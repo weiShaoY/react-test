@@ -7,7 +7,9 @@ import userStore from '@/store/userStore';
 import { Result } from '#/api';
 import { ResultEnum } from '#/enum';
 
-// 创建 axios 实例
+/**
+ *  创建 axios 实例
+ */
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 50000,
