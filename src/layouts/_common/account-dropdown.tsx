@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
 import { IconButton } from '@/components/icon';
-import { useLoginStateContext } from '@/pages/sys/login/providers/LoginStateProvider';
 import { useRouter } from '@/router/hooks';
 import { useUserInfo, useUserActions } from '@/store/userStore';
 import { useThemeToken } from '@/theme/hooks';
@@ -19,14 +18,14 @@ export default function AccountDropdown() {
   const { replace } = useRouter();
   const { username, email, avatar } = useUserInfo();
   const { clearUserInfoAndToken } = useUserActions();
-  const { backToLogin } = useLoginStateContext();
+  // const { backToLogin } = useLoginStateContext();
   const { t } = useTranslation();
   const logout = () => {
     try {
       // todo const logoutMutation = useMutation(userService.logout);
       // todo logoutMutation.mutateAsync();
       clearUserInfoAndToken();
-      backToLogin();
+      // backToLogin();
     } catch (error) {
       console.log(error);
     } finally {

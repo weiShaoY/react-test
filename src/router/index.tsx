@@ -4,7 +4,6 @@ import { Navigate, RouteObject, RouterProvider, createHashRouter } from 'react-r
 
 import DashboardLayout from '@/layouts/dashboard';
 
-import AuthGuard from '@/router/components/auth-guard';
 
 import { usePermissionRoutes } from '@/router/hooks';
 
@@ -23,14 +22,7 @@ const RootRoute: AppRouteObject = {
   element: <Navigate to='/home' replace />,
 };
 
-/**
- * 登录路由配置
- * @type {AppRouteObject}
- */
-const LoginRoute: AppRouteObject = {
-  path: '/login',
-  Component: lazy(() => import('@/pages/sys/login/Login')),
-};
+
 
 /**
  * 主页路由配置
@@ -66,20 +58,7 @@ export default function Router(): JSX.Element {
    * 动态加载的权限路由
    * @type {AppRouteObject}
    */
-  /**
- * 定义异步加载的主页路由对象，`AppRouteObject` 类型是应用自定义的路由对象类型。
- */
-  // const asyncRoutes: AppRouteObject = {
 
-  //   path: '/code',
-  //   element: (
-  //     <DashboardLayout />
-  //   ),
-  //   children: [
-  //     { index: true, element: <Navigate to='/code/dashboard/analysis' replace /> },
-  //     ...permissionRoutes,
-  //   ],
-  // };
   const asyncRoutes: AppRouteObject = {
 
     path: '/',
@@ -91,18 +70,11 @@ export default function Router(): JSX.Element {
       ...permissionRoutes,
     ],
   };
-  console.log("%c Line:76 🍊 permissionRoutes", "color:#fca650", permissionRoutes);
 
   /**
    * 合并后的所有路由
    */
   const routes = [
-    /**
-     * 登录页路由
-      * 包含用户登录的页面路径
-     */
-    LoginRoute,
-
     /**
      *  根路由
      */
@@ -123,7 +95,7 @@ export default function Router(): JSX.Element {
      * 错误页路由
      * 包含 404、500 等错误页面路径
      */
-    // ErrorRoutes,
+    ErrorRoutes,
 
     /**
      * 未匹配到的路由

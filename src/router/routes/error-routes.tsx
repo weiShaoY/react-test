@@ -6,7 +6,6 @@ import { CircleLoading } from '@/components/loading';
 
 import SimpleLayout from '@/layouts/simple';
 
-import AuthGuard from '../components/auth-guard';
 
 import { AppRouteObject } from '#/router';
 
@@ -21,13 +20,11 @@ const Page500 = lazy(() => import('@/pages/sys/error/Page500'));
  */
 export const ErrorRoutes: AppRouteObject = {
   element: (
-    <AuthGuard> {/* 权限守卫，确保用户具有访问权限 */}
-      <SimpleLayout> {/* 使用简单布局包裹错误页面 */}
-        <Suspense fallback={<CircleLoading />}> {/* 懒加载时显示加载动画 */}
-          <Outlet /> {/* 占位符，用于渲染子路由的组件 */}
-        </Suspense>
-      </SimpleLayout>
-    </AuthGuard>
+    <SimpleLayout> {/* 使用简单布局包裹错误页面 */}
+      <Suspense fallback={<CircleLoading />}> {/* 懒加载时显示加载动画 */}
+        <Outlet /> {/* 占位符，用于渲染子路由的组件 */}
+      </Suspense>
+    </SimpleLayout>
   ),
   children: [
     { path: '403', element: <Page403 /> }, // 403 页面路径和对应组件
