@@ -24,7 +24,7 @@ const components: AppRouteObject = {
     </Suspense>
   ),
   meta: {
-    label: 'sys.menu.components',
+    label: '组件',
     icon: <Iconify icon="solar:widget-5-bold-duotone" className="ant-menu-item-icon" size="24" />,
     key: '/components',
   },

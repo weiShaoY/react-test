@@ -12,7 +12,11 @@ import { Permission } from '#/entity'; // 导入权限实体
 import { BasicStatus, PermissionType } from '#/enum'; // 导入基础状态和权限类型枚举
 import { AppRouteObject } from '#/router'; // 导入应用路由对象类型
 
+
+import { getRoutesFromModules } from '@/router/utils';
+
 const ENTRY_PATH = '/src/pages'; // 定义页面文件所在的目录路径
+
 const PAGES = import.meta.glob('/src/pages/**/*.tsx'); // 使用Vite的import.meta.glob导入页面组件
 const loadComponentFromPath = (path: string) => PAGES[`${ENTRY_PATH}${path}`]; // 根据路径加载页面组件
 
@@ -67,7 +71,7 @@ function RouteWrapper({ children }: { children: React.ReactNode }) {
  * 创建基本路由对象
  * @param {Permission} permission - 权限对象
  * @param {string} completeRoute - 完整路由路径
- * @returns {AppRouteObject} 基本路由对象
+ * @returns  基本路由对象
  */
 const createBaseRoute = (permission: Permission, completeRoute: string): AppRouteObject => {
   const { route, label, icon, order, hide, hideTab, status, frameSrc, newFeature } = permission;
@@ -99,7 +103,7 @@ const createBaseRoute = (permission: Permission, completeRoute: string): AppRout
  * 创建目录路由对象
  * @param {Permission} permission - 权限对象
  * @param {Permission[]} flattenedPermissions - 扁平化权限数组
- * @returns {AppRouteObject} 目录路由对象
+ * @returns 目录路由对象
  */
 const createCatalogueRoute = (
   permission: Permission,
@@ -140,7 +144,7 @@ const createCatalogueRoute = (
  * 创建菜单路由对象
  * @param {Permission} permission - 权限对象
  * @param {Permission[]} flattenedPermissions - 扁平化权限数组
- * @returns {AppRouteObject} 菜单路由对象
+ * @returns  菜单路由对象
  */
 const createMenuRoute = (
   permission: Permission,
@@ -170,7 +174,7 @@ const createMenuRoute = (
  * 将权限数组转换为路由数组
  * @param {Permission[]} permissions - 权限数组
  * @param {Permission[]} flattenedPermissions - 扁平化权限数组
- * @returns {AppRouteObject[]} 路由数组
+ * @returns  路由数组
  */
 function transformPermissionsToRoutes(
   permissions: Permission[],
@@ -187,17 +191,33 @@ function transformPermissionsToRoutes(
 
 /**
  * 获取当前用户权限的路由配置
- * @returns {AppRouteObject[]} 路由数组
+ * @returns  路由数组
  */
 export function usePermissionRoutes() {
-  // 从状态管理中获取当前用户的权限信息
-  const permissions = useUserPermission();
-  return useMemo(() => {
-    if (!permissions) return []; // 如果没有权限，返回空数组
 
-    // 将权限树状结构扁平化
-    const flattenedPermissions = flattenTrees(permissions);
-    // 根据扁平化的权限生成路由配置
-    return transformPermissionsToRoutes(permissions, flattenedPermissions);
-  }, [permissions]); // 如果权限发生变化，则重新计算路由配置
+  //  静态路由表
+  return useMemo(() => {
+    return getRoutesFromModules();
+  }, []);
+
+
+  // /**
+  //  *  从状态管理中获取当前用户的权限信息
+  //  */
+  // const permissions = useUserPermission();
+
+
+
+  // return useMemo(() => {
+  //   if (!permissions) {
+  //     return []
+  //   }; // 如果没有权限，返回空数组
+
+  //   // 将权限树状结构扁平化
+  //   const flattenedPermissions = flattenTrees(permissions);
+  //   // 根据扁平化的权限生成路由配置
+  //   return transformPermissionsToRoutes(permissions, flattenedPermissions);
+  // }, [permissions]); // 如果权限发生变化，则重新计算路由配置
 }
+
+

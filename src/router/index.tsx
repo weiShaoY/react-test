@@ -12,7 +12,16 @@ import { ErrorRoutes } from '@/router/routes/error-routes';
 
 import { AppRouteObject } from '#/router';
 
+
 const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
+
+/**
+ *  根路由配置
+ */
+const RootRoute: AppRouteObject = {
+  path: '/',
+  element: <Navigate to='/home' replace />,
+};
 
 /**
  * 登录路由配置
@@ -46,7 +55,11 @@ const PAGE_NOT_FOUND_ROUTE: AppRouteObject = {
  * @returns {JSX.Element} - 路由提供程序
  */
 export default function Router(): JSX.Element {
-  // 获取带权限过滤的路由列表
+
+
+  /**
+   *  获取带权限过滤的路由列表
+   */
   const permissionRoutes = usePermissionRoutes();
 
   /**
@@ -56,6 +69,17 @@ export default function Router(): JSX.Element {
   /**
  * 定义异步加载的主页路由对象，`AppRouteObject` 类型是应用自定义的路由对象类型。
  */
+  // const asyncRoutes: AppRouteObject = {
+
+  //   path: '/code',
+  //   element: (
+  //     <DashboardLayout />
+  //   ),
+  //   children: [
+  //     { index: true, element: <Navigate to='/code/dashboard/analysis' replace /> },
+  //     ...permissionRoutes,
+  //   ],
+  // };
   const asyncRoutes: AppRouteObject = {
 
     path: '/',
@@ -63,23 +87,26 @@ export default function Router(): JSX.Element {
       <DashboardLayout />
     ),
     children: [
-      { index: true, element: <Navigate to={HOMEPAGE} replace /> },
+      { index: true, element: <Navigate to='/dashboard/analysis' replace /> },
       ...permissionRoutes,
     ],
   };
-
-
+  console.log("%c Line:76 🍊 permissionRoutes", "color:#fca650", permissionRoutes);
 
   /**
    * 合并后的所有路由
    */
   const routes = [
-
     /**
      * 登录页路由
       * 包含用户登录的页面路径
      */
     LoginRoute,
+
+    /**
+     *  根路由
+     */
+    RootRoute,
 
     /**
      *  首页路由
@@ -96,7 +123,7 @@ export default function Router(): JSX.Element {
      * 错误页路由
      * 包含 404、500 等错误页面路径
      */
-    ErrorRoutes,
+    // ErrorRoutes,
 
     /**
      * 未匹配到的路由
@@ -114,58 +141,3 @@ export default function Router(): JSX.Element {
 }
 
 
-//   /**
-//    * 动态加载的权限路由
-//    * @type {AppRouteObject}
-//    */
-//   /**
-//  * 定义异步加载的主页路由对象，`AppRouteObject` 类型是应用自定义的路由对象类型。
-//  */
-//   const asyncRoutes: AppRouteObject = {
-//     /**
-//      * `path` 属性表示路径为 `/`，即默认的根路径。
-//      * 当用户访问根路径时，将加载此路由的 `element` 中定义的组件。
-//      */
-//     path: '/',
-
-//     /**
-//      * `element` 属性定义在当前路由下渲染的 React 组件。
-//      * 这里使用了 `AuthGuard` 组件，表示此路由受权限控制保护。
-//      *
-//      * `AuthGuard` 组件:
-//      * 1. 检查用户是否已登录（存在 accessToken）。
-//      * 2. 如果用户未登录，跳转到 `/login` 登录页面。
-//      *
-//      * `DashboardLayout` 组件:
-//      * 1. 用于渲染包含导航菜单、顶部导航栏等的主布局。
-//      * 2. 用户登录成功后，进入的默认布局界面。
-//      */
-//     // element: (
-//     //   <AuthGuard>
-//     //     <DashboardLayout />
-//     //   </AuthGuard>
-//     // ),
-
-//     /**
-//      * `children` 属性是当前路由的子路由配置列表。
-//      * 定义了当前路由 `/` 下的子页面路由。
-//      */
-//     children: [
-//       /**
-//        * 第一个子路由对象，表示默认子路由，使用 `{ index: true }` 表示该子路由为默认路由。
-//        * 当用户访问 `/` 路径时，会自动重定向到 `/home` 路径。
-//        *
-//        * `<Navigate>` 组件用于实现页面重定向。
-//        * - `to='/home'` 表示重定向的目标路径为 `/home`。
-//        * - `replace` 属性表示在浏览器历史记录中替换当前路径，不会新增历史记录。
-//        */
-//       { index: true, element: <Navigate to='/home' replace /> },
-
-//       /**
-//        * 展开 `permissionRoutes`，包含根据用户权限动态加载的路由列表。
-//        * - `permissionRoutes` 是从 `usePermissionRoutes` 钩子函数中获取的，通常根据用户权限生成。
-//        * - 这些路由包含用户有权限访问的页面，如仪表盘、设置等功能页面。
-//        */
-//       ...permissionRoutes,
-//     ],
-//   };
