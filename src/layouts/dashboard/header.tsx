@@ -19,16 +19,37 @@ import NavVertical from './nav/nav-vertical';
 
 import { ThemeLayout } from '#/enum';
 
+
 type Props = {
+  /**
+   *  自定义类名
+   */
   className?: string;
+  /**
+   *  是否有顶部偏移，用于调整头部高度
+   */
   offsetTop?: boolean;
 };
+
+/**
+ * Header 组件
+ * @param  props - 组件的属性
+ * @returns  Header 组件
+ */
 export default function Header({ className = '', offsetTop = false }: Props) {
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  // 获取主题设置和布局配置
   const { themeLayout, breadCrumb } = useSettings();
+
   const { colorBgElevated, colorBorder } = useThemeToken();
+
   const { screenMap } = useResponsive();
 
+  /**
+   * Header 样式
+   * @type {CSSProperties}
+   */
   const headerStyle: CSSProperties = {
     position: themeLayout === ThemeLayout.Horizontal ? 'relative' : 'fixed',
     borderBottom:
@@ -38,12 +59,15 @@ export default function Header({ className = '', offsetTop = false }: Props) {
     backgroundColor: Color(colorBgElevated).alpha(1).toString(),
   };
 
+  // 设置不同布局下的宽度
   if (themeLayout === ThemeLayout.Horizontal) {
     headerStyle.width = '100vw';
   } else if (screenMap.md) {
     headerStyle.right = '0px';
     headerStyle.left = 'auto';
-    headerStyle.width = `calc(100% - ${themeLayout === ThemeLayout.Vertical ? dashboardConfig.NAV_WIDTH : dashboardConfig.NAV_COLLAPSED_WIDTH
+    headerStyle.width = `calc(100% - ${themeLayout === ThemeLayout.Vertical
+      ? dashboardConfig.NAV_WIDTH
+      : dashboardConfig.NAV_COLLAPSED_WIDTH
       }px)`;
   } else {
     headerStyle.width = '100vw';
@@ -51,15 +75,19 @@ export default function Header({ className = '', offsetTop = false }: Props) {
 
   return (
     <>
+      {/* Header 主体 */}
       <header className={`z-20 w-full ${className}`} style={headerStyle}>
         <div
           className="flex flex-grow items-center justify-between px-4 text-gray backdrop-blur xl:px-6 2xl:px-10"
           style={{
-            height: offsetTop ? dashboardConfig.OFFSET_HEADER_HEIGHT : dashboardConfig.HEADER_HEIGHT,
+            height: offsetTop
+              ? dashboardConfig.OFFSET_HEADER_HEIGHT
+              : dashboardConfig.HEADER_HEIGHT,
             transition: 'height 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
           }}
         >
           <div className="flex items-baseline">
+            {/* Logo 或菜单按钮 */}
             {themeLayout !== ThemeLayout.Horizontal ? (
               <IconButton onClick={() => setDrawerOpen(true)} className="h-10 w-10 md:hidden">
                 <SvgIcon icon="ic-menu" size="24" />
@@ -67,9 +95,11 @@ export default function Header({ className = '', offsetTop = false }: Props) {
             ) : (
               <Logo />
             )}
+            {/* 面包屑导航 */}
             <div className="ml-4 hidden md:block">{breadCrumb ? <BreadCrumb /> : null}</div>
           </div>
 
+          {/* 功能按钮区域 */}
           <div className="flex">
             <SearchBar />
             <LocalePicker />
@@ -85,6 +115,8 @@ export default function Header({ className = '', offsetTop = false }: Props) {
           </div>
         </div>
       </header>
+
+      {/* 侧边栏 Drawer */}
       <Drawer
         placement="left"
         onClose={() => setDrawerOpen(false)}

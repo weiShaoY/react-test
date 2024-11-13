@@ -33,13 +33,13 @@ const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 const MultiTabsContext = createContext<MultiTabsContextType>({
   tabs: [],
   activeTabRoutePath: '',
-  setTabs: () => {},
-  closeTab: () => {},
-  closeOthersTab: () => {},
-  closeAll: () => {},
-  closeLeft: () => {},
-  closeRight: () => {},
-  refreshTab: () => {},
+  setTabs: () => { },
+  closeTab: () => { },
+  closeOthersTab: () => { },
+  closeAll: () => { },
+  closeLeft: () => { },
+  closeRight: () => { },
+  refreshTab: () => { },
 });
 
 export function MultiTabsProvider({ children }: PropsWithChildren) {
