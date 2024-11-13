@@ -11,7 +11,8 @@ import {
 import { menuFilter } from '@/router/utils';
 import { useThemeToken } from '@/theme/hooks';
 
-import { NAV_HORIZONTAL_HEIGHT } from '../config';
+import dashboardConfig from '../config';
+
 
 export default function NavHorizontal() {
   const navigate = useNavigate();
@@ -42,7 +43,11 @@ export default function NavHorizontal() {
   };
 
   return (
-    <div className="w-screen" style={{ height: NAV_HORIZONTAL_HEIGHT }}>
+    <div
+      className="w-screen"
+      style={{
+        height: dashboardConfig.NAV_HORIZONTAL_HEIGHT
+      }}>
       <Menu
         mode="horizontal"
         items={menuList}

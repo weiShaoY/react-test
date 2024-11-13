@@ -14,7 +14,7 @@ import { menuFilter } from '@/router/utils';
 import { useSettingActions, useSettings } from '@/store/settingStore';
 import { useThemeToken } from '@/theme/hooks';
 
-import { NAV_WIDTH } from '../config';
+import dashboardConfig from '../config';
 
 import NavLogo from './nva-logo';
 
@@ -94,7 +94,7 @@ export default function NavVertical(props: Props) {
       trigger={null}
       collapsible
       collapsed={collapsed}
-      width={NAV_WIDTH}
+      width={dashboardConfig.NAV_WIDTH}
       theme={sidebarTheme}
       style={{
         height: '100vh',

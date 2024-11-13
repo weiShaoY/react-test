@@ -5,7 +5,7 @@ import { useSettings } from '@/store/settingStore';
 import { useThemeToken } from '@/theme/hooks';
 import { cn } from '@/utils';
 
-import { HEADER_HEIGHT } from '../config';
+import dashboardConfig from '../config';
 
 import { ThemeLayout } from '#/enum';
 
@@ -19,7 +19,9 @@ export default function NavLogo({ collapsed, onToggle }: Props) {
     useThemeToken();
   return (
     <div
-      style={{ height: `${HEADER_HEIGHT}px` }}
+      style={{
+        height: `${dashboardConfig.HEADER_HEIGHT}px`
+      }}
       className="relative flex items-center justify-center py-4"
     >
       <div className="flex items-center">

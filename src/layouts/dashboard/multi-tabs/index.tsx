@@ -13,14 +13,9 @@ import { replaceDynamicParams } from '@/router/hooks/use-current-route-meta';
 import { useSettings } from '@/store/settingStore';
 import { useResponsive, useThemeToken } from '@/theme/hooks';
 
-import {
-  NAV_WIDTH,
-  NAV_COLLAPSED_WIDTH,
-  HEADER_HEIGHT,
-  OFFSET_HEADER_HEIGHT,
-  MULTI_TABS_HEIGHT,
-  NAV_HORIZONTAL_HEIGHT,
-} from '../config';
+
+
+import dashboardConfig from '../config';
 
 import { useMultiTabsContext, type KeepAliveTab } from './multi-tabs-provider';
 
@@ -241,7 +236,7 @@ export default function MultiTabs({ offsetTop = false }: Props) {
               style={{
                 visibility:
                   (tab.key !== activeTabRoutePath && tab.key !== hoveringTabKey) ||
-                  tabs.length === 1
+                    tabs.length === 1
                     ? 'hidden'
                     : 'visible',
               }}
@@ -308,22 +303,21 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 
   const multiTabsStyle: CSSProperties = {
     position: 'fixed',
-    top: offsetTop ? OFFSET_HEADER_HEIGHT - 2 : HEADER_HEIGHT,
+    top: offsetTop ? dashboardConfig.OFFSET_HEADER_HEIGHT - 2 : dashboardConfig.HEADER_HEIGHT,
     left: 0,
-    height: MULTI_TABS_HEIGHT,
+    height: dashboardConfig.MULTI_TABS_HEIGHT,
     backgroundColor: Color(colorBgElevated).alpha(1).toString(),
     borderBottom: `1px dashed ${Color(colorBorder).alpha(0.6).toString()}`,
     transition: 'top 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
   };
 
   if (themeLayout === ThemeLayout.Horizontal) {
-    multiTabsStyle.top = HEADER_HEIGHT + NAV_HORIZONTAL_HEIGHT - 2;
+    multiTabsStyle.top = dashboardConfig.HEADER_HEIGHT + dashboardConfig.NAV_HORIZONTAL_HEIGHT - 2;
   } else if (screenMap.md) {
     multiTabsStyle.right = '0px';
     multiTabsStyle.left = 'auto';
-    multiTabsStyle.width = `calc(100% - ${
-      themeLayout === ThemeLayout.Vertical ? NAV_WIDTH : NAV_COLLAPSED_WIDTH
-    }px`;
+    multiTabsStyle.width = `calc(100% - ${themeLayout === ThemeLayout.Vertical ? dashboardConfig.NAV_WIDTH : dashboardConfig.NAV_COLLAPSED_WIDTH
+      }px`;
   } else {
     multiTabsStyle.width = '100vw';
   }

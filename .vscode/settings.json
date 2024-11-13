@@ -39,6 +39,7 @@
     "nprogress",
     "rehype",
     "screenfull",
+    "setopen",
     "simplebar",
     "stylelint",
     "tailwindcss",

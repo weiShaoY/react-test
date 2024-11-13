@@ -14,7 +14,7 @@ import NoticeButton from '../_common/notice';
 import SearchBar from '../_common/search-bar';
 import SettingButton from '../_common/setting-button';
 
-import { NAV_COLLAPSED_WIDTH, NAV_WIDTH, HEADER_HEIGHT, OFFSET_HEADER_HEIGHT } from './config';
+import dashboardConfig from './config';
 import NavVertical from './nav/nav-vertical';
 
 import { ThemeLayout } from '#/enum';
@@ -43,9 +43,8 @@ export default function Header({ className = '', offsetTop = false }: Props) {
   } else if (screenMap.md) {
     headerStyle.right = '0px';
     headerStyle.left = 'auto';
-    headerStyle.width = `calc(100% - ${
-      themeLayout === ThemeLayout.Vertical ? NAV_WIDTH : NAV_COLLAPSED_WIDTH
-    }px)`;
+    headerStyle.width = `calc(100% - ${themeLayout === ThemeLayout.Vertical ? dashboardConfig.NAV_WIDTH : dashboardConfig.NAV_COLLAPSED_WIDTH
+      }px)`;
   } else {
     headerStyle.width = '100vw';
   }
@@ -56,7 +55,7 @@ export default function Header({ className = '', offsetTop = false }: Props) {
         <div
           className="flex flex-grow items-center justify-between px-4 text-gray backdrop-blur xl:px-6 2xl:px-10"
           style={{
-            height: offsetTop ? OFFSET_HEADER_HEIGHT : HEADER_HEIGHT,
+            height: offsetTop ? dashboardConfig.OFFSET_HEADER_HEIGHT : dashboardConfig.HEADER_HEIGHT,
             transition: 'height 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
           }}
         >
