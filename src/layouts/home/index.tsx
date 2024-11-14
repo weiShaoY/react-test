@@ -1,13 +1,12 @@
-import { Layout } from 'antd';
+import Logo from '@/components/logo';
 
+import SettingButton from '../_common/setting-button';
 
-function Home() {
-
-
+export default function HeaderSimple() {
   return (
-    <Layout className="relative flex !min-h-screen !w-full !flex-row">
-      122222222
-    </Layout>
+    <header className="flex h-16 w-full items-center justify-between px-6">
+      <Logo size={30} />
+      <SettingButton />
+    </header>
   );
 }
-export default Home;

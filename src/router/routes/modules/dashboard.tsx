@@ -6,7 +6,7 @@ import { CircleLoading } from '@/components/loading';
 
 import { AppRouteObject } from '#/router';
 
-const HomePage = lazy(() => import(`@/pages/dashboard/workbench`));
+const Workbench = lazy(() => import(`@/pages/dashboard/workbench`));
 const Analysis = lazy(() => import('@/pages/dashboard/analysis'));
 
 const dashboard: AppRouteObject = {
@@ -29,7 +29,7 @@ const dashboard: AppRouteObject = {
     },
     {
       path: 'workbench',
-      element: <HomePage />,
+      element: <Workbench />,
       meta: { label: 'sys.menu.workbench', key: '/dashboard/workbench' },
     },
     {

@@ -12,7 +12,7 @@ import { ErrorRoutes } from '@/router/routes/error-routes';
 import { AppRouteObject } from '#/router';
 
 
-const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
+// const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 
 /**
  *  根路由配置
@@ -25,7 +25,7 @@ const RootRoute: AppRouteObject = {
 
 
 /**
- * 主页路由配置
+ * 首页路由配置
  * @type {AppRouteObject}
  */
 const HomeRoute: AppRouteObject = {
@@ -48,12 +48,6 @@ const PAGE_NOT_FOUND_ROUTE: AppRouteObject = {
  */
 export default function Router(): JSX.Element {
 
-
-  /**
-   *  获取带权限过滤的路由列表
-   */
-  const permissionRoutes = usePermissionRoutes();
-
   /**
    * 动态加载的权限路由
    * @type {AppRouteObject}
@@ -67,7 +61,7 @@ export default function Router(): JSX.Element {
     ),
     children: [
       { index: true, element: <Navigate to='/dashboard/analysis' replace /> },
-      ...permissionRoutes,
+      ...usePermissionRoutes(),
     ],
   };
 

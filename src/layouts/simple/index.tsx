@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useThemeToken } from '@/theme/hooks';
 
-import HeaderSimple from '../_common/header-simple';
+import HeaderSimple from './header-simple';
 
 type Props = {
   children: React.ReactNode;
