@@ -62,21 +62,44 @@ function DashboardLayout() {
 
   // 渲染布局组件
   return (
-    <ScrollbarStyleWrapper $themeMode={themeMode}>
+    <ScrollbarStyleWrapper
+      $themeMode={themeMode}
+    >
+
       {/* 显示进度条 */}
       <ProgressBar />
+
       <Layout className={layoutClassName}>
-        <Suspense fallback={<CircleLoading />}>
+
+        <Suspense
+          fallback={
+            <CircleLoading />
+          }
+        >
           <Layout>
             {/* 页头组件，offsetTop 用于判断滚动时的样式变化 */}
-            <Header offsetTop={themeLayout === ThemeLayout.Vertical ? offsetTop : undefined} />
+
+            <Header
+              offsetTop={
+                themeLayout === ThemeLayout.Vertical ? offsetTop : undefined
+              } />
+
             {/* 导航栏组件 */}
             <Nav />
+
             {/* 主内容区域组件，传递 offsetTop 和引用 */}
-            <Main ref={mainEl} offsetTop={offsetTop} />
+            <Main
+              ref={mainEl}
+              offsetTop={offsetTop}
+            />
+
+
           </Layout>
+
         </Suspense>
+
       </Layout>
+
     </ScrollbarStyleWrapper>
   );
 }

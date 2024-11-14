@@ -2,7 +2,7 @@ import { App as AntdApp } from 'antd';
 
 import { Helmet } from 'react-helmet-async';
 
-import Logo from '@/assets/images/logo.png';
+import Logo from '@/assets/images/avatar.jpg';
 
 import Router from '@/router/index';
 
@@ -16,12 +16,19 @@ function App() {
       <AntdApp>
         {/* 懒加载路由 */}
         <MotionLazy>
+
+
           {/* 修改 HTML <head> 中的内 */}
           <Helmet>
+
             <title>
               weiShaoY
             </title>
-            <link rel="icon" href={Logo} />
+
+            <link
+              rel="icon"
+              href={Logo}
+            />
           </Helmet>
 
           <Router />

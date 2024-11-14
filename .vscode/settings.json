@@ -43,6 +43,7 @@
     "languagedetector",
     "matchs",
     "nprogress",
+    "partialize",
     "rehype",
     "screenfull",
     "setopen",
