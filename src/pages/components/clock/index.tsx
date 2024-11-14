@@ -7,9 +7,9 @@ function Clock() {
     <div
       className="grid grid-cols-2 h-full w-full"
     >
-      <Left></Left>
+      <Left />
 
-      <Right></Right>
+      <Right />
     </div>
   );
 }

@@ -5,10 +5,7 @@
   ],
   "plugins": ["stylelint-order"],
   "rules": {
-    "indentation": 2,
-    "declaration-colon-space-after": "always",
-    "declaration-colon-space-before": "never",
-    "declaration-block-semicolon-newline-after": "always-multi-line",
+
     "selector-not-notation": null,
     "import-notation": null,
     "function-no-unknown": null,
@@ -38,7 +35,6 @@
       }
     ],
     "no-empty-source": null,
-    "string-quotes": null,
     "named-grid-areas-no-invalid": null,
     "no-descending-specificity": null,
     "font-family-no-missing-generic-family-keyword": null,
@@ -67,5 +63,6 @@
       ],
       { "severity": "error" }
     ]
+
   }
 }

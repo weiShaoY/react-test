@@ -29,7 +29,8 @@ function Right() {
 
   return (
     <div className="h-full w-full flex justify-center bg-[#1e1f26]">
-      <div className="relative aspect-square h-full flex items-center justify-center bg-[#1e1f26]">
+
+      <div className="relative aspect-square  w-full flex items-center justify-center bg-[#1e1f26]">
         <div className="clock relative">
           {/* 渲染表盘数字 */}
           {Array.from({ length: 12 }).map((_, num) => (
