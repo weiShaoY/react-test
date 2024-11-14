@@ -17,19 +17,53 @@ import type { RouteMeta } from '#/router';
 export type KeepAliveTab = RouteMeta & {
   children: any;
 };
+
+/**
+ *  定义多标签上下文类型
+ */
 type MultiTabsContextType = {
+  /**
+   *  当前已打开的标签页列表
+   */
   tabs: KeepAliveTab[];
+  /**
+   *  当前激活的标签页路由路径
+   */
   activeTabRoutePath?: string;
+  /**
+   *  更新标签页列表
+   */
   setTabs: (tabs: KeepAliveTab[]) => void;
+  /**
+   *  关闭指定的标签页
+   */
   closeTab: (path?: string) => void;
+  /**
+   *  关闭指定标签页以外的所有标签页
+   */
   closeOthersTab: (path?: string) => void;
+  /**
+   *  关闭所有标签页
+   */
   closeAll: () => void;
+  /**
+   *  关闭指定标签页左侧的所有标签页
+   */
   closeLeft: (path: string) => void;
+  /**
+   *  关闭指定标签页右侧的所有标签页
+   */
   closeRight: (path: string) => void;
+  /**
+   *  刷新指定的标签页
+   */
   refreshTab: (path: string) => void;
 };
 const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 
+/**
+ *   创建多标签上下文，提供默认值
+ */
 const MultiTabsContext = createContext<MultiTabsContextType>({
   tabs: [],
   activeTabRoutePath: '',
@@ -42,35 +76,51 @@ const MultiTabsContext = createContext<MultiTabsContextType>({
   refreshTab: () => { },
 });
 
+/**
+ *  多标签上下文提供者组件
+ */
 export function MultiTabsProvider({ children }: PropsWithChildren) {
   const { push } = useRouter();
-  // tabs
+
   const [tabs, setTabs] = useState<KeepAliveTab[]>([]);
 
-  // current route meta
+  /**
+   *   当前路由的元信息
+   */
   const currentRouteMeta = useCurrentRouteMeta();
-  // active tab
+
+  //  计算当前激活的标签页路径
   const activeTabRoutePath = useMemo(() => {
-    if (!currentRouteMeta) return '';
+
+    if (!currentRouteMeta) {
+      return ''
+    };
 
     const { key, params = {} } = currentRouteMeta;
     if (!isEmpty(params)) {
+      // 替换动态参数
       return replaceDynamicParams(key, params);
     }
     return key;
   }, [currentRouteMeta]);
 
   /**
-   * Close specified tab
-   */
+    * 关闭指定的标签页
+    */
   const closeTab = useCallback(
     (path = activeTabRoutePath) => {
       const tempTabs = [...tabs];
-      if (tempTabs.length === 1) return;
+      //  只有一个标签时不允许关闭
+      if (tempTabs.length === 1) {
+        return
+      };
 
       const deleteTabIndex = tempTabs.findIndex((item) => item.key === path);
-      if (deleteTabIndex === -1) return;
+      if (deleteTabIndex === -1) {
+        return
+      };
 
+      // 关闭后导航到前一个或下一个标签页
       if (deleteTabIndex > 0) {
         push(tempTabs[deleteTabIndex - 1].key);
       } else {
@@ -84,7 +134,7 @@ export function MultiTabsProvider({ children }: PropsWithChildren) {
   );
 
   /**
-   * Close other tabs besides the specified tab
+   *  关闭指定标签页以外的所有标签页
    */
   const closeOthersTab = useCallback(
     (path = activeTabRoutePath) => {
@@ -97,7 +147,7 @@ export function MultiTabsProvider({ children }: PropsWithChildren) {
   );
 
   /**
-   * Close all tabs then navigate to the home page
+   *  关闭所有标签页并跳转到首页
    */
   const closeAll = useCallback(() => {
     setTabs([]);
@@ -105,7 +155,7 @@ export function MultiTabsProvider({ children }: PropsWithChildren) {
   }, [push]);
 
   /**
-   * Close all tabs in the left of specified tab
+   * 关闭指定标签页左侧的所有标签页
    */
   const closeLeft = useCallback(
     (path: string) => {
@@ -118,7 +168,7 @@ export function MultiTabsProvider({ children }: PropsWithChildren) {
   );
 
   /**
-   * Close all tabs in the right of specified tab
+   * 关闭指定标签页右侧的所有标签页
    */
   const closeRight = useCallback(
     (path: string) => {
@@ -131,8 +181,8 @@ export function MultiTabsProvider({ children }: PropsWithChildren) {
   );
 
   /**
-   * Refresh specified tab
-   */
+    * 刷新指定的标签页
+    */
   const refreshTab = useCallback(
     (path = activeTabRoutePath) => {
       setTabs((prev) => {
@@ -148,6 +198,7 @@ export function MultiTabsProvider({ children }: PropsWithChildren) {
     [activeTabRoutePath],
   );
 
+  // 当路由元信息变化时，自动添加新标签页
   useEffect(() => {
     setTabs((prev) => prev.filter((item) => !item.hideTab));
 
@@ -169,6 +220,8 @@ export function MultiTabsProvider({ children }: PropsWithChildren) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentRouteMeta]);
 
+
+  // 使用 useMemo 创建上下文默认值
   const defaultValue: MultiTabsContextType = useMemo(
     () => ({
       tabs,
@@ -192,13 +245,21 @@ export function MultiTabsProvider({ children }: PropsWithChildren) {
       tabs,
     ],
   );
+
+  // 提供多标签上下文
   return <MultiTabsContext.Provider value={defaultValue}>{children}</MultiTabsContext.Provider>;
 }
 
+/**
+ *  自定义 Hook，用于获取多标签上下文
+ */
 export function useMultiTabsContext() {
   return useContext(MultiTabsContext);
 }
 
+/**
+ *  获取当前时间戳的辅助函数
+ */
 function getTimeStamp() {
   return new Date().getTime().toString();
 }
