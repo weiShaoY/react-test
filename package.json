@@ -39,6 +39,8 @@
     "highlight.js": "^11.9.0",
     "i18next": "^23.5.1",
     "i18next-browser-languagedetector": "^8.0.0",
+    "less": "^4.2.0",
+    "lunar-typescript": "^1.7.6",
     "nprogress": "^0.2.0",
     "numeral": "^2.0.6",
     "ramda": "^0.30.1",
