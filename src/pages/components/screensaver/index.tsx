@@ -1,5 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ScreensaverItem from './item';
+import Card from '@/components/card';
+
 
 /**
  * 获取当前时间数组
@@ -25,7 +27,7 @@ function getTimeArr(now: Date) {
   return [...h, ...m, ...s];
 }
 
-const Screensaver: React.FC = () => {
+function Screensaver() {
   /**
    * 当前时间数组
    */
@@ -61,9 +63,11 @@ const Screensaver: React.FC = () => {
   }, []);
 
   return (
-    <div
-      className="h-full w-full flex items-center justify-center bg-[radial-gradient(ellipse_at_center,#969696_0%,#595959_100%)]"
+
+    <Card
+      className='h-full w-full flex items-center justify-center !bg-[radial-gradient(ellipse_at_center,#969696_0%,#595959_100%)]'
     >
+
       <ScreensaverItem total={2} current={timeArr[0]} />
       <ScreensaverItem total={9} current={timeArr[1]} />
 
@@ -82,7 +86,7 @@ const Screensaver: React.FC = () => {
 
       <ScreensaverItem total={5} current={timeArr[4]} />
       <ScreensaverItem total={9} current={timeArr[5]} />
-    </div>
+    </Card >
   );
 };
 

@@ -1,5 +1,5 @@
 import './item.less'
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 
 type ScreensaverItemProps = {
@@ -13,11 +13,11 @@ type ScreensaverItemProps = {
   current: number;
 };
 
-const ScreensaverItem: React.FC<ScreensaverItemProps> = (
+function ScreensaverItem(
   {
     total = 9,
     current = -1,
-  }) => {
+  }: ScreensaverItemProps) {
 
 
   const [before, setBefore] = useState<number>(total === current ? -1 : total);
