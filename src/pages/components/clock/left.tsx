@@ -1,4 +1,3 @@
-import Card from '@/components/card';
 
 import { useEffect, useRef } from 'react'
 
@@ -145,15 +144,13 @@ function Left() {
   }, [])
 
   return (
-    <Card>
-      <div
-        className="w-full relative flex items-center justify-center bg-[#1e1f26] bg-gradient-to-br from-[#224141] to-[#162a2a] aspect-square rounded-xl"
-      >
-        <canvas ref={canvasRef}>
-          您的浏览器版本过低，请更新浏览器
-        </canvas>
-      </div>
-    </Card>
+    <div
+      className="w-full relative flex items-center justify-center bg-[#1e1f26] bg-gradient-to-br from-[#224141] to-[#162a2a] aspect-square rounded-xl"
+    >
+      <canvas ref={canvasRef}>
+        您的浏览器版本过低，请更新浏览器
+      </canvas>
+    </div>
   )
 }
 

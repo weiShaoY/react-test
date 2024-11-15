@@ -1,6 +1,7 @@
 import Left from './left';
 import Right from './right';
 import { Col, Row } from 'antd';
+import Card from '@/components/card';
 
 function Clock() {
 
@@ -10,14 +11,21 @@ function Clock() {
     <Row gutter={[16, 16]} justify="center">
 
       <Col span={24} lg={12}>
-        <Left />
+        <Card>
+          <Left />
+        </Card>
       </Col>
 
       <Col span={24} lg={12}>
-        <Right />
+        <Card>
+          <Right />
+        </Card>
       </Col>
     </Row>
   );
 }
 
 export default Clock;
+
+
+

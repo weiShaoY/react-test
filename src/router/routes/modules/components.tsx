@@ -1,7 +1,9 @@
 import { Suspense, lazy } from 'react';
+
 import { Navigate, Outlet } from 'react-router-dom';
 
 import { SvgIcon } from '@/components/icon';
+
 import { CircleLoading } from '@/components/loading';
 
 import { AppRouteObject } from '#/router';
@@ -14,6 +16,8 @@ const CalendarPage = lazy(() => import('@/pages/components/calendar'));
 const ScreensaverPage = lazy(() => import('@/pages/components/screensaver'));
 const TimePage = lazy(() => import('@/pages/components/time'));
 const RipplePage = lazy(() => import('@/pages/components/ripple'));
+const CodeWallPage = lazy(() => import('@/pages/components/codeWall'));
+const TextPage = lazy(() => import('@/pages/components/text'));
 
 const components: AppRouteObject = {
   order: 2,
@@ -86,6 +90,24 @@ const components: AppRouteObject = {
         label: '水波',
         key: '/components/ripple',
         icon: <SvgIcon icon="menu-ripple" className="ant-menu-item-icon" size="24" />,
+      },
+    },
+    {
+      path: 'text',
+      element: <TextPage />,
+      meta: {
+        label: '文字',
+        key: '/components/text',
+        icon: <SvgIcon icon="menu-text" className="ant-menu-item-icon" size="24" />,
+      },
+    },
+    {
+      path: 'codeWall',
+      element: <CodeWallPage />,
+      meta: {
+        label: '代码墙',
+        key: '/components/codeWall',
+        icon: <SvgIcon icon="menu-codeWall" className="ant-menu-item-icon" size="24" />,
       },
     },
 

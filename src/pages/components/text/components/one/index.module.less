@@ -1,0 +1,39 @@
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 100px 0 60px;
+  background-color: #000;
+
+  p {
+    @keyframes move {
+      0%,
+      10%,
+      100% {
+        width: 0;
+      }
+
+      70%,
+      90% {
+        width: 100%;
+      }
+    }
+
+    position: relative;
+    color: #222;
+    font-weight: 500;
+    font-size: 64px;
+
+    &::before {
+      position: absolute;
+      overflow: hidden;
+      color: #fff;
+      white-space: nowrap;
+      border-right: 4px solid #fff;
+      filter: drop-shadow(0 0 20px #fff) drop-shadow(0 0 50px #fff);
+      animation: move 8s linear infinite;
+      content: attr(data-text);
+    }
+  }
+}
