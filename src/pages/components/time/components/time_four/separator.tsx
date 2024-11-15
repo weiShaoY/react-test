@@ -25,19 +25,19 @@ function DotIndicator({
   }, [number]);
 
   return (
-    <div className="flex flex-col justify-around">
+    <div className="h-24 flex flex-col justify-around">
       <i
         className={`block h-1.5 w-1.5 rounded transition-all`}
         style={{
           opacity: refresh ? 1 : 0.2,
-          backgroundColor: color,
+          backgroundColor: color
         }}
       />
       <i
         className={`block h-1.5 w-1.5 rounded transition-all`}
         style={{
           opacity: refresh ? 1 : 0.2,
-          backgroundColor: color,
+          backgroundColor: color
         }}
       />
     </div>

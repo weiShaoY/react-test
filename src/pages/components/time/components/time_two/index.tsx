@@ -2,58 +2,61 @@ import type { TimeType } from '@/hooks/use-get-time';
 import Digit from './digit';
 
 import Separator from './separator';
-import type { DigitNum } from './digit'
+import type { DigitNumType } from './digit'
 
-type TimeDisplayProps = {
+type PropsType = {
   time: TimeType;
   is24Hour?: boolean;
+  color?: string
 };
 
 /**
  * 格式化时间为两位数的每一位
- * @param {number} number - 要格式化的数字
- * @param {boolean} bool - 是否为十位数
- * @returns {DigitNum} 返回格式化后的数字
+ * @param  number - 要格式化的数字
+ * @param  bool - 是否为十位数
+ * @returns {DigitNumType} 返回格式化后的数字
  */
-const mathNum = (number: number = 0, bool: boolean = true): DigitNum => {
+function mathNum(
+  number: number = 0,
+  bool: boolean = true,
+): DigitNumType {
   return bool
-    ? (Math.floor(number / 10) as DigitNum)
-    : ((number % 10) as DigitNum);
-};
+    ? (Math.floor(number / 10) as unknown as DigitNumType)
+    : ((number % 10) as unknown as DigitNumType)
+}
+
 
 function TimeTwo({
   time,
   is24Hour = true,
-}: TimeDisplayProps) {
+  color = '#04A770',
+}: PropsType) {
 
-  const className = 'text-white bg-[radial-gradient(ellipse_at_center,#969696_0%,#595959_100%)]'
 
-  console.log("%c Line:32 🍑 time", "color:#7f2b82", time);
   const hour = is24Hour ? time.hour24 : time.hour12;
-  console.log("%c Line:33 🍧 hour", "color:#ffdd4d", hour);
 
 
   return (
     <div
-      className={`max-w-full flex flex-col items-center justify-center h-full w-full ${className}`}
+      className={`max-w-full flex flex-col items-center justify-center h-full w-full `}
     >
       <div className="max-w-full flex items-center justify-center gap-1 px-2 md:gap-2 md:px-0">
         {/* 小时十位 */}
-        <Digit number={mathNum(hour)} />
+        <Digit number={mathNum(hour)} color={color} />
         {/* 小时个位 */}
-        <Digit number={mathNum(hour, false)} />
+        <Digit number={mathNum(hour, false)} color={color} />
         {/* 分隔符 */}
-        <Separator number={time.second || 0} />
+        <Separator number={time.second || 0} color={color} />
         {/* 分钟十位 */}
-        <Digit number={mathNum(time.minute)} />
+        <Digit number={mathNum(time.minute)} color={color} />
         {/* 分钟个位 */}
-        <Digit number={mathNum(time.minute, false)} />
+        <Digit number={mathNum(time.minute, false)} color={color} />
         {/* 分隔符 */}
-        <Separator number={time.second || 0} />
+        <Separator number={time.second || 0} color={color} />
         {/* 秒钟十位 */}
-        <Digit number={mathNum(time.second)} />
+        <Digit number={mathNum(time.second)} color={color} />
         {/* 秒钟个位 */}
-        <Digit number={mathNum(time.second, false)} />
+        <Digit number={mathNum(time.second, false)} color={color} />
       </div>
     </div>
   );

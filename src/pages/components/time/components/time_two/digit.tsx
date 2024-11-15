@@ -2,19 +2,32 @@ import { useEffect, useState } from 'react';
 import digitNum from './data';
 
 // 定义 DigitNum 类型为 0-9 的数字
-export type DigitNum = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+export type DigitNumType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 /**
  * Digit 组件的属性类型
  */
-type DigitProps = {
-  number: DigitNum;
+type PropsType = {
+  /**
+   * 数字
+   */
+  number: DigitNumType;
+
+  /**
+   * 颜色
+   */
+  color?: string
 };
+
 
 /**
  * Digit 组件
  */
-function Digit({ number }: DigitProps) {
+function Digit({
+  number,
+  color = '#04A770',
+}: PropsType
+) {
   // 当前所有 segment 状态，true 为亮起，false 为熄灭
   const [segmentsOn, setSegmentsOn] = useState<boolean[]>([
     false, false, false, false, false, false, false,
@@ -32,14 +45,23 @@ function Digit({ number }: DigitProps) {
   return (
     <div className="relative mx-1 h-24 w-14 flex-shrink flex-grow-0 scale-75 transform md:scale-100">
       {segmentsOn.map((segment, index) => {
-        // 基础样式
-        const baseClass = 'bg-white absolute block rounded opacity-20 transition-opacity';
 
-        // 根据 segment 状态决定是否亮起
+        /**
+         *  基础样式
+         */
+        const baseClass = `absolute block rounded opacity-20 transition-opacity`;
+
+        /**
+         *  根据 segment 状态决定是否亮起
+         */
         const opacityClass = segment ? '!opacity-100' : '';
 
-        // 根据索引确定样式
+        /**
+         *  根据索引确定样式
+         */
         let positionClass = '';
+
+
         switch (index) {
           case 0:
             positionClass = 'h-1.5 top-1 left-2 right-2';
@@ -68,6 +90,9 @@ function Digit({ number }: DigitProps) {
           <i
             key={index}
             className={`${baseClass} ${opacityClass} ${positionClass}`}
+            style={{
+              backgroundColor: color
+            }}
           />
         );
       })}

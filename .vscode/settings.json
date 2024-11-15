@@ -46,6 +46,7 @@
     "languagedetector",
     "matchs",
     "nprogress",
+    "nums",
     "partialize",
     "pinia",
     "rehype",
