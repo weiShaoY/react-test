@@ -1,6 +1,8 @@
+import Card from '@/components/card';
 
 
 import { useMemo } from 'react';
+
 import './right.less'
 
 import { useGetTime } from '@/hooks';
@@ -28,9 +30,9 @@ function Right() {
 
 
   return (
-    <div className="h-full w-full flex justify-center bg-[#1e1f26]">
+    <Card>
 
-      <div className="relative aspect-square  w-full flex items-center justify-center bg-[#1e1f26]">
+      <div className="relative aspect-square  w-full flex items-center justify-center bg-[#1e1f26] rounded-xl">
         <div className="clock relative">
           {/* 渲染表盘数字 */}
           {Array.from({ length: 12 }).map((_, num) => (
@@ -60,7 +62,8 @@ function Right() {
           />
         </div>
       </div>
-    </div>
+
+    </Card>
   );
 }
 
