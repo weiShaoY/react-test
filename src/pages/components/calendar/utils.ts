@@ -444,6 +444,8 @@ class CalendarUtils {
 
     // 存储节假日信息到 state 中
     state.holidays = holidays
+
+    // return state
   }
 
   /**

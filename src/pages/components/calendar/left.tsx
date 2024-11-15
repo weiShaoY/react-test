@@ -28,16 +28,18 @@ function Calendar({ state, setState }: LeftProps) {
    * 选择日期
    */
   const handleSelectDay = (day: DayType): void => {
-    console.log("%c Line:29 🍖 day", "color:#7f2b82", day);
 
-
-    setState({
+    const newState = {
       ...state,
-      selectedDay: day
-    });
+      selectedDay: {
+        ...day,
+        isSelected: true
+      }
+    }
 
 
-
+    CalendarUtils.render(newState);
+    setState(newState);
   };
 
   /**
@@ -45,11 +47,13 @@ function Calendar({ state, setState }: LeftProps) {
    */
   const handleToday = (): void => {
     const updatedState = CalendarUtils.init();
+
+    CalendarUtils.render(updatedState);
+
     setState({
       ...updatedState
     });
 
-    CalendarUtils.render(updatedState);
   };
 
   /**
@@ -65,15 +69,18 @@ function Calendar({ state, setState }: LeftProps) {
   /**
    * 月份选择器变化
    */
-  const handleMonthPickerChange: DatePickerProps['onChange'] = (date, dateString) => {
-    console.log(date, dateString);
-    // 改变 父组件 state的值
-    setState({
+  const handleMonthPickerChange: DatePickerProps['onChange'] = (date) => {
+
+    const newState = {
       ...state,
       year: date.year(),
       month: date.month() + 1,
       selectedDay: CalendarUtils.init().selectedDay
-    })
+    }
+
+    CalendarUtils.render(newState);
+
+    setState(newState);
   };
 
 
@@ -81,45 +88,51 @@ function Calendar({ state, setState }: LeftProps) {
    * 跳转到上一个月
    */
   function handlePreviousMonth() {
-    setState((prevState) => {
-      let newMonth = prevState.month - 1;
-      let newYear = prevState.year;
 
-      if (newMonth < 1) {
-        newMonth = 12;
-        newYear -= 1;
-      }
+    let newMonth = state.month - 1;
+    let newYear = state.year;
 
-      // 返回新的状态
-      return {
-        ...prevState,
-        month: newMonth,
-        year: newYear
-      };
+    if (newMonth < 1) {
+      newMonth = 12;
+      newYear -= 1;
     }
-    );
+
+    const newState = {
+      ...state,
+      month: newMonth,
+      year: newYear,
+
+    }
+
+    CalendarUtils.render(newState);
+
+    setState(newState);
   }
 
   /**
    * 跳转到下一个月
    */
   function handleNextMonth(): void {
-    setState((prevState) => {
-      let newMonth = prevState.month + 1;
-      let newYear = prevState.year;
 
-      if (newMonth > 12) {
-        newMonth = 1;
-        newYear += 1;
-      }
 
-      // 返回新的状态
-      return {
-        ...prevState,
-        month: newMonth,
-        year: newYear
-      };
-    });
+    let newMonth = state.month + 1;
+    let newYear = state.year;
+
+    if (newMonth > 12) {
+      newMonth = 1;
+      newYear += 1;
+    }
+
+    const newState = {
+
+      ...state,
+      month: newMonth,
+      year: newYear,
+    }
+
+    CalendarUtils.render(newState);
+
+    setState(newState);
   }
 
   /**
@@ -177,7 +190,7 @@ function Calendar({ state, setState }: LeftProps) {
         {state.monthData.weekTitleArray.map((weekTitle) => (
           <div
             key={weekTitle}
-            className={`mx-1 text-center text-2xl ${weekTitle === '六' || weekTitle === '日' ? 'text-[#D24863]' : ''}`}
+            className={`mx-1 text-center text-2xl ${weekTitle === '六' || weekTitle === '日' ? 'text-red' : ''}`}
           >
             {weekTitle}
           </div>
@@ -198,7 +211,7 @@ function Calendar({ state, setState }: LeftProps) {
           >
 
             <div
-              className={`w-15 flex items-center justify-start text-xl ${week.isTodayWeek ? 'text-primary' : ''}`}
+              className={`w-16 flex items-center justify-start text-xl ${week.isTodayWeek ? 'text-primary' : ''}`}
             >
 
               <span
@@ -237,7 +250,7 @@ function Calendar({ state, setState }: LeftProps) {
                 {day.isHoliday && (
                   <div
                     className={`absolute right-1 top-1 h-4 w-4 flex items-center justify-center rounded-xl text-xs text-[#fff]
-                      ${day.isRestDay ? 'bg-[#D24863]' : 'bg-[#333]'}
+                      ${day.isRestDay ? 'bg-red' : 'bg-[#333]'}
                     `}
                   >
                     {day.isRestDay ? '休' : '班'}
