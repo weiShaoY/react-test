@@ -10,6 +10,10 @@ import { AppRouteObject } from '#/router';
 
 const ClockPage = lazy(() => import('@/pages/components/clock'));
 const MuYuPage = lazy(() => import('@/pages/components/muYu'));
+const CalendarPage = lazy(() => import('@/pages/components/calendar'));
+const ScreensaverPage = lazy(() => import('@/pages/components/screensaver'));
+const TimePage = lazy(() => import('@/pages/components/time'));
+const RipplePage = lazy(() => import('@/pages/components/ripple'));
 
 const components: AppRouteObject = {
   order: 2,
@@ -47,7 +51,43 @@ const components: AppRouteObject = {
         key: '/components/muYu',
         icon: <SvgIcon icon="menu-muYu" className="ant-menu-item-icon" size="24" />,
       },
-    }
+    },
+    {
+      path: 'calendar',
+      element: <CalendarPage />,
+      meta: {
+        label: '日历',
+        key: '/components/calendar',
+        icon: <SvgIcon icon="menu-calendar" className="ant-menu-item-icon" size="24" />,
+      },
+    },
+    {
+      path: 'screensaver',
+      element: <ScreensaverPage />,
+      meta: {
+        label: '屏保',
+        key: '/components/screensaver',
+        icon: <SvgIcon icon="menu-screensaver" className="ant-menu-item-icon" size="24" />,
+      },
+    },
+    {
+      path: 'time',
+      element: <TimePage />,
+      meta: {
+        label: '时间',
+        key: '/components/time',
+        icon: <SvgIcon icon="menu-time" className="ant-menu-item-icon" size="24" />,
+      },
+    },
+    {
+      path: 'ripple',
+      element: <RipplePage />,
+      meta: {
+        label: '水波',
+        key: '/components/ripple',
+        icon: <SvgIcon icon="menu-ripple" className="ant-menu-item-icon" size="24" />,
+      },
+    },
 
   ],
 };
