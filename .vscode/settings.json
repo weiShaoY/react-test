@@ -27,29 +27,4 @@
 	"[json]": {
 		"editor.defaultFormatter": "biomejs.biome"
   },
-  "cSpell.ignoreWords": [
-    "ahooks",
-    "antd",
-    "apexcharts",
-    "biomejs",
-    "brotliSize",
-    "clsx",
-    "commitlint",
-    "cssinjs",
-    "daygrid",
-    "fullcalendar",
-    "iconify",
-    "languagedetector",
-    "lefthook",
-    "nprogress",
-    "preinstall",
-    "rehype",
-    "screenfull",
-    "simplebar",
-    "tailwindcss",
-    "tanstack",
-    "timegrid",
-    "weiShaoY",
-    "zustand"
-  ]
 }
