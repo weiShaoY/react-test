@@ -64,12 +64,7 @@ function Ripple() {
   return (
     <Card className="h-full" >
       <div
-        style={{
-          boxSizing: "border-box",
-          width: "100%",
-          height: "100%",
-          display: "flex",
-        }}
+        className="bor-box h-full w-full flex cursor-pointer"
         ref={boxRef}
       >
         <canvas ref={canvasRef}>
