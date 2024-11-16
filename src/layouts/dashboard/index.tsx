@@ -1,107 +1,99 @@
-import { Layout } from 'antd';
-import { useScroll } from 'framer-motion';
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import styled from 'styled-components';
+import { Layout } from "antd";
+import { useScroll } from "framer-motion";
+import {
+	Suspense,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
+import styled from "styled-components";
 
-import { CircleLoading } from '@/components/loading';
-import ProgressBar from '@/components/progress-bar';
-import { useSettings } from '@/store/settingStore';
-import { cn } from '@/utils';
+import { CircleLoading } from "@/components/loading";
+import ProgressBar from "@/components/progress-bar";
+import { useSettings } from "@/store/settingStore";
+import { cn } from "@/utils";
 
-import Header from './header';
-import Main from './main';
-import Nav from './nav';
+import Header from "./header";
+import Main from "./main";
+import Nav from "./nav";
 
-import { ThemeLayout, ThemeMode } from '#/enum';
+import { ThemeLayout, ThemeMode } from "#/enum";
 
 /**
  * DashboardLayout 组件，用于构建包含导航栏、页头和主内容区域的布局
  */
 function DashboardLayout() {
-  // 从全局设置中获取当前的布局方式和主题模式
-  const { themeLayout, themeMode } = useSettings();
+	// 从全局设置中获取当前的布局方式和主题模式
+	const { themeLayout, themeMode } = useSettings();
 
-  /**
-   *  mainEl 引用，用于获取主内容区域的 DOM 元素
-   */
-  const mainEl = useRef<HTMLDivElement>(null);
+	/**
+	 *  mainEl 引用，用于获取主内容区域的 DOM 元素
+	 */
+	const mainEl = useRef<HTMLDivElement>(null);
 
-  /**
-   *  获取滚动位置
-   */
-  const { scrollY } = useScroll({ container: mainEl });
+	/**
+	 *  获取滚动位置
+	 */
+	const { scrollY } = useScroll({ container: mainEl });
 
-  /**
-   * 记录内容是否被滚动
-   */
-  const [offsetTop, setOffsetTop] = useState(false);
+	/**
+	 * 记录内容是否被滚动
+	 */
+	const [offsetTop, setOffsetTop] = useState(false);
 
-  /**
-   * 当滚动位置发生变化时，更新 offsetTop 状态
-   */
-  const onOffSetTop = useCallback(() => {
-    scrollY.on('change', (scrollHeight) => {
-      setOffsetTop(scrollHeight > 0);
-    });
-  }, [scrollY]);
+	/**
+	 * 当滚动位置发生变化时，更新 offsetTop 状态
+	 */
+	const onOffSetTop = useCallback(() => {
+		scrollY.on("change", (scrollHeight) => {
+			setOffsetTop(scrollHeight > 0);
+		});
+	}, [scrollY]);
 
-  // 使用 useEffect 监听滚动事件
-  useEffect(() => {
-    onOffSetTop();
-  }, [onOffSetTop]);
+	// 使用 useEffect 监听滚动事件
+	useEffect(() => {
+		onOffSetTop();
+	}, [onOffSetTop]);
 
-  /**
-   * 使用 useMemo 缓存布局的 className，避免每次渲染时重新计算
-   */
-  const layoutClassName = useMemo(() => {
-    return cn(
-      'flex h-screen overflow-hidden',
-      themeLayout === ThemeLayout.Horizontal ? 'flex-col' : 'flex-row',
-    );
-  }, [themeLayout]);
+	/**
+	 * 使用 useMemo 缓存布局的 className，避免每次渲染时重新计算
+	 */
+	const layoutClassName = useMemo(() => {
+		return cn(
+			"flex h-screen overflow-hidden",
+			themeLayout === ThemeLayout.Horizontal ? "flex-col" : "flex-row",
+		);
+	}, [themeLayout]);
 
-  // 渲染布局组件
-  return (
-    <ScrollbarStyleWrapper
-      $themeMode={themeMode}
-    >
+	// 渲染布局组件
+	return (
+		<ScrollbarStyleWrapper $themeMode={themeMode}>
+			{/* 显示进度条 */}
+			<ProgressBar />
 
-      {/* 显示进度条 */}
-      <ProgressBar />
+			<Layout className={layoutClassName}>
+				<Suspense fallback={<CircleLoading />}>
+					<Layout>
+						{/* 页头组件，offsetTop 用于判断滚动时的样式变化 */}
 
-      <Layout className={layoutClassName}>
+						<Header
+							offsetTop={
+								themeLayout === ThemeLayout.Vertical ? offsetTop : undefined
+							}
+						/>
 
-        <Suspense
-          fallback={
-            <CircleLoading />
-          }
-        >
-          <Layout>
-            {/* 页头组件，offsetTop 用于判断滚动时的样式变化 */}
+						{/* 导航栏组件 */}
+						<Nav />
 
-            <Header
-              offsetTop={
-                themeLayout === ThemeLayout.Vertical ? offsetTop : undefined
-              } />
-
-            {/* 导航栏组件 */}
-            <Nav />
-
-            {/* 主内容区域组件，传递 offsetTop 和引用 */}
-            <Main
-              ref={mainEl}
-              offsetTop={offsetTop}
-            />
-
-
-          </Layout>
-
-        </Suspense>
-
-      </Layout>
-
-    </ScrollbarStyleWrapper>
-  );
+						{/* 主内容区域组件，传递 offsetTop 和引用 */}
+						<Main ref={mainEl} offsetTop={offsetTop} />
+					</Layout>
+				</Suspense>
+			</Layout>
+		</ScrollbarStyleWrapper>
+	);
 }
 
 export default DashboardLayout;
@@ -110,40 +102,40 @@ export default DashboardLayout;
  * 滚动条样式配置
  */
 const scrollbarStyles = {
-  /**
-   *  深色主题
-   */
-  dark: {
-    /**
-     *  滚动条轨道颜色
-     */
-    track: '#2c2c2c',
-    /**
-     *  滚动条滑块颜色
-     */
-    thumb: '#6b6b6b',
-    /**
-     *  滑块悬停时的颜色
-     */
-    thumbHover: '#939393',
-  },
-  /**
-   *  浅色主题
-   */
-  light: {
-    /**
-     *  滚动条轨道颜色
-     */
-    track: '#FAFAFA',
-    /**
-     *  滚动条滑块颜色
-     */
-    thumb: '#C1C1C1',
-    /**
-     *  滑块悬停时的颜色
-     */
-    thumbHover: '#7D7D7D',
-  },
+	/**
+	 *  深色主题
+	 */
+	dark: {
+		/**
+		 *  滚动条轨道颜色
+		 */
+		track: "#2c2c2c",
+		/**
+		 *  滚动条滑块颜色
+		 */
+		thumb: "#6b6b6b",
+		/**
+		 *  滑块悬停时的颜色
+		 */
+		thumbHover: "#939393",
+	},
+	/**
+	 *  浅色主题
+	 */
+	light: {
+		/**
+		 *  滚动条轨道颜色
+		 */
+		track: "#FAFAFA",
+		/**
+		 *  滚动条滑块颜色
+		 */
+		thumb: "#C1C1C1",
+		/**
+		 *  滑块悬停时的颜色
+		 */
+		thumbHover: "#7D7D7D",
+	},
 };
 
 /**
@@ -157,25 +149,31 @@ const ScrollbarStyleWrapper = styled.div<{ $themeMode?: ThemeMode }>`
   ::-webkit-scrollbar-track {
     border-radius: 8px; // 滚动条轨道圆角
     background: ${({ $themeMode }) =>
-    $themeMode === ThemeMode.Dark ? scrollbarStyles.dark.track : scrollbarStyles.light.track};
+			$themeMode === ThemeMode.Dark
+				? scrollbarStyles.dark.track
+				: scrollbarStyles.light.track};
   }
 
   ::-webkit-scrollbar-thumb {
     border-radius: 10px; // 滚动条滑块圆角
     background: ${({ $themeMode }) =>
-    $themeMode === ThemeMode.Dark ? scrollbarStyles.dark.thumb : scrollbarStyles.light.thumb};
+			$themeMode === ThemeMode.Dark
+				? scrollbarStyles.dark.thumb
+				: scrollbarStyles.light.thumb};
   }
 
   ::-webkit-scrollbar-thumb:hover {
     background: ${({ $themeMode }) =>
-    $themeMode === ThemeMode.Dark
-      ? scrollbarStyles.dark.thumbHover
-      : scrollbarStyles.light.thumbHover};
+			$themeMode === ThemeMode.Dark
+				? scrollbarStyles.dark.thumbHover
+				: scrollbarStyles.light.thumbHover};
   }
 
   .simplebar-scrollbar::before {
     background: ${({ $themeMode }) =>
-    $themeMode === ThemeMode.Dark ? scrollbarStyles.dark.thumb : scrollbarStyles.light.thumb};
+			$themeMode === ThemeMode.Dark
+				? scrollbarStyles.dark.thumb
+				: scrollbarStyles.light.thumb};
   }
 
   .simplebar-scrollbar.simplebar-visible:before {

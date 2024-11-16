@@ -1,5 +1,3 @@
-import useGetTime from './use-get-time'
+import useGetTime from "./use-get-time";
 
-export {
-  useGetTime
-}
+export { useGetTime };

@@ -1,10 +1,10 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 
-import DashboardLayout from '@/layouts/dashboard';
+import DashboardLayout from "@/layouts/dashboard";
 
-import { getRoutesFromModules } from '../utils';
+import { getRoutesFromModules } from "../utils";
 
-import { AppRouteObject } from '#/router';
+import type { AppRouteObject } from "#/router";
 
 /**
  *  动态获取所有菜单模块路由
@@ -21,15 +21,12 @@ const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
  * 用于配置主菜单的动态路由
  */
 export const menuRoutes: AppRouteObject = {
-  path: '/',
-  element: (
-    <DashboardLayout />
-  ),
-  children: [
-
-    // 默认跳转到首页路径，首页路径从环境变量中动态获取
-    { index: true, element: <Navigate to={HOMEPAGE} replace /> },
-    // 动态加载菜单模块的子路由
-    ...menuModuleRoutes,
-  ],
+	path: "/",
+	element: <DashboardLayout />,
+	children: [
+		// 默认跳转到首页路径，首页路径从环境变量中动态获取
+		{ index: true, element: <Navigate to={HOMEPAGE} replace /> },
+		// 动态加载菜单模块的子路由
+		...menuModuleRoutes,
+	],
 };

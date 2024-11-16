@@ -1,24 +1,20 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
-import { useThemeToken } from '@/theme/hooks';
+import { useThemeToken } from "@/theme/hooks";
 
-import { SvgIcon } from '../icon';
+import { SvgIcon } from "../icon";
 
 interface Props {
-  size?: number | string;
+	size?: number | string;
 }
 function Logo({ size = 60 }: Props) {
-  const { colorPrimary } = useThemeToken();
+	const { colorPrimary } = useThemeToken();
 
-  return (
-    <NavLink to="/">
-      <SvgIcon
-        icon="logo"
-        size={size}
-        color={colorPrimary}
-      />
-    </NavLink>
-  );
+	return (
+		<NavLink to="/">
+			<SvgIcon icon="logo" size={size} color={colorPrimary} />
+		</NavLink>
+	);
 }
 
 export default Logo;
