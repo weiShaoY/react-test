@@ -1,6 +1,6 @@
-import './item.less'
 import { useEffect, useMemo, useRef, useState } from 'react';
 
+import './index.less';
 
 type ScreensaverItemProps = {
   /**

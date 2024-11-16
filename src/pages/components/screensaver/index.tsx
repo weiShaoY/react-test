@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import ScreensaverItem from './item';
+import ScreensaverItem from './components/item';
 import Card from '@/components/card';
 
 

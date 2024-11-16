@@ -1,5 +1,5 @@
-import Left from './left';
-import Right from './right';
+import Left from './components/left';
+import Right from './components/right';
 import { Col, Row } from 'antd';
 import Card from '@/components/card';
 
