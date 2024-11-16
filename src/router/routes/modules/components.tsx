@@ -20,7 +20,7 @@ const CodeWallPage = lazy(() => import('@/pages/components/codeWall'));
 const TextPage = lazy(() => import('@/pages/components/text'));
 
 const components: AppRouteObject = {
-  order: 2,
+  order: 3,
   path: 'components',
   element: (
     <Suspense fallback={<CircleLoading />}>

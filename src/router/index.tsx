@@ -12,7 +12,7 @@ import { ErrorRoutes } from '@/router/routes/error-routes';
 import { AppRouteObject } from '#/router';
 
 
-// const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
+const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 
 /**
  *  根路由配置
@@ -60,7 +60,7 @@ export default function Router(): JSX.Element {
       <DashboardLayout />
     ),
     children: [
-      { index: true, element: <Navigate to='/dashboard/analysis' replace /> },
+      { index: true, element: <Navigate to={HOMEPAGE} replace /> },
       ...usePermissionRoutes(),
     ],
   };

@@ -8,13 +8,13 @@ import { AppRouteObject } from '#/router';
 
 const Iframe = lazy(() => import('@/pages/sys/others/iframe'));
 
-const Vue = lazy(() => import(`@/pages/document/vue`));
+const ExternalLink = lazy(() => import('@/pages/sys/others/iframe/external-link'));
 
 function Wrapper({ children }: any) {
   return <Suspense fallback={<CircleLoading />}>{children}</Suspense>;
 }
 const document: AppRouteObject = {
-  order: 1,
+  order: 2,
   path: 'document',
   element: (
     <Suspense fallback={<CircleLoading />}>
@@ -28,18 +28,6 @@ const document: AppRouteObject = {
   },
   children: [
     {
-      index: true,
-      element: <Navigate to="vue" replace />,
-    },
-    {
-      path: 'vue',
-      element: <Vue />,
-      meta: {
-        label: 'Vue', key: '/document/vue',
-        icon: <SvgIcon icon="menu-vue" className="ant-menu-item-icon" size="24" />
-      },
-    },
-    {
       path: 'react',
       element: (
         <Wrapper>
@@ -50,6 +38,24 @@ const document: AppRouteObject = {
         label: 'React',
         key: '/document/react',
         icon: <SvgIcon icon="menu-react" className="ant-menu-item-icon" size="24" />
+      },
+    },
+    {
+      index: true,
+      element: <Navigate to="vue" replace />,
+    },
+    {
+      path: 'vue',
+      element: (
+        <Wrapper>
+          <ExternalLink src="https://cn.vuejs.org/" />
+        </Wrapper>
+      )
+      ,
+      meta: {
+        label: 'Vue',
+        key: '/document/vue',
+        icon: <SvgIcon icon="menu-vue" className="ant-menu-item-icon" size="24" />
       },
     },
     {
