@@ -1,12 +1,24 @@
-import Logo from "@/components/logo";
+import type React from "react";
 
-import SettingButton from "../_common/setting-button";
+import { useThemeToken } from "@/theme/hooks";
 
-export default function HeaderSimple() {
+import HeaderHome from "./header-home";
+
+type Props = {
+	children: React.ReactNode;
+};
+export default function SimpleLayout({ children }: Props) {
+	const { colorBgElevated, colorTextBase } = useThemeToken();
 	return (
-		<header className="flex h-16 w-full items-center justify-between px-6">
-			<Logo size={30} />
-			<SettingButton />
-		</header>
+		<div
+			className="flex h-screen w-full flex-col"
+			style={{
+				color: colorTextBase,
+				background: colorBgElevated,
+			}}
+		>
+			<HeaderHome />
+			{children}
+		</div>
 	);
 }
