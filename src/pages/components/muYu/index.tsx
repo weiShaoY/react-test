@@ -2,6 +2,7 @@ import "./index.less";
 import { useRef, useState } from "react";
 import muYuImage from "./image/muYu.png";
 import muYuMusic from "./music/muYu.aac";
+import Card from "@/components/card";
 
 function Clock() {
 	/**
@@ -47,11 +48,11 @@ function Clock() {
 	};
 
 	return (
-		<div className="h-full w-full flex items-center justify-center">
-			<div className="relative h-96 w-96 flex items-center justify-between p-6 text-[#C39557]">
+		<Card className="h-full w-full flex items-center justify-center">
+			<div className="relative h-72 w-72 flex items-center justify-between p-6 text-[#C39557]">
 				{/* 提示文字 */}
 				<div
-					className={`absolute left-[50%] top-[30%] translate-x-[-50%] text-center text-base opacity-0 ${
+					className={`absolute font-bold left-[50%] top-[30%] translate-x-[-50%] text-center text-base opacity-0 ${
 						isStartClick ? "tips-active" : ""
 					}`}
 				>
@@ -59,7 +60,7 @@ function Clock() {
 				</div>
 
 				{/* 功德计数 */}
-				<div className="text-center text-8">功德: {meritNumber}</div>
+				<div className="text-center text-xl font-bold">功德: {meritNumber}</div>
 
 				{/* 木鱼图片按钮 */}
 				<div
@@ -73,7 +74,7 @@ function Clock() {
 					onMouseUp={handleMouseUp}
 				/>
 			</div>
-		</div>
+		</Card>
 	);
 }
 
