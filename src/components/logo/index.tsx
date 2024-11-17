@@ -7,7 +7,7 @@ import { SvgIcon } from "../icon";
 interface Props {
 	size?: number | string;
 }
-function Logo({ size = 60 }: Props) {
+function Logo({ size = 80 }: Props) {
 	const { colorPrimary } = useThemeToken();
 
 	return (

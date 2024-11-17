@@ -47,10 +47,12 @@
 		"tabpane",
 		"tailwindcss",
 		"tanstack",
+		"themetoken",
 		"timegrid",
 		"unocss",
 		"vueuse",
 		"weiShaoY",
+		"zhanKai",
 		"zustand"
 	]
 }

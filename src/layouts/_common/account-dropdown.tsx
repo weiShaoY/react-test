@@ -1,7 +1,6 @@
 import { Divider, type MenuProps } from "antd";
 import Dropdown, { type DropdownProps } from "antd/es/dropdown/dropdown";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 
 import { IconButton } from "@/components/icon";
@@ -19,7 +18,6 @@ export default function AccountDropdown() {
 	const { username, email, avatar } = useUserInfo();
 	const { clearUserInfoAndToken } = useUserActions();
 	// const { backToLogin } = useLoginStateContext();
-	const { t } = useTranslation();
 	const logout = () => {
 		try {
 			// todo const logoutMutation = useMutation(userService.logout);
@@ -60,36 +58,28 @@ export default function AccountDropdown() {
 		{
 			label: (
 				<NavLink to="https://docs-admin.slashspaces.com/" target="_blank">
-					{t("sys.docs")}
+					文档
 				</NavLink>
 			),
 			key: "0",
 		},
 		{
-			label: <NavLink to={HOMEPAGE}>{t("sys.menu.dashboard")}</NavLink>,
+			label: <NavLink to={HOMEPAGE}>仪表</NavLink>,
 			key: "1",
 		},
 		{
-			label: (
-				<NavLink to="/management/user/profile">
-					{t("sys.menu.user.profile")}
-				</NavLink>
-			),
+			label: <NavLink to="/management/user/profile">个人资料</NavLink>,
 			key: "2",
 		},
 		{
-			label: (
-				<NavLink to="/management/user/account">
-					{t("sys.menu.user.account")}
-				</NavLink>
-			),
+			label: <NavLink to="/management/user/account">账户</NavLink>,
 			key: "3",
 		},
 		{ type: "divider" },
 		{
 			label: (
-				<button className="font-bold text-warning">
-					{t("sys.login.logout")}
+				<button className="font-bold text-warning" type="button">
+					退出
 				</button>
 			),
 			key: "4",

@@ -15,7 +15,6 @@ import {
 	Droppable,
 	type OnDragEndResponder,
 } from "react-beautiful-dnd";
-import { useTranslation } from "react-i18next";
 import { useFullscreen, useToggle } from "react-use";
 import styled from "styled-components";
 
@@ -39,7 +38,6 @@ type Props = {
 	offsetTop?: boolean;
 };
 export default function MultiTabs({ offsetTop = false }: Props) {
-	const { t } = useTranslation();
 	const { push } = useRouter();
 	const scrollContainer = useRef<HTMLDivElement>(null);
 	const [hoveringTabKey, setHoveringTabKey] = useState("");
@@ -81,7 +79,7 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 					// 从 `tab.params` 中获取用户 ID
 					const userId = tab.params?.id;
 					// 默认标签文本为国际化后的 `tab.label` 值
-					const defaultLabel = t(tab.label);
+					const defaultLabel = tab.label;
 
 					// 如果存在用户 ID，则查找用户列表中的对应用户信息
 					if (userId) {
@@ -95,7 +93,7 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 					return defaultLabel;
 				},
 			}),
-			[t], // 依赖项：`t` 国际化函数，变化时重新计算映射表
+			[], // 依赖项：`t` 国际化函数，变化时重新计算映射表
 		);
 
 	/**
@@ -106,19 +104,19 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 		() => [
 			{
 				/** 全屏操作项 */
-				label: t(`sys.tab.${MultiTabOperation.FULLSCREEN}`), // 菜单项文本，通过国际化函数 `t` 获取
+				label: "全屏", // 菜单项文本，通过国际化函数 `t` 获取
 				key: MultiTabOperation.FULLSCREEN, // 菜单项的唯一标识符
 				icon: <Iconify icon="material-symbols:fullscreen" size={18} />, // 菜单项图标
 			},
 			{
 				/** 刷新操作项 */
-				label: t(`sys.tab.${MultiTabOperation.REFRESH}`),
+				label: "刷新",
 				key: MultiTabOperation.REFRESH,
 				icon: <Iconify icon="mdi:reload" size={18} />,
 			},
 			{
 				/** 关闭当前标签页操作项 */
-				label: t(`sys.tab.${MultiTabOperation.CLOSE}`),
+				label: "关闭当前标签页",
 				key: MultiTabOperation.CLOSE,
 				icon: <Iconify icon="material-symbols:close" size={18} />,
 				/**
@@ -133,7 +131,7 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 			},
 			{
 				/** 关闭左侧标签页操作项 */
-				label: t(`sys.tab.${MultiTabOperation.CLOSELEFT}`),
+				label: "关闭左侧标签页",
 				key: MultiTabOperation.CLOSELEFT,
 				icon: (
 					<Iconify
@@ -150,7 +148,7 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 			},
 			{
 				/** 关闭右侧标签页操作项 */
-				label: t(`sys.tab.${MultiTabOperation.CLOSERIGHT}`),
+				label: "关闭右侧标签页",
 				key: MultiTabOperation.CLOSERIGHT,
 				icon: (
 					<Iconify icon="material-symbols:tab-close-right-outline" size={18} />
@@ -169,7 +167,7 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 			},
 			{
 				/** 关闭其他标签页操作项 */
-				label: t(`sys.tab.${MultiTabOperation.CLOSEOTHERS}`),
+				label: "关闭其他标签页",
 				key: MultiTabOperation.CLOSEOTHERS,
 				icon: <Iconify icon="material-symbols:tab-close-outline" size={18} />,
 				/**
@@ -180,7 +178,7 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 			},
 			{
 				/** 关闭所有标签页操作项 */
-				label: t(`sys.tab.${MultiTabOperation.CLOSEALL}`),
+				label: "关闭所有标签页",
 				key: MultiTabOperation.CLOSEALL,
 				icon: <Iconify icon="mdi:collapse-all-outline" size={18} />,
 			},
@@ -191,7 +189,7 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 		 * - `t`: 国际化函数，用于获取不同语言的文本
 		 * - `tabs`: 当前存在的标签页数组，用于判断菜单项的禁用状态
 		 */
-		[openDropdownTabKey, t, tabs],
+		[openDropdownTabKey, tabs],
 	);
 
 	/**
@@ -371,6 +369,7 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 	 * 渲染单个 tab 标签
 	 * @param  tab - 当前 tab
 	 */
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	const renderTabLabel = useCallback(
 		(tab: KeepAliveTab) => {
 			//  如果当前 Tab 配置为隐藏，则返回 null，不进行渲染
@@ -403,7 +402,7 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 						<div>
 							{SpecialTabRenderMap[tab.label]
 								? SpecialTabRenderMap[tab.label](tab)
-								: t(tab.label)}
+								: tab.label}
 						</div>
 
 						{/* 关闭按钮 */}
@@ -435,7 +434,6 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 			);
 		},
 		[
-			t,
 			menuItems,
 			activeTabRoutePath,
 			hoveringTabKey,
@@ -712,15 +710,21 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 			// 阻止默认的垂直滚动行为
 			event.preventDefault();
 			// 根据 `deltaY` 值进行水平滚动
-			scrollContainer.current!.scrollLeft += event.deltaY;
+			if (scrollContainer.current) {
+				scrollContainer.current.scrollLeft += event.deltaY;
+			}
 		}
 
-		scrollContainer.current!.addEventListener("mouseenter", () => {
-			scrollContainer.current!.addEventListener("wheel", handleMouseWheel);
-		});
-		scrollContainer.current!.addEventListener("mouseleave", () => {
-			scrollContainer.current!.removeEventListener("wheel", handleMouseWheel);
-		});
+		if (scrollContainer.current) {
+			scrollContainer.current.addEventListener("mouseenter", () => {
+				if (scrollContainer.current) {
+					scrollContainer.current.addEventListener("wheel", handleMouseWheel);
+				}
+			});
+			scrollContainer.current.addEventListener("mouseleave", () => {
+				scrollContainer.current?.removeEventListener("wheel", handleMouseWheel);
+			});
+		}
 	}, []);
 
 	return (

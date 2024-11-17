@@ -58,7 +58,9 @@ export default function NavVertical(props: Props) {
 	const { setSettings } = useSettingActions();
 
 	const routeToMenuFn = useRouteToMenuFn();
+
 	const permissionRoutes = usePermissionRoutes();
+
 	const flattenedRoutes = useFlattenedRoutes();
 
 	/**

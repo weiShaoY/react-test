@@ -198,6 +198,7 @@ export function MultiTabsProvider({ children }: PropsWithChildren) {
 	);
 
 	// 当路由元信息变化时，自动添加新标签页
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		setTabs((prev) => prev.filter((item) => !item.hideTab));
 

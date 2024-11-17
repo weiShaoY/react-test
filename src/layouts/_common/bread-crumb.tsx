@@ -1,6 +1,5 @@
 import { Breadcrumb, type BreadcrumbProps, type GetProp } from "antd";
 import { useMemo } from "react";
-import { useTranslation } from "react-i18next";
 import { Link, useMatches } from "react-router-dom";
 
 import { Iconify } from "@/components/icon";
@@ -13,7 +12,6 @@ type MenuItem = GetProp<BreadcrumbProps, "items">[number];
  * 动态面包屑解决方案：https://github.com/MinjieChang/myblog/issues/29
  */
 export default function BreadCrumb() {
-	const { t } = useTranslation();
 	const matches = useMatches();
 	const flattenedRoutes = useFlattenedRoutes();
 	const permissionRoutes = usePermissionRoutes();
@@ -44,18 +42,20 @@ export default function BreadCrumb() {
 
 			return {
 				key,
-				title: t(label),
+				title: label,
 				...(currentMenuItems.length > 0 && {
 					menu: {
 						items: currentMenuItems.map((item) => ({
 							key: item.meta?.key,
-							label: <Link to={item.meta!.key!}>{t(item.meta!.label)}</Link>,
+							label: item.meta?.key ? (
+								<Link to={item.meta.key}>{item.meta.label}</Link>
+							) : null,
 						})),
 					},
 				}),
 			};
 		});
-	}, [matches, flattenedRoutes, t, permissionRoutes]);
+	}, [matches, flattenedRoutes, permissionRoutes]);
 
 	return (
 		<Breadcrumb

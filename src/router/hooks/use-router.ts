@@ -27,7 +27,9 @@ export function useRouter() {
 			 */
 			forward: () => navigate(1),
 
-			// 刷新当前页面
+			/**
+			 *  刷新当前页面
+			 */
 			reload: () => window.location.reload(),
 
 			/**

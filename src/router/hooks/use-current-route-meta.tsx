@@ -31,6 +31,7 @@ export function useCurrentRouteMeta() {
 	const [currentRouteMeta, setCurrentRouteMeta] = useState<RouteMeta>();
 
 	// 当 matchs 改变时，更新当前路由的 Meta 信息
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		// 获取最后一个匹配的路由（即当前路由）
 		const lastRoute = matchs.at(-1);
@@ -85,21 +86,14 @@ export const replaceDynamicParams = (
 
 	// 如果存在动态参数
 	if (paramNames) {
-		// 遍历所有动态参数
-		paramNames.forEach((paramName) => {
-			// 去掉冒号，获取参数的名称
+		for (const paramName of paramNames) {
+			// 去掉冒号，获取参数名称
 			const paramKey = paramName.slice(1);
-			// 检查 params 对象中是否有对应的参数值
-			if (params[paramKey]) {
-				// 将路径中的动态参数替换为实际的参数值
-				replacedPathName = replacedPathName.replace(
-					paramName,
-					params[paramKey]!,
-				);
-			}
-		});
-	}
+			if (!params[paramKey]) continue;
 
+			replacedPathName = replacedPathName.replace(paramName, params[paramKey]);
+		}
+	}
 	// 返回替换后的路径
 	return replacedPathName;
 };
