@@ -1,5 +1,3 @@
-import { lazy } from "react";
-
 import {
 	Navigate,
 	type RouteObject,
@@ -12,6 +10,10 @@ import DashboardLayout from "@/layouts/dashboard";
 import { usePermissionRoutes } from "@/router/hooks";
 
 import { ErrorRoutes } from "@/router/routes/error-routes";
+
+import { HomeRoutes } from "@/router/routes/home-routes";
+
+import { NotFoundRoute } from "./routes/not-found-route";
 
 import type { AppRouteObject } from "#/router";
 
@@ -26,24 +28,6 @@ const RootRoute: AppRouteObject = {
 };
 
 /**
- * 首页路由配置
- * @type {AppRouteObject}
- */
-const HomeRoute: AppRouteObject = {
-	path: "/home",
-	Component: lazy(() => import("@/pages/home/index")),
-};
-
-/**
- * 404 页面路由配置
- * @type {AppRouteObject}
- */
-const PAGE_NOT_FOUND_ROUTE: AppRouteObject = {
-	path: "*",
-	element: <Navigate to="/404" replace />,
-};
-
-/**
  * 主路由组件
  * @returns {JSX.Element} - 路由提供程序
  */
@@ -53,7 +37,7 @@ export default function Router(): JSX.Element {
 	 * @type {AppRouteObject}
 	 */
 
-	const asyncRoutes: AppRouteObject = {
+	const CodeRoutes: AppRouteObject = {
 		path: "/",
 		element: <DashboardLayout />,
 		children: [
@@ -74,13 +58,13 @@ export default function Router(): JSX.Element {
 		/**
 		 *  首页路由
 		 */
-		HomeRoute,
+		HomeRoutes,
 
 		/**
 		 * 异步加载的主页路由
 		 * 包含权限校验的动态加载页面
 		 */
-		asyncRoutes,
+		CodeRoutes,
 
 		/**
 		 * 错误页路由
@@ -92,7 +76,7 @@ export default function Router(): JSX.Element {
 		 * 未匹配到的路由
 		 * 重定向到 404 页面
 		 */
-		PAGE_NOT_FOUND_ROUTE,
+		NotFoundRoute,
 	];
 
 	/**
