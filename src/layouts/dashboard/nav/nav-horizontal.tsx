@@ -91,6 +91,7 @@ export default function NavHorizontal() {
 				height: dashboardConfig.NAV_HORIZONTAL_HEIGHT, // 水平导航栏的高度配置
 			}}
 		>
+			222222
 			<Menu
 				mode="horizontal" // 设置菜单为水平模式
 				items={menuList} // 菜单项列表

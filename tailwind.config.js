@@ -53,6 +53,13 @@ export default {
 				"spin-slow": "spin 8s linear infinite",
 			},
 		},
+
+		fontFamily: {
+			/**
+			 *  @description 改良瘦金体
+			 */
+			sans: ["gaiLiangShouJinTi", "sans-serif"],
+		},
 	},
 	corePlugins: {
 		// Remove the Tailwind CSS preflight styles so it can use custom base style (src/theme/base.css)

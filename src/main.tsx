@@ -27,7 +27,7 @@ import worker from "./_mock";
 import "./locales/i18n";
 
 // 引入 Tailwind CSS 样式
-import "./theme/index.css";
+import "./theme/index.less";
 
 // 创建一个 QueryClient 实例，用于管理 React Query 的全局配置
 const queryClient = new QueryClient({

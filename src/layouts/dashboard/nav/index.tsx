@@ -12,6 +12,7 @@ import { ThemeLayout } from "#/enum";
 export default function Nav() {
 	// 从全局设置中获取当前主题布局类型
 	const { themeLayout } = useSettings();
+
 	// 获取屏幕响应式信息（如是否为中等屏幕）
 	const { screenMap } = useResponsive();
 
