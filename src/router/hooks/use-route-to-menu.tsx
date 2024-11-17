@@ -1,6 +1,4 @@
 import { useCallback } from "react";
-import { useTranslation } from "react-i18next";
-
 import { Iconify, SvgIcon } from "@/components/icon";
 import type { GetProp, MenuProps } from "antd";
 import type { AppRouteObject } from "#/router";
@@ -30,14 +28,10 @@ const renderIcon = (icon: string | React.ReactNode): React.ReactNode => {
  * @param {(key: string) => string} t - 翻译函数
  * @returns {React.ReactNode} 包含文本和后缀的菜单项标签
  */
-const renderLabel = (
-	label: string,
-	suffix: React.ReactNode,
-	t: (key: string) => string,
-) => {
+const renderLabel = (label: string, suffix: React.ReactNode) => {
 	return (
 		<div className="flex items-center">
-			<div>{t(label)}</div>
+			<div>{label}</div>
 			{suffix}
 		</div>
 	);
@@ -47,8 +41,6 @@ const renderLabel = (
  * Hook: 将路由配置转换为菜单项配置
  */
 export function useRouteToMenuFn() {
-	const { t } = useTranslation();
-
 	// 使用 useCallback 缓存转换函数，避免每次渲染都重新创建
 	const routeToMenuFn = useCallback(
 		(items: AppRouteObject[]): MenuItem[] => {
@@ -62,7 +54,7 @@ export function useRouteToMenuFn() {
 					const menuItem: Partial<MenuItem> = {
 						key: meta.key, // 菜单项的唯一标识
 						disabled: meta.disabled, // 是否禁用
-						label: renderLabel(meta.label, meta.suffix, t), // 菜单项的显示文本
+						label: renderLabel(meta.label, meta.suffix), // 菜单项的显示文本
 						...(meta.icon && { icon: renderIcon(meta.icon) }), // 如果有图标，则渲染图标
 						...(children && { children: routeToMenuFn(children) }), // 如果有子路由，则递归处理子菜单项
 					};
@@ -70,7 +62,7 @@ export function useRouteToMenuFn() {
 					return menuItem as MenuItem;
 				});
 		},
-		[t], // 依赖于翻译函数 t
+		[], // 依赖于翻译函数 t
 	);
 	return routeToMenuFn;
 }

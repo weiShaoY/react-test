@@ -6,7 +6,7 @@ import { CircleLoading } from "@/components/loading";
 
 import type { AppRouteObject } from "#/router";
 
-const Workbench = lazy(() => import(`@/pages/workbench`));
+const Workbench = lazy(() => import("@/pages/workbench"));
 
 const workbench: AppRouteObject = {
 	order: 1,

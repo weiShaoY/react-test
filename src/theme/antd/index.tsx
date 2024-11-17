@@ -36,6 +36,7 @@ export default function AntdConfig({ children }: Props) {
 					colorPrimary,
 					...customThemeTokenConfig,
 					...themeModeToken[themeMode].token,
+					fontFamily: "'gaiLiangShouJinTi', 'Fira Code VF', sans-serif",
 				},
 				components: {
 					...customComponentConfig,
