@@ -105,12 +105,17 @@ const createBaseRoute = (
 	// 如果有order属性，添加到路由对象中
 	if (order) baseRoute.order = order;
 	// 如果有图标，添加到路由meta中
-	if (icon) baseRoute.meta!.icon = icon;
-	// 如果有iframe源地址，添加到meta中
-	if (frameSrc) baseRoute.meta!.frameSrc = frameSrc;
-	// 如果是新功能，添加新功能标签
-	if (newFeature) baseRoute.meta!.suffix = <NewFeatureTag />;
+	// if (icon) baseRoute.meta!.icon = icon;
+	// // 如果有iframe源地址，添加到meta中
+	// if (frameSrc) baseRoute.meta!.frameSrc = frameSrc;
+	// // 如果是新功能，添加新功能标签
+	// if (newFeature) baseRoute.meta.suffix = <NewFeatureTag />;
 
+	if (baseRoute.meta) {
+		if (icon) baseRoute.meta.icon = icon;
+		if (frameSrc) baseRoute.meta.frameSrc = frameSrc;
+		if (newFeature) baseRoute.meta.suffix = <NewFeatureTag />;
+	}
 	return baseRoute;
 };
 
@@ -129,7 +134,10 @@ const createCatalogueRoute = (
 		buildCompleteRoute(permission, flattenedPermissions), // 创建完整的路由路径
 	);
 
-	baseRoute.meta!.hideTab = true; // 隐藏tab
+	// 隐藏tab
+	if (baseRoute.meta) {
+		baseRoute.meta.hideTab = true;
+	}
 
 	const { parentId, children = [] } = permission;
 	if (!parentId) {
@@ -173,16 +181,19 @@ const createMenuRoute = (
 		buildCompleteRoute(permission, flattenedPermissions), // 创建完整的路由路径
 	);
 
-	const Element = lazy(loadComponentFromPath(permission.component!) as any); // 懒加载组件
+	if (permission.component) {
+		// 懒加载组件
+		const Element = lazy(loadComponentFromPath(permission.component) as any);
 
-	// 根据是否有frameSrc来决定渲染方式
-	baseRoute.element = permission.frameSrc ? (
-		<Element src={permission.frameSrc} /> // 如果有iframe源地址，渲染iframe
-	) : (
-		<RouteWrapper>
-			<Element />
-		</RouteWrapper> // 否则直接渲染组件
-	);
+		// 根据是否有frameSrc来决定渲染方式
+		baseRoute.element = permission.frameSrc ? (
+			<Element src={permission.frameSrc} />
+		) : (
+			<RouteWrapper>
+				<Element />
+			</RouteWrapper>
+		);
+	}
 
 	return baseRoute;
 };
