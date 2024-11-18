@@ -2,7 +2,9 @@ import { App as AntdApp } from "antd";
 
 import { Helmet } from "react-helmet-async";
 
-import Logo from "@/assets/images/avatar.jpg";
+// import Logo from "@/assets/images/avatar.jpg";
+// import Logo from "/public/favicon.svg";
+import Logo from "/public/favicon.ico";
 
 import Router from "@/router/index";
 

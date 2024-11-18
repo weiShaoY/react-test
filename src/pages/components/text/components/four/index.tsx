@@ -34,7 +34,7 @@ function Four() {
 				webkit-playsinline="true"
 				ref={videoRef}
 			>
-				<source src="public/smoke.mp4"></source>
+				<source src="public/video/smoke.mp4" />
 			</video>
 			<p ref={pRef}>
 				<span className={styles.span1}>w</span>

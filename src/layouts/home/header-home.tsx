@@ -2,59 +2,50 @@ import Logo from "@/components/logo";
 
 import { SvgIcon } from "@/components/icon";
 
-import SettingButton from "../_common/setting-button";
+// import SettingButton from "../_common/setting-button";
 
-import { Select, Dropdown, Button } from "antd";
+import { Button, Dropdown } from "antd";
 
-function handleChange(value: string) {
-	console.log(`selected ${value}`);
-}
+import type { MenuProps } from "antd";
+import { useNavigate } from "react-router-dom";
+
+// function handleChange(value: string) {
+// 	console.log(`selected ${value}`);
+// }
 
 export default function HeaderHome() {
+	const navigate = useNavigate();
+
 	const items: MenuProps["items"] = [
 		{
-			key: "1",
-			label: (
-				<a
-					target="_blank"
-					rel="noopener noreferrer"
-					href="https://www.antgroup.com"
-				>
-					About
-				</a>
-			),
+			key: "/about",
+			label: <div>About</div>,
 		},
 		{
-			key: "2",
-			label: (
-				<a
-					target="_blank"
-					rel="noopener noreferrer"
-					href="https://www.aliyun.com"
-				>
-					Resume
-				</a>
-			),
+			key: "/resume",
+			label: <div>Resume</div>,
+		},
+		{
+			key: "/code",
+			label: <div>Code</div>,
 		},
 	];
+
+	function handleClick(e: any) {
+		// 使用 navigate 进行页面跳转();
+		navigate(e.key);
+	}
 
 	return (
 		<header className="flex h-16 w-full  justify-center bg-yellow">
 			<div className="container flex items-center justify-between">
-				<Logo size={140} />
-				<SettingButton />
+				<Logo size={60} />
+				{/* <SettingButton /> */}
 
-				<Select
-					defaultValue="lucy"
-					style={{ width: 60 }}
-					onChange={handleChange}
-					options={[
-						{ value: "/about", label: "About" },
-						{ value: "/resume", label: "Resume" },
-					]}
-				/>
-
-				<Dropdown menu={{ items }} placement="bottomLeft">
+				<Dropdown
+					menu={{ items, onClick: handleClick }}
+					placement="bottomRight"
+				>
 					<Button
 						icon={
 							<SvgIcon

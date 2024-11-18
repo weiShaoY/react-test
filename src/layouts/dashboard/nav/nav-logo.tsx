@@ -50,12 +50,13 @@ export default function NavLogo({ collapsed, onToggle }: Props) {
 
 				{/* 当布局模式不是 Mini 时显示项目名称 */}
 				{themeLayout !== ThemeLayout.Mini && (
-					<span
-						className="ml-2 text-xl font-bold"
-						style={{ color: colorPrimary }}
-					>
-						weiShaoY
-					</span>
+					// <span
+					// 	className="ml-2 text-xl font-bold"
+					// 	style={{ color: colorPrimary }}
+					// >
+					// 	weiShaoY
+					// </span>
+					<SvgIcon icon="ic-weiShaoY" size="120" />
 				)}
 			</div>
 

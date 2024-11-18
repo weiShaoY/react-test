@@ -7,12 +7,12 @@ import { SvgIcon } from "../icon";
 interface Props {
 	size?: number | string;
 }
-function Logo({ size = 80 }: Props) {
+function Logo({ size = 60 }: Props) {
 	const { colorPrimary } = useThemeToken();
 
 	return (
 		<NavLink to="/">
-			<SvgIcon icon="logo" size={size} color={colorPrimary} />
+			<SvgIcon icon="ic-logo" size={size} color={colorPrimary} />
 		</NavLink>
 	);
 }
