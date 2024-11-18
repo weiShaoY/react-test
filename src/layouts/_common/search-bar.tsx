@@ -164,7 +164,7 @@ export default function SearchBar() {
 						ref={inputRef}
 						value={searchQuery}
 						onChange={(e) => setSearchQuery(e.target.value)}
-						placeholder="Search..."
+						placeholder="搜索..."
 						variant="borderless"
 						autoFocus
 						prefix={<SvgIcon icon="ic-search" size="20" />}
@@ -173,7 +173,7 @@ export default function SearchBar() {
 								className="h-6 rounded-md bg-hover text-xs"
 								onClick={handleCancel}
 							>
-								Esc
+								退出
 							</IconButton>
 						}
 					/>
@@ -183,15 +183,15 @@ export default function SearchBar() {
 						<div className="flex">
 							<ProTag color="cyan">↑</ProTag>
 							<ProTag color="cyan">↓</ProTag>
-							<span>to navigate</span>
+							<span>导航</span>
 						</div>
 						<div className="flex">
 							<ProTag color="cyan">↵</ProTag>
-							<span>to select</span>
+							<span>选择</span>
 						</div>
 						<div className="flex">
 							<ProTag color="cyan">ESC</ProTag>
-							<span>to close</span>
+							<span>关闭</span>
 						</div>
 					</div>
 				}

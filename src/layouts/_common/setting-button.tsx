@@ -169,12 +169,12 @@ export default function SettingButton() {
 										color={colorPrimary}
 										className="!m-0"
 									/>
-									<span className="ml-2">Exit FullScreen</span>
+									<span className="ml-2">退出全屏</span>
 								</>
 							) : (
 								<>
 									<SvgIcon icon="ic-settings-fullscreen" className="!m-0" />
-									<span className="ml-2 text-gray">FullScreen</span>
+									<span className="ml-2 text-gray">全屏</span>
 								</>
 							)}
 						</div>
@@ -188,7 +188,7 @@ export default function SettingButton() {
 							className="mb-3 text-base font-semibold"
 							style={{ color: colorTextSecondary }}
 						>
-							Mode
+							模式
 						</div>
 						<div className="flex flex-row gap-4">
 							<Card
@@ -214,13 +214,46 @@ export default function SettingButton() {
 						</div>
 					</div>
 
+					{/* theme presets */}
+					<div>
+						<div
+							className="mb-3 text-base font-semibold"
+							style={{ color: colorTextSecondary }}
+						>
+							预设
+						</div>
+						<div className="grid grid-cols-3 gap-x-4 gap-y-3">
+							{Object.entries(colorPrimarys).map(([preset, color]) => (
+								<Card
+									key={preset}
+									className="flex h-14 w-full cursor-pointer items-center justify-center"
+									style={{
+										backgroundColor:
+											themeColorPresets === preset ? `${color}14` : "",
+									}}
+									onClick={() =>
+										setThemeColorPresets(preset as ThemeColorPresets)
+									}
+								>
+									<div style={{ color }}>
+										<MdCircle
+											style={{
+												fontSize: themeColorPresets === preset ? 24 : 12,
+											}}
+										/>
+									</div>
+								</Card>
+							))}
+						</div>
+					</div>
+
 					{/* theme layout */}
 					<div>
 						<div
 							className="mb-3 text-base font-semibold"
 							style={{ color: colorTextSecondary }}
 						>
-							Layout
+							布局
 						</div>
 						<div className="grid grid-cols-3 gap-4">
 							<Card
@@ -354,7 +387,7 @@ export default function SettingButton() {
 							className=" mb-3 text-base font-semibold"
 							style={{ color: colorTextSecondary }}
 						>
-							<span className="mr-2">Stretch</span>
+							<span className="mr-2">拉伸</span>
 							<Tooltip title="Only available at large resolutions > 1600px (xl)">
 								<QuestionCircleOutlined />
 							</Tooltip>
@@ -400,53 +433,20 @@ export default function SettingButton() {
 						</Card>
 					</div>
 
-					{/* theme presets */}
-					<div>
-						<div
-							className="mb-3 text-base font-semibold"
-							style={{ color: colorTextSecondary }}
-						>
-							Presets
-						</div>
-						<div className="grid grid-cols-3 gap-x-4 gap-y-3">
-							{Object.entries(colorPrimarys).map(([preset, color]) => (
-								<Card
-									key={preset}
-									className="flex h-14 w-full cursor-pointer items-center justify-center"
-									style={{
-										backgroundColor:
-											themeColorPresets === preset ? `${color}14` : "",
-									}}
-									onClick={() =>
-										setThemeColorPresets(preset as ThemeColorPresets)
-									}
-								>
-									<div style={{ color }}>
-										<MdCircle
-											style={{
-												fontSize: themeColorPresets === preset ? 24 : 12,
-											}}
-										/>
-									</div>
-								</Card>
-							))}
-						</div>
-					</div>
-
 					{/* Page config */}
 					<div>
 						<div
 							className="mb-3 text-base font-semibold"
 							style={{ color: colorTextSecondary }}
 						>
-							Page
+							页面
 						</div>
 						<div className="flex flex-col gap-2">
 							<div
 								className="flex items-center justify-between"
 								style={{ color: colorTextTertiary }}
 							>
-								<div>BreadCrumb</div>
+								<div>面包屑</div>
 								<Switch
 									size="small"
 									checked={breadCrumb}
@@ -457,7 +457,7 @@ export default function SettingButton() {
 								className="flex items-center justify-between"
 								style={{ color: colorTextTertiary }}
 							>
-								<div>Multi Tab</div>
+								<div>多选项卡</div>
 								<Switch
 									size="small"
 									checked={multiTab}
@@ -468,7 +468,7 @@ export default function SettingButton() {
 								className="flex items-center justify-between"
 								style={{ color: colorTextTertiary }}
 							>
-								<div>Dark Sidebar</div>
+								<div>深色侧边栏</div>
 								<Switch
 									size="small"
 									checked={darkSidebar}

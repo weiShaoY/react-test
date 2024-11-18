@@ -74,10 +74,10 @@ export default function NavLogo({ collapsed, onToggle }: Props) {
 				{/* 根据折叠状态显示不同的图标 */}
 				{collapsed ? (
 					// <RightOutlined style={{ fontSize: 12, color: colorTextSecondary }} />
-					<SvgIcon icon="nav-zhanKai" size="40" />
+					<SvgIcon icon="ic-nav-collapsed" size="40" />
 				) : (
 					// <LeftOutlined style={{ fontSize: 12, color: colorTextSecondary }} />
-					<SvgIcon icon="nav-guanBi" size="40" />
+					<SvgIcon icon="ic-nav-expand" size="40" />
 				)}
 			</div>
 		</div>
