@@ -18,7 +18,16 @@ declare global {
 // 配置 highlight.js 的高亮语言
 hljs.configure({
 	// 指定支持的语言列表，减少不必要的语言解析，提高性能
-	languages: ["javascript", "sh", "bash", "html", "scss", "css", "json"],
+	languages: [
+		"javascript",
+		"sh",
+		"bash",
+		"html",
+		"scss",
+		"less",
+		"css",
+		"json",
+	],
 });
 
 // 检查当前环境是否为浏览器环境（即 window 对象是否存在）
