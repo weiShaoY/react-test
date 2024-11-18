@@ -2,6 +2,7 @@ import { Layout, Menu, type MenuProps } from "antd";
 import Color from "color";
 import { useEffect, useMemo, useState } from "react";
 import { useMatches, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 import Scrollbar from "@/components/scrollbar";
 import {
@@ -16,7 +17,7 @@ import { useThemeToken } from "@/theme/hooks";
 
 import dashboardConfig from "../config";
 
-import NavLogo from "./nva-logo";
+import NavLogo from "./nav-logo";
 
 import { ThemeLayout, ThemeMode } from "#/enum";
 
@@ -148,6 +149,14 @@ export default function NavVertical(props: Props) {
 		return darkSidebar ? "dark" : "light";
 	}, [themeMode, darkSidebar]);
 
+	const theme = useThemeToken();
+
+	const StyledMenu = styled(Menu)`
+	.ant-menu-submenu-selected.ant-menu-submenu-vertical {
+		background-color: ${theme.colorPrimaryBg} !important;
+	}
+`;
+
 	return (
 		<Sider
 			trigger={null} // 不显示默认的触发器（折叠图标）
@@ -165,7 +174,7 @@ export default function NavVertical(props: Props) {
 
 			{/* 滚动条包裹区域，包含菜单 */}
 			<Scrollbar>
-				<Menu
+				<StyledMenu
 					mode="inline" // 设置菜单为内联模式
 					items={menuList} // 菜单项
 					theme={sidebarTheme} // 菜单主题

@@ -85,22 +85,26 @@ const useSettingStore = create<SettingStore>()(
 				darkSidebar: false,
 			},
 			actions: {
-				// 更新 settings 的函数
 				setSettings: (settings) => {
 					set({ settings });
 				},
-				// 清除持久化存储的 settings 数据
 				clearSettings() {
 					useSettingStore.persist.clearStorage();
 				},
 			},
 		}),
 		{
-			// 存储的 key 名称
-			name: StorageEnum.Settings,
-			// 存储方式，这里使用 localStorage
-			storage: createJSONStorage(() => localStorage),
-			// 持久化时仅存储 settings 部分的数据
+			/**
+			 *  存储的 key 名称
+			 */
+			name: StorageEnum.Settings, // name of the item in the storage (must be unique)
+			/**
+			 *  存储方式
+			 */
+			storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
+			/**
+			 *  持久化时仅存储 settings 部分的数据
+			 */
 			partialize: (state) => ({ [StorageEnum.Settings]: state.settings }),
 		},
 	),

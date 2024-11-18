@@ -182,7 +182,7 @@ export default function SettingButton() {
 				}
 			>
 				<div className="flex flex-col gap-6 p-6">
-					{/* theme mode */}
+					{/* 模式 */}
 					<div>
 						<div
 							className="mb-3 text-base font-semibold"
@@ -214,7 +214,7 @@ export default function SettingButton() {
 						</div>
 					</div>
 
-					{/* theme presets */}
+					{/* 预设 */}
 					<div>
 						<div
 							className="mb-3 text-base font-semibold"
@@ -247,7 +247,7 @@ export default function SettingButton() {
 						</div>
 					</div>
 
-					{/* theme layout */}
+					{/* 布局 */}
 					<div>
 						<div
 							className="mb-3 text-base font-semibold"
@@ -381,7 +381,7 @@ export default function SettingButton() {
 						</div>
 					</div>
 
-					{/* theme stretch */}
+					{/* 拉伸 */}
 					<div>
 						<div
 							className=" mb-3 text-base font-semibold"
@@ -433,13 +433,13 @@ export default function SettingButton() {
 						</Card>
 					</div>
 
-					{/* Page config */}
+					{/* 页面配置 */}
 					<div>
 						<div
 							className="mb-3 text-base font-semibold"
 							style={{ color: colorTextSecondary }}
 						>
-							页面
+							页面配置
 						</div>
 						<div className="flex flex-col gap-2">
 							<div
