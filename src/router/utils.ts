@@ -24,30 +24,6 @@ export const menuFilter = (items: AppRouteObject[]) => {
 };
 
 /**
- * 基于 src/router/routes/modules 文件结构动态生成路由
- * @returns  返回从模块文件夹中动态导入的路由对象数组
- */
-export function getRoutesFromModules() {
-	/**
-	 *    动态获取所有菜单模块路由
-	 */
-	const menuModules: AppRouteObject[] = [];
-
-	// 使用 Vite 的 import.meta.glob 方法动态导入指定路径下的所有路由模块文件
-	const modules = import.meta.glob("./routes/modules/**/*.tsx", {
-		eager: true,
-	});
-
-	for (const key in modules) {
-		const mod = (modules as any)[key].default || {};
-		const modList = Array.isArray(mod) ? [...mod] : [mod];
-		menuModules.push(...modList);
-	}
-
-	return menuModules;
-}
-
-/**
  * 获取用于侧边栏菜单的路由
  * @param  appRouteObjects - 路由对象数组
  * @returns  返回经过过滤和排序后的菜单路由
@@ -71,4 +47,49 @@ export function flattenMenuRoutes(routes: AppRouteObject[]) {
 		if (children) prev.push(...flattenMenuRoutes(children));
 		return prev;
 	}, []);
+}
+
+/**
+ * 基于 src/router/routes/modules 文件结构动态生成路由
+ * @returns  返回从模块文件夹中动态导入的路由对象数组
+ */
+export function getRoutesFromModules() {
+	/**
+	 *    动态获取所有菜单模块路由
+	 */
+	const menuModules: AppRouteObject[] = [];
+
+	// 使用 Vite 的 import.meta.glob 方法动态导入指定路径下的所有路由模块文件
+	const modules = import.meta.glob("./routes/modules/**/*.tsx", {
+		eager: true,
+	});
+
+	for (const key in modules) {
+		const mod = (modules as any)[key].default || {};
+		const modList = Array.isArray(mod) ? [...mod] : [mod];
+		menuModules.push(...modList);
+	}
+
+	const routesWihPrefix = addCodeRoutes(menuModules);
+
+	return menuFilter(routesWihPrefix);
+}
+
+function addCodeRoutes(routes: AppRouteObject[]) {
+	return routes.map((route) => {
+		const newRoute = { ...route };
+
+		if (newRoute.meta?.key && newRoute.meta.key !== "/") {
+			if (!newRoute.meta.key.startsWith("/code")) {
+				newRoute.meta.key = newRoute.meta.key.startsWith("/")
+					? `/code${newRoute.meta.key}`
+					: `/code/${newRoute.meta.key}`;
+			}
+		}
+		if (newRoute.children && newRoute.children.length > 0) {
+			newRoute.children = addCodeRoutes(newRoute.children);
+		}
+
+		return newRoute;
+	});
 }

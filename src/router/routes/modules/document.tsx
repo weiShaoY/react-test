@@ -18,11 +18,11 @@ function Wrapper({ children }: any) {
 const document: AppRouteObject = {
 	order: 2,
 	path: "document",
-	element: (
-		<Suspense fallback={<CircleLoading />}>
-			<Outlet />
-		</Suspense>
-	),
+	// element: (
+	// 	<Suspense fallback={<CircleLoading />}>
+	// 		<Outlet />
+	// 	</Suspense>
+	// ),
 	meta: {
 		label: "文档",
 		icon: (
@@ -63,6 +63,8 @@ const document: AppRouteObject = {
 				icon: (
 					<SvgIcon icon="menu-vue" className="ant-menu-item-icon" size="24" />
 				),
+				//  在多标签页中隐藏
+				hideTab: true,
 			},
 		},
 		{

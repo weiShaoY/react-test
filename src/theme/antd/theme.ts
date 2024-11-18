@@ -72,6 +72,7 @@ const themeModeToken: Record<"dark" | "light", ThemeConfig> = {
 			},
 			Menu: {
 				darkItemBg: "#161c24",
+				dangerItemColor: "#ff5630",
 			},
 		},
 	},

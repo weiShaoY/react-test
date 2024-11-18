@@ -38,7 +38,7 @@ export default function Router(): JSX.Element {
 	 */
 
 	const CodeRoutes: AppRouteObject = {
-		path: "/",
+		path: "/code",
 		element: <DashboardLayout />,
 		children: [
 			{ index: true, element: <Navigate to={HOMEPAGE} replace /> },
