@@ -149,13 +149,13 @@ export default function NavVertical(props: Props) {
 		return darkSidebar ? "dark" : "light";
 	}, [themeMode, darkSidebar]);
 
-	const theme = useThemeToken();
+	// const theme = useThemeToken();
 
-	const StyledMenu = styled(Menu)`
-	.ant-menu-submenu-selected.ant-menu-submenu-vertical {
-		background-color: ${theme.colorPrimaryBg} !important;
-	}
-`;
+	// 	const StyledMenu = styled(Menu)`
+	// 	.ant-menu-submenu-selected.ant-menu-submenu-vertical {
+	// 		background-color: ${theme.colorPrimaryBg} !important;
+	// 	}
+	// `;
 
 	return (
 		<Sider
@@ -174,7 +174,7 @@ export default function NavVertical(props: Props) {
 
 			{/* 滚动条包裹区域，包含菜单 */}
 			<Scrollbar>
-				<StyledMenu
+				<Menu
 					mode="inline" // 设置菜单为内联模式
 					items={menuList} // 菜单项
 					theme={sidebarTheme} // 菜单主题

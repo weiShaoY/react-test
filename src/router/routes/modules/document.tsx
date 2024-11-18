@@ -6,7 +6,12 @@ import { CircleLoading } from "@/components/loading";
 
 import type { AppRouteObject } from "#/router";
 
-const Iframe = lazy(() => import("@/pages/sys/others/iframe"));
+// const Iframe = lazy(() => import("@/pages/sys/others/iframe"));
+
+const Iframe = lazy(async () => {
+	await new Promise((resolve) => setTimeout(resolve, 300)); // 延迟 300ms
+	return import("@/pages/sys/others/iframe");
+});
 
 const ExternalLink = lazy(
 	() => import("@/pages/sys/others/iframe/external-link"),
@@ -18,11 +23,11 @@ function Wrapper({ children }: any) {
 const document: AppRouteObject = {
 	order: 2,
 	path: "document",
-	// element: (
-	// 	<Suspense fallback={<CircleLoading />}>
-	// 		<Outlet />
-	// 	</Suspense>
-	// ),
+	element: (
+		<Suspense fallback={<CircleLoading />}>
+			<Outlet />
+		</Suspense>
+	),
 	meta: {
 		label: "文档",
 		icon: (
@@ -70,9 +75,12 @@ const document: AppRouteObject = {
 		{
 			path: "angular",
 			element: (
-				<Wrapper>
+				// <Wrapper>
+				// 	<Iframe src="https://angular.io/" />
+				// </Wrapper>
+				<Suspense fallback={<CircleLoading />}>
 					<Iframe src="https://angular.io/" />
-				</Wrapper>
+				</Suspense>
 			),
 			meta: {
 				label: "Angular",
