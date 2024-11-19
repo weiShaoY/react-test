@@ -11,8 +11,8 @@ import { type CSSProperties, useState } from "react";
 import { MdCircle } from "react-icons/md";
 import screenfull from "screenfull";
 
-import CyanBlur from "@/assets/images/background/cyan-blur.png";
-import RedBlur from "@/assets/images/background/red-blur.png";
+import CyanBlur from "@/assets/images/setting/cyan-blur.png";
+import RedBlur from "@/assets/images/setting/red-blur.png";
 import { varHover } from "@/components/animate/variants/action";
 import { IconButton, SvgIcon } from "@/components/icon";
 import { useSettingActions, useSettings } from "@/store/settingStore";

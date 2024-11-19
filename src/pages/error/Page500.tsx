@@ -3,7 +3,7 @@ import { m } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { NavLink } from "react-router-dom";
 
-import Character8 from "@/assets/images/characters/character_8.png";
+import Character8 from "@/assets/images/error/character_8.png";
 import MotionContainer from "@/components/animate/motion-container";
 import { varBounce } from "@/components/animate/variants/bounce";
 import { useThemeToken } from "@/theme/hooks";
@@ -15,20 +15,20 @@ export default function Page() {
 	return (
 		<>
 			<Helmet>
-				<title> 500 Internal Server Error!</title>
+				<title> 500 内部服务器错误!</title>
 			</Helmet>
 
 			<div className="m-auto max-w-[400px]">
 				<MotionContainer className="flex flex-col items-center justify-center px-2">
 					<m.div variants={varBounce().in}>
 						<Typography.Title level={3} className="text-center">
-							500 Internal Server Error
+							500 内部服务器错误
 						</Typography.Title>
 					</m.div>
 
 					<m.div variants={varBounce().in}>
 						<Typography.Paragraph type="secondary" className="text-center">
-							There was an error, please try again later.
+							出现错误，请稍后重试。
 						</Typography.Paragraph>
 					</m.div>
 
@@ -40,6 +40,7 @@ export default function Page() {
 							height={400}
 							className="w-full"
 						>
+							<title>500</title>
 							<defs>
 								<linearGradient
 									id="BG"
@@ -162,7 +163,7 @@ export default function Page() {
 						style={{ background: colorTextBase, color: colorBgBase }}
 						className="rounded-md p-4"
 					>
-						Go to Home
+						转至主页
 					</NavLink>
 				</MotionContainer>
 			</div>

@@ -9,9 +9,9 @@ import SimpleLayout from "@/layouts/simple";
 import type { AppRouteObject } from "#/router";
 
 // 使用 React.lazy 动态加载错误页面组件
-const Page403 = lazy(() => import("@/pages/sys/error/Page403"));
-const Page404 = lazy(() => import("@/pages/sys/error/Page404"));
-const Page500 = lazy(() => import("@/pages/sys/error/Page500"));
+const Page403 = lazy(() => import("@/pages/error/Page403"));
+const Page404 = lazy(() => import("@/pages/error/Page404"));
+const Page500 = lazy(() => import("@/pages/error/Page500"));
 
 /**
  * ErrorRoutes: 错误页面路由配置

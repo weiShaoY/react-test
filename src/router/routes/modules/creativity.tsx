@@ -8,18 +8,20 @@ import { CircleLoading } from "@/components/loading";
 
 import type { AppRouteObject } from "#/router";
 
-const ClockPage = lazy(() => import("@/pages/components/clock"));
-const MuYuPage = lazy(() => import("@/pages/components/muYu"));
-const CalendarPage = lazy(() => import("@/pages/components/calendar"));
-const ScreensaverPage = lazy(() => import("@/pages/components/screensaver"));
-const TimePage = lazy(() => import("@/pages/components/time"));
-const RipplePage = lazy(() => import("@/pages/components/ripple"));
-const CodeWallPage = lazy(() => import("@/pages/components/codeWall"));
-const TextPage = lazy(() => import("@/pages/components/text"));
+const ClockPage = lazy(() => import("@/pages/code/creativity/clock"));
+const MuYuPage = lazy(() => import("@/pages/code/creativity/muYu"));
+const CalendarPage = lazy(() => import("@/pages/code/creativity/calendar"));
+const ScreensaverPage = lazy(
+	() => import("@/pages/code/creativity/screensaver"),
+);
+const TimePage = lazy(() => import("@/pages/code/creativity/time"));
+const RipplePage = lazy(() => import("@/pages/code/creativity/ripple"));
+const CodeWallPage = lazy(() => import("@/pages/code/creativity/codeWall"));
+const TextPage = lazy(() => import("@/pages/code/creativity/text"));
 
-const components: AppRouteObject = {
+const Creativity: AppRouteObject = {
 	order: 3,
-	path: "components",
+	path: "creativity",
 	element: (
 		<Suspense fallback={<CircleLoading />}>
 			<Outlet />
@@ -29,12 +31,12 @@ const components: AppRouteObject = {
 		label: "组件",
 		icon: (
 			<SvgIcon
-				icon="code-menu-components"
+				icon="code-menu-creativity"
 				className="ant-menu-item-icon"
 				size="24"
 			/>
 		),
-		key: "/components",
+		key: "/creativity",
 	},
 	children: [
 		{
@@ -47,9 +49,13 @@ const components: AppRouteObject = {
 			element: <ClockPage />,
 			meta: {
 				label: "时钟",
-				key: "/components/clock",
+				key: "/creativity/clock",
 				icon: (
-					<SvgIcon icon="code-menu-clock" className="ant-menu-item-icon" size="24" />
+					<SvgIcon
+						icon="code-menu-clock"
+						className="ant-menu-item-icon"
+						size="24"
+					/>
 				),
 			},
 		},
@@ -59,9 +65,13 @@ const components: AppRouteObject = {
 			element: <MuYuPage />,
 			meta: {
 				label: "木鱼",
-				key: "/components/muYu",
+				key: "/creativity/muYu",
 				icon: (
-					<SvgIcon icon="code-menu-muYu" className="ant-menu-item-icon" size="24" />
+					<SvgIcon
+						icon="code-menu-muYu"
+						className="ant-menu-item-icon"
+						size="24"
+					/>
 				),
 			},
 		},
@@ -71,7 +81,7 @@ const components: AppRouteObject = {
 			element: <CalendarPage />,
 			meta: {
 				label: "日历",
-				key: "/components/calendar",
+				key: "/creativity/calendar",
 				icon: (
 					<SvgIcon
 						icon="code-menu-calendar"
@@ -86,7 +96,7 @@ const components: AppRouteObject = {
 			element: <ScreensaverPage />,
 			meta: {
 				label: "屏保",
-				key: "/components/screensaver",
+				key: "/creativity/screensaver",
 				icon: (
 					<SvgIcon
 						icon="code-menu-screensaver"
@@ -101,9 +111,13 @@ const components: AppRouteObject = {
 			element: <TimePage />,
 			meta: {
 				label: "时间",
-				key: "/components/time",
+				key: "/creativity/time",
 				icon: (
-					<SvgIcon icon="code-menu-time" className="ant-menu-item-icon" size="24" />
+					<SvgIcon
+						icon="code-menu-time"
+						className="ant-menu-item-icon"
+						size="24"
+					/>
 				),
 			},
 		},
@@ -112,7 +126,7 @@ const components: AppRouteObject = {
 			element: <RipplePage />,
 			meta: {
 				label: "水波",
-				key: "/components/ripple",
+				key: "/creativity/ripple",
 				icon: (
 					<SvgIcon
 						icon="code-menu-ripple"
@@ -127,9 +141,13 @@ const components: AppRouteObject = {
 			element: <TextPage />,
 			meta: {
 				label: "文字",
-				key: "/components/text",
+				key: "/creativity/text",
 				icon: (
-					<SvgIcon icon="code-menu-text" className="ant-menu-item-icon" size="24" />
+					<SvgIcon
+						icon="code-menu-text"
+						className="ant-menu-item-icon"
+						size="24"
+					/>
 				),
 			},
 		},
@@ -138,7 +156,7 @@ const components: AppRouteObject = {
 			element: <CodeWallPage />,
 			meta: {
 				label: "代码墙",
-				key: "/components/codeWall",
+				key: "/creativity/codeWall",
 				icon: (
 					<SvgIcon
 						icon="code-menu-codeWall"
@@ -151,4 +169,4 @@ const components: AppRouteObject = {
 	],
 };
 
-export default components;
+export default Creativity;

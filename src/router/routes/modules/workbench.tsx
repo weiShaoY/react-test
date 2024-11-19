@@ -6,7 +6,7 @@ import { CircleLoading } from "@/components/loading";
 
 import type { AppRouteObject } from "#/router";
 
-const Workbench = lazy(() => import("@/pages/workbench"));
+const Workbench = lazy(() => import("@/pages/code/workbench"));
 
 const workbench: AppRouteObject = {
 	order: 1,
@@ -19,7 +19,11 @@ const workbench: AppRouteObject = {
 	meta: {
 		label: "工作台",
 		icon: (
-			<SvgIcon icon="code-menu-workbench" className="ant-menu-item-icon" size="24" />
+			<SvgIcon
+				icon="code-menu-workbench"
+				className="ant-menu-item-icon"
+				size="24"
+			/>
 		),
 		key: "/workbench",
 	},

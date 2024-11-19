@@ -1,8 +1,8 @@
 import {
-	Navigate,
 	type RouteObject,
+	Navigate,
 	RouterProvider,
-	createHashRouter,
+	createBrowserRouter,
 } from "react-router-dom";
 
 import DashboardLayout from "@/layouts/dashboard";
@@ -82,7 +82,12 @@ export default function Router(): JSX.Element {
 	/**
 	 * 创建 Hash 路由器
 	 */
-	const router = createHashRouter(routes as unknown as RouteObject[]);
+	// const router = createHashRouter(routes as unknown as RouteObject[]);
+
+	/**
+	 *  创建 History 路由器
+	 */
+	const router = createBrowserRouter(routes as unknown as RouteObject[]);
 
 	return <RouterProvider router={router} />;
 }
