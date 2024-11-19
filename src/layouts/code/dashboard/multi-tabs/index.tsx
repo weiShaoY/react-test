@@ -2,7 +2,6 @@ import { Dropdown, type MenuProps, Tabs, type TabsProps } from "antd";
 import Color from "color";
 import {
 	type CSSProperties,
-	type ReactNode,
 	useCallback,
 	useEffect,
 	useMemo,
@@ -18,7 +17,6 @@ import {
 import { useFullscreen, useToggle } from "react-use";
 import styled from "styled-components";
 
-import { USER_LIST } from "@/_mock/assets";
 import { Iconify } from "@/components/icon";
 import { useRouter } from "@/router/hooks";
 import { replaceDynamicParams } from "@/router/hooks/use-current-route-meta";
@@ -61,40 +59,6 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 		closeLeft,
 		closeRight,
 	} = useMultiTabsContext();
-
-	/**
-	 * 特殊标签页渲染映射表
-	 * - 使用 `useMemo` 创建一个包含特殊标签页渲染逻辑的映射对象，避免每次渲染时重复计算
-	 * - 根据不同的 `tab.label` 值，返回自定义的渲染内容
-	 */
-	const SpecialTabRenderMap: Record<string, (tab: KeepAliveTab) => ReactNode> =
-		useMemo(
-			() => ({
-				/**
-				 * 系统用户详情页面 (`sys.menu.system.user_detail`)
-				 * @param {KeepAliveTab} tab - 当前标签页对象，包含 `label` 和 `params` 等属性
-				 * @returns {ReactNode} 返回渲染的标签文本
-				 */
-				"sys.menu.system.user_detail": (tab: KeepAliveTab) => {
-					// 从 `tab.params` 中获取用户 ID
-					const userId = tab.params?.id;
-					// 默认标签文本为国际化后的 `tab.label` 值
-					const defaultLabel = tab.label;
-
-					// 如果存在用户 ID，则查找用户列表中的对应用户信息
-					if (userId) {
-						// 查找 `USER_LIST` 中与 `userId` 匹配的用户对象
-						const user = USER_LIST.find((item) => item.id === userId);
-						// 返回格式为：`用户名-默认标签文本`（如：`john-doe-用户详情`）
-						return `${user?.username}-${defaultLabel}`;
-					}
-
-					// 如果没有用户 ID，直接返回默认标签文本
-					return defaultLabel;
-				},
-			}),
-			[], // 依赖项：`t` 国际化函数，变化时重新计算映射表
-		);
 
 	/**
 	 * tab 下拉菜单项
@@ -399,11 +363,7 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 						onMouseLeave={() => setHoveringTabKey("")}
 					>
 						{/* 判断是否使用特殊渲染映射表 如果在 SpecialTabRenderMap 中存在对应的渲染函数，则调用该函数渲染 否则使用默认的翻译函数 t() 进行渲染 */}
-						<div>
-							{SpecialTabRenderMap[tab.label]
-								? SpecialTabRenderMap[tab.label](tab)
-								: tab.label}
-						</div>
+						<div>{tab.label}</div>
 
 						{/* 关闭按钮 */}
 						<Iconify
@@ -441,7 +401,6 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 			menuClick,
 			closeTab,
 			calcTabStyle,
-			SpecialTabRenderMap,
 		],
 	);
 

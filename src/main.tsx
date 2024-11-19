@@ -21,8 +21,6 @@ import "virtual:svg-icons-register";
 
 import App from "@/App";
 
-import worker from "./_mock";
-
 // 引入 Tailwind CSS 样式
 import "./theme/index.less";
 
@@ -90,8 +88,3 @@ root.render(
 		</QueryClientProvider>
 	</HelmetProvider>,
 );
-
-// 启动 Mock 服务（仅在开发环境生效），用于模拟接口请求
-worker.start({
-	onUnhandledRequest: "bypass",
-});
