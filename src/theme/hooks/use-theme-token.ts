@@ -1,10 +1,12 @@
 import { theme } from "antd";
 import { useMemo } from "react";
 
+import type { ExtendedThemeConfig } from "../antd/theme";
+
 /**
  * 获取 Ant Design 的主题 token，并使用 useMemo 进行缓存
  */
-export function useThemeToken() {
+export function useThemeToken(): NonNullable<ExtendedThemeConfig["token"]> {
 	// 使用 Ant Design 提供的 useToken Hook 获取主题 token
 	const { token } = theme.useToken();
 

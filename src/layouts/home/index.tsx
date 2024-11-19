@@ -2,26 +2,23 @@ import type React from "react";
 
 import { useThemeToken } from "@/theme/hooks";
 
-import HeaderHome from "./header-home";
+import Header from "./header";
 
 type Props = {
 	children: React.ReactNode;
 };
 export default function HomeLayout({ children }: Props) {
-	const { colorBgElevated, colorTextBase } = useThemeToken();
+	const themeToken = useThemeToken();
 
-	const backgroundColor =
-		"!bg-[radial-gradient(ellipse_at_center,#969696_0%,#595959_100%)]";
-
+	// !bg-[#222325]
 	return (
 		<div
-			className="flex h-screen w-full flex-col !bg-[#222325]"
+			className="flex h-screen w-full flex-col "
 			style={{
-				color: colorTextBase,
-				// background: colorBgElevated,
+				background: themeToken.colorHomeBgLayout,
 			}}
 		>
-			<HeaderHome />
+			<Header />
 			{children}
 		</div>
 	);

@@ -43,12 +43,51 @@ const colorPrimarys: {
 	red: "#FF3030",
 };
 
-const themeModeToken: Record<"dark" | "light", ThemeConfig> = {
+/**
+ * 扩展后的 ThemeConfig 类型
+ */
+export interface ExtendedThemeConfig extends Omit<ThemeConfig, "token"> {
+	/**
+	 * 使用扩展后的 Token 类型
+	 */
+	token?: ThemeConfig["token"] & {
+		/**
+		 * 自定义属性：首页头部背景色
+		 */
+		colorHomeHeaderBg?: string;
+
+		/**
+		 *  自定义属性：首页页面背景色
+		 */
+		colorHomeBgLayout?: string;
+	};
+}
+const themeModeToken: Record<"dark" | "light", ExtendedThemeConfig> = {
+	light: {
+		token: {
+			colorHomeHeaderBg: "#e2e5e5",
+			colorHomeBgLayout: "#fff",
+		},
+
+		components: {
+			Layout: {
+				siderBg: "#161c24",
+			},
+			Menu: {
+				darkItemBg: "#161c24",
+				dangerItemColor: "#ff5630",
+			},
+		},
+	},
+
 	dark: {
 		token: {
-			colorBgLayout: "#161c24",
+			colorBgLayout: "#222325",
 			colorBgContainer: "#212b36",
 			colorBgElevated: "#161c24",
+
+			colorHomeHeaderBg: "#191919",
+			colorHomeBgLayout: "#222325",
 		},
 		components: {
 			Layout: {
@@ -63,17 +102,6 @@ const themeModeToken: Record<"dark" | "light", ThemeConfig> = {
 				footerBg: "#212b36",
 			},
 			Notification: {},
-		},
-	},
-	light: {
-		components: {
-			Layout: {
-				siderBg: "#161c24",
-			},
-			Menu: {
-				darkItemBg: "#161c24",
-				dangerItemColor: "#ff5630",
-			},
 		},
 	},
 };
