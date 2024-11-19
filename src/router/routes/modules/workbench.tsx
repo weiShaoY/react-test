@@ -19,7 +19,7 @@ const workbench: AppRouteObject = {
 	meta: {
 		label: "工作台",
 		icon: (
-			<SvgIcon icon="menu-workbench" className="ant-menu-item-icon" size="24" />
+			<SvgIcon icon="code-menu-workbench" className="ant-menu-item-icon" size="24" />
 		),
 		key: "/workbench",
 	},

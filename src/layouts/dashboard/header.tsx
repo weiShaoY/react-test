@@ -3,13 +3,11 @@ import Color from "color";
 import { type CSSProperties, useState } from "react";
 
 import { IconButton, Iconify, SvgIcon } from "@/components/icon";
-import LocalePicker from "@/components/locale-picker";
 import Logo from "@/components/logo";
 import { useSettings } from "@/store/settingStore";
 import { useResponsive, useThemeToken } from "@/theme/hooks";
 
 import BreadCrumb from "../_common/bread-crumb";
-import NoticeButton from "../_common/notice";
 import SearchBar from "../_common/search-bar";
 import SettingButton from "../_common/setting-button";
 
@@ -106,7 +104,8 @@ export default function Header({ className = "", offsetTop = false }: Props) {
 					{/* 功能按钮区域 */}
 					<div className="flex">
 						<SearchBar />
-						<LocalePicker />
+
+
 						<IconButton
 							onClick={() =>
 								window.open("https://github.com/d3george/slash-admin")
@@ -114,12 +113,13 @@ export default function Header({ className = "", offsetTop = false }: Props) {
 						>
 							<Iconify icon="mdi:github" size={24} />
 						</IconButton>
+
 						<IconButton
 							onClick={() => window.open("https://discord.gg/fXemAXVNDa")}
 						>
 							<Iconify icon="carbon:logo-discord" size={24} />
 						</IconButton>
-						<NoticeButton />
+
 						<SettingButton />
 					</div>
 				</div>

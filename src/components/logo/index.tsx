@@ -12,7 +12,7 @@ function Logo({ size = 60 }: Props) {
 
 	return (
 		<NavLink to="/">
-			<SvgIcon icon="root-logo" size={size} color={colorPrimary} />
+			<SvgIcon icon="common-logo" size={size} color={colorPrimary} />
 		</NavLink>
 	);
 }

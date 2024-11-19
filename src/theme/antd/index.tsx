@@ -2,7 +2,6 @@ import { StyleProvider } from "@ant-design/cssinjs";
 import { ConfigProvider, theme } from "antd";
 import "antd/dist/reset.css";
 
-import useLocale from "@/locales/useLocale";
 import { useSettings } from "@/store/settingStore";
 
 import {
@@ -20,8 +19,6 @@ type Props = {
 export default function AntdConfig({ children }: Props) {
 	const { themeMode, themeColorPresets } = useSettings();
 
-	const { language } = useLocale();
-
 	const algorithm =
 		themeMode === ThemeMode.Light
 			? theme.defaultAlgorithm
@@ -30,7 +27,6 @@ export default function AntdConfig({ children }: Props) {
 
 	return (
 		<ConfigProvider
-			locale={language.antdLocal}
 			theme={{
 				token: {
 					colorPrimary,

@@ -5,10 +5,8 @@ import axios, {
 	type AxiosResponse,
 } from "axios";
 
-import { t } from "@/locales/i18n";
-// import userStore from "@/store/userStore";
-
 import type { Result } from "#/api";
+
 import { ResultEnum } from "#/enum";
 
 /**
@@ -45,7 +43,7 @@ axiosInstance.interceptors.request.use(
  */
 axiosInstance.interceptors.response.use(
 	(res: AxiosResponse<Result>) => {
-		if (!res.data) throw new Error(t("sys.api.apiRequestFailed"));
+		if (!res.data) throw new Error("请求出错,请稍后再试");
 
 		const { status, data, message } = res.data;
 		// 业务请求成功
@@ -56,7 +54,7 @@ axiosInstance.interceptors.response.use(
 		}
 
 		// 业务请求错误
-		throw new Error(message || t("sys.api.apiRequestFailed"));
+		throw new Error(message || "请求出错,请稍后再试");
 	},
 	/**
 	 * 错误处理：处理 HTTP 错误
@@ -65,8 +63,7 @@ axiosInstance.interceptors.response.use(
 	 */
 	(error: AxiosError<Result>) => {
 		const { response, message } = error || {};
-		const errMsg =
-			response?.data?.message || message || t("sys.api.errorMessage");
+		const errMsg = response?.data?.message || message || "操作失败,系统异常!";
 		Message.error(errMsg);
 
 		const status = response?.status;

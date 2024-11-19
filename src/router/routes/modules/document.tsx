@@ -31,7 +31,7 @@ const document: AppRouteObject = {
 	meta: {
 		label: "文档",
 		icon: (
-			<SvgIcon icon="menu-document" className="ant-menu-item-icon" size="24" />
+			<SvgIcon icon="code-menu-document" className="ant-menu-item-icon" size="24" />
 		),
 		key: "/document",
 	},
@@ -47,7 +47,7 @@ const document: AppRouteObject = {
 				label: "React",
 				key: "/document/react",
 				icon: (
-					<SvgIcon icon="menu-react" className="ant-menu-item-icon" size="24" />
+					<SvgIcon icon="code-menu-react" className="ant-menu-item-icon" size="24" />
 				),
 			},
 		},
@@ -66,7 +66,7 @@ const document: AppRouteObject = {
 				label: "Vue",
 				key: "/document/vue",
 				icon: (
-					<SvgIcon icon="menu-vue" className="ant-menu-item-icon" size="24" />
+					<SvgIcon icon="code-menu-vue" className="ant-menu-item-icon" size="24" />
 				),
 				//  在多标签页中隐藏
 				hideTab: true,
@@ -87,7 +87,7 @@ const document: AppRouteObject = {
 				key: "/document/angular",
 				icon: (
 					<SvgIcon
-						icon="menu-angular"
+						icon="code-menu-angular"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
@@ -106,7 +106,7 @@ const document: AppRouteObject = {
 				key: "/document/typeScript",
 				icon: (
 					<SvgIcon
-						icon="menu-typeScript"
+						icon="code-menu-typeScript"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
@@ -124,7 +124,7 @@ const document: AppRouteObject = {
 				label: "Pinia",
 				key: "/document/pinia",
 				icon: (
-					<SvgIcon icon="menu-pinia" className="ant-menu-item-icon" size="24" />
+					<SvgIcon icon="code-menu-pinia" className="ant-menu-item-icon" size="24" />
 				),
 			},
 		},
@@ -140,7 +140,7 @@ const document: AppRouteObject = {
 				key: "/document/vueuse",
 				icon: (
 					<SvgIcon
-						icon="menu-vueuse"
+						icon="code-menu-vueuse"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
@@ -159,7 +159,7 @@ const document: AppRouteObject = {
 				key: "/document/unocss",
 				icon: (
 					<SvgIcon
-						icon="menu-unocss"
+						icon="code-menu-unocss"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
@@ -178,7 +178,7 @@ const document: AppRouteObject = {
 				key: "/document/tailwindCss",
 				icon: (
 					<SvgIcon
-						icon="menu-tailwindCss"
+						icon="code-menu-tailwindCss"
 						className="ant-menu-item-icon"
 						size="24"
 					/>

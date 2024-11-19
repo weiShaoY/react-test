@@ -23,9 +23,6 @@ import App from "@/App";
 
 import worker from "./_mock";
 
-// i18n 国际化
-import "./locales/i18n";
-
 // 引入 Tailwind CSS 样式
 import "./theme/index.less";
 

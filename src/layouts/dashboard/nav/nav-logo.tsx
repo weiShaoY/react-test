@@ -56,7 +56,7 @@ export default function NavLogo({ collapsed, onToggle }: Props) {
 					// >
 					// 	weiShaoY
 					// </span>
-					<SvgIcon icon="ic-weiShaoY" size="120" />
+					<SvgIcon icon="common-weiShaoY" size="120" />
 				)}
 			</div>
 
@@ -75,10 +75,10 @@ export default function NavLogo({ collapsed, onToggle }: Props) {
 				{/* 根据折叠状态显示不同的图标 */}
 				{collapsed ? (
 					// <RightOutlined style={{ fontSize: 12, color: colorTextSecondary }} />
-					<SvgIcon icon="ic-nav-collapsed" size="40" />
+					<SvgIcon icon="code-collapsed" size="40" />
 				) : (
 					// <LeftOutlined style={{ fontSize: 12, color: colorTextSecondary }} />
-					<SvgIcon icon="ic-nav-expand" size="40" />
+					<SvgIcon icon="code-expand" size="40" />
 				)}
 			</div>
 		</div>
