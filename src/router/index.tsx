@@ -5,10 +5,6 @@ import {
 	createBrowserRouter,
 } from "react-router-dom";
 
-import DashboardLayout from "@/layouts/dashboard";
-
-import { usePermissionRoutes } from "@/router/hooks";
-
 import { ErrorRoutes } from "@/router/routes/error-routes";
 
 import { HomeRoutes } from "@/router/routes/home-routes";
@@ -17,7 +13,7 @@ import { NotFoundRoute } from "./routes/not-found-route";
 
 import type { AppRouteObject } from "#/router";
 
-const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
+import { CodeRoutes } from "@/router/routes/code-routes";
 
 /**
  *  根路由配置
@@ -32,20 +28,6 @@ const RootRoute: AppRouteObject = {
  * @returns {JSX.Element} - 路由提供程序
  */
 export default function Router(): JSX.Element {
-	/**
-	 * 动态加载的权限路由
-	 * @type {AppRouteObject}
-	 */
-
-	const CodeRoutes: AppRouteObject = {
-		path: "/code",
-		element: <DashboardLayout />,
-		children: [
-			{ index: true, element: <Navigate to={HOMEPAGE} replace /> },
-			...usePermissionRoutes(),
-		],
-	};
-
 	/**
 	 * 合并后的所有路由
 	 */
@@ -62,7 +44,6 @@ export default function Router(): JSX.Element {
 
 		/**
 		 * 异步加载的主页路由
-		 * 包含权限校验的动态加载页面
 		 */
 		CodeRoutes,
 

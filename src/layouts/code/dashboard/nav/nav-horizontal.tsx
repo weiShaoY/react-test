@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {
 	useFlattenedRoutes,
 	usePathname,
-	usePermissionRoutes,
+	useCodeRoutes,
 	useRouteToMenuFn,
 } from "@/router/hooks";
 import { menuFilter } from "@/router/utils";
@@ -40,7 +40,7 @@ export default function NavHorizontal() {
 	/**
 	 *  获取具有权限过滤后的路由列表
 	 */
-	const permissionRoutes = usePermissionRoutes();
+	const permissionRoutes = useCodeRoutes();
 
 	/**
 	 *  获取扁平化的路由列表

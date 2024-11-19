@@ -5,7 +5,7 @@ type Props = {
 	src: string;
 };
 
-export default function Iframe({ src = "" }: Props) {
+export default function CodeIframe({ src = "" }: Props) {
 	// 使用 state 来控制 iframe 是否加载完成
 	const [isLoading, setIsLoading] = useState(true);
 

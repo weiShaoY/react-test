@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 
 import { flattenMenuRoutes, menuFilter } from "../utils";
-import { usePermissionRoutes } from "./use-permission-routes";
+import { useCodeRoutes } from "./use-code-routes";
 
 /**
  * 自定义 Hook：useFlattenedRoutes
@@ -17,7 +17,7 @@ export function useFlattenedRoutes() {
 	/**
 	 *  获取权限过滤后的路由数组
 	 */
-	const permissionRoutes = usePermissionRoutes();
+	const permissionRoutes = useCodeRoutes();
 
 	/**
 	 *   使用 useMemo 缓存拍平后的路由结果，避免重复计算

@@ -6,16 +6,9 @@ import { CircleLoading } from "@/components/loading";
 
 import type { AppRouteObject } from "#/router";
 
-// const Iframe = lazy(() => import("@/pages/sys/others/iframe"));
+const Iframe = lazy(() => import("@/layouts/code/iframe"));
 
-const Iframe = lazy(async () => {
-	await new Promise((resolve) => setTimeout(resolve, 300)); // 延迟 300ms
-	return import("@/pages/sys/others/iframe");
-});
-
-const ExternalLink = lazy(
-	() => import("@/pages/sys/others/iframe/external-link"),
-);
+const External = lazy(() => import("@/layouts/code/external"));
 
 function Wrapper({ children }: any) {
 	return <Suspense fallback={<CircleLoading />}>{children}</Suspense>;
@@ -31,7 +24,11 @@ const document: AppRouteObject = {
 	meta: {
 		label: "文档",
 		icon: (
-			<SvgIcon icon="code-menu-document" className="ant-menu-item-icon" size="24" />
+			<SvgIcon
+				icon="code-menu-document"
+				className="ant-menu-item-icon"
+				size="24"
+			/>
 		),
 		key: "/document",
 	},
@@ -47,7 +44,11 @@ const document: AppRouteObject = {
 				label: "React",
 				key: "/document/react",
 				icon: (
-					<SvgIcon icon="code-menu-react" className="ant-menu-item-icon" size="24" />
+					<SvgIcon
+						icon="code-menu-react"
+						className="ant-menu-item-icon"
+						size="24"
+					/>
 				),
 			},
 		},
@@ -59,14 +60,18 @@ const document: AppRouteObject = {
 			path: "vue",
 			element: (
 				<Wrapper>
-					<ExternalLink src="https://cn.vuejs.org/" />
+					<External src="https://cn.vuejs.org/" />
 				</Wrapper>
 			),
 			meta: {
 				label: "Vue",
 				key: "/document/vue",
 				icon: (
-					<SvgIcon icon="code-menu-vue" className="ant-menu-item-icon" size="24" />
+					<SvgIcon
+						icon="code-menu-vue"
+						className="ant-menu-item-icon"
+						size="24"
+					/>
 				),
 				//  在多标签页中隐藏
 				hideTab: true,
@@ -124,7 +129,11 @@ const document: AppRouteObject = {
 				label: "Pinia",
 				key: "/document/pinia",
 				icon: (
-					<SvgIcon icon="code-menu-pinia" className="ant-menu-item-icon" size="24" />
+					<SvgIcon
+						icon="code-menu-pinia"
+						className="ant-menu-item-icon"
+						size="24"
+					/>
 				),
 			},
 		},

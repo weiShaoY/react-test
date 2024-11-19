@@ -22,9 +22,9 @@ import Nav from "./nav";
 import { ThemeLayout, ThemeMode } from "#/enum";
 
 /**
- * DashboardLayout 组件，用于构建包含导航栏、页头和主内容区域的布局
+ * Code 模块 DashboardLayout 组件，用于构建包含导航栏、页头和主内容区域的布局
  */
-function DashboardLayout() {
+export function CodeDashboardLayout() {
 	// 从全局设置中获取当前的布局方式和主题模式
 	const { themeLayout, themeMode } = useSettings();
 
@@ -96,7 +96,7 @@ function DashboardLayout() {
 	);
 }
 
-export default DashboardLayout;
+export default CodeDashboardLayout;
 
 /**
  * 滚动条样式配置

@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { Link, useMatches } from "react-router-dom";
 
 import { Iconify } from "@/components/icon";
-import { useFlattenedRoutes, usePermissionRoutes } from "@/router/hooks";
+import { useFlattenedRoutes, useCodeRoutes } from "@/router/hooks";
 import { menuFilter } from "@/router/utils";
 
 type MenuItem = GetProp<BreadcrumbProps, "items">[number];
@@ -14,7 +14,7 @@ type MenuItem = GetProp<BreadcrumbProps, "items">[number];
 export default function BreadCrumb() {
 	const matches = useMatches();
 	const flattenedRoutes = useFlattenedRoutes();
-	const permissionRoutes = usePermissionRoutes();
+	const permissionRoutes = useCodeRoutes();
 
 	const breadCrumbs = useMemo(() => {
 		const menuRoutes = menuFilter(permissionRoutes);

@@ -2,13 +2,13 @@ import { Layout, Menu, type MenuProps } from "antd";
 import Color from "color";
 import { useEffect, useMemo, useState } from "react";
 import { useMatches, useNavigate } from "react-router-dom";
-import styled from "styled-components";
+// import styled from "styled-components";
 
 import Scrollbar from "@/components/scrollbar";
 import {
 	useFlattenedRoutes,
 	usePathname,
-	usePermissionRoutes,
+	useCodeRoutes,
 	useRouteToMenuFn,
 } from "@/router/hooks";
 import { menuFilter } from "@/router/utils";
@@ -60,7 +60,7 @@ export default function NavVertical(props: Props) {
 
 	const routeToMenuFn = useRouteToMenuFn();
 
-	const permissionRoutes = usePermissionRoutes();
+	const permissionRoutes = useCodeRoutes();
 
 	const flattenedRoutes = useFlattenedRoutes();
 

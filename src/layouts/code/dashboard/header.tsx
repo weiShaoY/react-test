@@ -7,9 +7,9 @@ import Logo from "@/components/logo";
 import { useSettings } from "@/store/settingStore";
 import { useResponsive, useThemeToken } from "@/theme/hooks";
 
-import BreadCrumb from "../_common/bread-crumb";
-import SearchBar from "../_common/search-bar";
-import SettingButton from "../_common/setting-button";
+import BreadCrumb from "./bread-crumb";
+import SearchBar from "./search-bar";
+import SettingButton from "../../_common/setting-button";
 
 import dashboardConfig from "./config";
 import NavVertical from "./nav/nav-vertical";
@@ -104,7 +104,6 @@ export default function Header({ className = "", offsetTop = false }: Props) {
 					{/* 功能按钮区域 */}
 					<div className="flex">
 						<SearchBar />
-
 
 						<IconButton
 							onClick={() =>
