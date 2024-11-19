@@ -55,7 +55,7 @@ function Calendar({ state, setState }: LeftProps) {
 		const newDayjsDate = dayjs(new Date(state.year, state.month - 1, 1));
 		setMonthPicker(newDayjsDate);
 		setState(state);
-	}, [state.year, state.month, state.holidayMonth]);
+	}, [state, setState]);
 
 	/**
 	 * 月份选择器变化
@@ -198,7 +198,7 @@ function Calendar({ state, setState }: LeftProps) {
 
 						{week.dayArray.map((day, dayIndex) => (
 							<div
-								key={dayIndex}
+								key={day.day}
 								onClick={() => handleSelectDay(day)}
 								className={`relative mx-1 h-full flex flex-col flex-1 cursor-pointer items-center justify-center border-4 rounded-2xl
                   ${day.isSelected ? "border-primary" : ""}
