@@ -63,7 +63,7 @@ export default defineConfig(({ mode }) => {
 						"vendor-react": ["react", "react-dom", "react-router-dom"],
 						"vendor-antd": ["antd", "@ant-design/icons", "@ant-design/cssinjs"],
 						"vendor-charts": ["apexcharts", "react-apexcharts"],
-						"vendor-utils": ["axios", "dayjs", "i18next", "zustand"],
+						"vendor-utils": ["axios", "dayjs", "zustand"],
 						"vendor-ui": [
 							"framer-motion",
 							"styled-components",
