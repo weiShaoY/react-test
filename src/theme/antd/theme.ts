@@ -56,25 +56,24 @@ export interface ExtendedThemeConfig extends Omit<ThemeConfig, "token"> {
 		 */
 		colorHomeHeaderBg?: string;
 
-		/**
-		 *  自定义属性：首页页面背景色
-		 */
-		colorHomeBgLayout?: string;
+		// /**
+		//  *  自定义属性：首页页面背景色
+		//  */
+		// colorHomeBgLayout?: string;
 	};
 }
 const themeModeToken: Record<"dark" | "light", ExtendedThemeConfig> = {
 	light: {
 		token: {
 			colorHomeHeaderBg: "#e2e5e5",
-			colorHomeBgLayout: "#fff",
 		},
 
 		components: {
 			Layout: {
-				siderBg: "#161c24",
+				siderBg: "#212224",
 			},
 			Menu: {
-				darkItemBg: "#161c24",
+				darkItemBg: "#212224",
 				dangerItemColor: "#ff5630",
 			},
 		},
@@ -84,17 +83,16 @@ const themeModeToken: Record<"dark" | "light", ExtendedThemeConfig> = {
 		token: {
 			colorBgLayout: "#222325",
 			colorBgContainer: "#212b36",
-			colorBgElevated: "#161c24",
+			colorBgElevated: "#212224",
 
 			colorHomeHeaderBg: "#191919",
-			colorHomeBgLayout: "#222325",
 		},
 		components: {
 			Layout: {
-				siderBg: "#161c24",
+				siderBg: "#212224",
 			},
 			Menu: {
-				darkItemBg: "#161c24",
+				darkItemBg: "#212224",
 			},
 			Modal: {
 				headerBg: "#212b36",
