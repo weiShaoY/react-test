@@ -20,7 +20,9 @@ function TimeOne({
 
 	return (
 		<div
-			className={`max-w-full flex flex-col items-center justify-center h-full w-ful`}
+			className={
+				"max-w-full flex flex-col items-center justify-center h-full w-ful"
+			}
 			style={{
 				color: color,
 			}}

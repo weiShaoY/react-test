@@ -1,5 +1,5 @@
 import Card from "@/components/card";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import ScreensaverItem from "./components/item";
 
 /**
@@ -9,11 +9,8 @@ import ScreensaverItem from "./components/item";
  */
 function getTimeArr(now: Date) {
 	const h = String(now.getHours()).padStart(2, "0").split("").map(Number);
-
 	const m = String(now.getMinutes()).padStart(2, "0").split("").map(Number);
-
 	const s = String(now.getSeconds()).padStart(2, "0").split("").map(Number);
-
 	return [...h, ...m, ...s];
 }
 
@@ -26,31 +23,31 @@ function Screensaver() {
 	const timerRef = useRef<NodeJS.Timeout | null>(null);
 
 	/**
-	 * 启动定时器
-	 */
-	function startTimer() {
-		stopTimer();
-		timerRef.current = setTimeout(() => {
-			setTimeArr(getTimeArr(new Date()));
-			startTimer();
-		}, 1000);
-	}
-
-	/**
 	 * 停止定时器
 	 */
-	function stopTimer() {
+	const stopTimer = useCallback(() => {
 		if (timerRef.current) {
 			clearTimeout(timerRef.current);
 			timerRef.current = null;
 		}
-	}
+	}, []); // stopTimer 无需依赖其他状态
+
+	/**
+	 * 启动定时器
+	 */
+	const startTimer = useCallback(() => {
+		stopTimer(); // 调用 stopTimer，确保定时器停止
+		timerRef.current = setTimeout(() => {
+			setTimeArr(getTimeArr(new Date()));
+			startTimer(); // 递归调用，保持每秒更新时间
+		}, 1000);
+	}, [stopTimer]); // 这里只需要依赖 stopTimer
 
 	// 相当于 Vue 的 onMounted 和 onBeforeUnmount
 	useEffect(() => {
-		startTimer();
-		return () => stopTimer();
-	}, []);
+		startTimer(); // 启动定时器
+		return () => stopTimer(); // 组件卸载时停止定时器
+	}, [startTimer, stopTimer]); // 依赖项应为 startTimer 和 stopTimer
 
 	return (
 		<Card className="h-full w-full flex items-center justify-center !bg-[radial-gradient(ellipse_at_center,#969696_0%,#595959_100%)]">

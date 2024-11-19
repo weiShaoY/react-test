@@ -8,7 +8,6 @@ import Logo from "@/components/logo";
 import { useSettings } from "@/store/settingStore";
 import { useResponsive, useThemeToken } from "@/theme/hooks";
 
-import AccountDropdown from "../_common/account-dropdown";
 import BreadCrumb from "../_common/bread-crumb";
 import NoticeButton from "../_common/notice";
 import SearchBar from "../_common/search-bar";
@@ -122,7 +121,6 @@ export default function Header({ className = "", offsetTop = false }: Props) {
 						</IconButton>
 						<NoticeButton />
 						<SettingButton />
-						<AccountDropdown />
 					</div>
 				</div>
 			</header>

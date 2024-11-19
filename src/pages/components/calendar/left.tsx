@@ -146,20 +146,20 @@ function Calendar({ state, setState }: LeftProps) {
 
 				<Button
 					className="ml-3"
-					icon={<SvgIcon icon="jianTouZuo" />}
+					icon={<SvgIcon icon="code-leftArrow" />}
 					onClick={handlePreviousMonth}
 				/>
 
 				<Button
 					className="ml-3"
-					icon={<SvgIcon icon="jianTouYou" />}
+					icon={<SvgIcon icon="code-rightArrow" />}
 					onClick={handleNextMonth}
 				/>
 
 				{state.isShowBackToday && (
 					<Button
 						className="ml-3"
-						icon={<SvgIcon icon="dingWei" />}
+						icon={<SvgIcon icon="code-position" />}
 						onClick={handleToday}
 					/>
 				)}

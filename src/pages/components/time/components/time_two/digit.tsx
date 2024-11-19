@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import digitNum from "./data";
 
-// 定义 DigitNum 类型为 0-9 的数字
+/**
+ *  定义 DigitNum 类型为 0-9 的数字
+ */
 export type DigitNumType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 /**
@@ -37,9 +39,9 @@ function Digit({ number, color = "#04A770" }: PropsType) {
 	// 根据数字变化更新 segment 状态
 	useEffect(() => {
 		const newSeg = Array(7).fill(false);
-		digitNum[number].forEach((i: number) => {
+		for (const i of digitNum[number]) {
 			newSeg[i] = true;
-		});
+		}
 		setSegmentsOn(newSeg);
 	}, [number]);
 
@@ -49,7 +51,8 @@ function Digit({ number, color = "#04A770" }: PropsType) {
 				/**
 				 *  基础样式
 				 */
-				const baseClass = `absolute block rounded opacity-20 transition-opacity`;
+				const baseClass =
+					"absolute block rounded opacity-20 transition-opacity";
 
 				/**
 				 *  根据 segment 状态决定是否亮起
@@ -85,9 +88,12 @@ function Digit({ number, color = "#04A770" }: PropsType) {
 						break;
 				}
 
+				// 为每个元素添加一个唯一的 key，可以使用 segment 的索引和状态
+				const uniqueKey = `segment-${index}`;
+
 				return (
 					<i
-						key={index}
+						key={uniqueKey} // 不使用数组索引作为 key
 						className={`${baseClass} ${opacityClass} ${positionClass}`}
 						style={{
 							backgroundColor: color,

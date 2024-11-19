@@ -6,7 +6,7 @@ import axios, {
 } from "axios";
 
 import { t } from "@/locales/i18n";
-import userStore from "@/store/userStore";
+// import userStore from "@/store/userStore";
 
 import type { Result } from "#/api";
 import { ResultEnum } from "#/enum";
@@ -71,7 +71,7 @@ axiosInstance.interceptors.response.use(
 
 		const status = response?.status;
 		if (status === 401) {
-			userStore.getState().actions.clearUserInfoAndToken();
+			// userStore.getState().actions.clearUserInfoAndToken();
 		}
 		return Promise.reject(error);
 	},

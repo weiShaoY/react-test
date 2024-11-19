@@ -20,6 +20,7 @@
 		"apexcharts",
 		"biomejs",
 		"brotliSize",
+		"caiShen",
 		"clsx",
 		"colorPrimarys",
 		"commitlint",
@@ -28,6 +29,7 @@
 		"daygrid",
 		"drei",
 		"frameloop",
+		"fuShen",
 		"fullcalendar",
 		"gaiLiangShouJinTi",
 		"glsl",
@@ -41,6 +43,7 @@
 		"nprogress",
 		"nums",
 		"partialize",
+		"pathRouteMetas",
 		"pinia",
 		"preinstall",
 		"rehype",
@@ -62,6 +65,7 @@
 		"weiShaoY",
 		"wireframe",
 		"xaxistooltip",
+		"yueXiang",
 		"zhanKai",
 		"zustand"
 	]

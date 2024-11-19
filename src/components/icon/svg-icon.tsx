@@ -1,14 +1,37 @@
 import { cn } from "@/utils";
 import type { CSSProperties } from "react";
 
-interface SvgIconProps {
+type SvgIconProps = {
+	/**
+	 * 图标的前缀，可选
+	 */
 	prefix?: string;
+
+	/**
+	 * 图标的名称，必填
+	 */
 	icon: string;
+
+	/**
+	 * 图标的颜色，可选
+	 */
 	color?: string;
+
+	/**
+	 * 图标的大小，可以是字符串或数字，可选
+	 */
 	size?: string | number;
+
+	/**
+	 * 额外的 CSS 类名，可选
+	 */
 	className?: string;
+
+	/**
+	 * 行内样式，可选
+	 */
 	style?: CSSProperties;
-}
+};
 
 export default function SvgIcon({
 	icon,

@@ -27,7 +27,9 @@ function TimeTwo({ time, is24Hour = true, color = "#04A770" }: PropsType) {
 
 	return (
 		<div
-			className={`max-w-full flex flex-col items-center justify-center h-full w-full `}
+			className={
+				"max-w-full flex flex-col items-center justify-center h-full w-full "
+			}
 		>
 			<div className="max-w-full flex items-center justify-center gap-1 px-2 md:gap-2 md:px-0">
 				{/* 小时十位 */}

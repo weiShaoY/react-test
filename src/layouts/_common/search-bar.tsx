@@ -136,7 +136,7 @@ export default function SearchBar() {
 					onClick={handleOpen}
 				>
 					<div className="flex items-center justify-center gap-2">
-						<SvgIcon icon="ic-search" size="20" />
+						<SvgIcon icon="code-search" size="20" />
 						<span className="flex h-6 items-center justify-center rounded-md bg-[#fff] px-1.5 font-bold text-gray-800">
 							{" "}
 							⌘K{" "}
@@ -167,7 +167,7 @@ export default function SearchBar() {
 						placeholder="搜索..."
 						variant="borderless"
 						autoFocus
-						prefix={<SvgIcon icon="ic-search" size="20" />}
+						prefix={<SvgIcon icon="code-search" size="20" />}
 						suffix={
 							<IconButton
 								className="h-6 rounded-md bg-hover text-xs"

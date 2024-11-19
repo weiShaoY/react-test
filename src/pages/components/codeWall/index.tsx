@@ -1,13 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 import Card from "@/components/card";
 
 let canvasWidth = 600;
-
 let canvasHeight = 600;
-
 const text = "abcdefghijklmnopqrstuvwxyz";
-
 const bl = 26;
 
 const CodeWall = () => {
@@ -20,7 +17,10 @@ const CodeWall = () => {
 	const endRatesRef = useRef<Record<number, number>>({});
 	const textObjRef = useRef<Record<string, string>>({});
 
-	const init = () => {
+	/**
+	 *  使用 useCallback 包裹 init 函数，确保它不会重新创建
+	 */
+	const init = useCallback(() => {
 		if (boxRef.current && canvasRef.current) {
 			resize();
 			const ctx = canvasRef.current.getContext(
@@ -29,9 +29,12 @@ const CodeWall = () => {
 			ctx.font = "14px SourceHanSansCN-Regular";
 			ctxRef.current = ctx;
 		}
-	};
+	}, []); // 空依赖数组，确保只在组件挂载时执行一次
 
-	const play = () => {
+	/**
+	 *  使用 useCallback 包裹 play 函数，确保它不会重新创建
+	 */
+	const play = useCallback(() => {
 		if (ctxRef.current) {
 			ctxRef.current.clearRect(0, 0, canvasWidth, canvasHeight);
 			for (let i = 0; i < canvasWidth; i += bl) {
@@ -59,11 +62,12 @@ const CodeWall = () => {
 				gradient.addColorStop(1, "#000000");
 				ctxRef.current.fillStyle = gradient;
 				for (let j = 0; j < canvasHeight; j += bl) {
-					textObj[i + "-" + j] =
-						textObj[i + "-" + j] ||
-						text[Math.floor(Math.random() * text.length)];
-					ctxRef.current.fillText(textObj[i + "-" + j], i, j);
+					const key = `${i}-${j}`;
+					textObj[key] =
+						textObj[key] || text[Math.floor(Math.random() * text.length)];
+					ctxRef.current.fillText(textObj[key], i, j);
 				}
+
 				rates[i] += step;
 				endRates[i] += step;
 				startRates[i] += step;
@@ -88,9 +92,12 @@ const CodeWall = () => {
 
 			frameId.current = window.requestAnimationFrame(play);
 		}
-	};
+	}, []); // 空依赖数组，确保只在组件挂载时执行一次
 
-	const resize = () => {
+	/**
+	 *  使用 useCallback 包裹 resize 函数，确保它不会重新创建
+	 */
+	const resize = useCallback(() => {
 		if (boxRef.current && canvasRef.current) {
 			const { offsetWidth, offsetHeight } = boxRef.current;
 			canvasWidth = offsetWidth;
@@ -98,8 +105,9 @@ const CodeWall = () => {
 			canvasRef.current.width = canvasWidth;
 			canvasRef.current.height = canvasHeight;
 		}
-	};
+	}, []); // 空依赖数组，确保只在组件挂载时执行一次
 
+	// 在组件挂载时初始化
 	useEffect(() => {
 		init();
 		play();
@@ -107,15 +115,16 @@ const CodeWall = () => {
 		return () => {
 			frameId.current && cancelAnimationFrame(frameId.current);
 		};
-	}, []);
+	}, [init, play]); // 添加依赖数组，确保 `init` 和 `play` 只在第一次渲染时运行
 
+	// 监听窗口大小变化
 	useEffect(() => {
 		window.addEventListener("resize", resize);
 
 		return () => {
 			window.removeEventListener("resize", resize);
 		};
-	}, []);
+	}, [resize]); // 添加依赖数组，确保 `resize` 只在第一次渲染时运行
 
 	return (
 		<Card className="h-full">

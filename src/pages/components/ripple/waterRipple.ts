@@ -15,7 +15,7 @@ class WaterRipple {
 	background: HTMLImageElement;
 	load = false;
 	img_data: ImageData | null = null;
-	new_img_data: ImageData | null = null;
+	new_img_data: ImageData = null as any;
 	animation_idx: number | null = null;
 	mousemove_interval: number;
 	animation_interval: number;
@@ -118,7 +118,7 @@ class WaterRipple {
 
 		const half_h = this.height >> 1;
 
-		const len = this.new_img_data!.data.length;
+		const len = this.new_img_data.data.length;
 
 		for (let i = 0; i < len; i += 4) {
 			const buffer_idx = i >> 2;
@@ -157,13 +157,15 @@ class WaterRipple {
 
 				const img_data_idx = (offset_y * this.width + offset_x) << 2;
 
-				this.new_img_data!.data[i] = this.img_data!.data[img_data_idx];
-				this.new_img_data!.data[i + 1] = this.img_data!.data[img_data_idx + 1];
-				this.new_img_data!.data[i + 2] = this.img_data!.data[img_data_idx + 2];
+				if (this.img_data) {
+					this.new_img_data.data[i] = this.img_data.data[img_data_idx];
+					this.new_img_data.data[i + 1] = this.img_data.data[img_data_idx + 1];
+					this.new_img_data.data[i + 2] = this.img_data.data[img_data_idx + 2];
+				}
 			}
 		}
 
-		this.ctx.putImageData(this.new_img_data!, 0, 0);
+		this.ctx.putImageData(this.new_img_data, 0, 0);
 		this.ctx.drawImage(
 			this.bridge,
 			0,

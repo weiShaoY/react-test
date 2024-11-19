@@ -135,7 +135,7 @@ export default function SettingButton() {
 					onClick={() => setDrawerOpen(true)}
 				>
 					<IconButton className="h-10 w-10">
-						<SvgIcon icon="ic-setting" size="24" />
+						<SvgIcon icon="setting-setting" size="24" />
 					</IconButton>
 				</m.div>
 			</div>
@@ -165,7 +165,7 @@ export default function SettingButton() {
 							{isFullscreen ? (
 								<>
 									<SvgIcon
-										icon="ic-settings-exit-fullscreen"
+										icon="setting-exitFullscreen"
 										color={colorPrimary}
 										className="!m-0"
 									/>
@@ -173,7 +173,7 @@ export default function SettingButton() {
 								</>
 							) : (
 								<>
-									<SvgIcon icon="ic-settings-fullscreen" className="!m-0" />
+									<SvgIcon icon="setting-setFullscreen" className="!m-0" />
 									<span className="ml-2 text-gray">全屏</span>
 								</>
 							)}
@@ -196,7 +196,7 @@ export default function SettingButton() {
 								className="flex h-20 w-full cursor-pointer items-center justify-center"
 							>
 								<SvgIcon
-									icon="ic-settings-mode-sun"
+									icon="setting-modeSun"
 									size="24"
 									color={themeMode === ThemeMode.Light ? colorPrimary : ""}
 								/>
@@ -206,7 +206,7 @@ export default function SettingButton() {
 								className="flex h-20 w-full cursor-pointer items-center justify-center"
 							>
 								<SvgIcon
-									icon="ic-settings-mode-moon"
+									icon="setting-modeMoon"
 									size="24"
 									color={themeMode === ThemeMode.Dark ? colorPrimary : ""}
 								/>

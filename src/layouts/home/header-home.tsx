@@ -2,50 +2,42 @@ import Logo from "@/components/logo";
 
 import { SvgIcon } from "@/components/icon";
 
-// import SettingButton from "../_common/setting-button";
+import SettingButton from "../_common/setting-button";
 
 import { Button, Dropdown } from "antd";
 
 import type { MenuProps } from "antd";
-import { useNavigate } from "react-router-dom";
 
-// function handleChange(value: string) {
-// 	console.log(`selected ${value}`);
-// }
+// import { IconButton } from "@/components/icon";
+
+import { NavLink } from "react-router-dom";
 
 export default function HeaderHome() {
-	const navigate = useNavigate();
-
 	const items: MenuProps["items"] = [
 		{
-			key: "/about",
-			label: <div>About</div>,
+			key: "/home/about",
+			label: <NavLink to="/home/about">About</NavLink>,
 		},
 		{
-			key: "/resume",
-			label: <div>Resume</div>,
+			key: "/home/resume",
+			label: <NavLink to="/home/resume">Resume</NavLink>,
 		},
 		{
 			key: "/code",
-			label: <div>Code</div>,
+			label: <NavLink to="/code">Code</NavLink>,
 		},
 	];
-
-	function handleClick(e: any) {
-		// 使用 navigate 进行页面跳转();
-		navigate(e.key);
-	}
 
 	return (
 		<header className="flex h-16 w-full  justify-center bg-yellow">
 			<div className="container flex items-center justify-between">
 				<Logo size={60} />
-				{/* <SettingButton /> */}
+				<SettingButton />
 
-				<Dropdown
-					menu={{ items, onClick: handleClick }}
-					placement="bottomRight"
-				>
+				<Dropdown menu={{ items }} placement="bottomRight">
+					{/* <IconButton className="h-10 w-10 transform-none px-0 hover:scale-105">
+<img className="h-8 w-8 rounded-full" src={avatar} alt="" />
+</IconButton> */}
 					<Button
 						icon={
 							<SvgIcon
