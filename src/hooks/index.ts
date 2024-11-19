@@ -1,3 +1,5 @@
 import useGetTime from "./use-get-time";
 
-export { useGetTime };
+import useCopyToClipboard from "./use-copy-to-clipboard";
+
+export { useGetTime, useCopyToClipboard };

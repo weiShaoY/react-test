@@ -30,7 +30,7 @@ type ReturnType = {
 
 /**
  * 自定义 Hook，用于复制文本到剪贴板，并显示通知
- * @returns {ReturnType} 返回包含复制函数和已复制文本的对象
+ * @returns  返回包含复制函数和已复制文本的对象
  */
 export function useCopyToClipboard(): ReturnType {
 	// 定义一个状态，用于存储已复制的文本
@@ -72,3 +72,6 @@ export function useCopyToClipboard(): ReturnType {
 	// 返回复制函数和已复制文本
 	return { copiedText, copyFn };
 }
+
+
+export default useCopyToClipboard
