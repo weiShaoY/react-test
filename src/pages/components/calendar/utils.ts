@@ -392,7 +392,7 @@ class CalendarUtils {
 		}
 
 		// 遍历每一周
-		weeks.forEach((w) => {
+		for (const w of weeks) {
 			// 创建周实例
 			const week: WeekType = {
 				dayArray: [],
@@ -404,13 +404,13 @@ class CalendarUtils {
 			const weekTitle: string[] = [];
 
 			// 遍历周内的每一天
-			w.getDays().forEach((d) => {
+			for (const d of w.getDays()) {
 				// 将每一天的星期几添加到头部信息中
 				weekTitle.push(d.getWeekInChinese());
 
 				// 构建并添加每一天的日期信息到当前周中
 				week.dayArray.push(CalendarUtils.buildDay(d, state));
-			});
+			}
 
 			/**
 			 * 将计算标志设置为 false，表示已经检查过
@@ -439,7 +439,7 @@ class CalendarUtils {
 
 			// 将当前周存储到月份实例中
 			monthData.weeks.push(week);
-		});
+		}
 
 		// 存储月份实例到 state 中
 		state.monthData = monthData;
