@@ -8,7 +8,7 @@ type Props = {
 };
 export default function HomeLayout({ children }: Props) {
 	return (
-		<Layout className="flex h-screen w-full flex-col ">
+		<Layout className=" ">
 			<Header />
 			{children}
 		</Layout>

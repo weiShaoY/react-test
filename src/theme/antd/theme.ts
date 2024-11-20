@@ -53,6 +53,8 @@ const themeModeToken: Record<"dark" | "light", ThemeConfig> = {
 		components: {
 			Layout: {
 				siderBg: "#161c24",
+
+				bodyBg: "#161c24",
 			},
 			Menu: {
 				darkItemBg: "#161c24",
@@ -69,6 +71,8 @@ const themeModeToken: Record<"dark" | "light", ThemeConfig> = {
 		components: {
 			Layout: {
 				siderBg: "#161c24",
+
+				bodyBg: "#7C337C",
 			},
 			Menu: {
 				darkItemBg: "#161c24",
