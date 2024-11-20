@@ -31,8 +31,8 @@ function Clock() {
 	}, [time.second]);
 
 	return (
-		<Card className="">
-			<div className="relative aspect-square w-[80%] flex items-center justify-center bg-[#1e1f26] rounded-xl m-auto">
+		<Card className="h-full w-full">
+			<div className="relative aspect-square max-w-full max-h-full h-full w-full flex items-center justify-center bg-[#1e1f26] rounded-xl m-auto">
 				<div className={`relative ${styles.clock}`}>
 					{/* 渲染表盘数字 */}
 					{Array.from({ length: 12 }).map((_, index) => {

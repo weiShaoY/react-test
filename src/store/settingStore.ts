@@ -94,22 +94,12 @@ const useSettingStore = create<SettingStore>()(
 			},
 		}),
 		{
-			/**
-			 *  存储的 key 名称
-			 */
 			name: StorageEnum.Settings, // name of the item in the storage (must be unique)
-			/**
-			 *  存储方式
-			 */
 			storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
-			/**
-			 *  持久化时仅存储 settings 部分的数据
-			 */
 			partialize: (state) => ({ [StorageEnum.Settings]: state.settings }),
 		},
 	),
 );
-
 /**
  *  Hook 用于访问全局的 settings 配置
  */

@@ -1,8 +1,6 @@
-import Logo from "@/components/logo";
-
 import { SvgIcon } from "@/components/icon";
 
-import SettingButton from "../_common/setting-button";
+import SettingButton from "@/components/setting";
 
 import { Button, Dropdown } from "antd";
 
@@ -38,19 +36,27 @@ export default function Header() {
 		/**
 		 * 设置边框颜色，使用主题中的次要边框颜色
 		 */
-		backgroundColor: themeToken.colorHomeHeaderBg,
+		backgroundColor: themeToken.colorBgContainer,
 	};
 	// bg-[#191919]
 	return (
 		<header className="flex h-16 w-full  justify-center" style={style}>
 			<div className="container flex items-center justify-between mx-5">
-				<Logo size={60} />
+				{/* Logo 区域 */}
+				<NavLink to="/" className="flex items-center bg-red">
+					<SvgIcon icon="common-logo" size={60} />
+					<SvgIcon icon="common-weiShaoY" size="120" />
+				</NavLink>
 
 				<div className="flex items-center gap-2">
 					<SettingButton />
 
 					<Dropdown menu={{ items }} placement="bottomRight">
-						<Button icon={<SvgIcon icon="setting-setting" size="24" />} />
+						<Button
+							icon={<SvgIcon icon="home-menu" size="24" />}
+							color="default"
+							variant="text"
+						/>
 					</Dropdown>
 				</div>
 			</div>

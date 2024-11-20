@@ -1,6 +1,6 @@
 import { SvgIcon } from "@/components/icon";
+import { NavLink } from "react-router-dom";
 
-import Logo from "@/components/logo";
 import { useSettings } from "@/store/settingStore";
 import { useThemeToken } from "@/theme/hooks";
 import { cn } from "@/utils";
@@ -45,20 +45,12 @@ export default function NavLogo({ collapsed, onToggle }: Props) {
 			className="relative flex items-center justify-center py-4"
 		>
 			{/* Logo 区域 */}
-			<div className="flex items-center">
-				<Logo />
-
-				{/* 当布局模式不是 Mini 时显示项目名称 */}
+			<NavLink to="/" className="flex items-center bg-red">
+				<SvgIcon icon="common-logo" size={60} />
 				{themeLayout !== ThemeLayout.Mini && (
-					// <span
-					// 	className="ml-2 text-xl font-bold"
-					// 	style={{ color: colorPrimary }}
-					// >
-					// 	weiShaoY
-					// </span>
-					<SvgIcon icon="common-weiShaoY" size="120" />
+					<SvgIcon icon="common-weiShaoY" size="120" color={colorPrimary} />
 				)}
-			</div>
+			</NavLink>
 
 			{/* 折叠/展开按钮 */}
 			<div

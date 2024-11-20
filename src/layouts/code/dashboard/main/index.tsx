@@ -6,9 +6,9 @@ import { useSettings } from "@/store/settingStore";
 import { useResponsive, useThemeToken } from "@/theme/hooks";
 import { cn } from "@/utils";
 
-import dashboardConfig from "./config";
-import MultiTabs from "./multi-tabs";
-import { MultiTabsProvider } from "./multi-tabs/multi-tabs-provider";
+import dashboardConfig from "../config";
+import MultiTabs from "../multi-tabs";
+import { MultiTabsProvider } from "../multi-tabs/multi-tabs-provider";
 
 import { ThemeLayout } from "#/enum";
 

@@ -3,16 +3,15 @@ import Color from "color";
 import { type CSSProperties, useState } from "react";
 
 import { IconButton, Iconify, SvgIcon } from "@/components/icon";
-import Logo from "@/components/logo";
 import { useSettings } from "@/store/settingStore";
 import { useResponsive, useThemeToken } from "@/theme/hooks";
 
 import BreadCrumb from "./bread-crumb";
 import SearchBar from "./search-bar";
-import SettingButton from "../../_common/setting-button";
+import SettingButton from "@/components/setting";
 
-import dashboardConfig from "./config";
-import NavVertical from "./nav/nav-vertical";
+import dashboardConfig from "../config";
+import NavVertical from "../nav/nav-vertical";
 
 import { ThemeLayout } from "#/enum";
 
@@ -93,8 +92,10 @@ export default function Header({ className = "", offsetTop = false }: Props) {
 								<SvgIcon icon="ic-menu" size="24" />
 							</IconButton>
 						) : (
-							<Logo />
+							// <Logo />
+							<SvgIcon icon="ic-menu" size="24" />
 						)}
+
 						{/* 面包屑导航 */}
 						<div className="ml-4 hidden md:block">
 							{breadCrumb ? <BreadCrumb /> : null}
@@ -112,13 +113,6 @@ export default function Header({ className = "", offsetTop = false }: Props) {
 						>
 							<Iconify icon="mdi:github" size={24} />
 						</IconButton>
-
-						<IconButton
-							onClick={() => window.open("https://discord.gg/fXemAXVNDa")}
-						>
-							<Iconify icon="carbon:logo-discord" size={24} />
-						</IconButton>
-
 						<SettingButton />
 					</div>
 				</div>

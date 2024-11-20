@@ -24,12 +24,14 @@ export default function SearchBar() {
 	const listRef = useRef<HTMLDivElement>(null);
 
 	const [search, toggle] = useBoolean(false);
+
 	const themeToken = useThemeToken();
 
 	const flattenedRoutes = useFlattenedRoutes();
 
 	const activeStyle: CSSProperties = {
 		border: `1px dashed ${themeToken.colorPrimary}`,
+
 		backgroundColor: `${Color(themeToken.colorPrimary).alpha(0.2).toString()}`,
 	};
 
@@ -207,7 +209,7 @@ export default function SearchBar() {
 								return (
 									<StyledListItemButton
 										key={key}
-										$themetoken={themeToken}
+										$themetoken={themeToken as any}
 										style={index === selectedItemIndex ? activeStyle : {}}
 										onClick={() => handleSelect(key)}
 										onMouseMove={() => handleHover(index)}
