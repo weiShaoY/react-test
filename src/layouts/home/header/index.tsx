@@ -1,6 +1,6 @@
 import { SvgIcon } from "@/components/icon";
 
-import SettingButton from "@/components/setting";
+import Setting from "@/components/setting";
 
 import { Button, Dropdown } from "antd";
 
@@ -49,7 +49,7 @@ export default function Header() {
 				</NavLink>
 
 				<div className="flex items-center gap-2">
-					<SettingButton />
+					<Setting />
 
 					<Dropdown menu={{ items }} placement="bottomRight">
 						<Button
