@@ -5,10 +5,10 @@ import type { ThemeColorPresets } from "#/enum";
  * Antd theme editor: https://ant.design/theme-editor-cn
  */
 const customThemeTokenConfig: ThemeConfig["token"] = {
-	colorSuccess: "#22C55E",
-	colorWarning: "#FFAB00",
-	colorError: "#FF5630",
-	colorInfo: "#00B8D9",
+	colorSuccess: "#22c55e",
+	colorWarning: "#ff7849",
+	colorError: "#ff5630",
+	colorInfo: "#00b8d9",
 
 	// 线性化
 	wireframe: false,
@@ -43,19 +43,58 @@ const colorPrimarys: {
 	red: "#FF3030",
 };
 
-const themeModeToken: Record<"dark" | "light", ThemeConfig> = {
+/**
+ * 扩展后的 ThemeConfig 类型
+ */
+export interface ExtendedThemeConfig extends Omit<ThemeConfig, "token"> {
+	/**
+	 * 使用扩展后的 Token 类型
+	 */
+	token?: ThemeConfig["token"] & {
+		/**
+		 * 自定义属性：首页头部背景色
+		 */
+		colorHomeHeaderBg?: string;
+
+		// /**
+		//  *  自定义属性：首页页面背景色
+		//  */
+		// colorHomeBgLayout?: string;
+	};
+}
+const themeModeToken: Record<"dark" | "light", ExtendedThemeConfig> = {
+	light: {
+		token: {
+			colorHomeHeaderBg: "#e2e5e5",
+		},
+
+		components: {
+			Layout: {
+				siderBg: "#212224",
+				headerBg: "#212224",
+				colorBgBody: "#D0D2D6",
+			},
+			Menu: {
+				darkItemBg: "#212224",
+				dangerItemColor: "#ff5630",
+			},
+		},
+	},
+
 	dark: {
 		token: {
-			colorBgLayout: "#161c24",
+			colorBgLayout: "#222325",
 			colorBgContainer: "#212b36",
-			colorBgElevated: "#161c24",
+			colorBgElevated: "#212224",
+
+			colorHomeHeaderBg: "#191919",
 		},
 		components: {
 			Layout: {
-				siderBg: "#161c24",
+				siderBg: "#212224",
 			},
 			Menu: {
-				darkItemBg: "#161c24",
+				darkItemBg: "#212224",
 			},
 			Modal: {
 				headerBg: "#212b36",
@@ -63,16 +102,6 @@ const themeModeToken: Record<"dark" | "light", ThemeConfig> = {
 				footerBg: "#212b36",
 			},
 			Notification: {},
-		},
-	},
-	light: {
-		components: {
-			Layout: {
-				siderBg: "#161c24",
-			},
-			Menu: {
-				darkItemBg: "#161c24",
-			},
 		},
 	},
 };

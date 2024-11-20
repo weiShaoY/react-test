@@ -28,7 +28,7 @@ export default function HomeHeader() {
 	];
 
 	return (
-		<Header className="flex h-16 w-full  justify-center">
+		<Header className="flex h-16 w-full  justify-center fixed z-[999]">
 			<div className="container flex items-center justify-between mx-5">
 				{/* Logo 区域 */}
 				<NavLink to="/" className="flex items-center bg-red">
