@@ -1,8 +1,9 @@
 import { Drawer } from "antd";
 import Color from "color";
 import { type CSSProperties, useState } from "react";
+import { NavLink } from "react-router-dom";
 
-import { IconButton, Iconify, SvgIcon } from "@/components/icon";
+import { IconButton, SvgIcon } from "@/components/icon";
 import { useSettings } from "@/store/settingStore";
 import { useResponsive, useThemeToken } from "@/theme/hooks";
 
@@ -82,18 +83,12 @@ export default function Header({ className = "", offsetTop = false }: Props) {
 						transition: "height 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
 					}}
 				>
-					<div className="flex items-baseline">
+					<div className="flex items-center">
 						{/* Logo 或菜单按钮 */}
-						{themeLayout !== ThemeLayout.Horizontal ? (
-							<IconButton
-								onClick={() => setDrawerOpen(true)}
-								className="h-10 w-10 md:hidden"
-							>
-								<SvgIcon icon="ic-menu" size="24" />
-							</IconButton>
-						) : (
-							// <Logo />
-							<SvgIcon icon="ic-menu" size="24" />
+						{themeLayout === ThemeLayout.Horizontal && (
+							<NavLink to="/" className="flex items-center bg-red">
+								<SvgIcon icon="common-logo" size={60} />
+							</NavLink>
 						)}
 
 						{/* 面包屑导航 */}
@@ -111,7 +106,7 @@ export default function Header({ className = "", offsetTop = false }: Props) {
 								window.open("https://github.com/d3george/slash-admin")
 							}
 						>
-							<Iconify icon="mdi:github" size={24} />
+							<SvgIcon icon="common-github" size="24" />
 						</IconButton>
 						<SettingButton />
 					</div>

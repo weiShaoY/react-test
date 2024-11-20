@@ -8,10 +8,10 @@ import type { MenuProps } from "antd";
 
 import { NavLink } from "react-router-dom";
 
-import { useThemeToken } from "@/theme/hooks";
+import { Layout } from "antd";
 
-import type { CSSProperties } from "react";
-export default function Header() {
+const { Header } = Layout;
+export default function HomeHeader() {
 	const items: MenuProps["items"] = [
 		{
 			key: "/home/about",
@@ -27,20 +27,8 @@ export default function Header() {
 		},
 	];
 
-	const themeToken = useThemeToken();
-
-	/**
-	 * 初始化样式对象
-	 */
-	const style: CSSProperties = {
-		/**
-		 * 设置边框颜色，使用主题中的次要边框颜色
-		 */
-		backgroundColor: themeToken.colorBgContainer,
-	};
-	// bg-[#191919]
 	return (
-		<header className="flex h-16 w-full  justify-center" style={style}>
+		<Header className="flex h-16 w-full  justify-center">
 			<div className="container flex items-center justify-between mx-5">
 				{/* Logo 区域 */}
 				<NavLink to="/" className="flex items-center bg-red">
@@ -54,12 +42,11 @@ export default function Header() {
 					<Dropdown menu={{ items }} placement="bottomRight">
 						<Button
 							icon={<SvgIcon icon="home-menu" size="24" />}
-							color="default"
 							variant="text"
 						/>
 					</Dropdown>
 				</div>
 			</div>
-		</header>
+		</Header>
 	);
 }
