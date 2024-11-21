@@ -1,12 +1,13 @@
-import * as THREE from "three";
-import { useRef, Suspense, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
+import { Suspense, useEffect, useRef } from "react";
+import * as THREE from "three";
 
-import { Points, PointMaterial, Preload } from "@react-three/drei";
+import { PointMaterial, Points, Preload } from "@react-three/drei";
 
 import * as random from "maath/random/dist/maath-random.esm";
 
 import vertexShader from "./stars/vertex.glsl";
+
 import fragmentShader from "./stars/fragment.glsl";
 
 const Stars = (props) => {

@@ -72,7 +72,7 @@ const themeModeToken: Record<"dark" | "light", ThemeConfig> = {
 			Layout: {
 				siderBg: "#161c24",
 
-				bodyBg: "#7C337C",
+				bodyBg: "#343639",
 			},
 			Menu: {
 				darkItemBg: "#161c24",

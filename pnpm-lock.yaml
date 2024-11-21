@@ -102,8 +102,8 @@ importers:
         specifier: ^1.7.6
         version: 1.7.6
       maath:
-        specifier: 0.5.3
-        version: 0.5.3(@types/three@0.170.0)(three@0.170.0)
+        specifier: 0.10.8
+        version: 0.10.8(@types/three@0.170.0)(three@0.170.0)
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
@@ -2770,12 +2770,6 @@ packages:
     peerDependencies:
       '@types/three': '>=0.134.0'
       three: '>=0.134.0'
-
-  maath@0.5.3:
-    resolution: {integrity: sha512-ut63A4zTd9abtpi+sOHW1fPWPtAFrjK0E17eAthx1k93W/T2cWLKV5oaswyotJVDvvW1EXSdokAqhK5KOu0Qdw==}
-    peerDependencies:
-      '@types/three': '>=0.144.0'
-      three: '>=0.144.0'
 
   maath@0.6.0:
     resolution: {integrity: sha512-dSb2xQuP7vDnaYqfoKzlApeRcR2xtN8/f7WV/TMAkBC8552TwTLtOO0JTcSygkYMjNDPoo6V01jTw/aPi4JrMw==}
@@ -7064,11 +7058,6 @@ snapshots:
   lunar-typescript@1.7.6: {}
 
   maath@0.10.8(@types/three@0.170.0)(three@0.170.0):
-    dependencies:
-      '@types/three': 0.170.0
-      three: 0.170.0
-
-  maath@0.5.3(@types/three@0.170.0)(three@0.170.0):
     dependencies:
       '@types/three': 0.170.0
       three: 0.170.0
