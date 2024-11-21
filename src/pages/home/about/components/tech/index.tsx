@@ -2,6 +2,8 @@ import BallCanvas from "./ballCanvas";
 import SectionWrapper from "./SectionWrapper";
 import html from "@/assets/images/home/tech/html.png";
 import javascript from "@/assets/images/home/tech/javascript.png";
+import typescript from "@/assets/images/home/tech/typescript.png";
+import css from "@/assets/images/home/tech/css.png";
 
 const technologies = [
 	{
@@ -11,6 +13,14 @@ const technologies = [
 	{
 		name: "javascript",
 		icon: javascript,
+	},
+	{
+		name: "typescript",
+		icon: typescript,
+	},
+	{
+		name: "css",
+		icon: css,
 	},
 ];
 
