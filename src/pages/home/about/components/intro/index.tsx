@@ -1,4 +1,9 @@
-function Title() {
+/**
+ * 个人介绍 组件
+ * @description  用于展示个人介绍的组件，包括标题、描述和装饰条。
+ * @returns  包含左侧装饰条和右侧标题描述的布局。
+ */
+function Intro() {
 	return (
 		<div className="absolute inset-0 top-[120px] mx-auto max-w-7xl flex flex-row items-start gap-5 px-6 sm:px-16 ">
 			{/* 左侧装饰条 */}
@@ -25,4 +30,4 @@ function Title() {
 	);
 }
 
-export default Title;
+export default Intro;

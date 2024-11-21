@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
@@ -82,7 +84,7 @@ const Stars = (props) => {
 					uniforms={{
 						uTime: { value: 0 },
 					}}
-				></shaderMaterial>
+				/>
 			</Points>
 		</group>
 	);

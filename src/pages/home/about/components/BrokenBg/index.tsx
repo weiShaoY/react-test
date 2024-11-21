@@ -1,7 +1,7 @@
 import { SRGBColorSpace, TextureLoader } from "three";
 import { particleTex } from "@/assets/images";
 import { useEffect, useMemo, useRef } from "react";
-import { BokehBackground } from "./brokenBg.js"; // 确保该文件导出了正确的类或函数
+import { BokehBackground } from "./brokenBg"; // 确保该文件导出了正确的类或函数
 
 /**
  * BrokenBg 组件，用于渲染动态背景效果
