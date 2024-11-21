@@ -34,6 +34,10 @@ const document: AppRouteObject = {
 	},
 	children: [
 		{
+			index: true,
+			element: <Navigate to="react" replace />,
+		},
+		{
 			path: "react",
 			element: (
 				<Wrapper>
@@ -52,10 +56,7 @@ const document: AppRouteObject = {
 				),
 			},
 		},
-		{
-			index: true,
-			element: <Navigate to="vue" replace />,
-		},
+
 		{
 			path: "vue",
 			element: (

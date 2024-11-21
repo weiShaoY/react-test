@@ -28,7 +28,7 @@ const Creativity: AppRouteObject = {
 		</Suspense>
 	),
 	meta: {
-		label: "组件",
+		label: "创意",
 		icon: (
 			<SvgIcon
 				icon="code-menu-creativity"
