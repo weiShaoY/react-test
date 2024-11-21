@@ -1,4 +1,4 @@
-import ComputersCanvas from "./components/computers";
+import ComputersCanvas from "./components/computersCanvas";
 import Title from "./components/title";
 import BrokenBg from "./components/BrokenBg";
 
