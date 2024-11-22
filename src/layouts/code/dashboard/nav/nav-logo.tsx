@@ -35,7 +35,7 @@ export default function NavLogo({ collapsed, onToggle }: Props) {
 	// 	colorBgContainer,
 	// 	colorBorderSecondary,
 	// } = useThemeToken();
-	const { colorPrimary, colorBgContainer } = useThemeToken();
+	const { colorBgContainer } = useThemeToken();
 
 	return (
 		<div
@@ -48,7 +48,7 @@ export default function NavLogo({ collapsed, onToggle }: Props) {
 			<NavLink to="/" className="flex items-center bg-red">
 				<SvgIcon icon="common-logo" size={60} />
 				{themeLayout !== ThemeLayout.Mini && (
-					<SvgIcon icon="common-weiShaoY" size="120" color={colorPrimary} />
+					<SvgIcon icon="common-weiShaoY" size="120" color="#ffffff" />
 				)}
 			</NavLink>
 

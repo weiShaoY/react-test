@@ -8,8 +8,6 @@ import type { AppRouteObject } from "#/router";
 
 const Iframe = lazy(() => import("@/layouts/code/iframe"));
 
-const External = lazy(() => import("@/layouts/code/external"));
-
 function Wrapper({ children }: any) {
 	return <Suspense fallback={<CircleLoading />}>{children}</Suspense>;
 }
@@ -31,7 +29,7 @@ const document: AppRouteObject = {
 	children: [
 		{
 			index: true,
-			element: <Navigate to="vue" replace />,
+			element: <Navigate to="dailyHotTopics" replace />,
 		},
 		{
 			path: "dailyHotTopics",

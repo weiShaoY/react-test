@@ -9,13 +9,14 @@ import { useResponsive, useThemeToken } from "@/theme/hooks";
 
 import BreadCrumb from "./bread-crumb";
 import SearchBar from "./search-bar";
-import SettingButton from "@/components/setting";
+import Setting from "./setting";
 
 import dashboardConfig from "../config";
 import NavVertical from "../nav/nav-vertical";
 
 import { ThemeLayout } from "#/enum";
 
+import Github from "@/components/github";
 type Props = {
 	/**
 	 *  自定义类名
@@ -104,17 +105,12 @@ export default function Header({ className = "", offsetTop = false }: Props) {
 					</div>
 
 					{/* 功能按钮区域 */}
-					<div className="flex">
+					<div className="flex gap-4">
 						<SearchBar />
 
-						<IconButton
-							onClick={() =>
-								window.open("https://github.com/d3george/slash-admin")
-							}
-						>
-							<SvgIcon icon="common-github" size="24" />
-						</IconButton>
-						<SettingButton />
+						<Github />
+
+						<Setting />
 					</div>
 				</div>
 			</header>
