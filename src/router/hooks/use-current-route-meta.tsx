@@ -8,7 +8,7 @@ import { useRouter } from "./use-router";
 import type { RouteMeta } from "#/router";
 
 // 从环境变量中获取应用的首页路径
-const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
+const { VITE_APP_CODEPAGE: HOMEPAGE } = import.meta.env;
 
 /**
  * 获取当前路由的 Meta 信息

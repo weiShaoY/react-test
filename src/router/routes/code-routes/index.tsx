@@ -14,7 +14,7 @@ const codeModuleRoutes = getCodeModuleRoutes();
 // /**
 //  *  从环境变量中获取首页路径
 //  */
-// const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
+const { VITE_APP_CODEPAGE: CODEPAGE } = import.meta.env;
 
 /**
  * CodeRoutes: code模块路由配置
@@ -25,7 +25,7 @@ export const CodeRoutes: AppRouteObject = {
 	element: <CodeDashboardLayout />,
 	children: [
 		// 默认跳转到首页路径，首页路径从环境变量中动态获取
-		{ index: true, element: <Navigate to="/code/workbench" replace /> },
+		{ index: true, element: <Navigate to={CODEPAGE} replace /> },
 		// 动态加载菜单模块的子路由
 		...codeModuleRoutes,
 	],

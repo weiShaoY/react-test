@@ -59,7 +59,7 @@ type MultiTabsContextType = {
 	 */
 	refreshTab: (path: string) => void;
 };
-const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
+const { VITE_APP_CODEPAGE: HOMEPAGE } = import.meta.env;
 
 /**
  *   创建多标签上下文，提供默认值
