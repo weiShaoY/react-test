@@ -26,7 +26,7 @@ function About() {
 				{/* 太阳 */}
 
 				{!isMobile && (
-					<div className="absolute right-0 top-24 w-[500px] h-[500px]">
+					<div className="absolute right-0 top-20 w-[20vw] aspect-square">
 						<SunCanvas />
 					</div>
 				)}

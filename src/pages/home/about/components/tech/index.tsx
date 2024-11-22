@@ -10,11 +10,29 @@ import { Suspense } from "react"; // 如需加载器功能可取消注释
 
 import { CanvasLoading } from "@/components/loading";
 
-import html from "@/assets/images/home/tech/html.png";
-import javascript from "@/assets/images/home/tech/javascript.png";
-import typescript from "@/assets/images/home/tech/typescript.png";
-import css from "@/assets/images/home/tech/css.png";
-import angular from "@/assets/images/home/tech/angular.svg";
+import css from "@/assets/images/home/tech/css.svg";
+
+import git from "@/assets/images/home/tech/git.svg";
+
+import html from "@/assets/images/home/tech/html.svg";
+
+import javascript from "@/assets/images/home/tech/javascript.svg";
+
+import node from "@/assets/images/home/tech/node.svg";
+
+import pinia from "@/assets/images/home/tech/pinia.svg";
+
+import react from "@/assets/images/home/tech/react.svg";
+
+import tailwindCss from "@/assets/images/home/tech/tailwindCss.svg";
+
+import threeJs from "@/assets/images/home/tech/threeJs.svg";
+
+import typescript from "@/assets/images/home/tech/typescript.svg";
+
+import unocss from "@/assets/images/home/tech/unocss.svg";
+
+import vue from "@/assets/images/home/tech/vue.svg";
 
 /**
  * 技术栈数据
@@ -45,29 +63,45 @@ const technologies = [
 		url: "https://www.typescriptlang.org/zh/",
 	},
 	{
+		name: "node",
+		icon: node,
+		url: "https://nodejs.org/en/",
+	},
+	{
 		name: "react",
-		icon: javascript,
+		icon: react,
 		url: "https://zh-hans.react.dev/",
 	},
 	{
 		name: "vue",
-		icon: angular,
+		icon: vue,
 		url: "https://cn.vuejs.org/",
 	},
 	{
 		name: "tailwindCSS",
-		icon: angular,
+		icon: tailwindCss,
 		url: "https://tailwindcss.com/docs/installation",
 	},
 	{
 		name: "unocss",
-		icon: angular,
+		icon: unocss,
 		url: "https://unocss-cn.pages.dev/",
 	},
 	{
-		name: "threeJS",
-		icon: angular,
+		name: "threeJs",
+		icon: threeJs,
 		url: "https://threejs.org/",
+	},
+	{
+		name: "git",
+		icon: git,
+		url: "https://git-scm.com/",
+	},
+
+	{
+		name: "pinia",
+		icon: pinia,
+		url: "https://pinia.vuejs.org/zh/",
 	},
 ];
 
@@ -88,7 +122,7 @@ function Ball({ imgUrl, url }: { imgUrl: string; url: string }) {
 				castShadow
 				receiveShadow
 				scale={3}
-				onClick={(event) => {
+				onDoubleClick={(event) => {
 					// 阻止冒泡
 					event.stopPropagation();
 					window.open(url, "_blank", "noopener,noreferrer");
@@ -109,7 +143,6 @@ function Ball({ imgUrl, url }: { imgUrl: string; url: string }) {
 					polygonOffsetFactor={-5}
 					flatShading
 				/>
-				{/* <Decal position={[0, 0, 1]} map={decal} rotation={[0, 0, 0]} /> */}
 
 				{/* 正面贴图 */}
 				<Decal
@@ -118,34 +151,30 @@ function Ball({ imgUrl, url }: { imgUrl: string; url: string }) {
 					rotation={[Math.PI * 2, 0, 0]}
 				/>
 				{/* 背面贴图 */}
+				<Decal position={[0, 0, -1]} map={decal} rotation={[0, Math.PI, 0]} />
+				{/* 右侧贴图 */}
 				<Decal
-					position={[0, 0, -1]}
+					position={[1, 0, 0]}
 					map={decal}
-					rotation={[0, Math.PI, 0]} // 朝后旋转
+					rotation={[0, Math.PI / 2, 0]}
 				/>
 				{/* 左侧贴图 */}
 				<Decal
 					position={[-1, 0, 0]}
 					map={decal}
-					rotation={[0, Math.PI / 2, 0]} // 无需修正 Z 轴
-				/>
-				{/* 右侧贴图 */}
-				<Decal
-					position={[1, 0, 0]}
-					map={decal}
-					rotation={[0, -Math.PI / 2, 0]} // 无需修正 Z 轴
+					rotation={[0, -Math.PI / 2, 0]}
 				/>
 				{/* 顶部贴图 */}
 				<Decal
 					position={[0, 1, 0]}
 					map={decal}
-					rotation={[Math.PI / 2, 0, 0]} // 朝上旋转
+					rotation={[-Math.PI / 2, 0, 0]}
 				/>
 				{/* 底部贴图 */}
 				<Decal
 					position={[0, -1, 0]}
 					map={decal}
-					rotation={[-Math.PI / 2, 0, 0]} // 朝下旋转
+					rotation={[Math.PI / 2, 0, 0]}
 				/>
 			</mesh>
 		</Float>
