@@ -10,8 +10,6 @@ import SunCanvas from "./components/sunCanvas";
 
 import Tech from "./components/tech";
 
-import Candle from "./components/candle";
-
 import { isMobile } from "@/utils";
 console.log("%c Line:14 🍌 isMobile", "color:#ffdd4d", isMobile);
 function About() {
@@ -51,9 +49,6 @@ function About() {
 					<Tech />
 				</div>
 			</div>
-
-			{/* 蜡烛 */}
-			<Candle />
 		</div>
 	);
 }

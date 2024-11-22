@@ -16,8 +16,9 @@ const ScreensaverPage = lazy(
 );
 const TimePage = lazy(() => import("@/pages/code/creativity/time"));
 const RipplePage = lazy(() => import("@/pages/code/creativity/ripple"));
-const CodeWallPage = lazy(() => import("@/pages/code/creativity/codeWall"));
 const TextPage = lazy(() => import("@/pages/code/creativity/text"));
+const CandlePage = lazy(() => import("@/pages/code/creativity/candle"));
+const CodeWallPage = lazy(() => import("@/pages/code/creativity/codeWall"));
 
 const Creativity: AppRouteObject = {
 	order: 3,
@@ -145,6 +146,22 @@ const Creativity: AppRouteObject = {
 				icon: (
 					<SvgIcon
 						icon="code-menu-text"
+						className="ant-menu-item-icon"
+						size="24"
+					/>
+				),
+			},
+		},
+
+		{
+			path: "candle",
+			element: <CandlePage />,
+			meta: {
+				label: "蜡烛",
+				key: "/creativity/candle",
+				icon: (
+					<SvgIcon
+						icon="code-menu-candle"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
