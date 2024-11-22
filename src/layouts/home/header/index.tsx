@@ -1,31 +1,17 @@
-import { SvgIcon } from "@/components/icon";
+import { IconButton, SvgIcon } from "@/components/icon";
 
-import Setting from "@/components/setting";
-
-import { Button, Dropdown } from "antd";
-
-import type { MenuProps } from "antd";
-
+import Menu from "./components/menu";
 import { NavLink } from "react-router-dom";
 
-export default function HomeHeader() {
-	const items: MenuProps["items"] = [
-		{
-			key: "/home/about",
-			label: <NavLink to="/home/about">About</NavLink>,
-		},
-		{
-			key: "/home/resume",
-			label: <NavLink to="/home/resume">Resume</NavLink>,
-		},
-		{
-			key: "/code",
-			label: <NavLink to="/code">Code</NavLink>,
-		},
-	];
+import { isMobile } from "@/utils";
 
+export default function HomeHeader() {
+	const headerHeight = 80;
 	return (
-		<header className="flex h-16 w-full  justify-center fixed z-[999] bg-[#191919]">
+		<header
+			className="flex w-full  justify-center fixed z-[999] bg-[#191919]"
+			style={{ height: `${headerHeight}px` }}
+		>
 			<div className="container flex items-center justify-between mx-5">
 				{/* Logo 区域 */}
 				<NavLink to="/" className="flex items-center bg-red">
@@ -33,15 +19,17 @@ export default function HomeHeader() {
 					<SvgIcon icon="common-weiShaoY" size="120" color="#ffffff" />
 				</NavLink>
 
-				<div className="flex items-center gap-2">
-					<Setting />
+				<div className="flex items-center gap-5">
+					<IconButton
+						onClick={() =>
+							window.open("https://github.com/d3george/slash-admin")
+						}
+					>
+						<SvgIcon icon="common-github" size="24" />
+					</IconButton>
 
-					<Dropdown menu={{ items }} placement="bottomRight">
-						<Button
-							icon={<SvgIcon icon="home-menu" size="24" />}
-							variant="text"
-						/>
-					</Dropdown>
+					{/* 下拉菜单,只有h5可见 */}
+					{isMobile && <Menu headerHeight={headerHeight} />}
 				</div>
 			</div>
 		</header>

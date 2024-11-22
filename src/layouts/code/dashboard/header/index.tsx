@@ -84,9 +84,15 @@ export default function Header({ className = "", offsetTop = false }: Props) {
 					}}
 				>
 					<div className="flex items-center">
-						{/* Logo 或菜单按钮 */}
-						{themeLayout === ThemeLayout.Horizontal && (
-							<NavLink to="/" className="flex items-center bg-red">
+						{themeLayout !== ThemeLayout.Horizontal ? (
+							<IconButton
+								onClick={() => setDrawerOpen(true)}
+								className="h-10 w-10 md:hidden"
+							>
+								<SvgIcon icon="common-menu" size="24" />
+							</IconButton>
+						) : (
+							<NavLink to="/" className="flex items-center">
 								<SvgIcon icon="common-logo" size={60} />
 							</NavLink>
 						)}
