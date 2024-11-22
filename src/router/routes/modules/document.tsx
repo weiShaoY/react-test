@@ -81,9 +81,6 @@ const document: AppRouteObject = {
 		{
 			path: "angular",
 			element: (
-				// <Wrapper>
-				// 	<Iframe src="https://angular.io/" />
-				// </Wrapper>
 				<Suspense fallback={<CircleLoading />}>
 					<Iframe src="https://angular.io/" />
 				</Suspense>

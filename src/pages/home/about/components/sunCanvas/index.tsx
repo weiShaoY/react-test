@@ -106,7 +106,16 @@ const Sun = () => {
 
 			{/* 后期处理 - 添加辉光效果 */}
 			<EffectComposer>
-				<Bloom intensity={1} luminanceThreshold={0.6} mipmapBlur radius={0.5} />
+				<Bloom
+					// 控制光晕强度的参数，值越大光晕越明显
+					intensity={1}
+					// 亮度阈值，超过此亮度的部分会产生光晕效果
+					luminanceThreshold={0.6}
+					// 否启用Mipmap模糊处理，用于平滑光晕效果
+					mipmapBlur
+					// 制光晕的模糊半径，值越大光晕越扩散
+					radius={0}
+				/>
 			</EffectComposer>
 		</>
 	);

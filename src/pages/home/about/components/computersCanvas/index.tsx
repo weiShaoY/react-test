@@ -2,9 +2,8 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useEffect, useState } from "react";
 
-// import CanvasLoader from "../Loader";
+import { CanvasLoading } from "@/components/loading";
 
-// 定义组件的 Props 类型
 type ComputersProps = {
 	/**
 	 *  是否为移动端
@@ -87,7 +86,7 @@ function ComputersCanvas() {
 			dpr={[1, 2]}
 		>
 			{/* Suspense 组件用于处理异步加载的组件 */}
-			<Suspense fallback={null}>
+			<Suspense fallback={<CanvasLoading />}>
 				{/* OrbitControls 提供用户交互控制 */}
 				<OrbitControls
 					// 禁用缩放
