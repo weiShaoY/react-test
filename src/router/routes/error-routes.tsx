@@ -25,7 +25,8 @@ export const ErrorRoutes: AppRouteObject = {
 			<Suspense fallback={<CircleLoading />}>
 				{" "}
 				{/* 懒加载时显示加载动画 */}
-				<Outlet /> {/* 占位符，用于渲染子路由的组件 */}
+				{/* 占位符，用于渲染子路由的组件 */}
+				<Outlet />
 			</Suspense>
 		</SimpleLayout>
 	),

@@ -30,6 +30,10 @@ function Clock() {
 		return { transform: `rotate(${degrees}deg)` };
 	}, [time.second]);
 
+	if (!time || !hourHandStyle || !minuteHandStyle || !secondHandStyle) {
+		return null;
+	}
+
 	return (
 		<Card className="h-full w-full">
 			<div className="relative aspect-square max-w-full max-h-full h-full w-full flex items-center justify-center bg-[#1e1f26] rounded-xl m-auto">

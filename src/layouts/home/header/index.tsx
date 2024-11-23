@@ -6,15 +6,26 @@ import Logo from "@/components/logo";
 
 import Github from "@/components/github";
 
-export default function HomeHeader() {
-	const headerHeight = 80;
+import { NavLink } from "react-router-dom";
+
+export default function HomeHeader({ headerHeight = 80 }) {
 	return (
 		<header
-			className="flex w-full  justify-center fixed z-[999] bg-[#191919]"
+			className="flex w-full  justify-center fixed top-0 z-[999] bg-[#191919]"
 			style={{ height: `${headerHeight}px` }}
 		>
 			<div className="container flex items-center justify-between mx-5">
 				<Logo />
+
+				<div className="flex items-center gap-5 ">
+					<NavLink className="!text-white font-bold" to="/home/about">
+						About
+					</NavLink>
+
+					<NavLink className="!text-white font-bold" to="/home/resume">
+						Resume
+					</NavLink>
+				</div>
 
 				<div className="flex items-center gap-5">
 					<Github iconColor="#ffffff" />

@@ -10,6 +10,10 @@ import SunCanvas from "./components/sunCanvas";
 
 import Tech from "./components/tech";
 
+// import ParticlesCanvas from "./components/particlesCanvas";
+
+// import StarrySky from "./components/starrySky";
+
 import { isMobile } from "@/utils";
 console.log("%c Line:14 🍌 isMobile", "color:#ffdd4d", isMobile);
 function About() {
@@ -47,6 +51,12 @@ function About() {
 				<div className="container bg-[#3F4146]">
 					{/* 技术栈 */}
 					<Tech />
+				</div>
+
+				<div className="w-full h-[500px] ">
+					{/* <ParticlesCanvas /> */}
+
+					{/* <StarrySky /> */}
 				</div>
 			</div>
 		</div>
