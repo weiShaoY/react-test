@@ -9,7 +9,8 @@ export default function HomeLayout({ children }: Props) {
 	const headerHeight = 80;
 
 	return (
-		<div className="bg-[#212224] h-full" style={{ paddingTop: `${headerHeight}px` }}>
+		// <div className="bg-[#212224] h-full" style={{ marginTop: `${headerHeight}px` }}>
+		<div className="bg-[#212224] h-full">
 			<Header headerHeight={headerHeight} />
 			{children}
 		</div>
