@@ -21,6 +21,10 @@ import Nav from "./nav";
 
 import { ThemeLayout, ThemeMode } from "#/enum";
 
+import { App as AntdApp } from "antd";
+
+import AntdConfig from "@/theme/antd";
+
 /**
  * Code 模块 DashboardLayout 组件，用于构建包含导航栏、页头和主内容区域的布局
  */
@@ -69,30 +73,34 @@ export function CodeDashboardLayout() {
 
 	// 渲染布局组件
 	return (
-		<ScrollbarStyleWrapper $themeMode={themeMode}>
-			{/* 显示进度条 */}
-			<ProgressBar />
+		<AntdConfig>
+			<AntdApp>
+				<ScrollbarStyleWrapper $themeMode={themeMode}>
+					{/* 显示进度条 */}
+					<ProgressBar />
 
-			<Layout className={layoutClassName}>
-				<Suspense fallback={<CircleLoading />}>
-					<Layout>
-						{/* 页头组件，offsetTop 用于判断滚动时的样式变化 */}
+					<Layout className={layoutClassName}>
+						<Suspense fallback={<CircleLoading />}>
+							<Layout>
+								{/* 页头组件，offsetTop 用于判断滚动时的样式变化 */}
 
-						<Header
-							offsetTop={
-								themeLayout === ThemeLayout.Vertical ? offsetTop : undefined
-							}
-						/>
+								<Header
+									offsetTop={
+										themeLayout === ThemeLayout.Vertical ? offsetTop : undefined
+									}
+								/>
 
-						{/* 导航栏组件 */}
-						<Nav />
+								{/* 导航栏组件 */}
+								<Nav />
 
-						{/* 主内容区域组件，传递 offsetTop 和引用 */}
-						<Main ref={mainEl} offsetTop={offsetTop} />
+								{/* 主内容区域组件，传递 offsetTop 和引用 */}
+								<Main ref={mainEl} offsetTop={offsetTop} />
+							</Layout>
+						</Suspense>
 					</Layout>
-				</Suspense>
-			</Layout>
-		</ScrollbarStyleWrapper>
+				</ScrollbarStyleWrapper>
+			</AntdApp>
+		</AntdConfig>
 	);
 }
 
