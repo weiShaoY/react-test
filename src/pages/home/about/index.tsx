@@ -1,18 +1,16 @@
 import Intro from "./components/intro";
 
-import ComputersCanvas from "./components/computersCanvas";
+import ComputerDesk from "./components/computerDesk";
 
 // import BrokenBg from "./components/brokenBg";
 
 // import StarsCanvas from "./components/starsCanvas";
 
-import SunCanvas from "./components/sunCanvas";
+import Sun from "./components/sun";
 
 import Tech from "./components/tech";
 
 // import ParticlesCanvas from "./components/particlesCanvas";
-
-// import StarrySky from "./components/starrySky";
 
 import { isMobile } from "@/utils";
 console.log("%c Line:14 🍌 isMobile", "color:#ffdd4d", isMobile);
@@ -21,23 +19,16 @@ function About() {
 		<div className="h-full w-full z-0 relative">
 			{/* 第一页 */}
 			<div className="h-[100vh] w-full relative z-[1]">
-				{/* <div className="w-[500px] h-[500px]  absolute right-0 top-24">
-				<SunCanvas />
-					</div> */}
-
 				{/* 太阳 */}
-
-				{!isMobile && (
-					<div className="absolute right-0 top-20 w-[20vw] aspect-square">
-						<SunCanvas />
-					</div>
-				)}
+				<div className="absolute right-0 top-20 w-[20vw] aspect-square sm:flex hidden">
+					<Sun />
+				</div>
 
 				{/* 个人介绍 */}
 				<Intro />
 
 				{/* 电脑画面 */}
-				<ComputersCanvas />
+				<ComputerDesk />
 
 				{/* 背景 */}
 				{/* <BrokenBg /> */}
@@ -53,11 +44,7 @@ function About() {
 					<Tech />
 				</div>
 
-				<div className="w-full h-[500px] ">
-					{/* <ParticlesCanvas /> */}
-
-					{/* <StarrySky /> */}
-				</div>
+				<div className="w-full h-[500px] ">{/* <ParticlesCanvas /> */}</div>
 			</div>
 		</div>
 	);

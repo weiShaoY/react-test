@@ -1,21 +1,25 @@
-import React, { useEffect, useRef } from "react"; // 导入 React 及相关 Hook
-import { useGraph } from "@react-three/fiber"; // 导入用于处理 Three.js 场景的 Hook
 import { useAnimations, useFBX, useGLTF } from "@react-three/drei"; // 导入用于加载动画、FBX 和 GLTF 的钩子
-import { SkeletonUtils } from "three-stdlib"; // 导入 Three.js 的工具类，用于克隆骨架
+import { useGraph } from "@react-three/fiber"; // 导入用于处理 Three.js 场景的 Hook
+import React, { useEffect, useRef } from "react"; // 导入 React 及相关 Hook
 import type * as THREE from "three"; // 导入类型定义，以便使用 Three.js 的类型
+import { SkeletonUtils } from "three-stdlib"; // 导入 Three.js 的工具类，用于克隆骨架
 
-// 定义组件的 props 类型
-type Props = {
-	animationName?: string; // 动画名称，默认为 "idle"
-};
-
-// 开发者组件
-const Developer = ({ animationName = "idle", ...props }: Props) => {
+/**
+ *  开发者组件
+ *  @param animationName - 动画名称
+ *  @param scale - 缩放比例
+ *  @param positionY - Y 轴位置
+ */
+const Developer = ({
+	animationName = "idle",
+	scale = 3,
+	positionY = -3,
+}: { animationName?: string; scale?: number; positionY?: number }) => {
 	// 创建对 3D 模型组的引用
 	const group = useRef<THREE.Group>(null);
 
 	// 使用 useGLTF 钩子加载 GLTF 模型，返回场景数据
-	const { scene } = useGLTF("/models/animations/developer.glb");
+	const { scene } = useGLTF("/home/resume/developer/developer.glb");
 
 	// 使用 useMemo 钩子确保场景仅在加载后克隆一次
 	const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
@@ -26,19 +30,21 @@ const Developer = ({ animationName = "idle", ...props }: Props) => {
 	// 使用 useFBX 钩子加载多个 FBX 动画文件
 
 	// 加载 "idle" 动画
-	const { animations: idleAnimation } = useFBX("/models/animations/idle.fbx");
+	const { animations: idleAnimation } = useFBX(
+		"/home/resume/developer/idle.fbx",
+	);
 	// 加载 "salute" 动画
 	const { animations: saluteAnimation } = useFBX(
-		"/models/animations/salute.fbx",
+		"/home/resume/developer/salute.fbx",
 	);
 	// 加载 "clapping" 动画
 	const { animations: clappingAnimation } = useFBX(
-		"/models/animations/clapping.fbx",
+		"/home/resume/developer/clapping.fbx",
 	);
 
 	// 加载 "victory" 动画
 	const { animations: victoryAnimation } = useFBX(
-		"/models/animations/victory.fbx",
+		"/home/resume/developer/victory.fbx",
 	);
 
 	// 为每个动画命名，方便后续控制
@@ -78,7 +84,7 @@ const Developer = ({ animationName = "idle", ...props }: Props) => {
 
 	// 渲染 3D 模型
 	return (
-		<group ref={group} {...props} dispose={null}>
+		<group ref={group} scale={scale} position-y={positionY} dispose={null}>
 			{/*  包裹所有模型，group 是根节点 */}
 			<primitive object={nodes.Hips} />
 			{/* 渲染模型的 "Hips" 部分 */}
@@ -175,6 +181,6 @@ const Developer = ({ animationName = "idle", ...props }: Props) => {
 };
 
 // 预加载 GLTF 模型
-useGLTF.preload("/models/animations/developer.glb");
+useGLTF.preload("/home/resume/developer/developer.glb");
 
 export default Developer;

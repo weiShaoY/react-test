@@ -15,6 +15,9 @@ export default defineConfig(({ mode }) => {
 
 	return {
 		base,
+		alias: {
+			"@/": `${path.resolve(__dirname, "src")}/`,
+		},
 		plugins: [
 			glsl({
 				warnDuplicatedImports: false,

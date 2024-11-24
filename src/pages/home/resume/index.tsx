@@ -1,10 +1,12 @@
 import Experience from "./components/experience";
-import Projects from "./components/projects";
+import Project from "./components/project";
 function Resume() {
 	return (
-		<div className="h-full w-full bg-red relative max-w-7xl mx-auto ">
-			<Projects />
-			<Experience />
+		<div className="h-full w-full relative max-w-7xl mx-auto  bg-[#000000]">
+			{/* 项目 */}
+			<Project />
+			{/* 工作经历 */}
+			{/* <Experience /> */}
 			<div className="">1</div>
 		</div>
 	);

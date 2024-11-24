@@ -1,108 +1,33 @@
-import { Canvas } from "@react-three/fiber";
 import {
-	OrbitControls,
-	Float,
 	Decal,
+	Float,
+	OrbitControls,
 	Preload,
 	useTexture,
 } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react"; // 如需加载器功能可取消注释
 
 import { CanvasLoading } from "@/components/loading";
 
-import css from "@/assets/images/home/tech/css.svg";
-
-import git from "@/assets/images/home/tech/git.svg";
-
-import html from "@/assets/images/home/tech/html.svg";
-
-import javascript from "@/assets/images/home/tech/javascript.svg";
-
-import node from "@/assets/images/home/tech/node.svg";
-
-import pinia from "@/assets/images/home/tech/pinia.svg";
-
-import react from "@/assets/images/home/tech/react.svg";
-
-import tailwindCss from "@/assets/images/home/tech/tailwindCss.svg";
-
-import threeJs from "@/assets/images/home/tech/threeJs.svg";
-
-import typescript from "@/assets/images/home/tech/typescript.svg";
-
-import unocss from "@/assets/images/home/tech/unocss.svg";
-
-import vue from "@/assets/images/home/tech/vue.svg";
+import { techStack } from "@/utils";
 
 /**
  * 技术栈数据
- * @constant {Array<{name: string, icon: string}>}
- * @property {string} name - 技术名称
- * @property {string} icon - 技术对应的图标路径
  */
 const technologies = [
-	{
-		name: "html",
-		icon: html,
-		url: "https://developer.mozilla.org/zh-CN/docs/Web/HTML",
-	},
-	{
-		name: "css",
-		icon: css,
-		url: "https://developer.mozilla.org/zh-CN/docs/Web/CSS",
-	},
-
-	{
-		name: "javaScript",
-		icon: javascript,
-		url: "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript",
-	},
-	{
-		name: "typeScript",
-		icon: typescript,
-		url: "https://www.typescriptlang.org/zh/",
-	},
-	{
-		name: "node",
-		icon: node,
-		url: "https://nodejs.org/en/",
-	},
-	{
-		name: "react",
-		icon: react,
-		url: "https://zh-hans.react.dev/",
-	},
-	{
-		name: "vue",
-		icon: vue,
-		url: "https://cn.vuejs.org/",
-	},
-	{
-		name: "tailwindCSS",
-		icon: tailwindCss,
-		url: "https://tailwindcss.com/docs/installation",
-	},
-	{
-		name: "unocss",
-		icon: unocss,
-		url: "https://unocss-cn.pages.dev/",
-	},
-	{
-		name: "threeJs",
-		icon: threeJs,
-		url: "https://threejs.org/",
-	},
-	{
-		name: "git",
-		icon: git,
-		url: "https://git-scm.com/",
-	},
-
-	{
-		name: "pinia",
-		icon: pinia,
-		url: "https://pinia.vuejs.org/zh/",
-	},
+	techStack.html,
+	techStack.css,
+	techStack.javaScript,
+	techStack.typeScript,
+	techStack.node,
+	techStack.react,
+	techStack.vue,
+	techStack.tailwindCss,
+	techStack.unocss,
+	techStack.threeJs,
+	techStack.git,
+	techStack.pinia,
 ];
 
 /**
@@ -207,9 +132,9 @@ function BallCanvas({ icon, url }: { icon: string; url: string }) {
 function Tech() {
 	return (
 		<div className="flex flex-row flex-wrap justify-center gap-10">
-			{technologies.map(({ name, icon, url }) => (
+			{technologies.map(({ name, image, url }) => (
 				<div className="w-29 h-28" key={name}>
-					<BallCanvas icon={icon} url={url} />
+					<BallCanvas icon={image} url={url} />
 				</div>
 			))}
 		</div>
