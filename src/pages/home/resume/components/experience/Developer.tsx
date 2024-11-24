@@ -19,7 +19,7 @@ const Developer = ({
 	const group = useRef<THREE.Group>(null);
 
 	// 使用 useGLTF 钩子加载 GLTF 模型，返回场景数据
-	const { scene } = useGLTF("/home/resume/developer/developer.glb");
+	const { scene } = useGLTF("/models/home-about-experience-developer.glb");
 
 	// 使用 useMemo 钩子确保场景仅在加载后克隆一次
 	const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
@@ -31,20 +31,20 @@ const Developer = ({
 
 	// 加载 "idle" 动画
 	const { animations: idleAnimation } = useFBX(
-		"/home/resume/developer/idle.fbx",
+		"/models/home-about-experience-developer-idle.fbx",
 	);
 	// 加载 "salute" 动画
 	const { animations: saluteAnimation } = useFBX(
-		"/home/resume/developer/salute.fbx",
+		"/models/home-about-experience-developer-salute.fbx",
 	);
 	// 加载 "clapping" 动画
 	const { animations: clappingAnimation } = useFBX(
-		"/home/resume/developer/clapping.fbx",
+		"/models/home-about-experience-developer-clapping.fbx",
 	);
 
 	// 加载 "victory" 动画
 	const { animations: victoryAnimation } = useFBX(
-		"/home/resume/developer/victory.fbx",
+		"/models/home-about-experience-developer-victory.fbx",
 	);
 
 	// 为每个动画命名，方便后续控制

@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
  */
 export default function Logo(): JSX.Element {
 	return (
-		<NavLink to="/" className="flex items-center bg-red">
+		<NavLink to="/" className="flex items-center">
 			<SvgIcon icon="common-logo" size={60} />
 			<SvgIcon icon="common-weiShaoY" size="120" color="#ffffff" />
 		</NavLink>

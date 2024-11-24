@@ -8,6 +8,8 @@ import gsap from "gsap";
 import { useEffect, useRef } from "react";
 import type { Group } from "three";
 
+import texture1 from "@/assets/video/home-about-project-texture1.mp4";
+
 /**
  *  定义组件属性类型（根据 props 的使用情况调整）
  */
@@ -30,13 +32,13 @@ const DemoComputer = (props: Props) => {
 	const group = useRef<Group>(null);
 
 	// 加载 GLTF 格式的 3D 模型
-	const { nodes, materials } = useGLTF("/models/computer.glb") as any;
+	// const { nodes, materials } = useGLTF("/models/computer.glb") as any;
+	const { nodes, materials } = useGLTF(
+		"/models/home-about-project-computer.glb",
+	) as any;
 
 	// 使用视频作为纹理，如果没有传入纹理路径，则默认使用指定的视频文件
-	const txt = useVideoTexture(
-		// props.texture ? props.texture : "/textures/project/project1.mp4",
-		props.texture ? props.texture : "/video/project1.mp4",
-	);
+	const txt = useVideoTexture(props.texture ? props.texture : texture1);
 
 	// 在纹理加载完成后进行一些初始化操作，确保纹理正确显示
 	useEffect(() => {
@@ -1044,6 +1046,6 @@ const DemoComputer = (props: Props) => {
 	);
 };
 
-useGLTF.preload("/models/computer.glb");
+useGLTF.preload("/models/home-about-project-computer.glb");
 
 export default DemoComputer;

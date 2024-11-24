@@ -6,7 +6,7 @@ function Resume() {
 			{/* 项目 */}
 			<Project />
 			{/* 工作经历 */}
-			{/* <Experience /> */}
+			<Experience />
 			<div className="">1</div>
 		</div>
 	);

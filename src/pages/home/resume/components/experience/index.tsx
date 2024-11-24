@@ -5,10 +5,9 @@ import { Suspense, useState } from "react";
 import { CanvasLoading } from "@/components/loading";
 import Developer from "./developer";
 
-import figma from "@/assets/images/home/resume/experience/figma.svg";
-import framer from "@/assets/images/home/resume/experience/framer.svg";
-import notion from "@/assets/images/home/resume/experience/notion.svg";
-
+import icon1 from "@/assets/icons/home-about-experience-icon1.svg";
+import icon2 from "@/assets/icons/home-about-experience-icon2.svg";
+import icon3 from "@/assets/icons/home-about-experience-icon3.svg";
 const workExperiences = [
 	{
 		id: 1,
@@ -17,7 +16,7 @@ const workExperiences = [
 		duration: "2022 - Present",
 		title:
 			"Framer是我创建交互式原型的首选工具。我用它来实现设计，让利益相关者在开发之前体验用户流和交互。",
-		icon: framer,
+		icon: icon1,
 		animation: "victory",
 	},
 	{
@@ -27,7 +26,7 @@ const workExperiences = [
 		duration: "2020 - 2022",
 		title:
 			"Figma是我首选的协同设计平台。我利用它与团队成员和客户无缝协作，促进实时反馈和设计迭代。它基于云。",
-		icon: figma,
+		icon: icon2,
 		animation: "clapping",
 	},
 	{
@@ -37,7 +36,7 @@ const workExperiences = [
 		duration: "2019 - 2020",
 		title:
 			"Notion帮助我保持项目的有序性。我使用它进行项目管理、任务跟踪，并将其作为文档的中心枢纽，确保从设计说明到。",
-		icon: notion,
+		icon: icon3,
 		animation: "salute",
 	},
 ];
@@ -88,7 +87,7 @@ function Experience() {
 								>
 									<div className="flex flex-col h-full justify-start items-center py-2">
 										<div className="rounded-3xl w-16 h-16 p-2 bg-[#1a1a1a]">
-											<img className="w-full h-full" src="" alt="" />
+											<img className="w-full h-full" src={item.icon} alt="" />
 										</div>
 
 										<div className="flex-1 w-0.5 mt-4 h-full bg-[#1c1c21] group-hover:bg-[#3a3a49] group-last:hidden" />
