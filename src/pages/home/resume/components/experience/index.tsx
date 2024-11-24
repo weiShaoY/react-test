@@ -38,7 +38,10 @@ const workExperiences = [
 	},
 ];
 
-const WorkExperience = () => {
+/**
+ *  工作经历
+ */
+function Experience  ()  {
 	const [animationName, setAnimationName] = useState("idle");
 
 	return (
@@ -68,9 +71,9 @@ const WorkExperience = () => {
 
 					<div className="col-span-2 rounded-lg bg-[#0e0e10] border border-[#1c1c21]">
 						<div className="sm:py-10 py-5 sm:px-5 px-2.5">
-							{workExperiences.map((item, index) => (
+							{workExperiences.map((item) => (
 								<div
-									key={index}
+									key={item.id}
 									onClick={() => setAnimationName(item.animation.toLowerCase())}
 									onPointerOver={() =>
 										setAnimationName(item.animation.toLowerCase())
@@ -105,4 +108,4 @@ const WorkExperience = () => {
 	);
 };
 
-export default WorkExperience;
+export default Experience;
