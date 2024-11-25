@@ -12,8 +12,6 @@ import Tech from "./components/tech";
 
 // import ParticlesCanvas from "./components/particlesCanvas";
 
-import { isMobile } from "@/utils";
-console.log("%c Line:14 🍌 isMobile", "color:#ffdd4d", isMobile);
 function About() {
 	return (
 		<div className="h-full w-full z-0 relative">
