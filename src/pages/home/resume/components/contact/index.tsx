@@ -7,6 +7,8 @@ import { SvgIcon } from "@/components/icon";
 
 import { sendContactEmail } from "@/utils";
 
+import Earth from "./earth";
+
 /**
  * 表单数据类型
  */
@@ -79,70 +81,75 @@ const Contact = () => {
 
 	return (
 		<section className="sm:px-10 px-5 my-20" id="contact">
-			{alert.show && <Alert alert={alert} />} {/* 显示警告组件 */}
-			<div className="relative min-h-screen flex items-center justify-center flex-col">
-				<img
-					src="/assets/terminal.png"
-					alt="terminal-bg"
-					className="absolute inset-0 min-h-screen"
-				/>
+			{/* 显示警告组件 */}
+			{alert.show && <Alert alert={alert} />}
+			<div className="w-full text-[#afb0b6]">
+				<p className="sm:text-4xl text-3xl font-semibold text-gray_gradient">
+					联系我
+				</p>
 
-				<div className="max-w-xl relative z-10 sm:px-10 px-5 mt-12 text-[#afb0b6]">
-					<h3 className="sm:text-4xl text-3xl font-semibold">联系我</h3>
-
-					<form
-						ref={formRef}
-						onSubmit={handleSubmit}
-						className="mt-12 flex flex-col space-y-7"
-					>
-						<label className="space-y-3">
-							<span className="text-lg text-[#afb0b6]">姓名</span>
-							<input
-								type="text"
-								name="name"
-								value={form.name}
-								onChange={handleChange}
-								required
-								className="w-full bg-[#1c1c21] px-5 py-2 min-h-14 rounded-lg placeholder:text-[#62646c] text-lg text-[#e4e4e6] shadow-[#0E0E10]shadow-2xl focus:outline-none active:bg-opacity-30"
-								placeholder="例如, Alan Mathison Turing"
-							/>
-						</label>
-
-						<label className="space-y-3">
-							<span className="text-lg text-[#afb0b6]">电子邮件</span>
-							<input
-								type="email"
-								name="email"
-								value={form.email}
-								onChange={handleChange}
-								required
-								className="w-full bg-[#1c1c21] px-5 py-2 min-h-14 rounded-lg placeholder:text-[#62646c] text-lg text-[#e4e4e6] shadow-[#0E0E10]shadow-2xl focus:outline-none"
-								placeholder="例如, turing@gmail.com"
-							/>
-						</label>
-
-						<label className="space-y-3">
-							<span className="text-lg text-[#afb0b6]">您的留言</span>
-							<textarea
-								name="message"
-								value={form.message}
-								onChange={handleChange}
-								required
-								rows={5}
-								className="w-full bg-[#1c1c21] px-5 py-2 min-h-14 rounded-lg placeholder:text-[#62646c] text-lg text-[#e4e4e6] shadow-[#0E0E10]shadow-2xl focus:outline-none"
-								placeholder="分享您的想法或询问..."
-							/>
-						</label>
-
-						<button
-							className="p-3 bg-[#3a3a49] text-white cursor-pointer active:scale-95 transition-all rounded-lg hover:bg-opacity-70 flex items-center justify-center gap-2"
-							type="submit"
-							disabled={loading}
+				<div className="grid lg:grid-cols-2 grid-cols-1 mt-12 gap-5 w-full">
+					<div className="flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-[#0e0e10]">
+						<form
+							ref={formRef}
+							onSubmit={handleSubmit}
+							className="mt-12 flex flex-col space-y-7"
 						>
-							{loading ? "发送..." : "发送消息"}
-							<SvgIcon icon="arrow-top-right" size={18} />
-						</button>
-					</form>
+							<label className="space-y-3">
+								<span className="text-lg text-[#afb0b6]">姓名</span>
+								<input
+									type="text"
+									name="name"
+									value={form.name}
+									onChange={handleChange}
+									required
+									className="w-full bg-[#1c1c21] px-5 py-2 min-h-14 rounded-lg placeholder:text-[#62646c] text-lg text-[#e4e4e6] shadow-[#0E0E10]shadow-2xl focus:outline-none active:bg-opacity-30"
+									placeholder="例如, Alan Mathison Turing"
+								/>
+							</label>
+
+							<label className="space-y-3">
+								<span className="text-lg text-[#afb0b6]">电子邮件</span>
+								<input
+									type="email"
+									name="email"
+									value={form.email}
+									onChange={handleChange}
+									required
+									className="w-full bg-[#1c1c21] px-5 py-2 min-h-14 rounded-lg placeholder:text-[#62646c] text-lg text-[#e4e4e6] shadow-[#0E0E10]shadow-2xl focus:outline-none"
+									placeholder="例如, turing@gmail.com"
+								/>
+							</label>
+
+							<label className="space-y-3">
+								<span className="text-lg text-[#afb0b6]">您的留言</span>
+								<textarea
+									name="message"
+									value={form.message}
+									onChange={handleChange}
+									required
+									rows={5}
+									className="w-full bg-[#1c1c21] px-5 py-2 min-h-14 rounded-lg placeholder:text-[#62646c] text-lg text-[#e4e4e6] shadow-[#0E0E10]shadow-2xl focus:outline-none"
+									placeholder="分享您的想法或询问..."
+								/>
+							</label>
+
+							<button
+								className="p-3 bg-[#3a3a49] text-white cursor-pointer active:scale-95 transition-all rounded-lg hover:bg-opacity-70 flex items-center justify-center gap-2"
+								type="submit"
+								disabled={loading}
+							>
+								{loading ? "发送..." : "发送消息"}
+								<SvgIcon icon="arrow-top-right" size={18} />
+							</button>
+						</form>
+					</div>
+
+					<div className="rounded-lg flex justify-center items-center">
+						<div className="rounded-3xl w-full  h-fit flex justify-center items-center">
+							<Earth height={400} />
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>

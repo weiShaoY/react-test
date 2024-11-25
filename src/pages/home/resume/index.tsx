@@ -3,7 +3,7 @@ import Experience from "./components/experience";
 import Project from "./components/project";
 function Resume() {
 	return (
-		<div className="h-full w-full relative max-w-7xl mx-auto  bg-[#000000]">
+		<div className="h-full w-full relative max-w-7xl mx-auto  ">
 			{/* 项目 */}
 			<Project />
 			{/* 工作经历 */}

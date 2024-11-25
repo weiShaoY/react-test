@@ -13,6 +13,7 @@
 	"dependencies": {
 		"@ant-design/cssinjs": "^1.22.0",
 		"@ant-design/icons": "^5.5.1",
+		"@emailjs/browser": "^4.4.1",
 		"@fullcalendar/common": "^5.11.5",
 		"@fullcalendar/core": "^6.1.15",
 		"@fullcalendar/daygrid": "^6.1.15",
@@ -54,6 +55,7 @@
 		"react-beautiful-dnd": "^13.1.1",
 		"react-dom": "18.2.0",
 		"react-error-boundary": "^4.1.2",
+		"react-globe.gl": "^2.27.6",
 		"react-helmet-async": "^2.0.5",
 		"react-icons": "^5.3.0",
 		"react-markdown": "^9.0.1",
@@ -71,8 +73,7 @@
 		"three": "^0.170.0",
 		"three-stdlib": "^2.34.0",
 		"vite-plugin-glsl": "^1.1.2",
-		"zustand": "^5.0.1",
-		"@emailjs/browser": "^4.4.1"
+		"zustand": "^5.0.1"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
