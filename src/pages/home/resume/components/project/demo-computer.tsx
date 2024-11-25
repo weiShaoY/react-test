@@ -34,7 +34,7 @@ const DemoComputer = (props: Props) => {
 	// 加载 GLTF 格式的 3D 模型
 	// const { nodes, materials } = useGLTF("/models/computer.glb") as any;
 	const { nodes, materials } = useGLTF(
-		"/models/home-about-project-computer.glb",
+		"/models/home-resume-project-computer/index.glb",
 	) as any;
 
 	// 使用视频作为纹理，如果没有传入纹理路径，则默认使用指定的视频文件
@@ -57,6 +57,8 @@ const DemoComputer = (props: Props) => {
 			});
 		}
 	}, [txt]);
+
+	useGLTF.preload("/models/home-resume-project-computer/index.glb");
 
 	return (
 		<group ref={group} {...props} dispose={null}>
@@ -1045,7 +1047,5 @@ const DemoComputer = (props: Props) => {
 		</group>
 	);
 };
-
-useGLTF.preload("/models/home-about-project-computer.glb");
 
 export default DemoComputer;

@@ -19,8 +19,9 @@ const Developer = ({
 	const group = useRef<THREE.Group>(null);
 
 	// 使用 useGLTF 钩子加载 GLTF 模型，返回场景数据
-	const { scene } = useGLTF("/models/home-about-experience-developer.glb");
-
+	const { scene } = useGLTF(
+		"/models/home-resume-experience-developer/index.glb",
+	);
 	// 使用 useMemo 钩子确保场景仅在加载后克隆一次
 	const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
 
@@ -31,20 +32,20 @@ const Developer = ({
 
 	// 加载 "idle" 动画
 	const { animations: idleAnimation } = useFBX(
-		"/models/home-about-experience-developer-idle.fbx",
+		"/models/home-resume-experience-developer/idle.fbx",
 	);
 	// 加载 "salute" 动画
 	const { animations: saluteAnimation } = useFBX(
-		"/models/home-about-experience-developer-salute.fbx",
+		"/models/home-resume-experience-developer/salute.fbx",
 	);
 	// 加载 "clapping" 动画
 	const { animations: clappingAnimation } = useFBX(
-		"/models/home-about-experience-developer-clapping.fbx",
+		"/models/home-resume-experience-developer/clapping.fbx",
 	);
 
 	// 加载 "victory" 动画
 	const { animations: victoryAnimation } = useFBX(
-		"/models/home-about-experience-developer-victory.fbx",
+		"/models/home-resume-experience-developer/victory.fbx",
 	);
 
 	// 为每个动画命名，方便后续控制
@@ -81,6 +82,9 @@ const Developer = ({
 			}
 		};
 	}, [animationName, actions]); // 依赖 animationName 和 actions，当其改变时重新执行
+
+	// 预加载 GLTF 模型
+	useGLTF.preload("/models/home-resume-experience-developer/index.glb");
 
 	// 渲染 3D 模型
 	return (
@@ -179,8 +183,5 @@ const Developer = ({
 		</group>
 	);
 };
-
-// 预加载 GLTF 模型
-useGLTF.preload("/home/resume/developer/developer.glb");
 
 export default Developer;

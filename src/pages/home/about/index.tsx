@@ -1,6 +1,6 @@
 import Intro from "./components/intro";
 
-import ComputerDesk from "./components/computerDesk";
+import Desktop from "./components/desktop";
 
 // import BrokenBg from "./components/brokenBg";
 
@@ -27,8 +27,8 @@ function About() {
 				{/* 个人介绍 */}
 				<Intro />
 
-				{/* 电脑画面 */}
-				<ComputerDesk />
+				{/* 桌面模型 */}
+				<Desktop />
 
 				{/* 背景 */}
 				{/* <BrokenBg /> */}

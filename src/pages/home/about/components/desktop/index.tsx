@@ -21,7 +21,7 @@ const Computers = ({ isMobile }: ComputersProps): JSX.Element => {
 	 * 加载 3D 模型文件
 	 * @description 使用 useGLTF Hook 加载指定路径的 GLTF 模型
 	 */
-	const computer = useGLTF("/home/about/computerDesk/desktop_pc.gltf");
+	const computer = useGLTF("/models/home-about-desktop/index.gltf");
 
 	return (
 		<primitive
