@@ -7,7 +7,9 @@ import { SvgIcon } from "@/components/icon";
 
 import { sendContactEmail } from "@/utils";
 
-import Earth from "./earth";
+// import Earth from "@/canvas/earth";
+
+import Moon from "@/canvas/moon";
 
 /**
  * 表单数据类型
@@ -147,7 +149,8 @@ const Contact = () => {
 
 					<div className="rounded-lg flex justify-center items-center">
 						<div className="rounded-3xl w-full  h-fit flex justify-center items-center">
-							<Earth height={400} />
+							{/* <Earth height={400} /> */}
+							<Moon height={400} />
 						</div>
 					</div>
 				</div>

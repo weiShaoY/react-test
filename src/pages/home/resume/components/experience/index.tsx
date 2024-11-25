@@ -1,9 +1,6 @@
-import { OrbitControls } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 
-import { CanvasLoading } from "@/components/loading";
-import Developer from "./developer";
+import Developer from "@/canvas/developer";
 
 import icon1 from "@/assets/icons/home-about-experience-icon1.svg";
 import icon2 from "@/assets/icons/home-about-experience-icon2.svg";
@@ -57,20 +54,11 @@ function Experience() {
 				<div className="grid lg:grid-cols-3 grid-cols-1 gap-5 mt-12">
 					<div className="col-span-1 rounded-lg bg-[#0e0e10] border border-[#1c1c21]">
 						{/* 开发者模型 */}
-						<Canvas className="cursor-pointer">
-							<ambientLight intensity={7} />
-							<spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-							<directionalLight position={[10, 10, 10]} intensity={1} />
-							<OrbitControls enableZoom={false} maxPolarAngle={Math.PI / 2} />
-
-							<Suspense fallback={<CanvasLoading />}>
-								<Developer
-									animationName={animationName}
-									scale={3}
-									position-y={-3}
-								/>
-							</Suspense>
-						</Canvas>
+						<Developer
+							animationName={animationName}
+							scale={3}
+							position-y={-3}
+						/>
 					</div>
 
 					<div className="col-span-2 rounded-lg bg-[#0e0e10] border border-[#1c1c21]">

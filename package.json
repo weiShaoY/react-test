@@ -72,7 +72,7 @@
 		"tailwind-merge": "^2.5.4",
 		"three": "^0.170.0",
 		"three-stdlib": "^2.34.0",
-		"vite-plugin-glsl": "^1.1.2",
+		"vite-plugin-glsl": "^1.3.0",
 		"zustand": "^5.0.1"
 	},
 	"devDependencies": {

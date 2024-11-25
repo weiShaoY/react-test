@@ -26,5 +26,8 @@
 	},
 	"[json]": {
 		"editor.defaultFormatter": "biomejs.biome"
-  },
+	},
+	"cSpell.ignoreWords": [
+		"drei"
+	],
 }

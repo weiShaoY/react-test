@@ -1,22 +1,22 @@
 import Intro from "./components/intro";
 
-import Desktop from "./components/desktop";
+import Desktop from "@/canvas/desktop";
 
-// import BrokenBg from "./components/brokenBg";
+// import BrokenBg from "@/canvas/brokenBg";
 
-// import StarsCanvas from "./components/starsCanvas";
+// import Stars from "@/canvas/stars";
 
-import Sun from "./components/sun";
+import Sun from "@/canvas/sun";
 
-import Tech from "./components/tech";
+import Tech from "@/canvas/tech";
 
-// import ParticlesCanvas from "./components/particlesCanvas";
+// import ParticlesCanvas from "@/canvas/particlesCanvas";
 
 function About() {
 	return (
-		<div className="h-full w-full z-0 relative">
+		<div className="h-full w-full  relative">
 			{/* 第一页 */}
-			<div className="h-[100vh] w-full relative z-[1]">
+			<div className="min-h-screen w-full h-screen relative">
 				{/* 太阳 */}
 				<div className="absolute right-0 top-20 w-[20vw] aspect-square sm:flex hidden">
 					<Sun />
@@ -26,23 +26,29 @@ function About() {
 				<Intro />
 
 				{/* 桌面模型 */}
-				<Desktop />
+				<div className="absolute inset-0 z-1">
+					<Desktop />
+				</div>
 
 				{/* 背景 */}
 				{/* <BrokenBg /> */}
 			</div>
 
 			{/* 第二页 */}
-			<div className="h-[100vh]  z-[1] relative flex justify-center  items-center flex-col">
-				{/* 星空 */}
-				{/* <StarsCanvas /> */}
+			<div className="h-screen z-[1] flex justify-center items-center flex-col relative">
+				<div className="w-full h-full relative">
+					{/* 星空 */}
+					<div className="w-full h-auto absolute inset-0 z-[-1]">
+						{/* <Stars /> */}
+					</div>
 
-				<div className="container bg-[#3F4146]">
 					{/* 技术栈 */}
-					<Tech />
+					<div className="container bg-[#3F4146]">
+						<Tech />
+					</div>
 				</div>
 
-				<div className="w-full h-[500px] ">{/* <ParticlesCanvas /> */}</div>
+				{/* <div className="w-full h-[500px] "><ParticlesCanvas /></div> */}
 			</div>
 		</div>
 	);

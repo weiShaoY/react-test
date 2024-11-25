@@ -1,14 +1,12 @@
 import { useGSAP } from "@gsap/react";
-import { Center, OrbitControls } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import gsap from "gsap";
-import { Suspense, useState } from "react";
 
-import { CanvasLoading } from "@/components/loading";
+import gsap from "gsap";
+
+import { useState } from "react";
 
 import { myProjects } from "./data.ts";
 
-import DemoComputer from "./demo-computer.tsx";
+import Computer from "@/canvas/computer";
 
 import SvgIcon from "@/components/icon/svg-icon";
 
@@ -138,22 +136,7 @@ function Projects() {
 
 					{/* 3D Canvas 部分，展示项目的 3D 电脑模型 */}
 					<div className="border border-[#1c1c21] bg-[#0e0e10] rounded-lg h-96 md:h-full">
-						<Canvas className="cursor-pointer">
-							<ambientLight intensity={Math.PI} />
-							<directionalLight position={[10, 10, 5]} />
-							<Center>
-								<Suspense fallback={<CanvasLoading />}>
-									<group
-										scale={2}
-										position={[0, -3, 0]}
-										rotation={[0, -0.1, 0]}
-									>
-										<DemoComputer texture={currentProject.texture} />
-									</group>
-								</Suspense>
-							</Center>
-							<OrbitControls maxPolarAngle={Math.PI / 2} enableZoom={false} />
-						</Canvas>
+						<Computer texture={currentProject.texture} />
 					</div>
 				</div>
 			</div>
