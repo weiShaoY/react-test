@@ -9,11 +9,11 @@ import { SkeletonUtils } from "three-stdlib";
 
 // 导入用于加载 GLTF、FBX 和动画的钩子
 import {
-	useGLTF,
-	useFBX,
-	useAnimations,
 	OrbitControls,
 	Preload,
+	useAnimations,
+	useFBX,
+	useGLTF,
 } from "@react-three/drei";
 
 // 导入 Three.js 的渲染工具

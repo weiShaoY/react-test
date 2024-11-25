@@ -1,19 +1,19 @@
 import {
-	Clock as e,
-	PerspectiveCamera as i,
-	Scene as t,
-	WebGLRenderer as s,
-	SRGBColorSpace as n,
-	MathUtils as o,
-	Vector2 as r,
 	TextureLoader as a,
 	Color as c,
-	InstancedMesh as v,
-	PlaneGeometry as h,
 	MeshBasicMaterial as d,
+	Clock as e,
+	PlaneGeometry as h,
+	PerspectiveCamera as i,
 	AdditiveBlending as l,
 	Object3D as m,
+	SRGBColorSpace as n,
+	MathUtils as o,
 	Vector3 as p,
+	Vector2 as r,
+	WebGLRenderer as s,
+	Scene as t,
+	InstancedMesh as v,
 } from "three";
 import "three/addons/loaders/GLTFLoader.js";
 import "three/addons/loaders/DRACOLoader.js";
@@ -227,7 +227,7 @@ function R(e) {
 		...e,
 	};
 	return (
-		(function (e, i) {
+		((e, i) => {
 			f.has(e) ||
 				(f.set(e, i),
 				w ||
@@ -283,11 +283,11 @@ async function L(e, i) {
 	let t;
 	return (
 		(t = e.endsWith(".hdr")
-			? await (function (e, i) {
+			? await ((e, i) => {
 					y || (y = new u());
 					return y.loadAsync(e, i);
 				})(e, i)
-			: await (function (e, i) {
+			: await ((e, i) => {
 					z || (z = new a());
 					return z.loadAsync(e, i);
 				})(e, i)),
@@ -345,13 +345,13 @@ class O extends v {
 		this.#M();
 	}
 	#M() {
-		const e = (function (e) {
+		const e = ((e) => {
 			let i, t;
 			return (
 				s(e),
 				{
 					setColors: s,
-					getColorAt: function (e, s = new c()) {
+					getColorAt: (e, s = new c()) => {
 						const n = Math.max(0, Math.min(1, e)) * (i.length - 1),
 							o = Math.floor(n),
 							r = t[o];
@@ -413,12 +413,12 @@ function E(e, i) {
 		{
 			three: t,
 			particles: s,
-			loadMap: function (e) {
+			loadMap: (e) => {
 				L(e).then((e) => {
 					(e.flipY = !1), (s.material.map = e), (s.material.needsUpdate = !0);
 				});
 			},
-			bindMap: function (e) {
+			bindMap: (e) => {
 				e.flipY = !1;
 				s.material.map = e;
 				s.material.needsUpdate = !0;

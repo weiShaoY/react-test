@@ -1,9 +1,9 @@
+import { CanvasLoading } from "@/components/loading";
 import { OrbitControls, Preload, RenderCubeTexture } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
-import { Suspense, memo, useMemo, useRef, useState, useEffect } from "react";
+import { Suspense, memo, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import { CanvasLoading } from "@/components/loading";
 
 import fragmentAround from "./glsl/around-fragment.glsl";
 import vertexAround from "./glsl/around-vertex.glsl";

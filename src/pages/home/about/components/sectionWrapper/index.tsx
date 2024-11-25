@@ -1,6 +1,6 @@
 import { LazyMotion, domAnimation, m } from "framer-motion";
-import type { ComponentType } from "react";
 import type { Variants } from "framer-motion";
+import type { ComponentType } from "react";
 /**
  * 创建一个交错动画容器的配置
  * @function staggerContainer

@@ -43,10 +43,6 @@
 			"#/*": ["types/*"]
 		}
 	},
-	"include": [
-		"src",
-		"types",
-		"src/pages/home/resume/components/experience/developer.tsx"
-	],
+	"include": ["src", "types"],
 	"exclude": ["node_modules", "dist"]
 }
