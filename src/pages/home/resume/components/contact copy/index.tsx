@@ -1,7 +1,9 @@
 import { useRef, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 
-import { Alert, useAlert } from "./alert"; // 引入 Alert 和 useAlert
+import useAlert from "./use-alert";
+
+import Alert from "./alert";
 
 import { SvgIcon } from "@/components/icon";
 
@@ -27,9 +29,10 @@ type FormType = {
 
 const Contact = () => {
 	const formRef = useRef<HTMLFormElement | null>(null);
-	const { alert, showAlert, hideAlert } = useAlert(); // 使用 useAlert Hook 获取警告状态
+	const { alert, showAlert, hideAlert } = useAlert();
 
 	const [loading, setLoading] = useState<boolean>(false);
+
 	const [form, setForm] = useState<FormType>({
 		name: "",
 		email: "",
@@ -79,7 +82,8 @@ const Contact = () => {
 
 	return (
 		<section className="sm:px-10 px-5 my-20" id="contact">
-			{alert.show && <Alert alert={alert} />} {/* 显示警告组件 */}
+			{alert.show && <Alert {...alert} />}
+
 			<div className="relative min-h-screen flex items-center justify-center flex-col">
 				<img
 					src="/assets/terminal.png"
@@ -89,6 +93,9 @@ const Contact = () => {
 
 				<div className="max-w-xl relative z-10 sm:px-10 px-5 mt-12 text-[#afb0b6]">
 					<h3 className="sm:text-4xl text-3xl font-semibold">联系我</h3>
+					{/* <p className="text-lg text-[#afb0b6] mt-3">
+						无论您是想建立一个新网站、改进现有平台还是实现一个独特的项目，我都会为您提供帮助。
+					</p> */}
 
 					<form
 						ref={formRef}
