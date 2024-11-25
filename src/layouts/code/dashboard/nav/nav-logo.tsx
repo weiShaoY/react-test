@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import { useSettings } from "@/store/settingStore";
 import { useThemeToken } from "@/theme/hooks";
-import { cn } from "@/utils";
+import { tailwindClassMerger } from "@/utils";
 
 import dashboardConfig from "../config";
 
@@ -55,7 +55,7 @@ export default function NavLogo({ collapsed, onToggle }: Props) {
 			{/* 折叠/展开按钮 */}
 			<div
 				onClick={onToggle} // 点击切换折叠状态
-				className={cn(
+				className={tailwindClassMerger(
 					"absolute right-0 top-14 z-50 hidden h-8 w-8 translate-x-1/2 cursor-pointer select-none items-center justify-center rounded-full text-center md:flex",
 				)}
 				style={{

@@ -1,4 +1,4 @@
-import { cn } from "@/utils";
+import { tailwindClassMerger } from "@/utils";
 import type { CSSProperties } from "react";
 
 type SvgIconProps = {
@@ -53,7 +53,7 @@ export default function SvgIcon({
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 100 100"
-			className={cn(
+			className={tailwindClassMerger(
 				"anticon fill-current inline-block h-[1em] w-[1em] overflow-hidden outline-none",
 				className,
 			)}

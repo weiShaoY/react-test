@@ -5,7 +5,7 @@ import { isMobile } from "./isMobile";
 
 export * from "./techStack";
 
-export function cn(...inputs: ClassValue[]) {
+export function tailwindClassMerger(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 

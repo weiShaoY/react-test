@@ -13,7 +13,7 @@ import styled from "styled-components";
 import { CircleLoading } from "@/components/loading";
 import ProgressBar from "@/components/progress-bar";
 import { useSettings } from "@/store/settingStore";
-import { cn } from "@/utils";
+import { tailwindClassMerger } from "@/utils";
 
 import Header from "./header";
 import Main from "./main";
@@ -65,7 +65,7 @@ export function CodeDashboardLayout() {
 	 * 使用 useMemo 缓存布局的 className，避免每次渲染时重新计算
 	 */
 	const layoutClassName = useMemo(() => {
-		return cn(
+		return tailwindClassMerger(
 			"flex h-screen overflow-hidden",
 			themeLayout === ThemeLayout.Horizontal ? "flex-col" : "flex-row",
 		);

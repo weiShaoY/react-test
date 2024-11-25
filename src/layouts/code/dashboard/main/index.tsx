@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 import { useSettings } from "@/store/settingStore";
 import { useResponsive, useThemeToken } from "@/theme/hooks";
-import { cn } from "@/utils";
+import { tailwindClassMerger } from "@/utils";
 
 import dashboardConfig from "../config";
 import MultiTabs from "../multi-tabs";
@@ -61,7 +61,7 @@ const Main = forwardRef<HTMLDivElement, Props>(({ offsetTop = false }, ref) => {
 	return (
 		<Content ref={ref} style={mainStyle} className="flex overflow-auto">
 			<div
-				className={cn(
+				className={tailwindClassMerger(
 					"m-auto h-full w-full flex-grow sm:p-2",
 					themeStretch ? "" : "xl:max-w-screen-xl",
 					themeLayout === ThemeLayout.Horizontal ? "flex-col" : "flex-row",
