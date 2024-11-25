@@ -1,3 +1,4 @@
+import Contact from "./components/contact";
 import Experience from "./components/experience";
 import Project from "./components/project";
 function Resume() {
@@ -7,6 +8,8 @@ function Resume() {
 			<Project />
 			{/* 工作经历 */}
 			<Experience />
+
+			<Contact />
 			<div className="">1</div>
 		</div>
 	);

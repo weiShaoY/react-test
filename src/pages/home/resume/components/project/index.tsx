@@ -52,7 +52,7 @@ function Projects() {
 		<section className="sm:px-10 px-5 my-20 ">
 			<div className="w-full text-[#afb0b6]">
 				<p className="sm:text-4xl text-3xl font-semibold text-gray_gradient">
-					我的工作经历
+					我的精选作品
 				</p>
 				<div className="grid lg:grid-cols-2 grid-cols-1 mt-12 gap-5 w-full">
 					<div className="flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-[#0e0e10]">
