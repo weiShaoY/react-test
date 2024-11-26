@@ -81,7 +81,6 @@ root.render(
 			<Suspense>
 				{/* Vercel 的分析工具，用于统计用户数据 */}
 				<Analytics />
-
 				{/* 渲染应用的主组件 */}
 				<App />
 			</Suspense>

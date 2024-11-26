@@ -28,11 +28,11 @@ const Computers = ({ isMobile }: ComputersProps): JSX.Element => {
 			// 加载的 3D 模型场景对象
 			object={computer.scene}
 			// 根据是否为移动端设置模型的位置
-			position={isMobile ? [-1, -5, -1.5] : [0, -5, -1.5]}
+			position={isMobile ? [-2.5, -3, -1.5] : [0, -5, -1.5]}
 			// 设置模型的旋转角度
 			rotation={[-0.01, -0.2, -0.1]}
 			// 根据是否为移动端调整模型的缩放比例
-			scale={isMobile ? 0.6 : 1}
+			scale={isMobile ? 0.4 : 1}
 		/>
 	);
 };
