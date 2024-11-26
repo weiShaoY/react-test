@@ -36,10 +36,14 @@ function About() {
 				{/* <BrokenBg /> */}
 			</div>
 
+			<div className=" h-1">1</div>
+
 			{/* 第二页 */}
-			<div className="min-h-screen max-w-7xl mx-auto  relative">
+			<div className="min-h-screen max-w-7xl mx-auto relative">
 				<Info />
 			</div>
+
+			<div className=" h-1">1</div>
 
 			{/* 第三页 */}
 			<div className="min-h-screen flex justify-center items-center flex-col relative">
@@ -50,9 +54,7 @@ function About() {
 					</div>
 
 					{/* 技术栈 */}
-					<div className="container bg-[#3F4146]">
-						<Tech />
-					</div>
+					<div className="container bg-[#3F4146]">{/* <Tech /> */}</div>
 				</div>
 
 				{/* <div className="w-full h-[500px] "><ParticlesCanvas /></div> */}

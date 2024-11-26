@@ -5,11 +5,11 @@ import Earth from "@/canvas/earth";
 import Button from "./button";
 
 import copyImg from "./images/copy.svg";
-import gridImage1 from "./images/grid1.png";
-import gridImage2 from "./images/grid2.png";
 import gridImage3 from "./images/grid3.png";
 import gridImage4 from "./images/grid4.png";
 import tickImg from "./images/tick.svg";
+
+import Tech from "@/canvas/tech";
 
 const About = () => {
 	const [hasCopied, setHasCopied] = useState(false);
@@ -24,36 +24,13 @@ const About = () => {
 	};
 
 	return (
-		<section className="sm:px-10 px-5 my-20 bg-red" id="about">
+		<section className="sm:px-10 px-5 my-20 " id="info">
 			<div className="grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-full">
-				<div className="col-span-1 xl:row-span-3">
+				<div className="xl:col-span-2 xl:row-span-3">
 					<div className="w-full h-full border border-[#1c1c21] bg-[#0E0E10] rounded-lg sm:p-7 p-4 flex flex-col gap-5">
-						<img
-							src={gridImage1}
-							alt="grid-1"
-							className="w-full sm:h-[276px] h-fit object-contain"
-						/>
-
-						<div>
-							<p className="text-xl font-semibold mb-2 text-white ;">
-								Hi,我是 weiShaoY
-							</p>
-							<p className="text-[#afb0b6] text-base">
-								凭借
-								12年的经验,我磨练了前端和后端开发的技能,创建了动态且响应迅速的网站。
-							</p>
+						<div className="w-full sm:h-[266px] h-fit cursor-pointer">
+							<Tech />
 						</div>
-					</div>
-				</div>
-
-				<div className="col-span-1 xl:row-span-3">
-					<div className="w-full h-full border border-[#1c1c21] bg-[#0E0E10] rounded-lg sm:p-7 p-4 flex flex-col gap-5">
-						<img
-							src={gridImage2}
-							alt="grid-2"
-							className="w-full sm:h-[276px] h-fit object-contain"
-						/>
-
 						<div>
 							<p className="text-xl font-semibold mb-2 text-white">技术栈</p>
 							<p className="text-[#afb0b6] text-base">
@@ -65,7 +42,7 @@ const About = () => {
 
 				<div className="col-span-1 xl:row-span-4">
 					<div className="w-full h-full border border-[#1c1c21] bg-[#0E0E10] rounded-lg sm:p-7 p-4 flex flex-col gap-5">
-						<div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center">
+						<div className="rounded-3xl w-full  sm:h-[326px] h-fit  flex justify-center items-center">
 							<Earth height={326} />
 						</div>
 						<div>

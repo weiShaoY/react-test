@@ -148,8 +148,7 @@ const Contact = () => {
 					</div>
 
 					<div className="rounded-lg flex justify-center items-center">
-						<div className="rounded-3xl w-full  h-fit flex justify-center items-center">
-							{/* <Earth height={400} /> */}
+						<div className="rounded-3xl w-full  h-fit flex justify-center items-center cursor-pointer">
 							<Moon height={400} />
 						</div>
 					</div>

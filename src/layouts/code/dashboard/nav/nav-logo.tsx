@@ -48,7 +48,7 @@ export default function NavLogo({ collapsed, onToggle }: Props) {
 			<NavLink to="/" className="flex items-center bg-red">
 				<SvgIcon icon="common-logo" size={60} />
 				{themeLayout !== ThemeLayout.Mini && (
-					<SvgIcon icon="common-weiShaoY" size="120" color="#ffffff" />
+					<SvgIcon icon="common-weiShaoY" size="120" color="#191919" />
 				)}
 			</NavLink>
 
