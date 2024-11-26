@@ -74,7 +74,7 @@ const ComputerCanvas = (props: DeveloperProps) => {
 	useGLTF.preload("/models/computer/index.glb");
 
 	return (
-		<group scale={2} position={[-0.45, -3, 0]} rotation={[0, -0.1, 0]}>
+		<group scale={2} position={[-0.5, -3, 0]} rotation={[0, -0.1, 0]}>
 			<group ref={group} {...props} dispose={null}>
 				<group name="Scene">
 					<mesh
