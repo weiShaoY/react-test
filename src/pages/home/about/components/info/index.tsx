@@ -50,7 +50,7 @@ const About = () => {
 								我对时区、通讯和位置非常灵活
 							</p>
 							<p className="text-[#afb0b6] text-base">
-								我居住在湖南的长沙，愿意在世界各地进行远程工作。
+								我居住在湖南长沙，愿意在世界各地进行远程工作。
 							</p>
 							<Button name="联系我" isBeam containerClass="w-full mt-10" />
 						</div>
