@@ -125,7 +125,7 @@ function BallCanvas({ icon, url }: { icon: string; url: string }) {
 }
 
 /**
- * 渲染技术栈列表
+ * 技术栈组件
  * @function Tech
  * @returns  包含技术栈图标的布局
  */

@@ -1,5 +1,5 @@
-import MobileMenu from "./components/mobile-menu";
 import DesktopMenu from "./components/desktop-menu";
+import MobileMenu from "./components/mobile-menu";
 
 import Logo from "@/components/logo";
 
@@ -17,6 +17,14 @@ const menuList = [
 	{
 		key: "/code",
 		label: "Code",
+	},
+	{
+		key: "/blog",
+		label: "Blog",
+	},
+	{
+		key: "/garage",
+		label: "Garage",
 	},
 ];
 

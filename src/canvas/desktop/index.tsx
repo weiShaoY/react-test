@@ -37,11 +37,10 @@ const Computers = ({ isMobile }: ComputersProps): JSX.Element => {
 	);
 };
 /**
- * 电脑桌面 Canvas 组件
- * @description  提供一个包含 Canvas 的外层容器，用于渲染 3D 模型
- * @returns  返回一个 JSX 元素，包含 3D 模型的渲染环境
+ * 桌面组件
+ * @returns  返回一个3D电脑桌面组件
  */
-function ComputerDesk() {
+function Desktop() {
 	// 定义是否为移动端的状态
 	const [isMobile, setMobile] = useState(false);
 
@@ -133,4 +132,4 @@ function ComputerDesk() {
 	);
 }
 
-export default ComputerDesk;
+export default Desktop;

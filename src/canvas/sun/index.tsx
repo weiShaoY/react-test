@@ -13,8 +13,8 @@ import textureFragment from "./glsl/texture-fragment.glsl";
 import textureVertex from "./glsl/texture-vertex.glsl";
 
 /**
- * 太阳组件，包含太阳的球体、外围光环以及后期效果。
- * @returns JSX.Element
+ * 太阳组件
+ * @returns 返回一个太阳的可视化组件
  */
 const Sun = () => {
 	const sunMatRef = useRef<THREE.ShaderMaterial | null>(null);

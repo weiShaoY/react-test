@@ -1,6 +1,6 @@
 import {
-	type RouteObject,
 	Navigate,
+	type RouteObject,
 	RouterProvider,
 	createBrowserRouter,
 } from "react-router-dom";
@@ -14,6 +14,8 @@ import { NotFoundRoute } from "./routes/not-found-route";
 import type { AppRouteObject } from "#/router";
 
 import { CodeRoutes } from "@/router/routes/code-routes";
+
+import { GarageRoute } from "./routes/garage-route";
 
 /**
  *  根路由配置
@@ -41,6 +43,11 @@ export default function Router(): JSX.Element {
 		 *  首页路由
 		 */
 		HomeRoutes,
+
+		/**
+		 *  车库路由
+		 */
+		GarageRoute,
 
 		/**
 		 * 异步加载的主页路由
