@@ -8,8 +8,6 @@ import Desktop from "@/canvas/desktop";
 
 import Sun from "@/canvas/sun";
 
-import Tech from "@/canvas/tech";
-
 // import ParticlesCanvas from "@/canvas/particlesCanvas";
 
 import Info from "./components/info";
@@ -36,17 +34,14 @@ function About() {
 				{/* <BrokenBg /> */}
 			</div>
 
-			<div className=" h-1">1</div>
-
 			{/* 第二页 */}
 			<div className="min-h-screen max-w-7xl mx-auto relative">
 				<Info />
 			</div>
 
-			<div className=" h-1">1</div>
+			{/* 第三页 min-h-screen */}
 
-			{/* 第三页 */}
-			<div className="min-h-screen flex justify-center items-center flex-col relative">
+			<div className=" flex justify-center items-center flex-col relative">
 				<div className="w-full h-full relative">
 					{/* 星空 */}
 					<div className="w-full h-auto absolute inset-0 z-[-1]">
