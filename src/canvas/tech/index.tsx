@@ -131,7 +131,7 @@ function BallCanvas({ icon, url }: { icon: string; url: string }) {
  */
 function Tech() {
 	return (
-		<div className="grid grid-cols-6 gap-2 place-items-center h-full">
+		<div className="grid sm:grid-cols-6 grid-cols-3 gap-2 place-items-center h-full">
 			{technologies.map(({ name, image, url }) => (
 				<div className="w-20 h-20" key={name}>
 					<BallCanvas icon={image} url={url} />
