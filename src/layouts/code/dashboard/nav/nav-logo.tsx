@@ -26,7 +26,7 @@ type Props = {
  */
 export default function NavLogo({ collapsed, onToggle }: Props) {
 	// 获取当前的布局模式
-	const { themeLayout } = useSettings();
+	const { themeLayout, darkSidebar } = useSettings();
 
 	// 获取主题相关的颜色
 	// const {
@@ -48,7 +48,11 @@ export default function NavLogo({ collapsed, onToggle }: Props) {
 			<NavLink to="/" className="flex items-center bg-red">
 				<SvgIcon icon="common-logo" size={60} />
 				{themeLayout !== ThemeLayout.Mini && (
-					<SvgIcon icon="common-weiShaoY" size="120" color="#191919" />
+					<SvgIcon
+						icon="common-weiShaoY"
+						size="120"
+						color={darkSidebar ? "#ffffff" : "#191919"}
+					/>
 				)}
 			</NavLink>
 

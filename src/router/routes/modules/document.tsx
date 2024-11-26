@@ -17,7 +17,6 @@ function Wrapper({ children }: any) {
 
 /**
  * 子路由配置数组
- * @type {Array<{ path: string, src: string, label: string, key: string, icon: string, external?: boolean, hideTab?: boolean }>}
  */
 const childRoutes = [
 	{
@@ -106,6 +105,40 @@ const childRoutes = [
 		label: "Docker",
 		key: "/document/docker",
 		icon: "code-menu-docker",
+		external: true,
+		hideTab: true,
+	},
+	{
+		path: "echarts",
+		src: "https://echarts.apache.org/zh/index.html",
+		label: "Echarts",
+		key: "/document/echarts",
+		icon: "code-menu-echarts",
+		external: true,
+		hideTab: true,
+	},
+	{
+		path: "nginx",
+		src: "https://nginx.org/en/docs/",
+		label: "Nginx",
+		key: "/document/nginx",
+		icon: "code-menu-nginx",
+	},
+	{
+		path: "electron",
+		src: "https://www.electronjs.org/zh/docs/latest/",
+		label: "Electron",
+		key: "/document/electron",
+		icon: "code-menu-electron",
+	},
+	{
+		path: "nextJs",
+		src: "https://www.nextjs.cn/",
+		label: "NextJs",
+		key: "/document/nextJs",
+		icon: "code-menu-nextJs",
+		external: true,
+		hideTab: true,
 	},
 ];
 
