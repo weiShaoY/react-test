@@ -18,10 +18,10 @@ const menuList = [
 		key: "/code",
 		label: "Code",
 	},
-	{
-		key: "/blog",
-		label: "Blog",
-	},
+	// {
+	// 	key: "/blog",
+	// 	label: "Blog",
+	// },
 	{
 		key: "/garage",
 		label: "Garage",
