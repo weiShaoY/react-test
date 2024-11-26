@@ -21,6 +21,20 @@ function Wrapper({ children }: any) {
  */
 const childRoutes = [
 	{
+		path: "typeScript",
+		src: "https://www.typescriptlang.org/zh/",
+		label: "TypeScript",
+		key: "/document/typeScript",
+		icon: "code-menu-typeScript",
+	},
+	{
+		path: "vite",
+		src: "https://cn.vitejs.dev/guide/",
+		label: "Vite",
+		key: "/document/vite",
+		icon: "code-menu-vite",
+	},
+	{
 		path: "react",
 		src: "https://zh-hans.react.dev/",
 		label: "React",
@@ -42,13 +56,6 @@ const childRoutes = [
 		label: "Angular",
 		key: "/document/angular",
 		icon: "code-menu-angular",
-	},
-	{
-		path: "typeScript",
-		src: "https://www.typescriptlang.org/zh/",
-		label: "TypeScript",
-		key: "/document/typeScript",
-		icon: "code-menu-typeScript",
 	},
 	{
 		path: "pinia",
@@ -85,19 +92,20 @@ const childRoutes = [
 		key: "/document/eslint",
 		icon: "code-menu-eslint",
 	},
+
 	{
-		path: "vite",
-		src: "https://cn.vitejs.dev/guide/",
-		label: "Vite",
-		key: "/document/vite",
-		icon: "code-menu-vite",
+		path: "biomejs",
+		src: "https://biomejs.dev/zh-cn/guides/getting-started/",
+		label: "Biomejs",
+		key: "/document/biomejs",
+		icon: "code-menu-biomejs",
 	},
 	{
-		path: "biome",
-		src: "https://biomejs.dev/zh-cn/guides/getting-started/",
-		label: "Biome",
-		key: "/document/biome",
-		icon: "code-menu-biome",
+		path: "docker",
+		src: "https://docs.docker.com/build-cloud/",
+		label: "Docker",
+		key: "/document/docker",
+		icon: "code-menu-docker",
 	},
 ];
 
