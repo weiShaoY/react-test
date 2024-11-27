@@ -1,6 +1,7 @@
+import { SvgIcon } from "@/components/icon";
 import { Spin } from "antd";
+import { Button, Tooltip } from "antd";
 import { useState } from "react";
-
 type Props = {
 	src: string;
 };
@@ -15,7 +16,7 @@ export default function CodeIframe({ src = "" }: Props) {
 	};
 
 	return (
-		<div className="h-full w-full relative">
+		<div className="h-full w-full relative flex flex-col">
 			{/* 加载中时显示的 loading 效果 */}
 			{isLoading && (
 				<div className="absolute inset-0 flex items-center justify-center bg-white z-10">
@@ -23,11 +24,18 @@ export default function CodeIframe({ src = "" }: Props) {
 					<Spin size="large" />
 				</div>
 			)}
+			<div className="w-full flex py-2 justify-end">
+				<Tooltip placement="leftTop" title="在新标签页打开">
+					<Button onClick={() => window.open(src, "_blank")}>
+						<SvgIcon icon="arrow-top-right" />
+					</Button>
+				</Tooltip>
+			</div>
 			{/* iframe 元素 */}
 			<iframe
 				src={src}
 				title="iframe-page"
-				className="h-full w-full"
+				className="flex-1 w-full"
 				onLoad={handleLoad} // 监听 iframe 加载完成事件
 			/>
 		</div>
