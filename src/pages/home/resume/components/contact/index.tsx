@@ -105,7 +105,7 @@ const Contact = () => {
 									value={form.name}
 									onChange={handleChange}
 									required
-									className="w-full bg-[#1c1c21] px-5 py-2 min-h-14 rounded-lg placeholder:text-[#62646c] text-lg text-[#e4e4e6] shadow-[#0E0E10]shadow-2xl focus:outline-none active:bg-opacity-30"
+									className="w-full bg-[#1c1c21] px-5 py-2 min-h-14 rounded-lg placeholder:text-[#62646c] text-lg text-[#e4e4e6] shadow-[#0E0E10]shadow-2xl focus:outline-[#DED9FC]"
 									placeholder="例如, Alan Mathison Turing"
 								/>
 							</label>
@@ -118,7 +118,7 @@ const Contact = () => {
 									value={form.email}
 									onChange={handleChange}
 									required
-									className="w-full bg-[#1c1c21] px-5 py-2 min-h-14 rounded-lg placeholder:text-[#62646c] text-lg text-[#e4e4e6] shadow-[#0E0E10]shadow-2xl focus:outline-none"
+									className="w-full bg-[#1c1c21] px-5 py-2 min-h-14 rounded-lg placeholder:text-[#62646c] text-lg text-[#e4e4e6] shadow-[#0E0E10]shadow-2xl focus:outline-[#DED9FC]"
 									placeholder="例如, turing@gmail.com"
 								/>
 							</label>
@@ -131,7 +131,7 @@ const Contact = () => {
 									onChange={handleChange}
 									required
 									rows={5}
-									className="w-full bg-[#1c1c21] px-5 py-2 min-h-14 rounded-lg placeholder:text-[#62646c] text-lg text-[#e4e4e6] shadow-[#0E0E10]shadow-2xl focus:outline-none"
+									className="w-full bg-[#1c1c21] px-5 py-2 min-h-14 rounded-lg placeholder:text-[#62646c] text-lg text-[#e4e4e6] shadow-[#0E0E10]shadow-2xl focus:outline-[#DED9FC]"
 									placeholder="分享您的想法或询问..."
 								/>
 							</label>
