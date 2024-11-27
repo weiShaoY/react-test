@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => {
 		},
 		plugins: [
 			glsl({
-				warnDuplicatedImports: false,
+				// warnDuplicatedImports: false,
 			}),
 			react(),
 			tsconfigPaths(),
