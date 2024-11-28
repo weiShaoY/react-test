@@ -1,8 +1,8 @@
 import "./index.less";
+import Card from "@/components/card";
 import { useRef, useState } from "react";
 import muYuImage from "./image/muYu.png";
 import muYuMusic from "./music/muYu.aac";
-import Card from "@/components/card";
 
 function Clock() {
 	/**

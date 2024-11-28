@@ -6,9 +6,9 @@ import { useMatches, useNavigate } from "react-router-dom";
 
 import Scrollbar from "@/components/scrollbar";
 import {
+	useBlogRoutes,
 	useFlattenedRoutes,
 	usePathname,
-	useBlogRoutes,
 	useRouteToMenuFn,
 } from "@/router/hooks";
 import { menuFilter } from "@/router/utils";

@@ -1,5 +1,5 @@
 import Card from "@/components/card";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ScreensaverItem from "./components/item";
 
 /**

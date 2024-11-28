@@ -1,7 +1,7 @@
 import Card from "@/components/card";
+import { useGetTime } from "@/hooks";
 import { useMemo } from "react";
 import styles from "./index.module.less";
-import { useGetTime } from "@/hooks";
 
 function Clock() {
 	const time = useGetTime();

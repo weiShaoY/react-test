@@ -3,9 +3,9 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
+	useBlogRoutes,
 	useFlattenedRoutes,
 	usePathname,
-	useBlogRoutes,
 	useRouteToMenuFn,
 } from "@/router/hooks";
 import { menuFilter } from "@/router/utils";
