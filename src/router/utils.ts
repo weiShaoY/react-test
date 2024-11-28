@@ -6,7 +6,7 @@ import type { AppRouteObject, RouteMeta } from "#/router";
  * @param  items - 路由对象数组
  * @returns  返回经过筛选和排序后的菜单路由数组
  */
-export const menuFilter = (items: AppRouteObject[]) => {
+export function menuFilter(items: AppRouteObject[]) {
 	return (
 		items
 			.filter((item) => {
@@ -21,7 +21,7 @@ export const menuFilter = (items: AppRouteObject[]) => {
 			// 使用 Ramda 的 ascend 方法根据 order 字段对菜单项进行升序排序
 			.sort(ascend((item) => item.order || Number.POSITIVE_INFINITY))
 	);
-};
+}
 
 /**
  * 获取用于侧边栏菜单的路由
@@ -92,7 +92,7 @@ export function getBlogModuleRoutes(): AppRouteObject[] {
  * @param {AppRouteObject[]} routes - 路由列表
  * @returns {AppRouteObject[]} 添加前缀后的路由列表
  */
-function addBlogRoutes(routes: AppRouteObject[]): AppRouteObject[] {
+export function addBlogRoutes(routes: AppRouteObject[]): AppRouteObject[] {
 	return routes.map((route) => {
 		// 创建路由项的副本以避免修改原对象
 		const newRoute = { ...route };

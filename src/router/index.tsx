@@ -5,17 +5,17 @@ import {
 	createBrowserRouter,
 } from "react-router-dom";
 
-import { ErrorRoutes } from "@/router/routes/error-routes";
-
-import { HomeRoutes } from "@/router/routes/home-routes";
-
-import { NotFoundRoute } from "./routes/not-found-route";
-
 import type { AppRouteObject } from "#/router";
 
-import { BlogRoutes } from "@/router/routes/blog-routes";
+import { ErrorRoutes } from "./modules/error";
 
-import { GarageRoute } from "./routes/garage-route";
+import { HomeRoutes } from "./modules/home";
+
+import { FallbackRoute } from "./modules/fallback";
+
+import { GarageRoute } from "./modules/garage";
+
+import { BlogRoutes } from "./modules/blog";
 
 /**
  *  根路由配置
@@ -64,7 +64,7 @@ export default function Router(): JSX.Element {
 		 * 未匹配到的路由
 		 * 重定向到 404 页面
 		 */
-		NotFoundRoute,
+		FallbackRoute,
 	];
 
 	/**
