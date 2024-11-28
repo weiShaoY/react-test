@@ -50,11 +50,11 @@ export function flattenMenuRoutes(routes: AppRouteObject[]) {
 }
 
 /**
- * 获取code模块路由
+ * 获取blog模块路由
  *
  * @returns {AppRouteObject[]} 过滤后的路由列表
  */
-export function getCodeModuleRoutes(): AppRouteObject[] {
+export function getBlogModuleRoutes(): AppRouteObject[] {
 	/**
 	 * 用于存储动态加载的菜单模块路由
 	 */
@@ -80,36 +80,36 @@ export function getCodeModuleRoutes(): AppRouteObject[] {
 	}
 
 	// 添加路由前缀，并返回修改后的路由列表
-	const routesWihPrefix = addCodeRoutes(menuModules);
+	const routesWihPrefix = addBlogRoutes(menuModules);
 
 	// 通过菜单过滤规则返回最终的路由配置
 	return menuFilter(routesWihPrefix);
 }
 
 /**
- * 为路由项添加指定的前缀（例如 "/code"）
+ * 为路由项添加指定的前缀（例如 "/blog"）
  *
  * @param {AppRouteObject[]} routes - 路由列表
  * @returns {AppRouteObject[]} 添加前缀后的路由列表
  */
-function addCodeRoutes(routes: AppRouteObject[]): AppRouteObject[] {
+function addBlogRoutes(routes: AppRouteObject[]): AppRouteObject[] {
 	return routes.map((route) => {
 		// 创建路由项的副本以避免修改原对象
 		const newRoute = { ...route };
 
 		// 如果路由存在 meta.key 且 key 不是根路径 "/"
 		if (newRoute.meta?.key && newRoute.meta.key !== "/") {
-			// 检查 key 是否以 "/code" 开头，如果不是则添加前缀
-			if (!newRoute.meta.key.startsWith("/code")) {
+			// 检查 key 是否以 "/blog" 开头，如果不是则添加前缀
+			if (!newRoute.meta.key.startsWith("/blog")) {
 				newRoute.meta.key = newRoute.meta.key.startsWith("/")
-					? `/code${newRoute.meta.key}` // 如果 key 已有 "/"，直接拼接 "/code"
-					: `/code/${newRoute.meta.key}`; // 如果 key 没有 "/"，插入 "/code/"
+					? `/blog${newRoute.meta.key}` // 如果 key 已有 "/"，直接拼接 "/blog"
+					: `/blog/${newRoute.meta.key}`; // 如果 key 没有 "/"，插入 "/blog/"
 			}
 		}
 
 		// 如果当前路由有子路由，递归处理子路由
 		if (newRoute.children && newRoute.children.length > 0) {
-			newRoute.children = addCodeRoutes(newRoute.children);
+			newRoute.children = addBlogRoutes(newRoute.children);
 		}
 
 		return newRoute; // 返回添加前缀后的路由项

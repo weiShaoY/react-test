@@ -33,7 +33,7 @@ export default {
 			error: "#ff5630",
 			info: "#00b8d9",
 
-			code: "#d63384",
+			blog: "#d63384",
 
 			"gray-100": "#F9FAFB",
 			"gray-200": "#F4F6F8",

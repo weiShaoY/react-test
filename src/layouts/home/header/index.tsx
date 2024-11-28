@@ -15,8 +15,8 @@ const menuList = [
 		label: "Resume",
 	},
 	{
-		key: "/code",
-		label: "Code",
+		key: "/blog",
+		label: "Blog",
 	},
 	// {
 	// 	key: "/blog",

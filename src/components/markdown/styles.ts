@@ -1,7 +1,7 @@
 import type { GlobalToken } from "antd";
 /**
  * https://styled-components.com/
- * vscode plugin: https://github.com/styled-components/vscode-styled-components
+ * vsblog plugin: https://github.com/styled-components/vsblog-styled-components
  */
 import styled from "styled-components";
 
@@ -97,15 +97,15 @@ const StyledMarkdown = styled.div<{
     }
   }
 
-  // Code Block
+  // Blog Block
   pre,
-  pre > code {
+  pre > blog {
     font-size: 16px;
     overflow-x: auto;
     white-space: pre;
     border-radius: 8px;
   }
-  code {
+  blog {
     font-size: 14px;
     border-radius: 4px;
     white-space: pre;

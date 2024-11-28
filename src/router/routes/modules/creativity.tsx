@@ -8,17 +8,17 @@ import { CircleLoading } from "@/components/loading";
 
 import type { AppRouteObject } from "#/router";
 
-const ClockPage = lazy(() => import("@/pages/code/creativity/clock"));
-const MuYuPage = lazy(() => import("@/pages/code/creativity/muYu"));
-const CalendarPage = lazy(() => import("@/pages/code/creativity/calendar"));
+const ClockPage = lazy(() => import("@/pages/blog/creativity/clock"));
+const MuYuPage = lazy(() => import("@/pages/blog/creativity/muYu"));
+const CalendarPage = lazy(() => import("@/pages/blog/creativity/calendar"));
 const ScreensaverPage = lazy(
-	() => import("@/pages/code/creativity/screensaver"),
+	() => import("@/pages/blog/creativity/screensaver"),
 );
-const TimePage = lazy(() => import("@/pages/code/creativity/time"));
-const RipplePage = lazy(() => import("@/pages/code/creativity/ripple"));
-const TextPage = lazy(() => import("@/pages/code/creativity/text"));
-const CandlePage = lazy(() => import("@/pages/code/creativity/candle"));
-const CodeWallPage = lazy(() => import("@/pages/code/creativity/codeWall"));
+const TimePage = lazy(() => import("@/pages/blog/creativity/time"));
+const RipplePage = lazy(() => import("@/pages/blog/creativity/ripple"));
+const TextPage = lazy(() => import("@/pages/blog/creativity/text"));
+const CandlePage = lazy(() => import("@/pages/blog/creativity/candle"));
+const BlogWallPage = lazy(() => import("@/pages/blog/creativity/codeWall"));
 
 const Creativity: AppRouteObject = {
 	order: 3,
@@ -32,7 +32,7 @@ const Creativity: AppRouteObject = {
 		label: "创意",
 		icon: (
 			<SvgIcon
-				icon="code-menu-creativity"
+				icon="blog-menu-creativity"
 				className="ant-menu-item-icon"
 				size="24"
 			/>
@@ -53,7 +53,7 @@ const Creativity: AppRouteObject = {
 				key: "/creativity/clock",
 				icon: (
 					<SvgIcon
-						icon="code-menu-clock"
+						icon="blog-menu-clock"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
@@ -69,7 +69,7 @@ const Creativity: AppRouteObject = {
 				key: "/creativity/muYu",
 				icon: (
 					<SvgIcon
-						icon="code-menu-muYu"
+						icon="blog-menu-muYu"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
@@ -85,7 +85,7 @@ const Creativity: AppRouteObject = {
 				key: "/creativity/calendar",
 				icon: (
 					<SvgIcon
-						icon="code-menu-calendar"
+						icon="blog-menu-calendar"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
@@ -100,7 +100,7 @@ const Creativity: AppRouteObject = {
 				key: "/creativity/screensaver",
 				icon: (
 					<SvgIcon
-						icon="code-menu-screensaver"
+						icon="blog-menu-screensaver"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
@@ -115,7 +115,7 @@ const Creativity: AppRouteObject = {
 				key: "/creativity/time",
 				icon: (
 					<SvgIcon
-						icon="code-menu-time"
+						icon="blog-menu-time"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
@@ -130,7 +130,7 @@ const Creativity: AppRouteObject = {
 				key: "/creativity/ripple",
 				icon: (
 					<SvgIcon
-						icon="code-menu-ripple"
+						icon="blog-menu-ripple"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
@@ -145,7 +145,7 @@ const Creativity: AppRouteObject = {
 				key: "/creativity/text",
 				icon: (
 					<SvgIcon
-						icon="code-menu-text"
+						icon="blog-menu-text"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
@@ -161,7 +161,7 @@ const Creativity: AppRouteObject = {
 				key: "/creativity/candle",
 				icon: (
 					<SvgIcon
-						icon="code-menu-candle"
+						icon="blog-menu-candle"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
@@ -170,13 +170,13 @@ const Creativity: AppRouteObject = {
 		},
 		{
 			path: "codeWall",
-			element: <CodeWallPage />,
+			element: <BlogWallPage />,
 			meta: {
 				label: "代码墙",
 				key: "/creativity/codeWall",
 				icon: (
 					<SvgIcon
-						icon="code-menu-codeWall"
+						icon="blog-menu-codeWall"
 						className="ant-menu-item-icon"
 						size="24"
 					/>

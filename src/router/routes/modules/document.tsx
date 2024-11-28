@@ -4,8 +4,8 @@ import { Suspense, lazy } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import type { AppRouteObject } from "#/router";
 
-const Iframe = lazy(() => import("@/layouts/code/iframe"));
-const External = lazy(() => import("@/layouts/code/external"));
+const Iframe = lazy(() => import("@/layouts/blog/iframe"));
+const External = lazy(() => import("@/layouts/blog/external"));
 
 /**
  * 包装组件，统一处理 Suspense
@@ -24,28 +24,28 @@ const childRoutes = [
 		src: "https://www.typescriptlang.org/zh/",
 		label: "TypeScript",
 		key: "/document/typeScript",
-		icon: "code-menu-typeScript",
+		icon: "blog-menu-typeScript",
 	},
 	{
 		path: "vite",
 		src: "https://cn.vitejs.dev/guide/",
 		label: "Vite",
 		key: "/document/vite",
-		icon: "code-menu-vite",
+		icon: "blog-menu-vite",
 	},
 	{
 		path: "react",
 		src: "https://zh-hans.react.dev/",
 		label: "React",
 		key: "/document/react",
-		icon: "code-menu-react",
+		icon: "blog-menu-react",
 	},
 	{
 		path: "vue",
 		src: "https://cn.vuejs.org/",
 		label: "Vue",
 		key: "/document/vue",
-		icon: "code-menu-vue",
+		icon: "blog-menu-vue",
 		external: true,
 		hideTab: true,
 	},
@@ -54,42 +54,42 @@ const childRoutes = [
 		src: "https://angular.io/",
 		label: "Angular",
 		key: "/document/angular",
-		icon: "code-menu-angular",
+		icon: "blog-menu-angular",
 	},
 	{
 		path: "pinia",
 		src: "https://pinia.vuejs.org/zh/",
 		label: "Pinia",
 		key: "/document/pinia",
-		icon: "code-menu-pinia",
+		icon: "blog-menu-pinia",
 	},
 	{
 		path: "vueuse",
 		src: "https://vueuse.pages.dev/",
 		label: "VueUse",
 		key: "/document/vueuse",
-		icon: "code-menu-vueuse",
+		icon: "blog-menu-vueuse",
 	},
 	{
 		path: "unocss",
 		src: "https://unocss-cn.pages.dev/",
 		label: "Unocss",
 		key: "/document/unocss",
-		icon: "code-menu-unocss",
+		icon: "blog-menu-unocss",
 	},
 	{
 		path: "tailwindCss",
 		src: "https://tailwindcss.com/docs/installation",
 		label: "TailwindCss",
 		key: "/document/tailwindCss",
-		icon: "code-menu-tailwindCss",
+		icon: "blog-menu-tailwindCss",
 	},
 	{
 		path: "eslint",
 		src: "https://eslint.org/docs/latest/",
 		label: "Eslint",
 		key: "/document/eslint",
-		icon: "code-menu-eslint",
+		icon: "blog-menu-eslint",
 	},
 
 	{
@@ -97,14 +97,14 @@ const childRoutes = [
 		src: "https://biomejs.dev/zh-cn/guides/getting-started/",
 		label: "Biomejs",
 		key: "/document/biomejs",
-		icon: "code-menu-biomejs",
+		icon: "blog-menu-biomejs",
 	},
 	{
 		path: "docker",
 		src: "https://docs.docker.com/build-cloud/",
 		label: "Docker",
 		key: "/document/docker",
-		icon: "code-menu-docker",
+		icon: "blog-menu-docker",
 		external: true,
 		hideTab: true,
 	},
@@ -113,7 +113,7 @@ const childRoutes = [
 		src: "https://echarts.apache.org/zh/index.html",
 		label: "Echarts",
 		key: "/document/echarts",
-		icon: "code-menu-echarts",
+		icon: "blog-menu-echarts",
 		external: true,
 		hideTab: true,
 	},
@@ -122,21 +122,21 @@ const childRoutes = [
 		src: "https://nginx.org/en/docs/",
 		label: "Nginx",
 		key: "/document/nginx",
-		icon: "code-menu-nginx",
+		icon: "blog-menu-nginx",
 	},
 	{
 		path: "electron",
 		src: "https://www.electronjs.org/zh/docs/latest/",
 		label: "Electron",
 		key: "/document/electron",
-		icon: "code-menu-electron",
+		icon: "blog-menu-electron",
 	},
 	{
 		path: "nextJs",
 		src: "https://www.nextjs.cn/",
 		label: "NextJs",
 		key: "/document/nextJs",
-		icon: "code-menu-nextJs",
+		icon: "blog-menu-nextJs",
 		external: true,
 		hideTab: true,
 	},
@@ -154,7 +154,7 @@ const document: AppRouteObject = {
 		label: "文档",
 		icon: (
 			<SvgIcon
-				icon="code-menu-document"
+				icon="blog-menu-document"
 				className="ant-menu-item-icon"
 				size="24"
 			/>

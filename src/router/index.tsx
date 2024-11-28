@@ -13,7 +13,7 @@ import { NotFoundRoute } from "./routes/not-found-route";
 
 import type { AppRouteObject } from "#/router";
 
-import { CodeRoutes } from "@/router/routes/code-routes";
+import { BlogRoutes } from "@/router/routes/blog-routes";
 
 import { GarageRoute } from "./routes/garage-route";
 
@@ -52,7 +52,7 @@ export default function Router(): JSX.Element {
 		/**
 		 * 异步加载的主页路由
 		 */
-		CodeRoutes,
+		BlogRoutes,
 
 		/**
 		 * 错误页路由

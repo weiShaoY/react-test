@@ -6,7 +6,7 @@ import { CircleLoading } from "@/components/loading";
 
 import type { AppRouteObject } from "#/router";
 
-const Iframe = lazy(() => import("@/layouts/code/iframe"));
+const Iframe = lazy(() => import("@/layouts/blog/iframe"));
 
 function Wrapper({ children }: any) {
 	return <Suspense fallback={<CircleLoading />}>{children}</Suspense>;
@@ -22,7 +22,7 @@ const document: AppRouteObject = {
 	meta: {
 		label: "新闻",
 		icon: (
-			<SvgIcon icon="code-menu-news" className="ant-menu-item-icon" size="24" />
+			<SvgIcon icon="blog-menu-news" className="ant-menu-item-icon" size="24" />
 		),
 		key: "/news",
 	},
@@ -43,7 +43,7 @@ const document: AppRouteObject = {
 				key: "/news/dailyHotTopics",
 				icon: (
 					<SvgIcon
-						icon="code-menu-dailyHotTopics"
+						icon="blog-menu-dailyHotTopics"
 						className="ant-menu-item-icon"
 						size="24"
 					/>

@@ -32,7 +32,7 @@ export default function AntdConfig({ children }: Props) {
 					colorPrimary,
 					...customThemeTokenConfig,
 					...themeModeToken[themeMode].token,
-					fontFamily: "'gaiLiangShouJinTi', 'Fira Code VF', sans-serif",
+					fontFamily: "'gaiLiangShouJinTi', 'Fira Blog VF', sans-serif",
 				},
 				components: {
 					...customComponentConfig,
