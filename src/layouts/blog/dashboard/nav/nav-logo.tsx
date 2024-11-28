@@ -1,13 +1,16 @@
 import { SvgIcon } from "@/components/icon";
+
 import { NavLink } from "react-router-dom";
 
 import { useSettings } from "@/store/settingStore";
-import { useThemeToken } from "@/theme/hooks";
+
 import { tailwindClassMerger } from "@/utils";
 
 import dashboardConfig from "../config";
 
 import { ThemeLayout } from "#/enum";
+
+// import { useThemeToken } from "@/theme/hooks";
 
 type Props = {
 	/**
@@ -29,7 +32,7 @@ export default function NavLogo({ collapsed, onToggle }: Props) {
 	const { themeLayout, darkSidebar } = useSettings();
 
 	// 获取主题相关的颜色;
-	const { colorBgContainer, colorBorderSecondary } = useThemeToken();
+	// const { colorBgContainer, colorBorderSecondary } = useThemeToken();
 
 	return (
 		<div

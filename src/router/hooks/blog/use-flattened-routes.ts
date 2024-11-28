@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 
-import { flattenMenuRoutes, menuFilter } from "../utils";
+import { flattenMenuRoutes, menuFilter } from "@/router/utils";
 import { useBlogRoutes } from "./use-blog-routes";
 
 /**

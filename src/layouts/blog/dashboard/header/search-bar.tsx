@@ -14,7 +14,7 @@ import styled from "styled-components";
 
 import { IconButton, SvgIcon } from "@/components/icon";
 import Scrollbar from "@/components/scrollbar";
-import { useFlattenedRoutes, useRouter } from "@/router/hooks";
+import { useFlattenedRoutes, useRouter } from "@/router/hooks/blog";
 import ProTag from "@/theme/antd/components/tag";
 import { useThemeToken } from "@/theme/hooks";
 

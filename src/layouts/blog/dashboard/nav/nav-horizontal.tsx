@@ -7,7 +7,7 @@ import {
 	useFlattenedRoutes,
 	usePathname,
 	useRouteToMenuFn,
-} from "@/router/hooks";
+} from "@/router/hooks/blog";
 import { menuFilter } from "@/router/utils";
 import { useThemeToken } from "@/theme/hooks";
 

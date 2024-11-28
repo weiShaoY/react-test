@@ -9,15 +9,22 @@ import { CircleLoading } from "@/components/loading";
 import type { AppRouteObject } from "#/router";
 
 const ClockPage = lazy(() => import("@/pages/blog/creativity/clock"));
+
 const MuYuPage = lazy(() => import("@/pages/blog/creativity/muYu"));
+
 const CalendarPage = lazy(() => import("@/pages/blog/creativity/calendar"));
+
 const ScreensaverPage = lazy(
 	() => import("@/pages/blog/creativity/screensaver"),
 );
 const TimePage = lazy(() => import("@/pages/blog/creativity/time"));
+
 const RipplePage = lazy(() => import("@/pages/blog/creativity/ripple"));
+
 const TextPage = lazy(() => import("@/pages/blog/creativity/text"));
+
 const CandlePage = lazy(() => import("@/pages/blog/creativity/candle"));
+
 const BlogWallPage = lazy(() => import("@/pages/blog/creativity/codeWall"));
 
 const Creativity: AppRouteObject = {

@@ -9,8 +9,8 @@ import {
 	useState,
 } from "react";
 
-import { useCurrentRouteMeta, useRouter } from "@/router/hooks";
-import { replaceDynamicParams } from "@/router/hooks/use-current-route-meta";
+import { useCurrentRouteMeta, useRouter } from "@/router/hooks/blog";
+import { replaceDynamicParams } from "@/router/hooks/blog/use-current-route-meta";
 
 import type { RouteMeta } from "#/router";
 

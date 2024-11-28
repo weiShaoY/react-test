@@ -1,17 +1,14 @@
 import { Navigate } from "react-router-dom";
 
-import { BlogDashboardLayout } from "@/layouts/blog";
+import { BlogDashboardLayout } from "@/layouts/blog/dashboard";
 
 import type { AppRouteObject } from "#/router";
 
 import { menuFilter } from "@/router/utils";
 
-/**
- *  动态获取blog菜单模块路由
- */
-const blogModuleRoutes = getBlogModuleRoutes();
-
 const { VITE_APP_BLOGPAGE } = import.meta.env;
+
+import { useMemo } from "react";
 
 /**
  * 博客路由
@@ -25,17 +22,15 @@ export const BlogRoutes: AppRouteObject = {
 			element: <Navigate to={VITE_APP_BLOGPAGE} replace />,
 		},
 		// 动态加载菜单模块的子路由
-		...blogModuleRoutes,
+		...getBlogModuleRoutes(),
 	],
 };
-
-import { useMemo } from "react";
 
 /**
  * 为路由项添加指定的前缀（例如 "/blog"）
  *
- * @param {AppRouteObject[]} routes - 路由列表
- * @returns {AppRouteObject[]} 添加前缀后的路由列表
+ * @param  routes - 路由列表
+ * @returns  添加前缀后的路由列表
  */
 export function addBlogRoutes(routes: AppRouteObject[]): AppRouteObject[] {
 	return routes.map((route) => {
@@ -56,8 +51,8 @@ export function addBlogRoutes(routes: AppRouteObject[]): AppRouteObject[] {
 		if (newRoute.children && newRoute.children.length > 0) {
 			newRoute.children = addBlogRoutes(newRoute.children);
 		}
-
-		return newRoute; // 返回添加前缀后的路由项
+		// 返回添加前缀后的路由项
+		return newRoute;
 	});
 }
 
@@ -65,7 +60,7 @@ export function addBlogRoutes(routes: AppRouteObject[]): AppRouteObject[] {
  * 获取blog模块路由
  * @returns  过滤后的路由列表
  */
-function getBlogModuleRoutes(): AppRouteObject[] {
+export function getBlogModuleRoutes(): AppRouteObject[] {
 	/**
 	 * 用于存储动态加载的菜单模块路由
 	 */
@@ -101,7 +96,6 @@ function getBlogModuleRoutes(): AppRouteObject[] {
 	// 通过菜单过滤规则返回最终的路由配置
 	return menuFilter(routesWihPrefix);
 }
-
 
 /**
  * 获取blog模块的路由配置

@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { Link, useMatches } from "react-router-dom";
 
 import { Iconify } from "@/components/icon";
-import { useBlogRoutes, useFlattenedRoutes } from "@/router/hooks";
+import { useBlogRoutes, useFlattenedRoutes } from "@/router/hooks/blog";
 import { menuFilter } from "@/router/utils";
 
 type MenuItem = GetProp<BreadcrumbProps, "items">[number];

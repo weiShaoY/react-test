@@ -18,8 +18,8 @@ import { useFullscreen, useToggle } from "react-use";
 import styled from "styled-components";
 
 import { Iconify } from "@/components/icon";
-import { useRouter } from "@/router/hooks";
-import { replaceDynamicParams } from "@/router/hooks/use-current-route-meta";
+import { useRouter } from "@/router/hooks/blog";
+import { replaceDynamicParams } from "@/router/hooks/blog/use-current-route-meta";
 import { useSettings } from "@/store/settingStore";
 import { useResponsive, useThemeToken } from "@/theme/hooks";
 

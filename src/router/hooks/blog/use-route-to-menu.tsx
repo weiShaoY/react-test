@@ -1,6 +1,6 @@
-import { useCallback } from "react";
 import { SvgIcon } from "@/components/icon";
 import type { GetProp, MenuProps } from "antd";
+import { useCallback } from "react";
 import type { AppRouteObject } from "#/router";
 
 type MenuItem = GetProp<MenuProps, "items">[number];

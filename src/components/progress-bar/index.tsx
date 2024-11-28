@@ -2,7 +2,7 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { useCallback, useEffect } from "react";
 
-import { usePathname } from "@/router/hooks";
+import { usePathname } from "@/router/hooks/blog";
 import { useThemeToken } from "@/theme/hooks";
 
 // 配置 NProgress

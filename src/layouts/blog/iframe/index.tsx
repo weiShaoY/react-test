@@ -6,7 +6,7 @@ type Props = {
 	src: string;
 };
 
-export default function BlogIframe({ src = "" }: Props) {
+export default function BlogIframeLayout({ src = "" }: Props) {
 	// 使用 state 来控制 iframe 是否加载完成
 	const [isLoading, setIsLoading] = useState(true);
 
