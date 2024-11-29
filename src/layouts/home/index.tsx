@@ -10,7 +10,7 @@ export default function HomeLayout({ children }: Props) {
 
 	return (
 		// <div className="bg-[#212224] h-full" style={{ marginTop: `${headerHeight}px` }}>
-		<div className="bg-[#212224] h-full">
+		<div className="bg-[#212224] h-full min-h-screen">
 			<Header headerHeight={headerHeight} />
 			{children}
 		</div>

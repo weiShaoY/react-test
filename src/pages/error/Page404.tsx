@@ -22,21 +22,20 @@ export default function Page404() {
 	return (
 		<>
 			<Helmet>
-				<title> 404 Page Not Found!</title>
+				<title> 404! 页面未找到!</title>
 			</Helmet>
 
 			<div className="m-auto max-w-[400px]">
 				<MotionContainer className="flex flex-col items-center justify-center px-2">
 					<m.div variants={varBounce().in}>
 						<Typography.Title level={3} className="text-center">
-							Sorry, Page Not Found!
+							对不起，找不到页面！
 						</Typography.Title>
 					</m.div>
 
 					<m.div variants={varBounce().in}>
 						<Typography.Paragraph type="secondary" className="text-center">
-							Sorry, we couldn’t find the page you’re looking for. Perhaps
-							you’ve mistyped the URL? Be sure to check your spelling.
+							抱歉,我们找不到您要查找的页面。也许您输入了错误的URL?请务必检查您的拼写。
 						</Typography.Paragraph>
 					</m.div>
 

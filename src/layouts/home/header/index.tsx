@@ -11,17 +11,17 @@ const menuList = [
 		label: "About",
 	},
 	{
-		key: "/home/resume",
-		label: "Resume",
+		key: "/home/work",
+		label: "Work",
+	},
+	{
+		key: "/home/contact",
+		label: "Contact",
 	},
 	{
 		key: "/blog",
 		label: "Blog",
 	},
-	// {
-	// 	key: "/blog",
-	// 	label: "Blog",
-	// },
 	{
 		key: "/garage",
 		label: "Garage",

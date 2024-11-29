@@ -1,5 +1,5 @@
 import { CircleLoading } from "@/components/loading";
-import { Outlet, Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 import type { AppRouteObject } from "#/router";
 
@@ -9,7 +9,9 @@ import HomeLayout from "@/layouts/home";
 
 const AboutPage = lazy(() => import("@/pages/home/about"));
 
-const ResumePage = lazy(() => import("@/pages/home/resume"));
+const WorkPage = lazy(() => import("@/pages/home/work"));
+
+const ContactPage = lazy(() => import("@/pages/home/contact"));
 
 /**
  *  首页路由
@@ -34,8 +36,12 @@ export const HomeRoutes: AppRouteObject = {
 			element: <AboutPage />,
 		},
 		{
-			path: "resume",
-			element: <ResumePage />,
+			path: "work",
+			element: <WorkPage />,
+		},
+		{
+			path: "contact",
+			element: <ContactPage />,
 		},
 	],
 };

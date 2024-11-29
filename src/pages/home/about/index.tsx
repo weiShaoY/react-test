@@ -38,22 +38,6 @@ function About() {
 			<div className="min-h-screen max-w-7xl mx-auto relative">
 				<Info />
 			</div>
-
-			{/* 第三页 min-h-screen */}
-
-			<div className=" flex justify-center items-center flex-col relative">
-				<div className="w-full h-full relative">
-					{/* 星空 */}
-					<div className="w-full h-auto absolute inset-0 z-[-1]">
-						{/* <Stars /> */}
-					</div>
-
-					{/* 技术栈 */}
-					<div className="container bg-[#3F4146]">{/* <Tech /> */}</div>
-				</div>
-
-				{/* <div className="w-full h-[500px] "><ParticlesCanvas /></div> */}
-			</div>
 		</div>
 	);
 }
