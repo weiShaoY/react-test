@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 
-import { BlogDashboardLayout } from "@/layouts/blog/dashboard";
+import { BlogLayout } from "@/layouts/blog";
 
 import type { AppRouteObject } from "#/router";
 
@@ -15,7 +15,7 @@ import { useMemo } from "react";
  */
 export const BlogRoutes: AppRouteObject = {
 	path: "/blog",
-	element: <BlogDashboardLayout />,
+	element: <BlogLayout />,
 	children: [
 		{
 			index: true,

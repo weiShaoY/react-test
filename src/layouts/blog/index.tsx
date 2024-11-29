@@ -28,7 +28,7 @@ import AntdConfig from "@/theme/antd";
 /**
  * Blog 模块 DashboardLayout 组件，用于构建包含导航栏、页头和主内容区域的布局
  */
-export function BlogDashboardLayout() {
+export function BlogLayout() {
 	// 从全局设置中获取当前的布局方式和主题模式
 	const { themeLayout, themeMode } = useSettings();
 
@@ -104,7 +104,7 @@ export function BlogDashboardLayout() {
 	);
 }
 
-export default BlogDashboardLayout;
+export default BlogLayout;
 
 /**
  * 滚动条样式配置
