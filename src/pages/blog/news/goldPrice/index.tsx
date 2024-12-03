@@ -1,6 +1,6 @@
 import BlogApi from "@/api/modules/blog";
 import { useEffect, useState } from "react";
-import { Table, Spin, message } from "antd";
+import { Table, message } from "antd";
 import type { TableProps } from "antd";
 
 type GoldPriceData = {
@@ -27,7 +27,6 @@ const columns: TableProps<GoldPriceData>["columns"] = [
 		width: 80,
 		align: "center",
 		// 添加排序功能
-		sorter: (a, b) => a.id.localeCompare(b.id), // 根据 ID 字符串排序
 	},
 	{
 		title: "商品目录",
@@ -102,8 +101,11 @@ const columns: TableProps<GoldPriceData>["columns"] = [
 function GoldPrice() {
 	const [data, setData] = useState<GoldPriceData[]>([]);
 
+	const [loading, setLoading] = useState(false);
+
 	useEffect(() => {
 		async function fetchData() {
+			setLoading(true);
 			try {
 				const response = await BlogApi.getGoldPrice(); // 假设返回 GoldPriceData[]
 				// 根据每一项的id排序 response
@@ -111,11 +113,11 @@ function GoldPrice() {
 					(a: GoldPriceData, b: GoldPriceData) =>
 						Number.parseInt(a.id) - Number.parseInt(b.id),
 				);
-				console.log("%c Line:114 🍞 response", "color:#fca650", response);
 				setData(response);
 			} catch (error) {
 				message.error("获取数据失败，请稍后重试");
-				console.error("Error fetching gold price data:", error);
+			} finally {
+				setLoading(false);
 			}
 		}
 		fetchData();
@@ -127,6 +129,9 @@ function GoldPrice() {
 				columns={columns}
 				dataSource={data}
 				rowKey="id" // 设置唯一标识字段
+				loading={loading}
+				pagination={{ pageSize: 50 }}
+				scroll={{ y: "calc(100vh - 350px)" }}
 			/>
 		</div>
 	);
