@@ -13,7 +13,7 @@ import styled from "styled-components";
 import { CircleLoading } from "@/components/loading";
 import ProgressBar from "@/components/progress-bar";
 import { useSettings } from "@/store/settingStore";
-import { tailwindClassMerger } from "@/utils";
+import { tailwindClassMerger, getGreeting } from "@/utils";
 
 import Header from "./header";
 import Main from "./main";
@@ -70,6 +70,8 @@ export function BlogLayout() {
 			themeLayout === ThemeLayout.Horizontal ? "flex-col" : "flex-row",
 		);
 	}, [themeLayout]);
+
+	getGreeting();
 
 	// 渲染布局组件
 	return (
