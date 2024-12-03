@@ -8,6 +8,8 @@ import type { AppRouteObject } from "#/router";
 
 const Iframe = lazy(() => import("@/layouts/blog/iframe"));
 
+const GoldPricePage = lazy(() => import("@/pages/blog/news/goldPrice"));
+
 function Wrapper({ children }: any) {
 	return <Suspense fallback={<CircleLoading />}>{children}</Suspense>;
 }
@@ -44,6 +46,21 @@ const document: AppRouteObject = {
 				icon: (
 					<SvgIcon
 						icon="blog-menu-dailyHotTopics"
+						className="ant-menu-item-icon"
+						size="24"
+					/>
+				),
+			},
+		},
+		{
+			path: "goldPrice",
+			element: <GoldPricePage />,
+			meta: {
+				label: "金价",
+				key: "/news/goldPrice",
+				icon: (
+					<SvgIcon
+						icon="blog-menu-goldPrice"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
