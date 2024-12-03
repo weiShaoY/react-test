@@ -5,9 +5,9 @@ import axios, {
 	type AxiosResponse,
 } from "axios";
 
-import type { Result } from "#/api";
+import type { Result } from "./type";
 
-import { ResultEnum } from "#/enum";
+import { ResultEnum } from "./type";
 
 /**
  *  创建 axios 实例
@@ -77,7 +77,7 @@ axiosInstance.interceptors.response.use(
 /**
  * API 客户端类，封装常用的 HTTP 请求方法
  */
-class APIClient {
+class AxiosHttp {
 	/**
 	 * 发送 GET 请求
 	 * @template T - 请求响应的数据类型
@@ -139,4 +139,4 @@ class APIClient {
 	}
 }
 
-export default new APIClient();
+export default new AxiosHttp();

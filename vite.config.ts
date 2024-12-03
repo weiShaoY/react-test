@@ -35,18 +35,28 @@ export default defineConfig(({ mode }) => {
 					brotliSize: true,
 				}),
 		],
+
+		// server: {
+		// 	proxy: {
+		// 		"/api": {
+		// 			changeOrigin: true, //  是否跨域
+		// 			secure: false,
+		// 		},
+		// 	},
+		// },
 		server: {
 			open: true,
 			host: true,
-			port: 3001,
+			port: 1819,
 			proxy: {
-				"/api": {
-					target: "http://localhost:3000",
-					changeOrigin: true,
-					rewrite: (path) => path.replace(/^\/api/, ""),
-				},
+				// "/api": {
+				// 	// target: "http://localhost:3000",
+				// 	changeOrigin: true,
+				// 	rewrite: (path) => path.replace(/^\/api/, ""),
+				// },
 			},
 		},
+
 		optimizeDeps: {
 			// 指定需要预构建的依赖模块，用于加快开发阶段的冷启动速度
 			include: ["react", "react-dom", "react-router-dom", "antd"],
