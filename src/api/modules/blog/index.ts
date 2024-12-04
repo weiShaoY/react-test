@@ -1,5 +1,7 @@
 import { message } from "antd";
 
+import { jsonp } from "@/api/http/jsonp";
+
 class BlogApi {
 	/**
 	 * 测试获取黄金价格接口
@@ -79,6 +81,60 @@ class BlogApi {
 			message.error(error?.message || "请求失败，请稍后再试");
 			console.error("请求失败：", error);
 			return null; // 确保返回值始终有意义
+		}
+	}
+
+	/**
+	 *  获取励志语句
+	 */
+	async getMotivationalQuotes() {
+		try {
+			const response = await fetch(
+				"https://zj.v.api.aa1.cn/api/wenan-zl/?type=json",
+			);
+
+			// 检查响应状态是否正常
+			if (!response.ok) {
+				throw new Error(`HTTP 错误！状态码: ${response.status}`);
+			}
+
+			// 解析并返回 JSON 数据
+			const { data } = await response.json();
+			return data;
+		} catch (error) {
+			// 捕获错误并提示用户
+			message.error(error?.message || "请求失败，请稍后再试");
+		}
+	}
+
+	//  今日热点 https://v.api.aa1.cn/api/topbaidu/index.php
+	//  随机壁纸图片[API盒子官方资源库] https://cn.apihz.cn/api/img/apihzimgbz.php?id=88888888&key=88888888&type=1&imgtype=2
+	//  随机壁纸 https://www.bfbke.com/bzApi.php?type=sj
+
+	//  新闻简报 https://dayu.qqsuu.cn/weiyujianbao/apis.php?type=json
+	//  每日更新假期倒计时日历 https://dayu.qqsuu.cn/moyurili/apis.php?type=json
+	// 品牌黄金 https://free.xwteam.cn/api/gold/brand
+
+	/**
+	 *  获取电影票房
+	 */
+	async getMovieRevenue() {
+		try {
+			const response = await fetch(
+				"https://api.lolimi.cn/API/yiyan/dz.php",
+			);
+
+			// 检查响应状态是否正常
+			if (!response.ok) {
+				throw new Error(`HTTP 错误！状态码: ${response.status}`);
+			}
+
+			// 解析并返回 JSON 数据
+			const { data } = await response.json();
+			return data;
+		} catch (error) {
+			// 捕获错误并提示用户
+			message.error(error?.message || "请求失败，请稍后再试");
 		}
 	}
 }

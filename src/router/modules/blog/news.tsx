@@ -10,6 +10,8 @@ const Iframe = lazy(() => import("@/layouts/blog/iframe"));
 
 const GoldPricePage = lazy(() => import("@/pages/blog/news/goldPrice"));
 
+const MovieRevenuePage = lazy(() => import("@/pages/blog/news/movieRevenue"));
+
 function Wrapper({ children }: any) {
 	return <Suspense fallback={<CircleLoading />}>{children}</Suspense>;
 }
@@ -61,6 +63,21 @@ const document: AppRouteObject = {
 				icon: (
 					<SvgIcon
 						icon="blog-menu-goldPrice"
+						className="ant-menu-item-icon"
+						size="24"
+					/>
+				),
+			},
+		},
+		{
+			path: "movieRevenue",
+			element: <MovieRevenuePage />,
+			meta: {
+				label: "电影票房",
+				key: "/news/movieRevenue",
+				icon: (
+					<SvgIcon
+						icon="blog-menu-movieRevenue"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
