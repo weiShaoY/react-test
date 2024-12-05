@@ -187,7 +187,12 @@ function GoldPrice() {
 	 *  获取数据逻辑
 	 */
 	const getData = useCallback(async () => {
-		setState((prev) => ({ ...prev, loading: true }));
+		// 封装更新加载状态的函数
+		const updateLoading = (isLoading: boolean) => {
+			setState((prev) => ({ ...prev, loading: isLoading }));
+		};
+
+		updateLoading(true);
 		try {
 			const [marketGoldPrice, brandGoldPrice] = await Promise.all([
 				BlogApi.getMarketGoldPrice(),
@@ -207,7 +212,7 @@ function GoldPrice() {
 			});
 		} catch (error) {
 			message.error("获取数据失败，请稍后重试");
-			setState((prev) => ({ ...prev, loading: false }));
+			updateLoading(false);
 		}
 	}, []);
 

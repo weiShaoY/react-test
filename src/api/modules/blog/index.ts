@@ -1,7 +1,5 @@
 import { message } from "antd";
 
-import { jsonp } from "@/api/http/jsonp";
-
 class BlogApi {
 	/**
 	 * 测试获取黄金价格接口
@@ -136,11 +134,32 @@ class BlogApi {
 	// 品牌黄金 https://free.xwteam.cn/api/gold/brand
 
 	/**
-	 *  获取电影票房
+	 *  获取即将上映电影
 	 */
-	async getMovieRevenue() {
+	async getComingSoonMovie() {
 		try {
-			const response = await fetch("https://api.lolimi.cn/API/yiyan/dz.php");
+			const response = await fetch("https://free.xwteam.cn/api/cinema/coming");
+
+			// 检查响应状态是否正常
+			if (!response.ok) {
+				throw new Error(`HTTP 错误！状态码: ${response.status}`);
+			}
+
+			// 解析并返回 JSON 数据
+			const { data } = await response.json();
+			return data;
+		} catch (error) {
+			// 捕获错误并提示用户
+			message.error(error?.message || "请求失败，请稍后再试");
+		}
+	}
+
+	/**
+	 *  获取院线热播电影
+	 */
+	async getHotTheaterMovie() {
+		try {
+			const response = await fetch("https://free.xwteam.cn/api/cinema/hot");
 
 			// 检查响应状态是否正常
 			if (!response.ok) {
