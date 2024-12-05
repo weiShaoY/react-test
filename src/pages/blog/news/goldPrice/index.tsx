@@ -176,23 +176,20 @@ const marketGoldPriceColumns: TableProps<MarketGoldPriceItemType>["columns"] = [
 ];
 
 function GoldPrice() {
-	const [state, setState] = useState({
+	const [loading, setLoading] = useState(false);
+
+	const [data, setData] = useState({
 		marketGoldPriceData: [] as MarketGoldPriceItemType[],
 		brandGoldPriceData: [] as BrandGoldPriceItemType[],
-		loading: false,
 	});
 
 	/**
 	 *  获取数据逻辑
 	 */
 	const getData = useCallback(async () => {
-		// 封装更新加载状态的函数
-		const updateLoading = (isLoading: boolean) => {
-			setState((prev) => ({ ...prev, loading: isLoading }));
-		};
-
-		updateLoading(true);
 		try {
+			setLoading(true);
+
 			const [marketGoldPrice, brandGoldPrice] = await Promise.all([
 				BlogApi.getMarketGoldPrice(),
 				BlogApi.getBrandGoldPrice(),
@@ -204,14 +201,14 @@ function GoldPrice() {
 					Number.parseInt(a.id) - Number.parseInt(b.id),
 			);
 
-			setState({
+			setData({
 				marketGoldPriceData: marketGoldPrice,
 				brandGoldPriceData: brandGoldPrice,
-				loading: false,
 			});
 		} catch (error) {
 			message.error("获取数据失败，请稍后重试");
-			updateLoading(false);
+		} finally {
+			setLoading(false);
 		}
 	}, []);
 
@@ -229,7 +226,7 @@ function GoldPrice() {
 			columns={columns}
 			dataSource={data}
 			rowKey={rowKey}
-			loading={state.loading}
+			loading={loading}
 			pagination={{ pageSize: 50 }}
 			scroll={{ y: "calc(100vh - 350px)" }}
 		/>
@@ -244,7 +241,7 @@ function GoldPrice() {
 					label: "品牌价格",
 					children: renderTable(
 						brandGoldPriceColumns,
-						state.brandGoldPriceData,
+						data.brandGoldPriceData,
 						"brand",
 					),
 				},
@@ -253,7 +250,7 @@ function GoldPrice() {
 					label: "大盘价格",
 					children: renderTable(
 						marketGoldPriceColumns,
-						state.marketGoldPriceData,
+						data.marketGoldPriceData,
 						"id",
 					),
 				},

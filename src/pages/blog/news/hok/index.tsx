@@ -1,45 +1,30 @@
 import { useState } from "react";
-import {
-	message,
-	Select,
-	Spin,
-	Input,
-	Descriptions,
-	Image,
-	Skeleton,
-} from "antd";
+import { message, Select, Spin, Descriptions, Image, Skeleton } from "antd";
 import { BlogApi } from "@/api";
 import { useDebounceEffect } from "ahooks";
 
 function Hok() {
+	const [loading, setLoading] = useState(false);
+
 	const [state, setState] = useState({
-		loading: false, // 加载状态
 		type: "ios_qq", // 区类型
 		hero: "百里守约", // 英雄名称
 		data: null as any, // 数据
 	});
 
 	/**
-	 * 更新状态
-	 * @param partialState {Partial<typeof state>} 部分状态更新
-	 */
-	const updateState = (partialState: any) => {
-		setState((prev) => ({ ...prev, ...partialState }));
-	};
-
-	/**
 	 * 获取数据
 	 */
 	const getData = async () => {
-		updateState({ loading: true });
+		setLoading(true);
 		try {
 			const { type, hero } = state;
 			const res = await BlogApi.getHok(type, hero);
-			updateState({ data: res });
+			setState({ ...state, data: res });
 		} catch (error) {
 			message.error(error.message || "获取数据失败，请稍后重试");
 		} finally {
-			updateState({ loading: false });
+			setLoading(false);
 		}
 	};
 
@@ -198,19 +183,13 @@ function Hok() {
 					{state.data?.pic && (
 						<Image
 							src={state.data.pic}
-							alt="电影海报"
+							alt="头像"
 							width={80}
 							style={{ objectFit: "cover" }}
 							placeholder={
 								<Spin
 									size="small"
-									style={{
-										width: "100%",
-										height: "100%",
-										display: "flex",
-										alignItems: "center",
-										justifyContent: "center",
-									}}
+									className="w-full h-full flex items-center justify-center"
 								/>
 							}
 						/>
@@ -253,7 +232,7 @@ function Hok() {
 	];
 
 	return (
-		<div className="p-4">
+		<div className="p-4 h-full">
 			{/* 顶部筛选栏 */}
 			<div className="flex items-center justify-between mb-4">
 				<Select
@@ -262,7 +241,7 @@ function Hok() {
 					allowClear
 					placeholder="请选择区"
 					defaultValue={state.type}
-					onChange={(type) => updateState({ type })}
+					onChange={(type) => setState({ ...state, type })}
 					options={typeSelectOptions}
 				/>
 
@@ -272,14 +251,14 @@ function Hok() {
 					allowClear
 					placeholder="请输入或选择英雄名称"
 					defaultValue={state.hero}
-					onChange={(hero) => updateState({ hero })}
+					onChange={(hero) => setState({ ...state, hero })}
 					options={heroSelectOptions}
 				/>
 			</div>
 
 			{/* 数据展示 */}
 			<Descriptions bordered>
-				{state.loading
+				{loading
 					? Array(7)
 							.fill(null)
 							.map((_) => (

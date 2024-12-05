@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { Table, message, Tabs, Image, Spin } from "antd";
+import { Table, Tabs, Image, Spin, message } from "antd";
 import type { TableProps } from "antd";
 import { BlogApi } from "@/api";
 
@@ -122,17 +122,10 @@ const comingSoonMovieColumns: TableProps<ComingSoonMovieItemType>["columns"] = [
 				src={imgUrl}
 				alt="电影海报"
 				width={80}
-				style={{ objectFit: "cover" }}
 				placeholder={
 					<Spin
 						size="small"
-						style={{
-							width: "100%",
-							height: "100%",
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "center",
-						}}
+						className="w-full h-full flex items-center justify-center"
 					/>
 				}
 			/>
@@ -265,17 +258,10 @@ const hotTheaterMovieColumns: TableProps<HotTheaterMovieItemType>["columns"] = [
 					src={imgUrl}
 					alt="电影海报"
 					width={80}
-					style={{ objectFit: "cover" }}
 					placeholder={
 						<Spin
 							size="small"
-							style={{
-								width: "100%",
-								height: "100%",
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "center",
-							}}
+							className="w-full h-full flex items-center justify-center"
 						/>
 					}
 				/>
@@ -324,23 +310,20 @@ const hotTheaterMovieColumns: TableProps<HotTheaterMovieItemType>["columns"] = [
 ];
 
 function Movie() {
-	const [state, setState] = useState({
+	const [loading, setLoading] = useState(false);
+
+	const [data, setData] = useState({
 		comingSoonMovieData: [] as ComingSoonMovieItemType[],
 		hotTheaterMovieData: [] as HotTheaterMovieItemType[],
-		loading: false,
 	});
 
 	/**
 	 *  获取数据逻辑
 	 */
 	const getData = useCallback(async () => {
-		// 封装更新加载状态的函数
-		const updateLoading = (isLoading: boolean) => {
-			setState((prev) => ({ ...prev, loading: isLoading }));
-		};
-
-		updateLoading(true);
 		try {
+			setLoading(true);
+
 			// 并行获取数据，提高性能
 			const [comingSoonMovie, res] = await Promise.all([
 				BlogApi.getComingSoonMovie(),
@@ -350,14 +333,14 @@ function Movie() {
 			const hotTheaterMovie = res.movieList;
 
 			// 更新状态
-			setState({
+			setData({
 				comingSoonMovieData: comingSoonMovie,
 				hotTheaterMovieData: hotTheaterMovie,
-				loading: false,
 			});
 		} catch (error) {
-			message.error("获取数据失败，请稍后重试");
-			updateLoading(false);
+			message.error(error.message || "获取数据失败，请稍后重试");
+		} finally {
+			setLoading(false);
 		}
 	}, []);
 
@@ -375,7 +358,7 @@ function Movie() {
 			columns={columns}
 			dataSource={data}
 			rowKey={rowKey}
-			loading={state.loading}
+			loading={loading}
 			pagination={{ pageSize: 50 }}
 			scroll={{ y: "calc(100vh - 350px)" }}
 		/>
@@ -390,7 +373,7 @@ function Movie() {
 					label: "即将上映",
 					children: renderTable(
 						comingSoonMovieColumns,
-						state.comingSoonMovieData,
+						data.comingSoonMovieData,
 						"id",
 					),
 				},
@@ -399,7 +382,7 @@ function Movie() {
 					label: "院线热播",
 					children: renderTable(
 						hotTheaterMovieColumns,
-						state.hotTheaterMovieData,
+						data.hotTheaterMovieData,
 						"id",
 					),
 				},

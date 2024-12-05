@@ -197,6 +197,29 @@ class BlogApi {
 			message.error(error?.message || "请求失败，请稍后再试");
 		}
 	}
+
+	/**
+	 *  获取壁纸
+	 */
+	async getWallpaper(category: string) {
+		try {
+			const response = await fetch(
+				`https://free.xwteam.cn/api/img/pic?category=${category}`,
+			);
+
+			// 检查响应状态是否正常
+			if (!response.ok) {
+				throw new Error(`HTTP 错误！状态码: ${response.status}`);
+			}
+
+			// 解析并返回 JSON 数据
+			const { data } = await response.json();
+			return data;
+		} catch (error) {
+			// 捕获错误并提示用户
+			message.error(error?.message || "请求失败，请稍后再试");
+		}
+	}
 }
 
 export default new BlogApi();

@@ -8,6 +8,8 @@ import type { AppRouteObject } from "#/router";
 
 const GirlPage = lazy(() => import("@/pages/blog/video/girl"));
 
+const WallpaperPage = lazy(() => import("@/pages/blog/video/wallpaper"));
+
 const document: AppRouteObject = {
 	order: 4,
 	path: "video",
@@ -31,6 +33,21 @@ const document: AppRouteObject = {
 		{
 			index: true,
 			element: <Navigate to="girl" replace />,
+		},
+		{
+			path: "wallpaper",
+			element: <WallpaperPage />,
+			meta: {
+				label: "壁纸",
+				key: "/video/wallpaper",
+				icon: (
+					<SvgIcon
+						icon="blog-menu-wallpaper"
+						className="ant-menu-item-icon"
+						size="24"
+					/>
+				),
+			},
 		},
 
 		{
