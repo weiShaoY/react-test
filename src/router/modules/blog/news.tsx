@@ -12,6 +12,8 @@ const GoldPricePage = lazy(() => import("@/pages/blog/news/goldPrice"));
 
 const MoviePage = lazy(() => import("@/pages/blog/news/movie"));
 
+const HokPage = lazy(() => import("@/pages/blog/news/hok"));
+
 function Wrapper({ children }: any) {
 	return <Suspense fallback={<CircleLoading />}>{children}</Suspense>;
 }
@@ -78,6 +80,21 @@ const document: AppRouteObject = {
 				icon: (
 					<SvgIcon
 						icon="blog-menu-movie"
+						className="ant-menu-item-icon"
+						size="24"
+					/>
+				),
+			},
+		},
+		{
+			path: "hok",
+			element: <HokPage />,
+			meta: {
+				label: "王者荣耀",
+				key: "/news/hok",
+				icon: (
+					<SvgIcon
+						icon="blog-menu-hok"
 						className="ant-menu-item-icon"
 						size="24"
 					/>

@@ -2,7 +2,6 @@ import { useEffect, useState, useCallback } from "react";
 import { Table, message, Tabs } from "antd";
 import type { TableProps } from "antd";
 import { BlogApi } from "@/api";
-import Scrollbar from "@/components/scrollbar";
 
 /**
  *  品牌黄金价格每一项
@@ -226,15 +225,14 @@ function GoldPrice() {
 		data: T[],
 		rowKey: string,
 	) => (
-		<Scrollbar>
-			<Table<T>
-				columns={columns}
-				dataSource={data}
-				rowKey={rowKey}
-				loading={state.loading}
-				pagination={{ pageSize: 50 }}
-			/>
-		</Scrollbar>
+		<Table<T>
+			columns={columns}
+			dataSource={data}
+			rowKey={rowKey}
+			loading={state.loading}
+			pagination={{ pageSize: 50 }}
+			scroll={{ y: "calc(100vh - 350px)" }}
+		/>
 	);
 
 	return (
