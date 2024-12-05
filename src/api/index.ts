@@ -5,3 +5,7 @@
 //   user: userAPI,
 //   order: orderAPI,
 // };
+
+import BlogApi from "./modules/blog";
+
+export { BlogApi };
