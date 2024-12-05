@@ -8,7 +8,6 @@ import Router from "@/router/index";
 
 import { MotionLazy } from "./components/animate/motion-lazy";
 
-import BlogApi from "@/api/modules/blog";
 function print() {
 	console.info(
 		"%cNiceToMeetYou,我是weiShaoY",
@@ -16,14 +15,8 @@ function print() {
 	);
 }
 
-async function test() {
-	const data = await BlogApi.test();
-	console.log("%c Line:24 🍔 data", "color:#ed9ec7", data);
-}
-
 function App() {
 	print();
-	test();
 	return (
 		<MotionLazy>
 			{/* 懒加载路由 */}

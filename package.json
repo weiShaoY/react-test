@@ -73,7 +73,8 @@
 		"leva": "^0.9.35",
 		"r3f-perf": "^7.1.2",
 		"three-custom-shader-material": "5.4.0",
-		"postprocessing": "^6.34.3"
+		"postprocessing": "^6.34.3",
+		"video.js": "^8.18.1"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
