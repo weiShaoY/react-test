@@ -91,16 +91,15 @@ function Wallpaper() {
 						className="absolute w-full h-full flex items-center justify-center"
 					/>
 				)}
-				<Image
-					src={state.img_url}
-					className={`flex-1 w-auto object-cover ${imgLoading ? "opacity-0" : "opacity-100"}`}
-					onLoad={() => setImgLoading(false)} // 图片加载完成
-					onError={() => {
-						setImgLoading(false);
-						message.error("图片加载失败，请重试");
-					}} // 图片加载失败
-					placeholder={null} // 移除默认的 placeholder
-				/>
+
+				{state.img_url && (
+					<Image
+						src={state.img_url}
+						className={`flex-1 w-auto object-cover ${imgLoading ? "opacity-0" : "opacity-100"}`}
+						onLoad={() => setImgLoading(false)} // 图片加载完成
+						placeholder={null} // 移除默认的 placeholder
+					/>
+				)}
 			</div>
 		</div>
 	);
