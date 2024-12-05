@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { Table, message, Tabs } from "antd";
 import type { TableProps } from "antd";
 import { BlogApi } from "@/api";
+import Scrollbar from "@/components/scrollbar";
 
 /**
  *  品牌黄金价格每一项
@@ -32,9 +33,24 @@ type BrandGoldPriceItemType = {
  *  品牌黄金价格表格列
  */
 const brandGoldPriceColumns: TableProps<BrandGoldPriceItemType>["columns"] = [
-	{ title: "品牌", dataIndex: "brand", key: "brand", width: 100 },
-	{ title: "黄金价格", dataIndex: "goldPrice", key: "goldPrice", width: 100 },
-	{ title: "铂金价格", dataIndex: "ptPrice", key: "ptPrice", width: 100 },
+	{
+		title: "品牌",
+		dataIndex: "brand",
+		key: "brand",
+		align: "center",
+	},
+	{
+		title: "黄金价格",
+		dataIndex: "goldPrice",
+		key: "goldPrice",
+		align: "center",
+	},
+	{
+		title: "铂金价格",
+		dataIndex: "ptPrice",
+		key: "ptPrice",
+		align: "center",
+	},
 ];
 
 /**
@@ -205,14 +221,15 @@ function GoldPrice() {
 		data: T[],
 		rowKey: string,
 	) => (
-		<Table<T>
-			columns={columns}
-			dataSource={data}
-			rowKey={rowKey}
-			loading={state.loading}
-			pagination={{ pageSize: 50 }}
-			scroll={{ y: "calc(100vh - 350px)" }}
-		/>
+		<Scrollbar>
+			<Table<T>
+				columns={columns}
+				dataSource={data}
+				rowKey={rowKey}
+				loading={state.loading}
+				pagination={{ pageSize: 50 }}
+			/>
+		</Scrollbar>
 	);
 
 	return (
