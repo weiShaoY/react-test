@@ -1,5 +1,7 @@
 import { message } from "antd";
 
+import { jsonp } from "@/api/http/jsonp";
+
 class BlogApi {
 	/**
 	 * 测试获取黄金价格接口
@@ -81,14 +83,14 @@ class BlogApi {
 			return null; // 确保返回值始终有意义
 		}
 	}
-
 	/**
-	 *  获取随机帅哥视频
+	 *  获取励志语句
 	 */
-	async getRandomBoyVideo() {
+	async getMotivationalQuotes() {
 		try {
-			// 发起 GET 请求
-			const response = await fetch("https://papi.oxoll.cn/API/sgsp/");
+			const response = await fetch(
+				"https://zj.v.api.aa1.cn/api/wenan-zl/?type=json",
+			);
 
 			// 检查响应状态是否正常
 			if (!response.ok) {
@@ -104,13 +106,22 @@ class BlogApi {
 		}
 	}
 
+	//  今日热点 https://v.api.aa1.cn/api/topbaidu/index.php
+	//  随机壁纸图片[API盒子官方资源库] https://cn.apihz.cn/api/img/apihzimgbz.php?id=88888888&key=88888888&type=1&imgtype=2
+	//  随机壁纸 https://www.bfbke.com/bzApi.php?type=sj
+
+	//  新闻简报 https://dayu.qqsuu.cn/weiyujianbao/apis.php?type=json
+	//  每日更新假期倒计时日历 https://dayu.qqsuu.cn/moyurili/apis.php?type=json
+	// 品牌黄金 https://free.xwteam.cn/api/gold/brand
+
 	/**
-	 * 获取随机小姐姐视频
+	 *  获取电影票房
 	 */
-	async getRandomGirlVideo() {
+	async getMovieRevenue() {
 		try {
-			// 发起 GET 请求
-			const response = await fetch("https://tools.mgtv100.com/external/v1/pear/xjj");
+			const response = await fetch(
+				"https://api.lolimi.cn/API/yiyan/dz.php",
+			);
 
 			// 检查响应状态是否正常
 			if (!response.ok) {
