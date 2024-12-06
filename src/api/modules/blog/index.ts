@@ -1,213 +1,99 @@
-import { message } from "antd";
+import { fetchHttp } from "../../http";
 
 class BlogApi {
+	/**
+	 * 测试接口
+	 */
 	async test() {
-		try {
-			const response = await fetch(
-				"https://tools.mgtv100.com/external/v1/pear/goldPrice",
-			);
-
-			// 检查响应状态是否正常
-			if (!response.ok) {
-				throw new Error(`HTTP 错误！状态码: ${response.status}`);
-			}
-
-			// 解析并返回 JSON 数据
-			const { data } = await response.json();
-			return data;
-		} catch (error) {
-			// 捕获错误并提示用户
-			message.error(error?.message || "请求失败，请稍后再试");
-		}
+		return fetchHttp("https://tools.mgtv100.com/external/v1/pear/goldPrice");
 	}
 
 	/**
-	 *  获取大盘黄金价格
+	 * 获取大盘黄金价格
 	 */
 	async getMarketGoldPrice() {
-		try {
-			const response = await fetch(
-				"https://tools.mgtv100.com/external/v1/pear/goldPrice",
-			);
-
-			// 检查响应状态是否正常
-			if (!response.ok) {
-				throw new Error(`HTTP 错误！状态码: ${response.status}`);
-			}
-
-			// 解析并返回 JSON 数据
-			const { data } = await response.json();
-			return data;
-		} catch (error) {
-			// 捕获错误并提示用户
-			message.error(error?.message || "请求失败，请稍后再试");
-		}
+		return fetchHttp("https://tools.mgtv100.com/external/v1/pear/goldPrice");
 	}
 
 	/**
-	 *  获取品牌黄金价格
+	 * 获取品牌黄金价格
 	 */
 	async getBrandGoldPrice() {
-		try {
-			const response = await fetch("https://free.xwteam.cn/api/gold/brand");
-
-			// 检查响应状态是否正常
-			if (!response.ok) {
-				throw new Error(`HTTP 错误！状态码: ${response.status}`);
-			}
-
-			// 解析并返回 JSON 数据
-			const { data } = await response.json();
-			return data;
-		} catch (error) {
-			// 捕获错误并提示用户
-			message.error(error?.message || "请求失败，请稍后再试");
-		}
+		return fetchHttp("https://free.xwteam.cn/api/gold/brand");
 	}
 
 	/**
-	 *  获取问候语
+	 * 获取问候语
 	 */
 	async getGreeting() {
-		try {
-			// 添加查询参数 type=json 确保获取 JSON 格式数据
-			const response = await fetch(
-				"https://api.kuleu.com/api/getGreetingMessage?type=json",
-			);
-
-			// 打印响应信息以便调试
-			console.log("%c Line:59 🍋 response", "color:#2eafb0", response);
-
-			// 检查响应状态是否正常
-			if (!response.ok) {
-				throw new Error(`HTTP 错误！状态码: ${response.status}`);
-			}
-
-			// 解析 JSON 数据
-			const { code, data } = await response.json();
-
-			if (code !== 200) {
-				message.error("接口返回错误");
-				throw new Error(data.msg || "接口返回错误");
-			}
-
-			return data;
-		} catch (error) {
-			// 捕获错误并提示用户
-			message.error(error?.message || "请求失败，请稍后再试");
-			console.error("请求失败：", error);
-			return null; // 确保返回值始终有意义
-		}
+		return fetchHttp("https://api.kuleu.com/api/getGreetingMessage?type=json");
 	}
+
 	/**
-	 *  获取励志语句
+	 * 获取励志语句
 	 */
 	async getMotivationalQuotes() {
-		try {
-			const response = await fetch(
-				"https://zj.v.api.aa1.cn/api/wenan-zl/?type=json",
-			);
-
-			// 检查响应状态是否正常
-			if (!response.ok) {
-				throw new Error(`HTTP 错误！状态码: ${response.status}`);
-			}
-
-			// 解析并返回 JSON 数据
-			const { data } = await response.json();
-			return data;
-		} catch (error) {
-			// 捕获错误并提示用户
-			message.error(error?.message || "请求失败，请稍后再试");
-		}
+		return fetchHttp("https://zj.v.api.aa1.cn/api/wenan-zl/?type=json");
 	}
 
 	/**
-	 *  获取即将上映电影
+	 * 获取即将上映电影
 	 */
 	async getComingSoonMovie() {
-		try {
-			const response = await fetch("https://free.xwteam.cn/api/cinema/coming");
-
-			// 检查响应状态是否正常
-			if (!response.ok) {
-				throw new Error(`HTTP 错误！状态码: ${response.status}`);
-			}
-
-			// 解析并返回 JSON 数据
-			const { data } = await response.json();
-			return data;
-		} catch (error) {
-			// 捕获错误并提示用户
-			message.error(error?.message || "请求失败，请稍后再试");
-		}
+		return fetchHttp("https://free.xwteam.cn/api/cinema/coming");
 	}
 
 	/**
-	 *  获取院线热播电影
+	 * 获取院线热播电影
 	 */
 	async getHotTheaterMovie() {
-		try {
-			const response = await fetch("https://free.xwteam.cn/api/cinema/hot");
-
-			// 检查响应状态是否正常
-			if (!response.ok) {
-				throw new Error(`HTTP 错误！状态码: ${response.status}`);
-			}
-
-			// 解析并返回 JSON 数据
-			const { data } = await response.json();
-			return data;
-		} catch (error) {
-			// 捕获错误并提示用户
-			message.error(error?.message || "请求失败，请稍后再试");
-		}
+		return fetchHttp("https://free.xwteam.cn/api/cinema/hot");
 	}
 
 	/**
-	 *  获取王者荣耀战力
+	 * 获取王者荣耀战力
+	 * @param {string} type - 战力类型
+	 * @param {string} hero - 英雄名称
 	 */
 	async getHok(type: string, hero: string) {
-		try {
-			const response = await fetch(
-				`https://free.xwteam.cn/api/game/hok?type=${type}&hero=${hero}`,
-			);
-
-			// 检查响应状态是否正常
-			if (!response.ok) {
-				throw new Error(`HTTP 错误！状态码: ${response.status}`);
-			}
-
-			// 解析并返回 JSON 数据
-			const { data } = await response.json();
-			return data;
-		} catch (error) {
-			// 捕获错误并提示用户
-			message.error(error?.message || "请求失败，请稍后再试");
-		}
+		return fetchHttp(
+			`https://free.xwteam.cn/api/game/hok?type=${type}&hero=${hero}`,
+		);
 	}
 
 	/**
-	 *  获取壁纸
+	 * 获取壁纸
+	 * @param {string} category - 壁纸分类
 	 */
 	async getWallpaper(category: string) {
-		try {
-			const response = await fetch(
-				`https://free.xwteam.cn/api/img/pic?category=${category}`,
-			);
+		return fetchHttp(`https://free.xwteam.cn/api/img/pic?category=${category}`);
+	}
 
-			// 检查响应状态是否正常
-			if (!response.ok) {
-				throw new Error(`HTTP 错误！状态码: ${response.status}`);
-			}
+	/**
+	 *  获取随机美少女视频
+	 */
+	/**
+	 * 获取随机美少女视频
+	 */
+	async getRandomGirlVideo() {
+		return fetchHttp("http://www.wudada.online/Api/ScSp");
+	}
 
-			// 解析并返回 JSON 数据
-			const { data } = await response.json();
-			return data;
-		} catch (error) {
-			// 捕获错误并提示用户
-			message.error(error?.message || "请求失败，请稍后再试");
-		}
+	/**
+	 *  获取随机返回一条小姐姐视频
+	 */
+	/**
+	 * 获取随机返回一条小姐姐视频
+	 */
+	async getRandomReturnOneGirlVideo() {
+		return fetchHttp("https://tools.mgtv100.com/external/v1/pear/xjj");
+	}
+
+	/**
+	 *  获取测试视频
+	 */
+	async getTestVideo() {
+		return fetchHttp("https://tucdn.wpon.cn/api-girl/index.php?wpon=json");
 	}
 
 	//  今日热点 https://v.api.aa1.cn/api/topbaidu/index.php
@@ -221,72 +107,6 @@ class BlogApi {
 
 	//  随机美少女视频 https://www.wudada.online/Api/ScSp
 	//  随机返回一条小姐姐视频 https://tools.mgtv100.com/external/v1/pear/xjj
-
-	/**
-	 *  获取随机美少女视频
-	 */
-	async getRandomGirlVideo() {
-		try {
-			const response = await fetch("http://www.wudada.online/Api/ScSp");
-
-			// 检查响应状态是否正常
-			if (!response.ok) {
-				throw new Error(`HTTP 错误！状态码: ${response.status}`);
-			}
-
-			// 解析并返回 JSON 数据
-			const { data } = await response.json();
-			return data;
-		} catch (error) {
-			// 捕获错误并提示用户
-			message.error(error?.message || "请求失败，请稍后再试");
-		}
-	}
-	/**
-	 *  获取随机返回一条小姐姐视频
-	 */
-	async getRandomReturnOneGirlVideo() {
-		try {
-			const response = await fetch(
-				"https://tools.mgtv100.com/external/v1/pear/xjj",
-			);
-
-			// 检查响应状态是否正常
-			if (!response.ok) {
-				throw new Error(`HTTP 错误！状态码: ${response.status}`);
-			}
-
-			// 解析并返回 JSON 数据
-			const { data } = await response.json();
-			return data;
-		} catch (error) {
-			// 捕获错误并提示用户
-			message.error(error?.message || "请求失败，请稍后再试");
-		}
-	}
-
-	/**
-	 *  https://tools.mgtv100.com/external/v1/pear/xjj
-	 */
-	async getTestVideo() {
-		try {
-			const response = await fetch(
-				"https://tools.mgtv100.com/external/v1/pear/xjj",
-			);
-
-			// 检查响应状态是否正常
-			if (!response.ok) {
-				throw new Error(`HTTP 错误！状态码: ${response.status}`);
-			}
-
-			// 解析并返回 JSON 数据
-			const { data } = await response.json();
-			return data;
-		} catch (error) {
-			// 捕获错误并提示用户
-			message.error(error?.message || "请求失败，请稍后再试");
-		}
-	}
 }
 
 export default new BlogApi();

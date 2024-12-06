@@ -1,17 +1,16 @@
 import BlogApi from "@/api/modules/blog";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { message } from "antd";
 import ReactPlayer from "react-player/lazy";
 import { useDebounceEffect } from "ahooks";
 import { SvgIcon } from "@/components/icon";
-import { Select, Button, Spin } from "antd";
+import { Select, Button, Spin, Switch } from "antd";
 
-function Girl() {
-	const [loading, setLoading] = useState(false);
-
-	const [category, setCategory] = useState(0);
-
-	const [videoUrl, setVideoUrl] = useState<string>(""); // 状态存储视频URL
+function Video() {
+	const [loading, setLoading] = useState<boolean>(false);
+	const [category, setCategory] = useState<number>(0);
+	const [isAutoPlayNext, setIsAutoPlayNext] = useState<boolean>(true);
+	const [videoUrl, setVideoUrl] = useState<string>("");
 
 	/**
 	 *  分类选项
@@ -19,56 +18,54 @@ function Girl() {
 	const categoryOptions = [
 		{ value: 0, label: "测试" },
 		{ value: 1, label: "随机美少女视频" },
-		{
-			value: 2,
-			label: "随机返回一条小姐姐视频",
-		},
+		{ value: 2, label: "随机返回一条小姐姐视频" },
 	];
 
-	async function getData() {
+	/**
+	 *  分类接口映射
+	 */
+	const categoryMap: Record<number, () => Promise<string>> = {
+		0: BlogApi.getTestVideo,
+		1: BlogApi.getRandomGirlVideo,
+		2: BlogApi.getRandomReturnOneGirlVideo,
+	};
+
+	const getData = async () => {
 		try {
 			setLoading(true);
-			let response = null;
-
-			if (category === 0) {
-				response = await BlogApi.getTestVideo(); // 假设返回视频URL
+			const fetchVideo = categoryMap[category];
+			if (!fetchVideo) {
+				message.error("无效的分类");
+				return;
 			}
-
-			if (category === 1) {
-				console.log("%c Line:30 🍓 category", "color:#ffdd4d", category);
-				response = await BlogApi.getRandomGirlVideo(); // 假设返回视频URL
-			}
-
-			if (category === 2) {
-				response = await BlogApi.getRandomReturnOneGirlVideo(); // 假设返回视频URL
-			}
-
+			const response = await fetchVideo();
 			if (response) {
-				setVideoUrl(response); // 更新视频URL
+				setVideoUrl(response);
 			} else {
-				message.info("未获取到视频资源");
+				message.error("未获取到视频资源");
 			}
 		} catch (error) {
 			message.error("获取数据失败，请稍后重试");
 		} finally {
 			setLoading(false);
 		}
+	};
+
+	// 自动播放逻辑
+	function handleVideoEnd() {
+		if (isAutoPlayNext) {
+			getData();
+		}
 	}
-	/**
-	 * 使用 ahooks 的防抖处理输入变化
-	 */
+
+	// 使用防抖获取数据
 	useDebounceEffect(
 		() => {
 			getData();
 		},
 		[category],
-		{ wait: 500 }, // 防抖时间 500ms
+		{ wait: 500 },
 	);
-
-	function onEnded() {
-		console.log("%c Line:42 🍬 onEnded", "color:#33a5ff", "onEnded");
-		getData();
-	}
 
 	return (
 		<div className="h-full relative flex flex-col">
@@ -78,21 +75,30 @@ function Girl() {
 					showSearch
 					allowClear
 					placeholder="请选择视频类别"
-					defaultValue={category}
-					onChange={(category) => setCategory(category)}
+					value={category}
+					onChange={(value) => {
+						setCategory(value ?? 0);
+					}}
 					options={categoryOptions}
 				/>
 
 				<Button
 					className="h-14 w-14 flex items-center justify-center"
 					loading={loading}
-					onClick={() => getData()}
+					onClick={getData}
 				>
 					<SvgIcon icon="refresh" />
 				</Button>
+
+				<Switch
+					checkedChildren="自动播放"
+					unCheckedChildren="手动播放"
+					checked={isAutoPlayNext}
+					onChange={setIsAutoPlayNext}
+				/>
 			</div>
 
-			{/* 壁纸展示区域 */}
+			{/* 视频播放区域 */}
 			<div className="flex-1 flex justify-center items-center bg-gray-200 h-[80vh] relative">
 				{loading && (
 					<Spin
@@ -105,9 +111,9 @@ function Girl() {
 						controls
 						playing
 						url={videoUrl}
-						onEnded={onEnded}
-						height={"100%"}
-						width={"100%"}
+						onEnded={handleVideoEnd}
+						height="100%"
+						width="100%"
 					/>
 				)}
 			</div>
@@ -115,4 +121,4 @@ function Girl() {
 	);
 }
 
-export default Girl;
+export default Video;
