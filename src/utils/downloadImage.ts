@@ -1,37 +1,43 @@
+import { message } from "antd";
+
 /**
- * 下载图片工具函数
- * @param {string} url 图片的URL地址
- * @param {string} [filename] 下载保存的文件名（默认取URL中的文件名）
+ * 使用 `<a>` 标签下载文件，并动态设置文件名和扩展名
+ * @param url - 文件的 URL
+ * @param [defaultName="downloaded_file"] - 默认文件名（无文件名时使用）
  */
-export async function downloadImage(
-	url: string,
-	filename?: string,
-): Promise<void> {
+export function downloadImage(url: string, defaultName = "downloaded_file") {
 	try {
-		const response = await fetch(url);
-		if (!response.ok) {
-			throw new Error(`下载图片失败，HTTP状态码: ${response.status}`);
-		}
+		// 从 URL 中解析文件名
+		const urlParts = url.split("/");
+		const fileNameWithExtension = urlParts[urlParts.length - 1] || defaultName;
 
-		const blob = await response.blob();
-		const objectUrl = URL.createObjectURL(blob);
+		// 确保文件名具有有效扩展名
+		const validExtensions = [".png", ".jpg", ".jpeg"];
+		const lowerCaseName = fileNameWithExtension.toLowerCase();
+		const hasValidExtension = validExtensions.some((ext) =>
+			lowerCaseName.endsWith(ext),
+		);
 
-		// 提取文件名或使用默认值
-		const defaultFilename = url.split("/").pop() || "image";
-		const finalFilename = filename || defaultFilename;
+		// 如果没有有效扩展名，添加默认扩展名 .jpg
+		const fileName = hasValidExtension
+			? fileNameWithExtension
+			: `${fileNameWithExtension}.jpg`;
 
-		// 创建隐藏的下载链接并触发下载
+		// 创建 a 标签并触发下载
 		const link = document.createElement("a");
-		link.href = objectUrl;
-		link.download = finalFilename;
+		link.href = url;
+		link.target = "_blank";
+		link.download = fileName; // 动态设置文件名
 		document.body.appendChild(link);
 		link.click();
-
-		// 清理资源
 		document.body.removeChild(link);
-		URL.revokeObjectURL(objectUrl);
-	} catch (error) {
-		console.error("图片下载失败:", error);
-		throw error; // 可以根据需求决定是否抛出错误
+
+		// 成功提示
+		message.success(`文件下载成功: ${fileName}`);
+	} catch (err) {
+		console.error(err);
+
+		// 失败提示
+		message.error(`文件下载失败: ${url}`);
 	}
 }

@@ -6,6 +6,8 @@ import { useDebounceEffect } from "ahooks";
 
 import { SvgIcon } from "@/components/icon";
 
+import { downloadImage } from "@/utils/downloadImage";
+
 /**
  * 壁纸组件
  */
@@ -83,6 +85,13 @@ function Wallpaper() {
 					onClick={() => getData()}
 				>
 					<SvgIcon icon="refresh" />
+				</Button>
+
+				<Button
+					className="h-14 w-14 flex items-center justify-center"
+					onClick={() => downloadImage(wallpaper.img_url)}
+				>
+					下载
 				</Button>
 			</div>
 
