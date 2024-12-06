@@ -1,9 +1,6 @@
 import { message } from "antd";
 
 class BlogApi {
-	/**
-	 * 测试获取黄金价格接口
-	 */
 	async test() {
 		try {
 			const response = await fetch(
@@ -125,14 +122,6 @@ class BlogApi {
 		}
 	}
 
-	//  今日热点 https://v.api.aa1.cn/api/topbaidu/index.php
-	//  随机壁纸图片[API盒子官方资源库] https://cn.apihz.cn/api/img/apihzimgbz.php?id=88888888&key=88888888&type=1&imgtype=2
-	//  随机壁纸 https://www.bfbke.com/bzApi.php?type=sj
-
-	//  新闻简报 https://dayu.qqsuu.cn/weiyujianbao/apis.php?type=json
-	//  每日更新假期倒计时日历 https://dayu.qqsuu.cn/moyurili/apis.php?type=json
-	// 品牌黄金 https://free.xwteam.cn/api/gold/brand
-
 	/**
 	 *  获取即将上映电影
 	 */
@@ -205,6 +194,84 @@ class BlogApi {
 		try {
 			const response = await fetch(
 				`https://free.xwteam.cn/api/img/pic?category=${category}`,
+			);
+
+			// 检查响应状态是否正常
+			if (!response.ok) {
+				throw new Error(`HTTP 错误！状态码: ${response.status}`);
+			}
+
+			// 解析并返回 JSON 数据
+			const { data } = await response.json();
+			return data;
+		} catch (error) {
+			// 捕获错误并提示用户
+			message.error(error?.message || "请求失败，请稍后再试");
+		}
+	}
+
+	//  今日热点 https://v.api.aa1.cn/api/topbaidu/index.php
+	//  随机壁纸图片[API盒子官方资源库] https://cn.apihz.cn/api/img/apihzimgbz.php?id=88888888&key=88888888&type=1&imgtype=2
+	//  随机壁纸 https://www.bfbke.com/bzApi.php?type=sj
+
+	//  新闻简报 https://dayu.qqsuu.cn/weiyujianbao/apis.php?type=json
+	//  每日更新假期倒计时日历 https://dayu.qqsuu.cn/moyurili/apis.php?type=json
+	// 品牌黄金 https://free.xwteam.cn/api/gold/brand
+	// 摸鱼日报美女视频版 https://dayu.qqsuu.cn/moyuribaoshipin/apis.php?type=json
+
+	//  随机美少女视频 https://www.wudada.online/Api/ScSp
+	//  随机返回一条小姐姐视频 https://tools.mgtv100.com/external/v1/pear/xjj
+
+	/**
+	 *  获取随机美少女视频
+	 */
+	async getRandomGirlVideo() {
+		try {
+			const response = await fetch("http://www.wudada.online/Api/ScSp");
+
+			// 检查响应状态是否正常
+			if (!response.ok) {
+				throw new Error(`HTTP 错误！状态码: ${response.status}`);
+			}
+
+			// 解析并返回 JSON 数据
+			const { data } = await response.json();
+			return data;
+		} catch (error) {
+			// 捕获错误并提示用户
+			message.error(error?.message || "请求失败，请稍后再试");
+		}
+	}
+	/**
+	 *  获取随机返回一条小姐姐视频
+	 */
+	async getRandomReturnOneGirlVideo() {
+		try {
+			const response = await fetch(
+				"https://tools.mgtv100.com/external/v1/pear/xjj",
+			);
+
+			// 检查响应状态是否正常
+			if (!response.ok) {
+				throw new Error(`HTTP 错误！状态码: ${response.status}`);
+			}
+
+			// 解析并返回 JSON 数据
+			const { data } = await response.json();
+			return data;
+		} catch (error) {
+			// 捕获错误并提示用户
+			message.error(error?.message || "请求失败，请稍后再试");
+		}
+	}
+
+	/**
+	 *  https://tools.mgtv100.com/external/v1/pear/xjj
+	 */
+	async getTestVideo() {
+		try {
+			const response = await fetch(
+				"https://tools.mgtv100.com/external/v1/pear/xjj",
 			);
 
 			// 检查响应状态是否正常

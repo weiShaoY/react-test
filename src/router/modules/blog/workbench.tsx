@@ -6,14 +6,14 @@ import { CircleLoading } from "@/components/loading";
 
 import type { AppRouteObject } from "#/router";
 
-const Workbench = lazy(() => import("@/pages/blog/workbench"));
+const WorkbenchPage = lazy(() => import("@/pages/blog/workbench"));
 
-const workbench: AppRouteObject = {
+const Workbench: AppRouteObject = {
 	order: 1,
 	path: "workbench",
 	element: (
 		<Suspense fallback={<CircleLoading />}>
-			<Workbench />
+			<WorkbenchPage />
 		</Suspense>
 	),
 	meta: {
@@ -29,4 +29,4 @@ const workbench: AppRouteObject = {
 	},
 };
 
-export default workbench;
+export default Workbench;

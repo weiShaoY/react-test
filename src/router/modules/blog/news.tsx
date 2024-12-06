@@ -17,7 +17,7 @@ const HokPage = lazy(() => import("@/pages/blog/news/hok"));
 function Wrapper({ children }: any) {
 	return <Suspense fallback={<CircleLoading />}>{children}</Suspense>;
 }
-const document: AppRouteObject = {
+const News: AppRouteObject = {
 	order: 2,
 	path: "news",
 	element: (
@@ -104,4 +104,4 @@ const document: AppRouteObject = {
 	],
 };
 
-export default document;
+export default News;

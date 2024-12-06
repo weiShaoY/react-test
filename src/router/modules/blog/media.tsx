@@ -6,28 +6,28 @@ import { CircleLoading } from "@/components/loading";
 
 import type { AppRouteObject } from "#/router";
 
-const GirlPage = lazy(() => import("@/pages/blog/video/girl"));
+const VideoPage = lazy(() => import("@/pages/blog/media/video"));
 
-const WallpaperPage = lazy(() => import("@/pages/blog/video/wallpaper"));
+const WallpaperPage = lazy(() => import("@/pages/blog/media/wallpaper"));
 
-const document: AppRouteObject = {
+const Media: AppRouteObject = {
 	order: 4,
-	path: "video",
+	path: "media",
 	element: (
 		<Suspense fallback={<CircleLoading />}>
 			<Outlet />
 		</Suspense>
 	),
 	meta: {
-		label: "视频",
+		label: "媒体",
 		icon: (
 			<SvgIcon
-				icon="blog-menu-video"
+				icon="blog-menu-media"
 				className="ant-menu-item-icon"
 				size="24"
 			/>
 		),
-		key: "/video",
+		key: "/media",
 	},
 	children: [
 		{
@@ -39,7 +39,7 @@ const document: AppRouteObject = {
 			element: <WallpaperPage />,
 			meta: {
 				label: "壁纸",
-				key: "/video/wallpaper",
+				key: "/media/wallpaper",
 				icon: (
 					<SvgIcon
 						icon="blog-menu-wallpaper"
@@ -51,14 +51,14 @@ const document: AppRouteObject = {
 		},
 
 		{
-			path: "girl",
-			element: <GirlPage />,
+			path: "video",
+			element: <VideoPage />,
 			meta: {
-				label: "美女",
-				key: "/video/girl",
+				label: "视频",
+				key: "/media/video",
 				icon: (
 					<SvgIcon
-						icon="blog-menu-girl"
+						icon="blog-menu-video"
 						className="ant-menu-item-icon"
 						size="24"
 					/>
@@ -68,4 +68,4 @@ const document: AppRouteObject = {
 	],
 };
 
-export default document;
+export default Media;

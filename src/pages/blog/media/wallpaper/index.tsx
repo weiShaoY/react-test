@@ -10,6 +10,8 @@ import { SvgIcon } from "@/components/icon";
  * 壁纸组件
  */
 function Wallpaper() {
+	const [loading, setLoading] = useState(false);
+
 	const [category, setCategory] = useState("mn");
 
 	const [wallpaper, setWallpaper] = useState({
@@ -17,20 +19,6 @@ function Wallpaper() {
 		img_width: 1920,
 		img_height: 1080,
 	});
-
-	const [loading, setLoading] = useState(false);
-
-	/**
-	 * 使用 ahooks 的防抖处理输入变化
-	 * 只有在初始化之后，防抖才会生效
-	 */
-	useDebounceEffect(
-		() => {
-			getData();
-		},
-		[category],
-		{ wait: 500 }, // 防抖时间 500ms
-	);
 
 	/**
 	 *  分类选项
@@ -65,6 +53,17 @@ function Wallpaper() {
 			setLoading(false);
 		}
 	};
+
+	/**
+	 * 使用 ahooks 的防抖处理输入变化
+	 */
+	useDebounceEffect(
+		() => {
+			getData();
+		},
+		[category],
+		{ wait: 500 }, // 防抖时间 500ms
+	);
 	return (
 		<div className="h-full relative flex flex-col">
 			<div className="flex items-center mb-4 gap-5">
@@ -79,24 +78,31 @@ function Wallpaper() {
 				/>
 
 				<Button
-					className="h-14 w-14"
+					className="h-14 w-14 flex items-center justify-center"
 					loading={loading}
 					onClick={() => getData()}
 				>
-					<SvgIcon icon="refresh" size={40} />
+					<SvgIcon icon="refresh" />
 				</Button>
 			</div>
 
 			{/* 壁纸展示区域 */}
-			<div className="flex-1 flex justify-center items-center bg-gray-200 h-[80vh]">
-				{loading && !wallpaper.img_url ? (
-					<Spin size="large" />
-				) : (
+			<div className="flex-1 flex justify-center items-center bg-gray-200 h-[80vh] relative">
+				{loading && (
+					<Spin
+						size="large"
+						className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+					/>
+				)}
+				{wallpaper.img_url && (
 					<Image
 						src={wallpaper.img_url}
-						height="100%"
 						alt="壁纸"
-						style={{ objectFit: "contain", width: "auto", maxHeight: "100%" }}
+						style={{
+							maxWidth: "100%",
+							maxHeight: "100%",
+							objectFit: "contain",
+						}}
 					/>
 				)}
 			</div>

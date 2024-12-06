@@ -142,7 +142,7 @@ const childRoutes = [
 	},
 ];
 
-const document: AppRouteObject = {
+const Document: AppRouteObject = {
 	order: 2,
 	path: "document",
 	element: (
@@ -187,4 +187,4 @@ const document: AppRouteObject = {
 	],
 };
 
-export default document;
+export default Document;
