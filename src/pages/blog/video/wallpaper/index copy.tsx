@@ -79,31 +79,24 @@ function Wallpaper() {
 				/>
 
 				<Button
-					className="h-14 w-14 flex items-center justify-center"
+					className="h-14 w-14"
 					loading={loading}
 					onClick={() => getData()}
 				>
-					<SvgIcon icon="refresh" />
+					<SvgIcon icon="refresh" size={40} />
 				</Button>
 			</div>
 
 			{/* 壁纸展示区域 */}
-			<div className="flex-1 flex justify-center items-center bg-gray-200 h-[80vh] relative">
-				{loading && (
-					<Spin
-						size="large"
-						className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-					/>
-				)}
-				{wallpaper.img_url && (
+			<div className="flex-1 flex justify-center items-center bg-gray-200 h-[80vh]">
+				{loading && !wallpaper.img_url ? (
+					<Spin size="large" />
+				) : (
 					<Image
 						src={wallpaper.img_url}
+						height="100%"
 						alt="壁纸"
-						style={{
-							maxWidth: "100%",
-							maxHeight: "100%",
-							objectFit: "contain",
-						}}
+						style={{ objectFit: "contain", width: "auto", maxHeight: "100%" }}
 					/>
 				)}
 			</div>
