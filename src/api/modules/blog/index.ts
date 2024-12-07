@@ -4,49 +4,49 @@ class BlogApi {
 	/**
 	 * 测试接口
 	 */
-	async test() {
+	test() {
 		return fetchHttp("https://tools.mgtv100.com/external/v1/pear/goldPrice");
 	}
 
 	/**
 	 * 获取大盘黄金价格
 	 */
-	async getMarketGoldPrice() {
+	getMarketGoldPrice() {
 		return fetchHttp("https://tools.mgtv100.com/external/v1/pear/goldPrice");
 	}
 
 	/**
 	 * 获取品牌黄金价格
 	 */
-	async getBrandGoldPrice() {
+	getBrandGoldPrice() {
 		return fetchHttp("https://free.xwteam.cn/api/gold/brand");
 	}
 
 	/**
 	 * 获取问候语
 	 */
-	async getGreeting() {
+	getGreeting() {
 		return fetchHttp("https://api.kuleu.com/api/getGreetingMessage?type=json");
 	}
 
 	/**
 	 * 获取励志语句
 	 */
-	async getMotivationalQuotes() {
+	getMotivationalQuotes() {
 		return fetchHttp("https://zj.v.api.aa1.cn/api/wenan-zl/?type=json");
 	}
 
 	/**
 	 * 获取即将上映电影
 	 */
-	async getComingSoonMovie() {
+	getComingSoonMovie() {
 		return fetchHttp("https://free.xwteam.cn/api/cinema/coming");
 	}
 
 	/**
 	 * 获取院线热播电影
 	 */
-	async getHotTheaterMovie() {
+	getHotTheaterMovie() {
 		return fetchHttp("https://free.xwteam.cn/api/cinema/hot");
 	}
 
@@ -55,7 +55,7 @@ class BlogApi {
 	 * @param {string} type - 战力类型
 	 * @param {string} hero - 英雄名称
 	 */
-	async getHok(type: string, hero: string) {
+	getHok(type: string, hero: string) {
 		return fetchHttp(
 			`https://free.xwteam.cn/api/game/hok?type=${type}&hero=${hero}`,
 		);
@@ -65,35 +65,38 @@ class BlogApi {
 	 * 获取壁纸
 	 * @param {string} category - 壁纸分类
 	 */
-	async getWallpaper(category: string) {
+	getWallpaper(category: string) {
 		return fetchHttp(`https://free.xwteam.cn/api/img/pic?category=${category}`);
 	}
 
 	/**
-	 *  获取随机美少女视频
-	 */
-	/**
 	 * 获取随机美少女视频
 	 */
-	async getRandomGirlVideo() {
+	getRandomGirlVideo() {
 		return fetchHttp("http://www.wudada.online/Api/ScSp");
 	}
 
 	/**
-	 *  获取随机返回一条小姐姐视频
-	 */
-	/**
 	 * 获取随机返回一条小姐姐视频
 	 */
-	async getRandomReturnOneGirlVideo() {
+	getRandomReturnOneGirlVideo() {
 		return fetchHttp("https://tools.mgtv100.com/external/v1/pear/xjj");
 	}
 
 	/**
 	 *  获取测试视频
 	 */
-	async getTestVideo() {
+	getTestVideo() {
 		return fetchHttp("https://tucdn.wpon.cn/api-girl/index.php?wpon=json");
+	}
+
+	/**
+	 *  获取车牌信息
+	 */
+	getLicensePlateNumberInfo(licensePlateNumber: string) {
+		return fetchHttp(
+			`https://v.api.aa1.cn/api/car-number-fl/index.php?num=${licensePlateNumber}`,
+		);
 	}
 
 	//  今日热点 https://v.api.aa1.cn/api/topbaidu/index.php

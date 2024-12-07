@@ -1,7 +1,5 @@
 import { Suspense, lazy } from "react";
 
-import { SvgIcon } from "@/components/icon";
-
 import { CircleLoading } from "@/components/loading";
 
 import type { AppRouteObject } from "#/router";
@@ -18,13 +16,7 @@ const Workbench: AppRouteObject = {
 	),
 	meta: {
 		label: "工作台",
-		icon: (
-			<SvgIcon
-				icon="blog-menu-workbench"
-				className="ant-menu-item-icon"
-				size="24"
-			/>
-		),
+		icon: "blog-menu-workbench",
 		key: "/workbench",
 	},
 };

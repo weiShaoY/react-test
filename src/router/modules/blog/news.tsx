@@ -1,7 +1,6 @@
 import { Suspense, lazy } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
-import { SvgIcon } from "@/components/icon";
 import { CircleLoading } from "@/components/loading";
 
 import type { AppRouteObject } from "#/router";
@@ -18,7 +17,7 @@ function Wrapper({ children }: any) {
 	return <Suspense fallback={<CircleLoading />}>{children}</Suspense>;
 }
 const News: AppRouteObject = {
-	order: 2,
+	order: 4,
 	path: "news",
 	element: (
 		<Suspense fallback={<CircleLoading />}>
@@ -26,10 +25,8 @@ const News: AppRouteObject = {
 		</Suspense>
 	),
 	meta: {
-		label: "新闻",
-		icon: (
-			<SvgIcon icon="blog-menu-news" className="ant-menu-item-icon" size="24" />
-		),
+		label: "资讯",
+		icon: "blog-menu-news",
 		key: "/news",
 	},
 	children: [
@@ -47,13 +44,7 @@ const News: AppRouteObject = {
 			meta: {
 				label: "每日热点",
 				key: "/news/dailyHotTopics",
-				icon: (
-					<SvgIcon
-						icon="blog-menu-dailyHotTopics"
-						className="ant-menu-item-icon"
-						size="24"
-					/>
-				),
+				icon: "blog-menu-dailyHotTopics",
 			},
 		},
 		{
@@ -62,13 +53,7 @@ const News: AppRouteObject = {
 			meta: {
 				label: "金价",
 				key: "/news/goldPrice",
-				icon: (
-					<SvgIcon
-						icon="blog-menu-goldPrice"
-						className="ant-menu-item-icon"
-						size="24"
-					/>
-				),
+				icon: "blog-menu-goldPrice",
 			},
 		},
 		{
@@ -77,13 +62,7 @@ const News: AppRouteObject = {
 			meta: {
 				label: "电影",
 				key: "/news/movie",
-				icon: (
-					<SvgIcon
-						icon="blog-menu-movie"
-						className="ant-menu-item-icon"
-						size="24"
-					/>
-				),
+				icon: "blog-menu-movie",
 			},
 		},
 		{
@@ -92,13 +71,7 @@ const News: AppRouteObject = {
 			meta: {
 				label: "王者荣耀",
 				key: "/news/hok",
-				icon: (
-					<SvgIcon
-						icon="blog-menu-hok"
-						className="ant-menu-item-icon"
-						size="24"
-					/>
-				),
+				icon: "blog-menu-hok",
 			},
 		},
 	],

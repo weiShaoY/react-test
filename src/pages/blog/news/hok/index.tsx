@@ -11,36 +11,8 @@ function Hok() {
 		hero: "百里守约", // 英雄名称
 		data: null as any, // 数据
 	});
-
 	/**
-	 * 获取数据
-	 */
-	const getData = async () => {
-		setLoading(true);
-		try {
-			const { type, hero } = state;
-			const res = await BlogApi.getHok(type, hero);
-			setState({ ...state, data: res });
-		} catch (error) {
-			message.error(error.message || "获取数据失败，请稍后重试");
-		} finally {
-			setLoading(false);
-		}
-	};
-
-	/**
-	 * 使用 ahooks 的防抖处理输入变化
-	 */
-	useDebounceEffect(
-		() => {
-			getData();
-		},
-		[state.type, state.hero], // 依赖类型和英雄名称
-		{ wait: 500 }, // 防抖时间 500ms
-	);
-
-	/**
-	 * 常量配置
+	 *  区选项
 	 */
 	const typeSelectOptions = [
 		{ value: "ios_qq", label: "苹果QQ区" },
@@ -49,6 +21,9 @@ function Hok() {
 		{ value: "wx", label: "安卓微信区" },
 	];
 
+	/**
+	 *  英雄选项
+	 */
 	const heroSelectOptions = [
 		{ value: "影", label: "影" },
 		{ value: "少司缘", label: "少司缘" },
@@ -174,6 +149,32 @@ function Hok() {
 		{ value: "小乔", label: "小乔" },
 		{ value: "廉颇", label: "廉颇" },
 	];
+	/**
+	 * 获取数据
+	 */
+	const getData = async () => {
+		try {
+			setLoading(true);
+			const { type, hero } = state;
+			const res = await BlogApi.getHok(type, hero);
+			setState({ ...state, data: res });
+		} catch (error) {
+			message.error(error.message || "获取数据失败，请稍后重试");
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	/**
+	 * 使用 ahooks 的防抖处理输入变化
+	 */
+	useDebounceEffect(
+		() => {
+			getData();
+		},
+		[state.type, state.hero], // 依赖类型和英雄名称
+		{ wait: 500 }, // 防抖时间 500ms
+	);
 
 	const items = [
 		{

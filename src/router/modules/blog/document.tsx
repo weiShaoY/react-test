@@ -1,4 +1,3 @@
-import { SvgIcon } from "@/components/icon";
 import { CircleLoading } from "@/components/loading";
 import { Suspense, lazy } from "react";
 import { Navigate, Outlet } from "react-router-dom";
@@ -152,13 +151,7 @@ const Document: AppRouteObject = {
 	),
 	meta: {
 		label: "文档",
-		icon: (
-			<SvgIcon
-				icon="blog-menu-document"
-				className="ant-menu-item-icon"
-				size="24"
-			/>
-		),
+		icon: "blog-menu-document",
 		key: "/document",
 	},
 	children: [
@@ -177,9 +170,7 @@ const Document: AppRouteObject = {
 				meta: {
 					label,
 					key,
-					icon: (
-						<SvgIcon icon={icon} className="ant-menu-item-icon" size="24" />
-					),
+					icon,
 					...(hideTab && { hideTab }),
 				},
 			}),
