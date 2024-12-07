@@ -1,7 +1,7 @@
 import { BlogApi } from "@/api";
 import { message } from "antd";
 import { useState } from "react";
-import { Image, Select, Button, Spin } from "antd";
+import { Image, Select, Button, Spin, Tooltip } from "antd";
 import { useDebounceEffect } from "ahooks";
 
 import { SvgIcon } from "@/components/icon";
@@ -79,20 +79,20 @@ function Wallpaper() {
 					options={categoryOptions}
 				/>
 
-				<Button
-					className="h-14 w-14 flex items-center justify-center"
-					loading={loading}
-					onClick={() => getData()}
-				>
-					<SvgIcon icon="refresh" />
-				</Button>
+				<Tooltip placement="top" title="点击刷新">
+					<Button
+						loading={loading}
+						onClick={getData}
+						icon={<SvgIcon icon="refresh" />}
+					/>
+				</Tooltip>
 
-				<Button
-					className="h-14 w-14 flex items-center justify-center"
-					onClick={() => downloadImage(wallpaper.img_url)}
-				>
-					下载
-				</Button>
+				<Tooltip placement="top" title="点击下载">
+					<Button
+						onClick={() => downloadImage(wallpaper.img_url)}
+						icon={<SvgIcon icon="download" />}
+					/>
+				</Tooltip>
 			</div>
 
 			{/* 壁纸展示区域 */}

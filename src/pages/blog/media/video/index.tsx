@@ -4,7 +4,7 @@ import { message } from "antd";
 import ReactPlayer from "react-player/lazy";
 import { useDebounceEffect } from "ahooks";
 import { SvgIcon } from "@/components/icon";
-import { Select, Button, Spin, Switch } from "antd";
+import { Select, Button, Spin, Switch, Tooltip } from "antd";
 
 function Video() {
 	const [loading, setLoading] = useState<boolean>(false);
@@ -82,13 +82,13 @@ function Video() {
 					options={categoryOptions}
 				/>
 
-				<Button
-					className="h-14 w-14 flex items-center justify-center"
-					loading={loading}
-					onClick={getData}
-				>
-					<SvgIcon icon="refresh" />
-				</Button>
+				<Tooltip placement="top" title="点击刷新">
+					<Button
+						loading={loading}
+						onClick={getData}
+						icon={<SvgIcon icon="refresh" />}
+					/>
+				</Tooltip>
 
 				<Switch
 					checkedChildren="自动播放"

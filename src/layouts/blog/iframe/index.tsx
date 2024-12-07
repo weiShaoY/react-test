@@ -26,9 +26,10 @@ export default function BlogIframeLayout({ src = "" }: Props) {
 			)}
 			<div className="w-full flex py-2 justify-end">
 				<Tooltip placement="leftTop" title="在新标签页打开">
-					<Button onClick={() => window.open(src, "_blank")}>
-						<SvgIcon icon="arrow-top-right" />
-					</Button>
+					<Button
+						onClick={() => window.open(src, "_blank")}
+						icon={<SvgIcon icon="arrow-top-right" />}
+					/>
 				</Tooltip>
 			</div>
 			{/* iframe 元素 */}
