@@ -1,7 +1,7 @@
-import { useEffect, useState, useCallback } from "react";
-import { Table, Tabs, Image, Spin, message } from "antd";
-import type { TableProps } from "antd";
 import { BlogApi } from "@/api";
+import { Image, Spin, Table, Tabs, message } from "antd";
+import type { TableProps } from "antd";
+import { useCallback, useEffect, useState } from "react";
 
 /**
  *  电影即将上映列表每一项
@@ -360,7 +360,7 @@ function Movie() {
 			rowKey={rowKey}
 			loading={loading}
 			pagination={{ pageSize: 50 }}
-			scroll={{ y: "calc(100vh - 350px)" }}
+			scroll={{ y: "calc(100vh - 300px)" }}
 		/>
 	);
 

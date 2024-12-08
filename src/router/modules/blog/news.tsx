@@ -13,6 +13,8 @@ const MoviePage = lazy(() => import("@/pages/blog/news/movie"));
 
 const HokPage = lazy(() => import("@/pages/blog/news/hok"));
 
+const OilPage = lazy(() => import("@/pages/blog/news/oil"));
+
 function Wrapper({ children }: any) {
 	return <Suspense fallback={<CircleLoading />}>{children}</Suspense>;
 }
@@ -72,6 +74,15 @@ const News: AppRouteObject = {
 				label: "王者荣耀",
 				key: "/news/hok",
 				icon: "blog-menu-hok",
+			},
+		},
+		{
+			path: "oil",
+			element: <OilPage />,
+			meta: {
+				label: "油价",
+				key: "/news/oil",
+				icon: "blog-menu-oil",
 			},
 		},
 	],

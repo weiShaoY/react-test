@@ -1,7 +1,7 @@
-import { useEffect, useState, useCallback } from "react";
-import { Table, message, Tabs } from "antd";
-import type { TableProps } from "antd";
 import { BlogApi } from "@/api";
+import { Table, Tabs, message } from "antd";
+import type { TableProps } from "antd";
+import { useCallback, useEffect, useState } from "react";
 
 /**
  *  品牌黄金价格每一项
@@ -43,12 +43,14 @@ const brandGoldPriceColumns: TableProps<BrandGoldPriceItemType>["columns"] = [
 		dataIndex: "goldPrice",
 		key: "goldPrice",
 		align: "center",
+		sorter: (a, b) => Number(a.goldPrice) - Number(b.goldPrice),
 	},
 	{
 		title: "铂金价格",
 		dataIndex: "ptPrice",
 		key: "ptPrice",
 		align: "center",
+		sorter: (a, b) => Number(a.ptPrice) - Number(b.ptPrice),
 	},
 ];
 
@@ -125,6 +127,7 @@ const marketGoldPriceColumns: TableProps<MarketGoldPriceItemType>["columns"] = [
 		key: "price",
 		width: 100,
 		align: "right",
+		sorter: (a, b) => Number(a.price) - Number(b.price),
 	},
 	{
 		title: "涨跌幅",
@@ -137,6 +140,7 @@ const marketGoldPriceColumns: TableProps<MarketGoldPriceItemType>["columns"] = [
 		// 		{value}%
 		// 	</span>
 		// ),
+		sorter: (a, b) => Number(a.changepercent) - Number(b.changepercent),
 	},
 	{
 		title: "最高价",
@@ -144,6 +148,7 @@ const marketGoldPriceColumns: TableProps<MarketGoldPriceItemType>["columns"] = [
 		key: "maxprice",
 		width: 100,
 		align: "right",
+		sorter: (a, b) => Number(a.maxprice) - Number(b.maxprice),
 	},
 	{
 		title: "最低价",
@@ -151,6 +156,7 @@ const marketGoldPriceColumns: TableProps<MarketGoldPriceItemType>["columns"] = [
 		key: "minprice",
 		width: 100,
 		align: "right",
+		sorter: (a, b) => Number(a.minprice) - Number(b.minprice),
 	},
 	{
 		title: "开盘价",
@@ -158,6 +164,7 @@ const marketGoldPriceColumns: TableProps<MarketGoldPriceItemType>["columns"] = [
 		key: "openingprice",
 		width: 100,
 		align: "right",
+		sorter: (a, b) => Number(a.openingprice) - Number(b.openingprice),
 	},
 	{
 		title: "收盘价",
@@ -165,6 +172,7 @@ const marketGoldPriceColumns: TableProps<MarketGoldPriceItemType>["columns"] = [
 		key: "lastclosingprice",
 		width: 100,
 		align: "right",
+		sorter: (a, b) => Number(a.lastclosingprice) - Number(b.lastclosingprice),
 	},
 	{
 		title: "日期",
@@ -220,7 +228,7 @@ function GoldPrice() {
 	const renderTable = <T,>(
 		columns: TableProps<T>["columns"],
 		data: T[],
-		rowKey: string,
+		rowKey: string | ((record: T) => string),
 	) => (
 		<Table<T>
 			columns={columns}
@@ -228,7 +236,7 @@ function GoldPrice() {
 			rowKey={rowKey}
 			loading={loading}
 			pagination={{ pageSize: 50 }}
-			scroll={{ y: "calc(100vh - 350px)" }}
+			scroll={{ y: "calc(100vh - 300px)" }}
 		/>
 	);
 
@@ -251,7 +259,7 @@ function GoldPrice() {
 					children: renderTable(
 						marketGoldPriceColumns,
 						data.marketGoldPriceData,
-						"id",
+						(record) => `${record.id}-${record.date}`,
 					),
 				},
 			]}
