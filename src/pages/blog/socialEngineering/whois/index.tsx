@@ -118,7 +118,6 @@ function Hok() {
 	];
 
 	async function getData(trimmedWhois: string) {
-		console.log("%c Line:121 🍇 trimmedWhois", "color:#33a5ff", trimmedWhois);
 		try {
 			if (!trimmedWhois.trim()) throw new Error("请输入域名");
 
@@ -224,7 +223,7 @@ function Hok() {
 					<Descriptions
 						className="w-full h-full"
 						labelStyle={{
-							maxWidth: 300,
+							width: 160,
 						}}
 						bordered
 						items={items}

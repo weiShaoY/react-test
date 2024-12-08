@@ -169,7 +169,7 @@ function Hok() {
 					<Descriptions
 						className="w-full h-full"
 						labelStyle={{
-							maxWidth: 300,
+							width: 160,
 						}}
 						bordered
 						items={items}
