@@ -1,7 +1,7 @@
+import { useState } from "react";
+import { message, Select, Spin, Descriptions, Image, Skeleton } from "antd";
 import { BlogApi } from "@/api";
 import { useDebounceEffect } from "ahooks";
-import { Descriptions, Image, Select, Spin, message } from "antd";
-import { useState } from "react";
 
 function Hok() {
 	const [loading, setLoading] = useState(false);
@@ -233,46 +233,50 @@ function Hok() {
 	];
 
 	return (
-		<div className="p-4 h-full flex flex-col">
+		<div className="p-4 h-full">
+			{/* 顶部筛选栏 */}
+			<div className="flex items-center justify-between mb-4">
+				<Select
+					className="w-40"
+					showSearch
+					allowClear
+					placeholder="请选择区"
+					defaultValue={state.type}
+					onChange={(type) => setState({ ...state, type })}
+					options={typeSelectOptions}
+				/>
+
+				<Select
+					className="!w-60"
+					showSearch
+					allowClear
+					placeholder="请输入或选择英雄名称"
+					defaultValue={state.hero}
+					onChange={(hero) => setState({ ...state, hero })}
+					options={heroSelectOptions}
+				/>
+			</div>
+
 			{/* 数据展示 */}
-			{loading ? (
-				<Spin
-					size="large"
-					className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2
-				-translate-y-1/2"
-				/>
-			) : (
-				<Descriptions
-					className="w-full h-full"
-					labelStyle={{
-						width: 160,
-					}}
-					bordered
-					items={items}
-					title={
-						<Select
-							className="w-40"
-							showSearch
-							allowClear
-							placeholder="请选择区"
-							defaultValue={state.type}
-							onChange={(type) => setState({ ...state, type })}
-							options={typeSelectOptions}
-						/>
-					}
-					extra={
-						<Select
-							className="!w-60"
-							showSearch
-							allowClear
-							placeholder="请输入或选择英雄名称"
-							defaultValue={state.hero}
-							onChange={(hero) => setState({ ...state, hero })}
-							options={heroSelectOptions}
-						/>
-					}
-				/>
-			)}
+			<Descriptions bordered>
+				{loading
+					? Array(7)
+							.fill(null)
+							.map((_) => (
+								<Descriptions.Item key={_ + new Date().getTime()}>
+									<Skeleton active paragraph={{ rows: 1, width: "80%" }} />
+								</Descriptions.Item>
+							))
+					: items.map((item) => (
+							<Descriptions.Item
+								key={item.label}
+								label={item.label}
+								span={item.span}
+							>
+								{item.children}
+							</Descriptions.Item>
+						))}
+			</Descriptions>
 		</div>
 	);
 }

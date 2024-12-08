@@ -1,18 +1,12 @@
-import { useState } from "react";
-import {
-	message,
-	Select,
-	Spin,
-	Descriptions,
-	Image,
-	Skeleton,
-	Input,
-} from "antd";
 import { BlogApi } from "@/api";
+import { Input } from "antd";
+import { useState } from "react";
+console.log("%c Line:12 🌶 BlogApi", "color:#ffdd4d", BlogApi);
 import { useDebounceEffect } from "ahooks";
 
 function Hok() {
 	const [loading, setLoading] = useState(false);
+	console.log("%c Line:16 🍰 loading", "color:#93c0a4", loading);
 
 	const [name, setName] = useState("");
 
@@ -72,7 +66,7 @@ function Hok() {
 		// 	span: 1,
 		// },
 	];
-
+	console.log("%c Line:77 🍢 items", "color:#93c0a4", items);
 	return (
 		<div className="p-4 h-full">
 			{/* 顶部筛选栏 */}
