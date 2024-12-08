@@ -188,48 +188,40 @@ function Hok() {
 
 	return (
 		<div className="p-4 h-full flex flex-col">
-			{/* 顶部筛选栏 */}
-			<div className="flex items-center justify-between mb-4">
-				<Input.Search
-					className="!w-80"
-					allowClear
-					placeholder="请输入域名"
-					value={whois}
-					onChange={handleInputChange}
-					onPressEnter={throttledGetData}
-					onSearch={throttledGetData}
-					onClear={handleClear}
-					loading={loading}
-					enterButton="搜索"
-					disabled={loading}
-					status={error ? "error" : ""}
-				/>{" "}
-				{/* 错误提示 */}
-				{error && (
-					<div style={{ color: "red", marginTop: "4px" }}>{error}</div>
-				)}{" "}
-			</div>
-
 			{/* 数据展示 */}
-			<div className="flex-1 flex justify-center items-center bg-gray-200 relative">
-				{loading && (
-					<Spin
-						size="large"
-						className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-					/>
-				)}
-
-				{!loading && (
-					<Descriptions
-						className="w-full h-full"
-						labelStyle={{
-							width: 160,
-						}}
-						bordered
-						items={items}
-					/>
-				)}
-			</div>
+			{loading ? (
+				<Spin
+					size="large"
+					className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2
+				-translate-y-1/2"
+				/>
+			) : (
+				<Descriptions
+					className="w-full h-full"
+					labelStyle={{
+						width: 160,
+					}}
+					bordered
+					items={items}
+					title={
+						<Input.Search
+							className="!w-80"
+							allowClear
+							placeholder="请输入域名"
+							value={whois}
+							onChange={handleInputChange}
+							onPressEnter={throttledGetData}
+							onSearch={throttledGetData}
+							onClear={handleClear}
+							loading={loading}
+							enterButton="搜索"
+							disabled={loading}
+							status={error ? "error" : ""}
+						/>
+					}
+					extra={error && <div className="text-red mt-1">{error}</div>}
+				/>
+			)}
 		</div>
 	);
 }
