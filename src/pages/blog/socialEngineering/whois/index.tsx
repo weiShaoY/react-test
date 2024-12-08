@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { message, Descriptions, Input, Spin } from "antd";
 import { BlogApi } from "@/api";
 import { isValidDomain } from "@/utils";
 import { useThrottleFn } from "ahooks";
+import { Descriptions, Input, Spin, message } from "antd";
 import dayjs from "dayjs";
+import { useState } from "react";
 
 /**
  * 表示域名的 Whois 数据结构
@@ -224,7 +224,7 @@ function Hok() {
 					<Descriptions
 						className="w-full h-full"
 						labelStyle={{
-							width: 300,
+							maxWidth: 300,
 						}}
 						bordered
 						items={items}

@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { message, Descriptions, Input, Spin } from "antd";
 import { BlogApi } from "@/api";
-import { useThrottleFn } from "ahooks";
 import { isValidPlateNumber } from "@/utils";
+import { useThrottleFn } from "ahooks";
+import { Descriptions, Input, Spin, message } from "antd";
+import { useState } from "react";
 
 const typeMap: Record<string, string> = {
 	"10": "民用",
@@ -169,7 +169,7 @@ function Hok() {
 					<Descriptions
 						className="w-full h-full"
 						labelStyle={{
-							width: 300,
+							maxWidth: 300,
 						}}
 						bordered
 						items={items}
