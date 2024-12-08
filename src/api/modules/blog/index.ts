@@ -5,7 +5,7 @@ class BlogApi {
 	 * 测试接口
 	 */
 	test() {
-		return fetchHttp("https://tools.mgtv100.com/external/v1/pear/goldPrice");
+		return fetchHttp("https://v2.api-m.com/api/whois?domain=xxhzm.cn");
 	}
 
 	/**
@@ -92,11 +92,20 @@ class BlogApi {
 
 	/**
 	 *  获取车牌信息
+	 *  @param {string} licensePlateNumber - 车牌号
 	 */
 	getLicensePlateNumberInfo(licensePlateNumber: string) {
 		return fetchHttp(
 			`https://v.api.aa1.cn/api/car-number-fl/index.php?num=${licensePlateNumber}`,
 		);
+	}
+
+	/**
+	 *  获取whois 信息
+	 *  @param {string} domain - 域名
+	 */
+	getWhoisInfo(domain: string) {
+		return fetchHttp(`https://v2.api-m.com/api/whois?domain=${domain}`);
 	}
 
 	//  今日热点 https://v.api.aa1.cn/api/topbaidu/index.php

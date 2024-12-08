@@ -13,7 +13,7 @@ const typeMap: Record<string, string> = {
 function Hok() {
 	const [loading, setLoading] = useState(false);
 
-	const [name, setName] = useState("京A12345");
+	const [licensePlateNumber, setLicensePlateNumber] = useState("京A12345");
 
 	const [data, setData] = useState({
 		province_name: "",
@@ -28,7 +28,7 @@ function Hok() {
 	const getData = async () => {
 		setLoading(true);
 		try {
-			const res = await BlogApi.getLicensePlateNumberInfo(name);
+			const res = await BlogApi.getLicensePlateNumberInfo(licensePlateNumber);
 
 			setData(res);
 		} catch (error) {
@@ -45,7 +45,7 @@ function Hok() {
 		() => {
 			getData();
 		},
-		[name], // 依赖类型和英雄名称
+		[licensePlateNumber], // 依赖类型和英雄名称
 		{ wait: 1000 }, // 防抖时间 500ms
 	);
 
@@ -80,8 +80,8 @@ function Hok() {
 				<Input
 					allowClear
 					placeholder="请输入车牌号"
-					value={name}
-					onChange={(e) => setName(e.target.value)}
+					value={licensePlateNumber}
+					onChange={(e) => setLicensePlateNumber(e.target.value)}
 					className="!w-80"
 				/>
 			</div>

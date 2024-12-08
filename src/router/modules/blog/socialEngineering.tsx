@@ -13,6 +13,10 @@ const LicensePlatePage = lazy(
 	() => import("@/pages/blog/socialEngineering/licensePlate"),
 );
 
+const WhoisPage = lazy(
+	() => import("@/pages/blog/socialEngineering/whois"),
+);
+
 const SocialEngineering: AppRouteObject = {
 	order: 6,
 	path: "socialEngineering",
@@ -47,6 +51,15 @@ const SocialEngineering: AppRouteObject = {
 				label: "车牌查询",
 				key: "/socialEngineering/licensePlate",
 				icon: "blog-menu-licensePlate",
+			},
+		},
+		{
+			path: "whois",
+			element: <WhoisPage />,
+			meta: {
+				label: "域名查询",
+				key: "/socialEngineering/whois",
+				icon: "blog-menu-whois",
 			},
 		},
 	],
