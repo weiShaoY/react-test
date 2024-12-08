@@ -251,7 +251,7 @@ function Hok() {
 					items={items}
 					title={
 						<Select
-							className="w-30"
+							className="w-32"
 							showSearch
 							allowClear
 							placeholder="请选择区"
@@ -262,7 +262,7 @@ function Hok() {
 					}
 					extra={
 						<Select
-							className="!w-50"
+							className="!w-44"
 							showSearch
 							allowClear
 							placeholder="请输入或选择英雄"
