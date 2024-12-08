@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { message, Descriptions, Skeleton, Input } from "antd";
+import { message, Descriptions, Input, Spin } from "antd";
 import { BlogApi } from "@/api";
-import { useDebounceEffect } from "ahooks";
+import { useThrottleFn } from "ahooks";
+import { isValidPlateNumber } from "@/utils";
 
 const typeMap: Record<string, string> = {
 	"10": "民用",
@@ -10,102 +11,171 @@ const typeMap: Record<string, string> = {
 	"40": "民航",
 	"50": "武警",
 };
+
+/**
+ *  表示车牌信息的数据结构
+ */
+type PlateInfoType = {
+	/**
+	 *  省份
+	 */
+	province_name: string;
+	/**
+	 *  城市
+	 */
+	city: string;
+
+	/**
+	 *  组织
+	 */
+	organization: string;
+
+	/**
+	 *  类型
+	 */
+	type: string | number;
+};
+
 function Hok() {
 	const [loading, setLoading] = useState(false);
 
-	const [licensePlateNumber, setLicensePlateNumber] = useState("京A12345");
+	const [error, setError] = useState("");
 
-	const [data, setData] = useState({
+	//  京A12345
+	const [licensePlateNumber, setLicensePlateNumber] = useState("");
+
+	const [data, setData] = useState<PlateInfoType>({
 		province_name: "",
 		city: "",
 		organization: "",
 		type: "",
 	});
 
-	/**
-	 * 获取数据
-	 */
-	const getData = async () => {
-		setLoading(true);
-		try {
-			const res = await BlogApi.getLicensePlateNumberInfo(licensePlateNumber);
-
-			setData(res);
-		} catch (error) {
-			message.error(error.message || "获取数据失败，请稍后重试");
-		} finally {
-			setLoading(false);
-		}
-	};
-
-	/**
-	 * 使用 ahooks 的防抖处理输入变化
-	 */
-	useDebounceEffect(
-		() => {
-			getData();
-		},
-		[licensePlateNumber], // 依赖类型和英雄名称
-		{ wait: 1000 }, // 防抖时间 500ms
-	);
-
 	const items = [
 		{
 			label: "省份",
-			children: data.province_name,
+			children: data.province_name || "无",
 			span: 3,
 		},
 		{
 			label: "城市",
-			children: data.city,
+			children: data.city || "无",
 			span: 3,
 		},
-
 		{
 			label: "机构名称",
-			children: data.organization,
+			children: data.organization || "无",
 			span: 3,
 		},
 		{
 			label: "类型编码",
-			children: <span>{typeMap[data.type]}</span>,
+			children: data.type ? <span>{typeMap[data.type]}</span> : "无",
 			span: 3,
 		},
 	];
 
+	/**
+	 * 检查并获取车牌数据
+	 */
+	async function getData(plateNumber: string) {
+		try {
+			if (!plateNumber.trim()) throw new Error("请输入车牌号");
+
+			if (!isValidPlateNumber(plateNumber))
+				throw new Error("请输入有效的车牌号");
+
+			setLoading(true);
+
+			const res = await BlogApi.getLicensePlateNumberInfo(plateNumber);
+
+			setData(res);
+		} catch (error) {
+			message.error(error.message || "获取数据失败，请稍后重试");
+			setError(error.message);
+		} finally {
+			setLoading(false);
+		}
+	}
+
+	/**
+	 *  使用 ahooks 的节流
+	 */
+	const { run: throttledGetData } = useThrottleFn(
+		() => {
+			getData(licensePlateNumber.replace(/\s+/g, ""));
+		},
+		{
+			wait: 1000,
+			leading: false,
+		},
+	);
+
+	/**
+	 * 输入变化的处理
+	 */
+	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+		setLicensePlateNumber(e.target.value);
+		setError("");
+	}
+
+	/**
+	 * 清空输入框
+	 */
+	function handleClear() {
+		setLicensePlateNumber("");
+
+		setError("");
+
+		setData({
+			province_name: "",
+			city: "",
+			organization: "",
+			type: "",
+		});
+	}
+
 	return (
-		<div className="p-4 h-full">
+		<div className="p-4 h-full flex flex-col">
 			{/* 顶部筛选栏 */}
 			<div className="flex items-center justify-between mb-4">
-				<Input
+				<Input.Search
 					allowClear
 					placeholder="请输入车牌号"
 					value={licensePlateNumber}
-					onChange={(e) => setLicensePlateNumber(e.target.value)}
+					onChange={handleInputChange}
+					onPressEnter={throttledGetData}
+					onSearch={throttledGetData}
+					onClear={handleClear}
 					className="!w-80"
+					loading={loading}
+					enterButton="搜索"
+					disabled={loading}
+					status={error ? "error" : ""}
 				/>
+				{/* 错误提示 */}
+				{error && (
+					<div style={{ color: "red", marginTop: "4px" }}>{error}</div>
+				)}{" "}
 			</div>
 
 			{/* 数据展示 */}
-			<Descriptions bordered>
-				{loading
-					? Array(7)
-							.fill(null)
-							.map((_) => (
-								<Descriptions.Item key={_ + new Date().getTime()}>
-									<Skeleton active paragraph={{ rows: 1, width: "80%" }} />
-								</Descriptions.Item>
-							))
-					: items.map((item) => (
-							<Descriptions.Item
-								key={item.label}
-								label={item.label}
-								span={item.span}
-							>
-								{item.children}
-							</Descriptions.Item>
-						))}
-			</Descriptions>
+			<div className="flex-1 flex justify-center items-center bg-gray-200 relative">
+				{loading ? (
+					<Spin
+						size="large"
+						className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+					/>
+				) : (
+					<Descriptions
+						className="w-full h-full"
+						labelStyle={{
+							width: 300,
+						}}
+						bordered
+						items={items}
+					/>
+				)}
+			</div>
 		</div>
 	);
 }

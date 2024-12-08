@@ -51,9 +51,12 @@ type WhoisDataType = {
 };
 
 function Hok() {
-	const [whois, setWhois] = useState("");
-	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
+
+	const [error, setError] = useState("");
+
+	const [whois, setWhois] = useState("");
+
 	const [data, setData] = useState<WhoisDataType>({
 		domainName: "",
 		registrationTime: "",
@@ -64,70 +67,6 @@ function Hok() {
 		sponsoringRegistrar: "",
 		dnsServer: [],
 	});
-
-	async function getData() {
-		if (!isValidDomain(whois) || whois.trim() === "") {
-			setError("请输入有效的域名");
-			return;
-		}
-		try {
-			setLoading(true);
-			const res = await BlogApi.getWhoisInfo(whois);
-			setData({
-				domainName: res["Domain Name"] || "",
-				registrationTime: res["Registration Time"] || "",
-				expirationTime: res["Expiration Time"] || "",
-				registrant: res.Registrant || "",
-				registrantContactEmail: res["Registrant Contact Email"] || "",
-				registrarURL: res["Registrar URL"] || "",
-				sponsoringRegistrar: res["Sponsoring Registrar"] || "",
-				dnsServer: res["DNS Serve"] || [],
-			});
-		} catch (error) {
-			message.error(error.message || "获取数据失败，请稍后重试");
-		} finally {
-			setLoading(false);
-		}
-	}
-
-	/**
-	 *  使用 ahooks 的节流
-	 */
-	const { run } = useThrottleFn(
-		() => {
-			if (!whois.trim()) return; // 清空时不触发
-
-			getData();
-		},
-		{
-			wait: 2000,
-			leading: false,
-		},
-	);
-
-	/**
-	 *  输入变化的处理
-	 */
-	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setWhois(e.target.value);
-		setError(""); // 清除错误提示
-	}
-
-	/**
-	 *  按下回车触发的数据获取
-	 */
-	function handlePressEnter() {
-		// 立即调用
-		run();
-	}
-
-	/**
-	 *  点击搜索按钮触发的数据获取
-	 */
-	function handleSearch() {
-		// 立即调用
-		run();
-	}
 
 	const items = [
 		{
@@ -178,25 +117,98 @@ function Hok() {
 		},
 	];
 
+	async function getData(trimmedWhois: string) {
+		console.log("%c Line:121 🍇 trimmedWhois", "color:#33a5ff", trimmedWhois);
+		try {
+			if (!trimmedWhois.trim()) throw new Error("请输入域名");
+
+			if (!isValidDomain(trimmedWhois)) throw new Error("请输入有效的域名");
+
+			setLoading(true);
+
+			const res = await BlogApi.getWhoisInfo(trimmedWhois);
+
+			setData({
+				domainName: res["Domain Name"] || "",
+				registrationTime: res["Registration Time"] || "",
+				expirationTime: res["Expiration Time"] || "",
+				registrant: res.Registrant || "",
+				registrantContactEmail: res["Registrant Contact Email"] || "",
+				registrarURL: res["Registrar URL"] || "",
+				sponsoringRegistrar: res["Sponsoring Registrar"] || "",
+				dnsServer: res["DNS Serve"] || [],
+			});
+		} catch (error) {
+			message.error(error.message || "获取数据失败，请稍后重试");
+			setError(error.message);
+		} finally {
+			setLoading(false);
+		}
+	}
+
+	/**
+	 *  使用 ahooks 的节流
+	 */
+	const { run: throttledGetData } = useThrottleFn(
+		() => {
+			getData(whois.replace(/\s+/g, ""));
+		},
+		{
+			wait: 1000,
+			leading: false,
+		},
+	);
+
+	/**
+	 *  输入变化的处理
+	 */
+	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+		setWhois(e.target.value);
+		setError("");
+	}
+
+	/**
+	 *  清空输入框
+	 */
+	function handleClear() {
+		setWhois("");
+
+		setError("");
+
+		setData({
+			domainName: "",
+			registrationTime: "",
+			expirationTime: "",
+			registrant: "",
+			registrantContactEmail: "",
+			registrarURL: "",
+			sponsoringRegistrar: "",
+			dnsServer: [],
+		});
+	}
+
 	return (
 		<div className="p-4 h-full flex flex-col">
 			{/* 顶部筛选栏 */}
 			<div className="flex items-center justify-between mb-4">
 				<Input.Search
+					className="!w-80"
 					allowClear
 					placeholder="请输入域名"
 					value={whois}
-					onChange={handleInputChange} // 双向绑定
-					onPressEnter={handlePressEnter}
-					onSearch={handleSearch} // 点击搜索按钮时触发
-					className="!w-80"
-					status={error ? "error" : ""} // 如果有错误，设置输入框状态为 error
+					onChange={handleInputChange}
+					onPressEnter={throttledGetData}
+					onSearch={throttledGetData}
+					onClear={handleClear}
 					loading={loading}
-					enterButton="搜索" // 固定的搜索按钮
+					enterButton="搜索"
 					disabled={loading}
-				/>
-				{error && <div style={{ color: "red", marginTop: "4px" }}>{error}</div>}{" "}
+					status={error ? "error" : ""}
+				/>{" "}
 				{/* 错误提示 */}
+				{error && (
+					<div style={{ color: "red", marginTop: "4px" }}>{error}</div>
+				)}{" "}
 			</div>
 
 			{/* 数据展示 */}
@@ -209,7 +221,14 @@ function Hok() {
 				)}
 
 				{!loading && (
-					<Descriptions bordered items={items} className="w-full h-full" />
+					<Descriptions
+						className="w-full h-full"
+						labelStyle={{
+							width: 300,
+						}}
+						bordered
+						items={items}
+					/>
 				)}
 			</div>
 		</div>
