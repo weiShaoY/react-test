@@ -101,11 +101,22 @@ class BlogApi {
 	}
 
 	/**
-	 *  获取whois 信息
+	 *  获取域名的 whois 信息
 	 *  @param {string} domain - 域名
 	 */
-	getWhoisInfo(domain: string) {
+	getDomainWhoisInfo(domain: string) {
 		return fetchHttp(`https://v2.api-m.com/api/whois?domain=${domain}`);
+	}
+
+	/**
+	 *  获取 网址综合查询
+	 *  @param {string} domain - 域名
+	 *  @description https://api.aa1.cn/doc/websitequery.html
+	 */
+	getWebsiteDetails(domain: string) {
+		return fetchHttp(
+			`https://api.pearktrue.cn/api/website/synthesis.php?url=${domain}`,
+		);
 	}
 
 	//  今日热点 https://v.api.aa1.cn/api/topbaidu/index.php

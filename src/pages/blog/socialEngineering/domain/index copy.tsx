@@ -48,6 +48,26 @@ type WhoisDataType = {
 	 * DNS 服务器列表
 	 */
 	dnsServer: string[];
+
+	/**
+	 *  单位名称
+	 */
+	unitName: string;
+
+	/**
+	 *  单位性质
+	 */
+	unitNature: string;
+
+	/**
+	 * 备案许可证编号
+	 */
+	icpLicense: string;
+
+	/**
+	 *  信息更新时间
+	 */
+	updateTime: string;
 };
 
 function Hok() {
@@ -55,7 +75,7 @@ function Hok() {
 
 	const [error, setError] = useState("");
 
-	const [whois, setWhois] = useState("");
+	const [domain, setDomain] = useState("");
 
 	const [data, setData] = useState<WhoisDataType>({
 		domainName: "",
@@ -66,6 +86,10 @@ function Hok() {
 		registrarURL: "",
 		sponsoringRegistrar: "",
 		dnsServer: [],
+		unitName: "",
+		unitNature: "",
+		icpLicense: "",
+		updateTime: "",
 	});
 
 	const items = [
@@ -117,25 +141,37 @@ function Hok() {
 		},
 	];
 
-	async function getData(trimmedWhois: string) {
+	async function getData(trimmedDomain: string) {
 		try {
-			if (!trimmedWhois.trim()) throw new Error("请输入域名");
+			if (!trimmedDomain.trim()) throw new Error("请输入域名");
 
-			if (!isValidDomain(trimmedWhois)) throw new Error("请输入有效的域名");
+			if (!isValidDomain(trimmedDomain)) throw new Error("请输入有效的域名");
 
 			setLoading(true);
 
-			const res = await BlogApi.getWhoisInfo(trimmedWhois);
+			const responseWhoisInfo = await BlogApi.getDomainWhoisInfo(trimmedDomain);
+
+			const responseICPInfo = await BlogApi.getWebsiteDetails(trimmedDomain);
+			console.log(
+				"%c Line:155 🥐 responseICPInfo",
+				"color:#42b983",
+				responseICPInfo,
+			);
 
 			setData({
-				domainName: res["Domain Name"] || "",
-				registrationTime: res["Registration Time"] || "",
-				expirationTime: res["Expiration Time"] || "",
-				registrant: res.Registrant || "",
-				registrantContactEmail: res["Registrant Contact Email"] || "",
-				registrarURL: res["Registrar URL"] || "",
-				sponsoringRegistrar: res["Sponsoring Registrar"] || "",
-				dnsServer: res["DNS Serve"] || [],
+				domainName: responseWhoisInfo["Domain Name"] || "",
+				registrationTime: responseWhoisInfo["Registration Time"] || "",
+				expirationTime: responseWhoisInfo["Expiration Time"] || "",
+				registrant: responseWhoisInfo.Registrant || "",
+				registrantContactEmail:
+					responseWhoisInfo["Registrant Contact Email"] || "",
+				registrarURL: responseWhoisInfo["Registrar URL"] || "",
+				sponsoringRegistrar: responseWhoisInfo["Sponsoring Registrar"] || "",
+				dnsServer: responseWhoisInfo["DNS Serve"] || [],
+				unitName: responseICPInfo.unitName || "",
+				unitNature: responseICPInfo.unitNature || "",
+				icpLicense: responseICPInfo.icpLicense || "",
+				updateTime: responseICPInfo.updateTime || "",
 			});
 		} catch (error) {
 			message.error(error.message || "获取数据失败，请稍后重试");
@@ -150,7 +186,7 @@ function Hok() {
 	 */
 	const { run: throttledGetData } = useThrottleFn(
 		() => {
-			getData(whois.replace(/\s+/g, ""));
+			getData(domain.replace(/\s+/g, ""));
 		},
 		{
 			wait: 1000,
@@ -162,7 +198,7 @@ function Hok() {
 	 *  输入变化的处理
 	 */
 	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setWhois(e.target.value);
+		setDomain(e.target.value);
 		setError("");
 	}
 
@@ -170,7 +206,7 @@ function Hok() {
 	 *  清空输入框
 	 */
 	function handleClear() {
-		setWhois("");
+		setDomain("");
 
 		setError("");
 
@@ -183,6 +219,10 @@ function Hok() {
 			registrarURL: "",
 			sponsoringRegistrar: "",
 			dnsServer: [],
+			unitName: "",
+			unitNature: "",
+			icpLicense: "",
+			updateTime: "",
 		});
 	}
 
@@ -208,7 +248,7 @@ function Hok() {
 							className="!w-80"
 							allowClear
 							placeholder="请输入域名"
-							value={whois}
+							value={domain}
 							onChange={handleInputChange}
 							onPressEnter={throttledGetData}
 							onSearch={throttledGetData}
