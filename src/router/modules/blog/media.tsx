@@ -9,6 +9,8 @@ const VideoPage = lazy(() => import("@/pages/blog/media/video"));
 
 const WallpaperPage = lazy(() => import("@/pages/blog/media/wallpaper"));
 
+const VoicePage = lazy(() => import("@/pages/blog/media/voice"));
+
 const Media: AppRouteObject = {
 	order: 5,
 	path: "media",
@@ -44,6 +46,16 @@ const Media: AppRouteObject = {
 				label: "视频",
 				key: "/media/video",
 				icon: "blog-menu-video",
+			},
+		},
+
+		{
+			path: "voice",
+			element: <VoicePage />,
+			meta: {
+				label: "语音",
+				key: "/media/voice",
+				icon: "blog-menu-voice",
 			},
 		},
 	],
