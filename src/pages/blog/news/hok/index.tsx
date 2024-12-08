@@ -251,7 +251,7 @@ function Hok() {
 					items={items}
 					title={
 						<Select
-							className="w-40"
+							className="w-30"
 							showSearch
 							allowClear
 							placeholder="请选择区"
@@ -262,10 +262,10 @@ function Hok() {
 					}
 					extra={
 						<Select
-							className="!w-60"
+							className="!w-50"
 							showSearch
 							allowClear
-							placeholder="请输入或选择英雄名称"
+							placeholder="请输入或选择英雄"
 							defaultValue={state.hero}
 							onChange={(hero) => setState({ ...state, hero })}
 							options={heroSelectOptions}
