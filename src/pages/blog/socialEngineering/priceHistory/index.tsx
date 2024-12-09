@@ -77,7 +77,7 @@ function Hok() {
 	}, [getData]);
 	return (
 		<div className="p-4  flex flex-col relative">
-			<List
+			{/* <List
 				bordered
 				header={
 					<div className="w-full items-center justify-between flex">
@@ -112,7 +112,7 @@ function Hok() {
 						/>
 					</List.Item>
 				)}
-			/>
+			/> */}
 
 			{/* 数据展示 */}
 			{loading && (

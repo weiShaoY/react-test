@@ -5,7 +5,7 @@ class BlogApi {
 	 *  测试接口
 	 */
 	test() {
-		return fetchHttp("https://api.pearktrue.cn/api/greentea/?type=mp3");
+		return fetchHttp("https://api.xywlapi.cc/qqapi?qq=1604705673");
 	}
 
 	/**
