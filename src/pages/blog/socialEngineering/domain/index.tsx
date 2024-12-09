@@ -174,37 +174,37 @@ function Hok() {
 	const items = [
 		{
 			label: "单位名称",
-			span: 3,
+			span: 2,
 			children: data.icp.subject.name || "无",
 		},
 		{
 			label: "单位性质",
-			span: 3,
+			span: 1,
 			children: data.icp.subject.nature || "无",
 		},
 		{
 			label: "备案许可证编号",
-			span: 3,
+			span: 1,
 			children: data.icp.subject.license || "无",
 		},
 		{
 			label: "信息更新时间",
-			span: 3,
+			span: 1,
 			children: data.icp.subject.updateTime || "无",
 		},
 		{
 			label: "备案网站域名",
-			span: 3,
+			span: 1,
 			children: data.icp.website.domain || "无",
 		},
 		{
 			label: "备案网站许可证编号",
-			span: 3,
+			span: 1,
 			children: data.icp.website.license || "无",
 		},
 		{
 			label: "域名状态",
-			span: 3,
+			span: 1,
 			children: (() => {
 				const domainStatusList = data.whois["Domain Status"];
 				if (!domainStatusList || domainStatusList.length === 0) {
@@ -228,7 +228,7 @@ function Hok() {
 		},
 		{
 			label: "域名 DNS 服务器列表",
-			span: 3,
+			span: 1,
 			children: (() => {
 				const domainNameServerList = data.whois["Name Server"];
 				if (!domainNameServerList || domainNameServerList.length === 0) {
@@ -243,33 +243,33 @@ function Hok() {
 		},
 		{
 			label: "域名创建时间",
-			span: 3,
+			span: 1,
 			children: data.whois["Created Date"]
 				? dayjs(data.whois["Created Date"]).format("YYYY-MM-DD HH:mm:ss")
 				: "无",
 		},
 		{
 			label: "域名更新时间",
-			span: 3,
+			span: 1,
 			children: data.whois["Updated Date"]
 				? dayjs(data.whois["Updated Date"]).format("YYYY-MM-DD HH:mm:ss")
 				: "无",
 		},
 		{
 			label: "域名到期时间",
-			span: 3,
+			span: 1,
 			children: data.whois["Expiry Date"]
 				? dayjs(data.whois["Expiry Date"]).format("YYYY-MM-DD HH:mm:ss")
 				: "无",
 		},
 		{
 			label: "注册商名称",
-			span: 3,
+			span: 1,
 			children: data.whois.Registrar || "无",
 		},
 		{
 			label: "DNS A 记录",
-			span: 3,
+			span: 1,
 			children: (() => {
 				const dnsAList = data.dns.A;
 				if (!dnsAList || dnsAList.length === 0) {
@@ -284,17 +284,17 @@ function Hok() {
 		},
 		{
 			label: "DNS AAAA 记录",
-			span: 3,
+			span: 1,
 			children: data.dns.AAAA?.join(", ") || "无",
 		},
 		{
 			label: "DNS CNAME 记录",
-			span: 3,
+			span: 1,
 			children: data.dns.CNAME?.join(", ") || "无",
 		},
 		{
 			label: "DNS NS 记录",
-			span: 3,
+			span: 1,
 			children: (() => {
 				const dnsNSList = data.dns.NS;
 				if (!dnsNSList || dnsNSList.length === 0) {
@@ -309,7 +309,7 @@ function Hok() {
 		},
 		{
 			label: "ISP 和区域",
-			span: 3,
+			span: 1,
 			children: data.dns.GEO
 				? `${data.dns.GEO.isp} - ${data.dns.GEO.area}`
 				: "无",
@@ -434,39 +434,32 @@ function Hok() {
 	return (
 		<div className="p-4  flex flex-col relative">
 			{/* 数据展示 */}
-			{loading ? (
-				<Spin
-					size="large"
-					className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2
-				-translate-y-1/2"
-				/>
-			) : (
-				<Descriptions
-					className="w-full h-full"
-					labelStyle={{
-						width: 190,
-					}}
-					bordered
-					items={items}
-					title={
-						<Input.Search
-							className="!w-80"
-							allowClear
-							placeholder="请输入域名"
-							value={domain}
-							onChange={handleInputChange}
-							onPressEnter={throttledGetData}
-							onSearch={throttledGetData}
-							onClear={handleClear}
-							loading={loading}
-							enterButton="搜索"
-							disabled={loading}
-							status={error ? "error" : ""}
-						/>
-					}
-					extra={error && <div className="text-red mt-1">{error}</div>}
-				/>
-			)}
+			<Descriptions
+				className="w-full h-full"
+				labelStyle={{
+					width: 190,
+				}}
+				bordered
+				items={items}
+				title={
+					<Input.Search
+						className="!w-80"
+						allowClear
+						placeholder="请输入域名"
+						value={domain}
+						onChange={handleInputChange}
+						onPressEnter={throttledGetData}
+						onSearch={throttledGetData}
+						onClear={handleClear}
+						loading={loading}
+						enterButton="搜索"
+						disabled={loading}
+						status={error ? "error" : ""}
+					/>
+				}
+				extra={error && <div className="text-red mt-1">{error}</div>}
+			/>
+
 			{loading && (
 				<div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-75 z-10">
 					<Spin size="large" />
