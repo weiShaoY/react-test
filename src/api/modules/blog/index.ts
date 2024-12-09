@@ -198,7 +198,7 @@ class BlogApi {
 	 *  获取 商品历史价格查询
 	 *  @description https://api.pearktrue.cn/info?id=66
 	 */
-	getProductHistoryPrice(url: string) {
+	getPriceHistory(url: string) {
 		return fetchHttp(
 			`https://api.pearktrue.cn/api/shop/history.php?url=${url}`,
 		);
@@ -209,7 +209,7 @@ class BlogApi {
 	 *  @description https://api.pearktrue.cn/info?id=61
 	 *  @param {string} order - 快递单号
 	 */
-	getExpressOrderDetails(order: string) {
+	getLogistic(order: string) {
 		return fetchHttp(`https://api.pearktrue.cn/api/kuaidi/?order=${order}`);
 	}
 }

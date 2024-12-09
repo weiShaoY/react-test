@@ -19,6 +19,14 @@ const LoveSpeechPage = lazy(
 	() => import("@/pages/blog/socialEngineering/loveSpeech"),
 );
 
+const LogisticPage = lazy(
+	() => import("@/pages/blog/socialEngineering/logistic"),
+);
+
+const PriceHistoryPage = lazy(
+	() => import("@/pages/blog/socialEngineering/priceHistory"),
+);
+
 const SocialEngineering: AppRouteObject = {
 	order: 6,
 	path: "socialEngineering",
@@ -71,6 +79,24 @@ const SocialEngineering: AppRouteObject = {
 				label: "恋爱话术",
 				key: "/socialEngineering/loveSpeech",
 				icon: "blog-menu-loveSpeech",
+			},
+		},
+		{
+			path: "logistic",
+			element: <LogisticPage />,
+			meta: {
+				label: "物流查询",
+				key: "/socialEngineering/logistic",
+				icon: "blog-menu-logistic",
+			},
+		},
+		{
+			path: "priceHistory",
+			element: <PriceHistoryPage />,
+			meta: {
+				label: "历史价格",
+				key: "/socialEngineering/priceHistory",
+				icon: "blog-menu-priceHistory",
 			},
 		},
 	],
