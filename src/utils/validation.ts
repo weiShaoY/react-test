@@ -41,3 +41,14 @@ export function isValidPlateNumber(plateNumber: string) {
 		militaryRegex.test(plateNumber)
 	);
 }
+
+/**
+ * 验证输入的是否为有效的QQ号
+ *
+ * @param {string} qq - 输入的QQ号
+ * @returns {boolean} - 如果是有效的QQ号，返回true，否则返回false
+ */
+export function isValidQQ(qq: string): boolean {
+	const qqRegex = /^[1-9]\d{4,10}$/; // 正则：5-11位数字，第一个数字不能为0
+	return qqRegex.test(qq);
+}

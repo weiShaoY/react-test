@@ -27,6 +27,9 @@ const PriceHistoryPage = lazy(
 	() => import("@/pages/blog/socialEngineering/priceHistory"),
 );
 
+const AccountPage = lazy(
+	() => import("@/pages/blog/socialEngineering/account"),
+);
 const SocialEngineering: AppRouteObject = {
 	order: 6,
 	path: "socialEngineering",
@@ -97,6 +100,15 @@ const SocialEngineering: AppRouteObject = {
 				label: "历史价格",
 				key: "/socialEngineering/priceHistory",
 				icon: "blog-menu-priceHistory",
+			},
+		},
+		{
+			path: "account",
+			element: <AccountPage />,
+			meta: {
+				label: "账号查询",
+				key: "/socialEngineering/account",
+				icon: "blog-menu-account",
 			},
 		},
 	],

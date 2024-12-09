@@ -212,6 +212,56 @@ class BlogApi {
 	getLogistic(order: string) {
 		return fetchHttp(`https://api.pearktrue.cn/api/kuaidi/?order=${order}`);
 	}
+
+	/**
+	 *  QQ号查询绑定手机
+	 *  @description https://zy.xywlapi.cc/
+	 */
+	getQqQueryPhone(qq: string) {
+		return fetchHttp(`https://api.xywlapi.cc/qqapi?qq=${qq}`);
+	}
+
+	/**
+	 *  手机号查询绑定QQ
+	 */
+	getPhoneQueryQq(phone: string) {
+		return fetchHttp(`https://api.xywlapi.cc/qqphone?phone=${phone}`);
+	}
+
+	/**
+	 *  QQ号查询LOL信息
+	 */
+	getQqQueryLol(qq: string) {
+		return fetchHttp(`https://api.xywlapi.cc/qqlol?qq=${qq}`);
+	}
+
+	/**
+	 *  LOL查询QQ信息
+	 */
+	getLolQueryQq(lol: string) {
+		return fetchHttp(`https://api.xywlapi.cc/lolname?name=${lol}`);
+	}
+
+	/**
+	 *  QQ号查询老密
+	 */
+	getQqQueryOldPassword(qq: string) {
+		return fetchHttp(`https://api.xywlapi.cc/qqlm?qq=${qq}`);
+	}
+
+	/**
+	 *  微博通过ID查手机号
+	 */
+	getWeiBoQueryPhone(id: string) {
+		return fetchHttp(`https://api.xywlapi.cc/wbapi?id=${id}`);
+	}
+
+	/**
+	 *  通过手机号查微博ID
+	 */
+	getPhoneQueryWeiBo(phone: string) {
+		return fetchHttp(`https://api.xywlapi.cc/wbphone?phone=${phone}`);
+	}
 }
 
 export default new BlogApi();

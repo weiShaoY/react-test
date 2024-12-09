@@ -21,14 +21,24 @@ export async function fetchHttp(
 		// 解析并返回 JSON 数据
 		const result = await response.json();
 
-		if (!(result?.code === 200 || result?.code === "200")) {
+		if (
+			!(
+				result?.code === 200 ||
+				result?.code === "200" ||
+				result?.status === 200 ||
+				result?.status === 500
+			)
+		) {
+			console.log("%c Line:25 🌶 result", "color:#7f2b82", result);
 			message.error(`接口响应码错误:${result?.code || "接口响应码错误"}`);
 
 			throw new Error(result.message || "接口响应码错误");
 		}
 		return result?.data || result;
 	} catch (error: any) {
-		message.error(`接口返回错误:${error?.message || "接口返回错误"}`);
+		console.log("%c Line:32 🍤 error", "color:#465975", error);
 		throw error; // 确保调用方可以捕获到错误
+
+		// message.error(`接口返回错误:${error?.message || "接口返回错误"}`);
 	}
 }
