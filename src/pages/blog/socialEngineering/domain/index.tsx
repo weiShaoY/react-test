@@ -3,7 +3,9 @@ import { isValidDomain } from "@/utils";
 import { useThrottleFn } from "ahooks";
 import { Descriptions, Input, Spin, message } from "antd";
 import dayjs from "dayjs";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
+const INITIALIZATION = "baidu.com";
 
 /**
  * 表示完整的域名信息结构
@@ -136,7 +138,7 @@ function Hok() {
 	const [error, setError] = useState("");
 
 	//  baidu.com
-	const [domain, setDomain] = useState("baidu.com");
+	const [domain, setDomain] = useState(INITIALIZATION);
 
 	const [data, setData] = useState<DomainInfoType>({
 		icp: {
@@ -310,9 +312,10 @@ function Hok() {
 		{
 			label: "ISP 和区域",
 			span: 1,
-			children: data.dns.GEO
-				? `${data.dns.GEO.isp} - ${data.dns.GEO.area}`
-				: "无",
+			children:
+				data.dns.GEO.isp && data.dns.GEO.area
+					? `${data.dns.GEO.isp} - ${data.dns.GEO.area}`
+					: "无",
 		},
 	];
 
@@ -431,6 +434,10 @@ function Hok() {
 		});
 	}
 
+	useEffect(() => {
+		getData(INITIALIZATION);
+	}, [getData]);
+
 	return (
 		<div className="p-4  flex flex-col relative">
 			{/* 数据展示 */}
@@ -457,7 +464,7 @@ function Hok() {
 						status={error ? "error" : ""}
 					/>
 				}
-				extra={error && <div className="text-red mt-1">{error}</div>}
+				extra={error && <span className="text-red ">{error}</span>}
 			/>
 
 			{loading && (

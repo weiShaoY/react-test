@@ -15,6 +15,10 @@ const LicensePlatePage = lazy(
 
 const DomainPage = lazy(() => import("@/pages/blog/socialEngineering/domain"));
 
+const LoveSpeechPage = lazy(
+	() => import("@/pages/blog/socialEngineering/loveSpeech"),
+);
+
 const SocialEngineering: AppRouteObject = {
 	order: 6,
 	path: "socialEngineering",
@@ -58,6 +62,15 @@ const SocialEngineering: AppRouteObject = {
 				label: "域名查询",
 				key: "/socialEngineering/domain",
 				icon: "blog-menu-domain",
+			},
+		},
+		{
+			path: "loveSpeech",
+			element: <LoveSpeechPage />,
+			meta: {
+				label: "恋爱话术",
+				key: "/socialEngineering/loveSpeech",
+				icon: "blog-menu-loveSpeech",
 			},
 		},
 	],

@@ -4,7 +4,7 @@ import { useThrottleFn } from "ahooks";
 import { Descriptions, Input, Spin, message } from "antd";
 import { useCallback, useEffect, useState } from "react";
 
-const INITIAL_PLATE_NUMBER = "京A12345";
+const INITIALIZATION = "京A12345";
 
 const typeMap: Record<string, string> = {
 	"10": "民用",
@@ -44,7 +44,7 @@ function Hok() {
 	const [error, setError] = useState("");
 
 	//  京A12345
-	const [licensePlateNumber, setLicensePlateNumber] = useState("京A12345");
+	const [licensePlateNumber, setLicensePlateNumber] = useState(INITIALIZATION);
 
 	const [data, setData] = useState<PlateInfoType>({
 		province_name: "",
@@ -137,8 +137,9 @@ function Hok() {
 	}
 
 	useEffect(() => {
-		getData(INITIAL_PLATE_NUMBER);
+		getData(INITIALIZATION);
 	}, [getData]);
+
 	return (
 		<div className="p-4  flex flex-col relative">
 			<Descriptions
@@ -164,7 +165,7 @@ function Hok() {
 						status={error ? "error" : ""}
 					/>
 				}
-				extra={error && <div className="text-red mt-1">{error}</div>}
+				extra={error && <span className="text-red ">{error}</span>}
 			/>
 
 			{/* 数据展示 */}

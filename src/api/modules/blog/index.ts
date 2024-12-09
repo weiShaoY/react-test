@@ -212,18 +212,6 @@ class BlogApi {
 	getExpressOrderDetails(order: string) {
 		return fetchHttp(`https://api.pearktrue.cn/api/kuaidi/?order=${order}`);
 	}
-
-	//  今日热点 https://v.api.aa1.cn/api/topbaidu/index.php
-	//  随机壁纸图片[API盒子官方资源库] https://cn.apihz.cn/api/img/apihzimgbz.php?id=88888888&key=88888888&type=1&imgtype=2
-	//  随机壁纸 https://www.bfbke.com/bzApi.php?type=sj
-
-	//  新闻简报 https://dayu.qqsuu.cn/weiyujianbao/apis.php?type=json
-	//  每日更新假期倒计时日历 https://dayu.qqsuu.cn/moyurili/apis.php?type=json
-	// 品牌黄金 https://free.xwteam.cn/api/gold/brand
-	// 摸鱼日报美女视频版 https://dayu.qqsuu.cn/moyuribaoshipin/apis.php?type=json
-
-	//  随机美少女视频 https://www.wudada.online/Api/ScSp
-	//  随机返回一条小姐姐视频 https://tools.mgtv100.com/external/v1/pear/xjj
 }
 
 export default new BlogApi();
