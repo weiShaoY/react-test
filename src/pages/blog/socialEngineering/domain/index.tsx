@@ -3,7 +3,7 @@ import { isValidDomain } from "@/utils";
 import { useThrottleFn } from "ahooks";
 import { Descriptions, Input, Spin, message } from "antd";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 /**
  * 表示完整的域名信息结构
@@ -136,7 +136,7 @@ function Hok() {
 	const [error, setError] = useState("");
 
 	//  baidu.com
-	const [domain, setDomain] = useState("");
+	const [domain, setDomain] = useState("baidu.com");
 
 	const [data, setData] = useState<DomainInfoType>({
 		icp: {
@@ -316,7 +316,7 @@ function Hok() {
 		},
 	];
 
-	async function getData(trimmedDomain: string) {
+	const getData = useCallback(async (trimmedDomain: string) => {
 		try {
 			if (!trimmedDomain.trim()) throw new Error("请输入域名");
 
@@ -366,7 +366,7 @@ function Hok() {
 		} finally {
 			setLoading(false);
 		}
-	}
+	}, []);
 
 	/**
 	 *  使用 ahooks 的节流
@@ -432,7 +432,7 @@ function Hok() {
 	}
 
 	return (
-		<div className="p-4 h-full flex flex-col">
+		<div className="p-4  flex flex-col relative">
 			{/* 数据展示 */}
 			{loading ? (
 				<Spin
@@ -466,6 +466,11 @@ function Hok() {
 					}
 					extra={error && <div className="text-red mt-1">{error}</div>}
 				/>
+			)}
+			{loading && (
+				<div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-75 z-10">
+					<Spin size="large" />
+				</div>
 			)}
 		</div>
 	);

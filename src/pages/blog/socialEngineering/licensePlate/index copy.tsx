@@ -140,38 +140,40 @@ function Hok() {
 		getData(INITIAL_PLATE_NUMBER);
 	}, [getData]);
 	return (
-		<div className="p-4  flex flex-col relative">
-			<Descriptions
-				className="w-full h-full"
-				labelStyle={{
-					width: 160,
-				}}
-				bordered
-				items={items}
-				title={
-					<Input.Search
-						className="!w-80"
-						allowClear
-						placeholder="请输入车牌号"
-						value={licensePlateNumber}
-						onChange={handleInputChange}
-						onPressEnter={throttledGetData}
-						onSearch={throttledGetData}
-						onClear={handleClear}
-						loading={loading}
-						enterButton="搜索"
-						disabled={loading}
-						status={error ? "error" : ""}
-					/>
-				}
-				extra={error && <div className="text-red mt-1">{error}</div>}
-			/>
-
+		<div className="p-4 h-full flex flex-col relative">
 			{/* 数据展示 */}
-			{loading && (
-				<div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-75 z-10">
-					<Spin size="large" />
-				</div>
+			{loading ? (
+				<Spin
+					size="large"
+					className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2
+				-translate-y-1/2"
+				/>
+			) : (
+				<Descriptions
+					className="w-full h-full"
+					labelStyle={{
+						width: 160,
+					}}
+					bordered
+					items={items}
+					title={
+						<Input.Search
+							className="!w-80"
+							allowClear
+							placeholder="请输入车牌号"
+							value={licensePlateNumber}
+							onChange={handleInputChange}
+							onPressEnter={throttledGetData}
+							onSearch={throttledGetData}
+							onClear={handleClear}
+							loading={loading}
+							enterButton="搜索"
+							disabled={loading}
+							status={error ? "error" : ""}
+						/>
+					}
+					extra={error && <div className="text-red mt-1">{error}</div>}
+				/>
 			)}
 		</div>
 	);
