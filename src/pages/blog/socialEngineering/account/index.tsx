@@ -255,9 +255,6 @@ function Hok() {
 					allowClear
 					placeholder="请选择视频类别"
 					value={category}
-					onBlur={() => {
-						event.stopPropagation();
-					}}
 					onChange={(value) => {
 						handleCategoryChange(value);
 					}}

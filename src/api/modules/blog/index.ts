@@ -5,7 +5,7 @@ class BlogApi {
 	 *  测试接口
 	 */
 	test() {
-		return fetchHttp("https://api.xywlapi.cc/qqapi?qq=1604705673");
+		return fetchHttp("https://api.lolimi.cn/API/boy/api.php");
 	}
 
 	/**
@@ -68,6 +68,14 @@ class BlogApi {
 	 */
 	getWallpaper(category: string) {
 		return fetchHttp(`https://free.xwteam.cn/api/img/pic?category=${category}`);
+	}
+
+	/**
+	 *  获取 帅哥图片
+	 *  @description https://api.lolimi.cn/doc-api_aynj.html
+	 */
+	getBoyImage() {
+		return fetchHttp("https://api.lolimi.cn/API/boy/api.php");
 	}
 
 	/**
@@ -211,6 +219,14 @@ class BlogApi {
 	 */
 	getLogistic(order: string) {
 		return fetchHttp(`https://api.pearktrue.cn/api/kuaidi/?order=${order}`);
+	}
+
+	/**
+	 *  香烟价格查询
+	 *  @description https://api.lolimi.cn/doc-api_shnb.html
+	 */
+	getCigarettePrice() {
+		return fetchHttp("https://api.lolimi.cn/API/xyan/api.php?msg=白沙");
 	}
 
 	/**

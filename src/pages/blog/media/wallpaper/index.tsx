@@ -1,8 +1,8 @@
 import { BlogApi } from "@/api";
-import { message } from "antd";
-import { useState } from "react";
-import { Image, Select, Button, Spin, Tooltip } from "antd";
 import { useDebounceEffect } from "ahooks";
+import { message } from "antd";
+import { Button, Image, Select, Spin, Tooltip } from "antd";
+import { useState } from "react";
 
 import { SvgIcon } from "@/components/icon";
 
@@ -16,11 +16,7 @@ function Wallpaper() {
 
 	const [category, setCategory] = useState("mn");
 
-	const [wallpaper, setWallpaper] = useState({
-		img_url: "",
-		img_width: 1920,
-		img_height: 1080,
-	});
+	const [url, setUrl] = useState("");
 
 	/**
 	 *  分类选项
@@ -39,6 +35,7 @@ function Wallpaper() {
 		{ value: "dm", label: "动漫" },
 		{ value: "qg", label: "情感" },
 		{ value: "wz", label: "文字" },
+		{ value: "sg", label: "帅哥" },
 	];
 
 	/**
@@ -47,8 +44,18 @@ function Wallpaper() {
 	const getData = async () => {
 		try {
 			setLoading(true);
-			const res = await BlogApi.getWallpaper(category);
-			setWallpaper(res);
+
+			if (category === "sg") {
+				const res = await BlogApi.getBoyImage();
+				console.log("%c Line:50 🍎 res", "color:#fca650", res);
+				const imageUrl = URL.createObjectURL(res.blob);
+				console.log("%c Line:52 🍕 imageUrl", "color:#ed9ec7", imageUrl);
+
+				setUrl(imageUrl);
+			} else {
+				const res = await BlogApi.getWallpaper(category);
+				setUrl(res.img_url);
+			}
 		} catch (error: any) {
 			message.error(error.message || "获取数据失败，请稍后重试");
 		} finally {
@@ -89,7 +96,7 @@ function Wallpaper() {
 
 				<Tooltip placement="top" title="点击下载">
 					<Button
-						onClick={() => downloadImage(wallpaper.img_url)}
+						onClick={() => downloadImage(url)}
 						icon={<SvgIcon icon="download" />}
 					/>
 				</Tooltip>
@@ -103,9 +110,9 @@ function Wallpaper() {
 						className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
 					/>
 				)}
-				{wallpaper.img_url && (
+				{url && (
 					<Image
-						src={wallpaper.img_url}
+						src={url}
 						alt="壁纸"
 						style={{
 							maxWidth: "100%",
