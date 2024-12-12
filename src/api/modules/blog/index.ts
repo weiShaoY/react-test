@@ -71,11 +71,12 @@ class BlogApi {
 	}
 
 	/**
-	 *  获取 帅哥图片
-	 *  @see https://api.lolimi.cn/doc-api_aynj.html
+	 *  获取 妹子(腿子)
+	 *  @see https://api.lolimi.cn/doc-api_mxyf.html
+	 *  @url https://api.lolimi.cn/API/meizi/api.php
 	 */
-	getBoyImage() {
-		return fetchHttp("https://api.lolimi.cn/API/boy/api.php");
+	getTuiImage() {
+		return fetchHttp("https://api.lolimi.cn/API/meizi/api.php");
 	}
 
 	/**

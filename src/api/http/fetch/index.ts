@@ -26,7 +26,8 @@ export async function fetchHttp(
 				result?.code === 200 ||
 				result?.code === "200" ||
 				result?.status === 200 ||
-				result?.status === 500
+				result?.status === 500 ||
+				result?.code === 1
 			)
 		) {
 			console.log("%c Line:25 🌶 result", "color:#7f2b82", result);

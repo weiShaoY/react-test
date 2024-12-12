@@ -35,7 +35,7 @@ function Wallpaper() {
 		{ value: "dm", label: "动漫" },
 		{ value: "qg", label: "情感" },
 		{ value: "wz", label: "文字" },
-		{ value: "sg", label: "帅哥" },
+		{ value: "tui", label: "腿" },
 	];
 
 	/**
@@ -45,13 +45,10 @@ function Wallpaper() {
 		try {
 			setLoading(true);
 
-			if (category === "sg") {
-				const res = await BlogApi.getBoyImage();
-				console.log("%c Line:50 🍎 res", "color:#fca650", res);
-				const imageUrl = URL.createObjectURL(res.blob);
-				console.log("%c Line:52 🍕 imageUrl", "color:#ed9ec7", imageUrl);
+			if (category === "tui") {
+				const res = await BlogApi.getTuiImage();
 
-				setUrl(imageUrl);
+				setUrl(res.text);
 			} else {
 				const res = await BlogApi.getWallpaper(category);
 				setUrl(res.img_url);
@@ -103,7 +100,7 @@ function Wallpaper() {
 			</div>
 
 			{/* 壁纸展示区域 */}
-			<div className="flex-1 flex justify-center items-center bg-gray-200 h-[80vh] relative">
+			<div className="flex-1 flex justify-center items-center bg-gray-200 relative">
 				{loading && (
 					<Spin
 						size="large"
@@ -114,11 +111,15 @@ function Wallpaper() {
 					<Image
 						src={url}
 						alt="壁纸"
-						style={{
-							maxWidth: "100%",
-							maxHeight: "100%",
-							objectFit: "contain",
-						}}
+						height="100%"
+						width="auto"
+						// style={{
+						// 	maxHeight: "100%", // 高度最大为父盒子高度
+						// 	maxWidth: "100%", // 宽度最大为父盒子宽度
+						// 	height: "auto", // 高度优先调整
+						// 	width: "auto", // 根据高度调整宽度，保持比例
+						// 	objectFit: "contain",
+						// }}
 					/>
 				)}
 			</div>
