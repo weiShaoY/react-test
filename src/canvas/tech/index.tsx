@@ -140,29 +140,5 @@ function Tech() {
 		</div>
 	);
 }
-/**
- * 高阶组件：为子组件添加样式和布局
- * @function SectionWrapper
- * @param {React.ComponentType} Component - 子组件
- * @param {string} idName - 用于标识的 DOM 元素 id
- * @returns {React.FC} 包装后的高阶组件
- */
-// function SectionWrapper(
-// 	Component: React.ComponentType,
-// 	idName: string,
-// ): React.FC {
-// 	return function WrappedComponent() {
-// 		return (
-// 			<div
-// 				className="sm:px-16 px-6 sm:py-16 py-10 max-w-7xl mx-auto relative z-0"
-// 				id={idName}
-// 			>
-// 				<Component />
-// 			</div>
-// 		);
-// 	};
-// }
-
-// export default SectionWrapper(Tech, "");
 
 export default Tech;

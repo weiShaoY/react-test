@@ -1,18 +1,3 @@
-// import Intro from "./components/intro";
-
-// function Contact() {
-// 	return (
-// 		<div className="h-full w-full  relative ">
-// 			{/* 第一页 */}
-// 			<div className="min-h-screen w-full  relative">
-// 				111122222
-// 				{/* 背景 */}
-// 				{/* <BrokenBg /> */}
-// 			</div>
-// 		</div>
-// 	);
-// }
-// export default Contact;
 import { useRef, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 

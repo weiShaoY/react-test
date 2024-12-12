@@ -65,9 +65,12 @@ function Hok() {
 			phonediqu: "",
 		},
 		[Category.PHONE_QUERY_QQ]: { phone: "", qq: "", phonediqu: "" },
-		[Category.QQ_QUERY_LOL]: { qq: "", lolInfo: "" },
-		[Category.LOL_QUERY_QQ]: { lolId: "", qq: "" },
-		[Category.QQ_QUERY_OLD_PASSWORD]: { qq: "", oldPassword: "" },
+		[Category.QQ_QUERY_LOL]: { qq: "", name: "", daqu: "" },
+
+		[Category.LOL_QUERY_QQ]: { qq: "", name: "", daqu: "" },
+
+		[Category.QQ_QUERY_OLD_PASSWORD]: { qq: "", qqlm: "" },
+
 		[Category.WEIBO_QUERY_PHONE]: { weiboId: "", phone: "" },
 		[Category.PHONE_QUERY_WEIBO]: { phone: "", weiboId: "" },
 	});
@@ -107,9 +110,52 @@ function Hok() {
 				children: data[Category.QQ_QUERY_PHONE].phonediqu,
 			},
 		],
-		[Category.QQ_QUERY_LOL]: [],
-		[Category.LOL_QUERY_QQ]: [],
-		[Category.QQ_QUERY_OLD_PASSWORD]: [],
+		[Category.QQ_QUERY_LOL]: [
+			{
+				label: "QQ号",
+				span: 3,
+				children: data[Category.QQ_QUERY_LOL].qq,
+			},
+			{
+				label: "名称",
+				span: 3,
+				children: data[Category.QQ_QUERY_LOL].name,
+			},
+			{
+				label: "所在大区",
+				span: 3,
+				children: data[Category.QQ_QUERY_LOL].daqu,
+			},
+		],
+		[Category.LOL_QUERY_QQ]: [
+			{
+				label: "QQ号",
+				span: 3,
+				children: data[Category.LOL_QUERY_QQ].qq,
+			},
+			{
+				label: "名称",
+				span: 3,
+				children: data[Category.LOL_QUERY_QQ].name,
+			},
+			{
+				label: "所在大区",
+				span: 3,
+				children: data[Category.LOL_QUERY_QQ].daqu,
+			},
+		],
+		[Category.QQ_QUERY_OLD_PASSWORD]: [
+			{
+				label: "QQ号",
+				span: 3,
+				children: data[Category.QQ_QUERY_OLD_PASSWORD].qq,
+			},
+			{
+				label: "密码",
+				span: 3,
+				children: data[Category.QQ_QUERY_OLD_PASSWORD].qqlm,
+			},
+		],
 		[Category.WEIBO_QUERY_PHONE]: [],
 		[Category.PHONE_QUERY_WEIBO]: [],
 	};
@@ -161,21 +207,21 @@ function Hok() {
 		}
 
 		// lolId
-		if (value === 3) {
-			setInputType(3);
+		if (value === Category.LOL_QUERY_QQ) {
+			setInputType(2);
 		}
 
 		// weiBoId
-		if (value === 5) {
-			setInputType(4);
+		if (value === Category.WEIBO_QUERY_PHONE) {
+			setInputType(3);
 		}
 	}
 
-	const [qq, setQq] = useState("1604705673");
+	const [qq, setQq] = useState("38199238");
 
 	const [phone, setPhone] = useState("18573841819");
 
-	const [lolId, setLolId] = useState(INITIALIZATION);
+	const [lolName, setLolName] = useState("中路杀神");
 
 	const [weiBoId, setWeiBoId] = useState(INITIALIZATION);
 
@@ -183,8 +229,6 @@ function Hok() {
 	 * 检查并获取车牌数据
 	 */
 	async function getData() {
-		console.log("%c Line:187 🍩 category", "color:#ea7e5c", category);
-		console.log("%c Line:188 🌶 isValidQQ(qq)", "color:#ed9ec7", isValidQQ(qq));
 		if (category === Category.QQ_QUERY_PHONE && !isValidQQ(qq)) {
 			message.error("请输入正确的QQ号");
 		}
@@ -196,6 +240,13 @@ function Hok() {
 				res = await BlogApi.getQqQueryPhone(qq);
 			} else if (category === Category.PHONE_QUERY_QQ) {
 				res = await BlogApi.getPhoneQueryQq(phone);
+			} else if (category === Category.QQ_QUERY_LOL) {
+				res = await BlogApi.getQqQueryLol(qq);
+			} else if (category === Category.LOL_QUERY_QQ) {
+				res = await BlogApi.getLolQueryQq(lolName);
+			} else if (category === Category.QQ_QUERY_OLD_PASSWORD) {
+				res = await BlogApi.getQqQueryOldPassword(qq);
+				console.log("%c Line:201 🍫 res", "color:#f5ce50", res);
 			}
 
 			setData({
@@ -215,6 +266,12 @@ function Hok() {
 			setQq(e.target.value);
 		} else if (category === Category.PHONE_QUERY_QQ) {
 			setPhone(e.target.value);
+		} else if (category === Category.QQ_QUERY_LOL) {
+			setQq(e.target.value);
+		} else if (category === Category.LOL_QUERY_QQ) {
+			setLolName(e.target.value);
+		} else if (category === Category.QQ_QUERY_OLD_PASSWORD) {
+			setQq(e.target.value);
 		}
 
 		if (error) {
@@ -223,28 +280,27 @@ function Hok() {
 	}
 
 	function handleClear() {
-		if (category === Category.QQ_QUERY_PHONE) {
-			console.log("%c Line:229 🥐 qq", "color:#ed9ec7", qq);
-			setData({
-				...data,
-				[Category.QQ_QUERY_PHONE]: {
-					qq: "",
-					phone: "",
-					phonediqu: "",
-				},
-			});
-		} else if (category === Category.PHONE_QUERY_QQ) {
-			setData({
-				...data,
-				[Category.PHONE_QUERY_QQ]: {
-					qq: "",
-					phone: "",
-					phonediqu: "",
-				},
-			});
-		}
-
-		setLoading(false);
+		// if (category === Category.QQ_QUERY_PHONE) {
+		// 	console.log("%c Line:229 🥐 qq", "color:#ed9ec7", qq);
+		// 	setData({
+		// 		...data,
+		// 		[Category.QQ_QUERY_PHONE]: {
+		// 			qq: "",
+		// 			phone: "",
+		// 			phonediqu: "",
+		// 		},
+		// 	});
+		// } else if (category === Category.PHONE_QUERY_QQ) {
+		// 	setData({
+		// 		...data,
+		// 		[Category.PHONE_QUERY_QQ]: {
+		// 			qq: "",
+		// 			phone: "",
+		// 			phonediqu: "",
+		// 		},
+		// 	});
+		// }
+		// setLoading(false);
 	}
 	return (
 		<div className="p-4  flex flex-col relative">
@@ -297,8 +353,8 @@ function Hok() {
 						<Input.Search
 							className="!w-80"
 							allowClear
-							placeholder="请输入LOL ID"
-							value={qq}
+							placeholder="请输入LOL 名称"
+							value={lolName}
 							onChange={handleChange}
 							onClear={handleClear}
 							onPressEnter={getData}
@@ -314,7 +370,7 @@ function Hok() {
 							className="!w-80"
 							allowClear
 							placeholder="请输入微博ID"
-							value={qq}
+							value={weiBoId}
 							onChange={handleChange}
 							onClear={handleClear}
 							onPressEnter={getData}
