@@ -28,7 +28,7 @@ enum Category {
 	WEIBO = 3,
 }
 
-function Hok() {
+function Account() {
 	const [loading, setLoading] = useState(false);
 
 	const [error, setError] = useState("");
@@ -441,4 +441,4 @@ function Hok() {
 	);
 }
 
-export default Hok;
+export default Account;
