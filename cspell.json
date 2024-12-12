@@ -32,6 +32,7 @@
 		"VITE",
 		"VITE_APP_EMAILJS_RECEIVERID",
 		"VITE_APP_EMAILJS_TEMPLATEID",
+		"WEIBO",
 		"WEIBO_QUERY_PHONE",
 		"ahooks",
 		"antd",

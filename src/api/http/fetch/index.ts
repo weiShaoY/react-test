@@ -12,7 +12,6 @@ export async function fetchHttp(
 ): Promise<any> {
 	try {
 		const response = await fetch(url, options);
-		console.log("%c Line:15 🍪 response", "color:#2eafb0", response);
 
 		// 检查响应状态是否正常
 		if (!response.ok) {

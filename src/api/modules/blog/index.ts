@@ -238,45 +238,50 @@ class BlogApi {
 	}
 
 	/**
-	 *  手机号查询绑定QQ
-	 */
-	getPhoneQueryQq(phone: string) {
-		return fetchHttp(`https://api.xywlapi.cc/qqphone?phone=${phone}`);
-	}
-
-	/**
 	 *  QQ号查询LOL信息
+	 *  @description https://zy.xywlapi.cc/
 	 */
 	getQqQueryLol(qq: string) {
 		return fetchHttp(`https://api.xywlapi.cc/qqlol?qq=${qq}`);
 	}
 
 	/**
-	 *  LOL查询QQ信息
-	 */
-	getLolQueryQq(lol: string) {
-		return fetchHttp(`https://api.xywlapi.cc/lolname?name=${lol}`);
-	}
-
-	/**
 	 *  QQ号查询老密
+	 *  @description https://zy.xywlapi.cc/
 	 */
 	getQqQueryOldPassword(qq: string) {
 		return fetchHttp(`https://api.xywlapi.cc/qqlm?qq=${qq}`);
 	}
-
 	/**
-	 *  微博通过ID查手机号
+	 *  手机号查询绑定QQ
+	 *  @description https://zy.xywlapi.cc/
 	 */
-	getWeiBoQueryPhone(id: string) {
-		return fetchHttp(`https://api.xywlapi.cc/wbapi?id=${id}`);
+	getPhoneQueryQq(phone: string) {
+		return fetchHttp(`https://api.xywlapi.cc/qqphone?phone=${phone}`);
 	}
 
 	/**
 	 *  通过手机号查微博ID
+	 *  @description https://zy.xywlapi.cc/
 	 */
 	getPhoneQueryWeiBo(phone: string) {
 		return fetchHttp(`https://api.xywlapi.cc/wbphone?phone=${phone}`);
+	}
+
+	/**
+	 *  LOL查询QQ信息
+	 *  @description https://zy.xywlapi.cc/
+	 */
+	getLolQueryQq(lolName: string) {
+		return fetchHttp(`https://api.xywlapi.cc/lolname?name=${lolName}`);
+	}
+
+	/**
+	 *  微博通过ID查手机号
+	 *  @description https://zy.xywlapi.cc/
+	 */
+	getWeiBoIdQueryPhone(weiBoId: string) {
+		return fetchHttp(`https://api.xywlapi.cc/wbapi?id=${weiBoId}`);
 	}
 }
 
