@@ -4,6 +4,8 @@ import { Suspense, useEffect, useState } from "react";
 
 import { CanvasLoading } from "@/components/loading";
 
+import * as THREE from "three";
+
 type ComputersProps = {
 	/**
 	 *  是否为移动端
@@ -14,11 +16,16 @@ type ComputersProps = {
 function replaceTexture(material) {
 	const textureLoader = new THREE.TextureLoader();
 	const newTextureURL =
-		"https://img.xwteam.cn/img.php?pic=9ae1cbfe03756dea03cdfa8ecc4abc0def921c5fff7fd050635974804267df266ce271781f72397178f86fe13f3f8ef7"; // 替换为你的网络图片 URL
+		"https://p0.pipi.cn/mediaplus/friday_image_fe/cdf05c146e34ea4ea93cbcd5e0c83aa01204e.jpg?imageMogr2/quality/80"; // 替换为你的网络图片 URL
 
 	textureLoader.load(
 		newTextureURL,
 		(newTexture) => {
+			// 清理旧的纹理资源
+			if (material.map) {
+				material.map.dispose();
+			}
+
 			// 加载完成后替换纹理
 			material.map = newTexture;
 			material.needsUpdate = true; // 通知材质更新
