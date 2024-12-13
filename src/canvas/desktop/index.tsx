@@ -57,7 +57,6 @@ function replaceMaterialTexture(
 function replaceTexturesInScene(scene: THREE.Object3D) {
 	scene.traverse((child: any) => {
 		if (child.isMesh) {
-			console.log("%c Line:57 🥚 child.isMesh", "color:#f5ce50", child.isMesh);
 			const material = child.material;
 
 			// const imgUrl = "https://p1.toutiaoimg.com/origin/1374c00019b8293a5d654";
@@ -70,6 +69,7 @@ function replaceTexturesInScene(scene: THREE.Object3D) {
 			// 替换发光纹理
 			if (material.emissiveMap && material.emissiveMap.name === "screenTex") {
 				replaceMaterialTexture(material, "emissiveMap", imgUrl);
+				material.emissiveIntensity = 0.6;
 			}
 		}
 	});
