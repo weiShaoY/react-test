@@ -6,11 +6,11 @@ import { Button, Select, Spin, Switch, Tooltip } from "antd";
 import { useState } from "react";
 import ReactPlayer from "react-player/lazy";
 
-function Video() {
-	const [loading, setLoading] = useState<boolean>(false);
-	const [category, setCategory] = useState<number>(0);
-	const [isAutoPlayNext, setIsAutoPlayNext] = useState<boolean>(true);
-	const [voiceUrl, setVoiceUrl] = useState<string>("");
+function Voice() {
+	const [loading, setLoading] = useState(false);
+	const [category, setCategory] = useState(0);
+	const [isAutoPlayNext, setIsAutoPlayNext] = useState(false);
+	const [keyword, setKeyword] = useState("");
 
 	/**
 	 *  分类选项
@@ -33,16 +33,13 @@ function Video() {
 	const getData = async () => {
 		try {
 			setLoading(true);
-			const getVoice = categoryMap[category];
 
-			if (!getVoice) {
-				message.error("无效的分类");
-				return;
-			}
-			const response = (await getVoice()) as any;
+			const fetchData = categoryMap[category];
+
+			const response = (await fetchData()) as any;
 
 			if (response) {
-				setVoiceUrl(response.audiopath);
+				setKeyword(response.audiopath);
 			} else {
 				message.error("未获取到视频资源");
 			}
@@ -71,7 +68,7 @@ function Video() {
 
 	return (
 		<div className="h-full relative flex flex-col">
-			<div className="flex items-center mb-4 gap-5">
+			<div className="flex items-center m-5 gap-5">
 				<Select
 					className="w-52"
 					showSearch
@@ -100,7 +97,6 @@ function Video() {
 				/>
 			</div>
 
-			{/* 视频播放区域 */}
 			<div className="flex-1 flex justify-center items-center bg-gray-200 h-[80vh] relative">
 				{loading && (
 					<Spin
@@ -108,11 +104,11 @@ function Video() {
 						className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
 					/>
 				)}
-				{voiceUrl && (
+				{keyword && (
 					<ReactPlayer
 						controls
 						playing
-						url={voiceUrl}
+						url={keyword}
 						onEnded={handleVideoEnd}
 						height="100%"
 						width="100%"
@@ -123,4 +119,4 @@ function Video() {
 	);
 }
 
-export default Video;
+export default Voice;

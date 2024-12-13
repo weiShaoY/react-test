@@ -254,13 +254,12 @@ function Account() {
 	 * 检查并获取车牌数据
 	 */
 	async function getData() {
-		if (category === Category.QQ && !isValidQQ(qq)) {
-			message.error("请输入正确的QQ号");
-		}
-
 		try {
-			setLoading(true);
+			if (category === Category.QQ && !isValidQQ(qq)) {
+				throw new Error("请输入正确的QQ号");
+			}
 
+			setLoading(true);
 			// QQ号
 			if (category === Category.QQ) {
 				const res_phone = await BlogApi.getQqQueryPhone(qq);
@@ -340,8 +339,8 @@ function Account() {
 
 	function handleClear() {}
 	return (
-		<div className="p-4  flex flex-col relative">
-			<div className="flex items-center gap-2">
+		<div className="h-full relative flex flex-col">
+			<div className="flex  m-5 gap-5 ">
 				<Select
 					className="w-48"
 					showSearch
@@ -354,74 +353,87 @@ function Account() {
 					options={categoryOptions}
 				/>
 
-				<>
-					{inputType === Category.QQ && (
-						<Input.Search
-							className="!w-80"
-							allowClear
-							placeholder="请输入QQ号"
-							value={qq}
-							onChange={handleChange}
-							onClear={handleClear}
-							onPressEnter={getData}
-							onSearch={getData}
-							enterButton="搜索"
-							status={error ? "error" : ""}
-						/>
-					)}
+				<div className="flex-1 flex items-center gap-2 flex-wrap">
+					<>
+						{inputType === Category.QQ && (
+							<Input.Search
+								className="!w-60"
+								allowClear
+								placeholder="请输入QQ号"
+								value={qq}
+								onChange={handleChange}
+								onClear={handleClear}
+								onPressEnter={getData}
+								onSearch={getData}
+								enterButton="搜索"
+								status={error ? "error" : ""}
+							/>
+						)}
 
-					{inputType === Category.PHONE && (
-						<Input.Search
-							className="!w-80"
-							allowClear
-							placeholder="请输入手机号"
-							value={phone}
-							onChange={handleChange}
-							onClear={handleClear}
-							onPressEnter={getData}
-							onSearch={getData}
-							enterButton="搜索"
-							loading={loading}
-							disabled={loading}
-							status={error ? "error" : ""}
-						/>
-					)}
-					{inputType === Category.LOL && (
-						<Input.Search
-							className="!w-80"
-							allowClear
-							placeholder="请输入LOL名称"
-							value={lol}
-							onChange={handleChange}
-							onClear={handleClear}
-							onPressEnter={getData}
-							onSearch={getData}
-							enterButton="搜索"
-							loading={loading}
-							disabled={loading}
-							status={error ? "error" : ""}
-						/>
-					)}
-					{inputType === Category.WEIBO && (
-						<Input.Search
-							className="!w-80"
-							allowClear
-							placeholder="请输入微博ID"
-							value={weiBoId}
-							onChange={handleChange}
-							onClear={handleClear}
-							onPressEnter={getData}
-							onSearch={getData}
-							enterButton="搜索"
-							loading={loading}
-							disabled={loading}
-							status={error ? "error" : ""}
-						/>
-					)}
-				</>
+						{inputType === Category.PHONE && (
+							<Input.Search
+								className="!w-60"
+								allowClear
+								placeholder="请输入手机号"
+								value={phone}
+								onChange={handleChange}
+								onClear={handleClear}
+								onPressEnter={getData}
+								onSearch={getData}
+								enterButton="搜索"
+								loading={loading}
+								disabled={loading}
+								status={error ? "error" : ""}
+							/>
+						)}
+						{inputType === Category.LOL && (
+							<Input.Search
+								className="!w-60"
+								allowClear
+								placeholder="请输入LOL名称"
+								value={lol}
+								onChange={handleChange}
+								onClear={handleClear}
+								onPressEnter={getData}
+								onSearch={getData}
+								enterButton="搜索"
+								loading={loading}
+								disabled={loading}
+								status={error ? "error" : ""}
+							/>
+						)}
+						{inputType === Category.WEIBO && (
+							<Input.Search
+								className="!w-60"
+								allowClear
+								placeholder="请输入微博ID"
+								value={weiBoId}
+								onChange={handleChange}
+								onClear={handleClear}
+								onPressEnter={getData}
+								onSearch={getData}
+								enterButton="搜索"
+								loading={loading}
+								disabled={loading}
+								status={error ? "error" : ""}
+							/>
+						)}
+					</>
+
+					<div className="">
+						{error && <span className="text-red ">{error}</span>}
+					</div>
+				</div>
 			</div>
 
-			<div className="flex-1 mt-5">
+			<div className="relative">
+				{loading && (
+					<Spin
+						size="large"
+						className="!absolute z-10 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+					/>
+				)}
+
 				<Descriptions
 					labelStyle={{
 						width: 160,
@@ -429,13 +441,6 @@ function Account() {
 					bordered
 					items={items[category]}
 				/>
-
-				{/* 数据展示 */}
-				{loading && (
-					<div className="absolute inset-0 flex justify-center items-center  z-10">
-						<Spin size="large" />
-					</div>
-				)}
 			</div>
 		</div>
 	);

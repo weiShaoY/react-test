@@ -10,7 +10,7 @@ type DataType = {
 	content: string;
 }[];
 
-function Hok() {
+function CommodityPrice() {
 	const [loading, setLoading] = useState(false);
 
 	const [error, setError] = useState("");
@@ -124,4 +124,4 @@ function Hok() {
 	);
 }
 
-export default Hok;
+export default CommodityPrice;

@@ -81,7 +81,7 @@ const columns: TableProps<ItemType>["columns"] = [
 		sorter: (a: any, b: any) => a.prices["0"] - b.prices["0"],
 	},
 ];
-function Movie() {
+function Oil() {
 	const [loading, setLoading] = useState(false);
 
 	const [data, setData] = useState([]);
@@ -94,12 +94,11 @@ function Movie() {
 			setLoading(true);
 
 			// 并行获取数据，提高性能
-
-			const res = await BlogApi.getOilPrices();
+			const response = await BlogApi.getOilPrices();
 
 			// 优先排序省份
 			const priorityProvinces = ["湖南", "广东"];
-			const sortedData = res.sort((a: ItemType, b: ItemType) => {
+			const sortedData = response.sort((a: ItemType, b: ItemType) => {
 				const indexA = priorityProvinces.indexOf(a.province);
 				const indexB = priorityProvinces.indexOf(b.province);
 
@@ -128,10 +127,10 @@ function Movie() {
 			dataSource={data}
 			rowKey="province"
 			loading={loading}
-			pagination={{ pageSize: 50 }}
-			scroll={{ y: "calc(100vh - 300px)" }}
+			pagination={false}
+			scroll={{ y: "80vh" }}
 		/>
 	);
 }
 
-export default Movie;
+export default Oil;

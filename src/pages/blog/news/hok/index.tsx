@@ -156,8 +156,8 @@ function Hok() {
 		try {
 			setLoading(true);
 			const { type, hero } = state;
-			const res = await BlogApi.getHok(type, hero);
-			setState({ ...state, data: res });
+			const response = await BlogApi.getHok(type, hero);
+			setState({ ...state, data: response });
 		} catch (error) {
 			message.error(error.message || "获取数据失败，请稍后重试");
 		} finally {
@@ -233,15 +233,36 @@ function Hok() {
 	];
 
 	return (
-		<div className="p-4 h-full flex flex-col">
-			{/* 数据展示 */}
-			{loading ? (
-				<Spin
-					size="large"
-					className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2
-				-translate-y-1/2"
+		<div className="h-full relative flex flex-col">
+			<div className="flex items-center m-5 gap-5">
+				<Select
+					className="w-32"
+					showSearch
+					allowClear
+					placeholder="请选择区"
+					defaultValue={state.type}
+					onChange={(type) => setState({ ...state, type })}
+					options={typeSelectOptions}
 				/>
-			) : (
+				<Select
+					className="!w-44"
+					showSearch
+					allowClear
+					placeholder="请输入或选择英雄"
+					defaultValue={state.hero}
+					onChange={(hero) => setState({ ...state, hero })}
+					options={heroSelectOptions}
+				/>
+			</div>
+
+			<div className="relative">
+				{loading && (
+					<Spin
+						size="large"
+						className="!absolute z-10 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+					/>
+				)}
+
 				<Descriptions
 					className="w-full h-full"
 					labelStyle={{
@@ -249,30 +270,8 @@ function Hok() {
 					}}
 					bordered
 					items={items}
-					title={
-						<Select
-							className="w-32"
-							showSearch
-							allowClear
-							placeholder="请选择区"
-							defaultValue={state.type}
-							onChange={(type) => setState({ ...state, type })}
-							options={typeSelectOptions}
-						/>
-					}
-					extra={
-						<Select
-							className="!w-44"
-							showSearch
-							allowClear
-							placeholder="请输入或选择英雄"
-							defaultValue={state.hero}
-							onChange={(hero) => setState({ ...state, hero })}
-							options={heroSelectOptions}
-						/>
-					}
 				/>
-			)}
+			</div>
 		</div>
 	);
 }

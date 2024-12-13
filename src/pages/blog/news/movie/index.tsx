@@ -325,12 +325,12 @@ function Movie() {
 			setLoading(true);
 
 			// 并行获取数据，提高性能
-			const [comingSoonMovie, res] = await Promise.all([
+			const [comingSoonMovie, response] = await Promise.all([
 				BlogApi.getComingSoonMovie(),
 				BlogApi.getHotTheaterMovie(),
 			]);
 
-			const hotTheaterMovie = res.movieList;
+			const hotTheaterMovie = response.movieList;
 
 			// 更新状态
 			setData({
@@ -359,8 +359,8 @@ function Movie() {
 			dataSource={data}
 			rowKey={rowKey}
 			loading={loading}
-			pagination={{ pageSize: 50 }}
-			scroll={{ y: "calc(100vh - 300px)" }}
+			pagination={false}
+			scroll={{ y: "78vh" }}
 		/>
 	);
 

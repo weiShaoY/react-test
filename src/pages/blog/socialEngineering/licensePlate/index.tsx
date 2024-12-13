@@ -2,9 +2,7 @@ import { BlogApi } from "@/api";
 import { isValidPlateNumber } from "@/utils";
 import { useThrottleFn } from "ahooks";
 import { Descriptions, Input, Spin, message } from "antd";
-import { useCallback, useEffect, useState } from "react";
-
-const INITIALIZATION = "京A12345";
+import { useState } from "react";
 
 const typeMap: Record<string, string> = {
 	"10": "民用",
@@ -38,13 +36,13 @@ type PlateInfoType = {
 	type: string | number;
 };
 
-function Hok() {
+function LicensePlate() {
 	const [loading, setLoading] = useState(false);
 
 	const [error, setError] = useState("");
 
 	//  京A12345
-	const [licensePlateNumber, setLicensePlateNumber] = useState(INITIALIZATION);
+	const [keyword, setKeyword] = useState("京A12345");
 
 	const [data, setData] = useState<PlateInfoType>({
 		province_name: "",
@@ -79,32 +77,32 @@ function Hok() {
 	/**
 	 * 检查并获取车牌数据
 	 */
-	const getData = useCallback(async (plateNumber: string) => {
+	const getData = async () => {
 		try {
-			if (!plateNumber.trim()) throw new Error("请输入车牌号");
+			if (!keyword.trim()) throw new Error("请输入车牌号");
 
-			if (!isValidPlateNumber(plateNumber))
+			if (!isValidPlateNumber(keyword.trim()))
 				throw new Error("请输入有效的车牌号");
 
 			setLoading(true);
 
-			const res = await BlogApi.getLicensePlateNumberInfo(plateNumber);
+			const response = await BlogApi.getLicensePlateNumberInfo(keyword);
 
-			setData(res);
+			setData(response);
 		} catch (error: any) {
 			message.error(error.message || "获取数据失败，请稍后重试");
 			setError(error.message);
 		} finally {
 			setLoading(false);
 		}
-	}, []);
+	};
 
 	/**
 	 *  使用 ahooks 的节流
 	 */
 	const { run: throttledGetData } = useThrottleFn(
 		() => {
-			getData(licensePlateNumber.replace(/\s+/g, ""));
+			getData();
 		},
 		{
 			wait: 1000,
@@ -116,7 +114,7 @@ function Hok() {
 	 * 输入变化的处理
 	 */
 	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setLicensePlateNumber(e.target.value);
+		setKeyword(e.target.value);
 		setError("");
 	}
 
@@ -124,7 +122,7 @@ function Hok() {
 	 * 清空输入框
 	 */
 	function handleClear() {
-		setLicensePlateNumber("");
+		setKeyword("");
 
 		setError("");
 
@@ -136,46 +134,47 @@ function Hok() {
 		});
 	}
 
-	useEffect(() => {
-		getData(INITIALIZATION);
-	}, [getData]);
-
 	return (
-		<div className="p-4  flex flex-col relative">
-			<Descriptions
-				className="w-full h-full"
-				labelStyle={{
-					width: 160,
-				}}
-				bordered
-				items={items}
-				title={
-					<Input.Search
-						className="!w-80"
-						allowClear
-						placeholder="请输入车牌号"
-						value={licensePlateNumber}
-						onChange={handleInputChange}
-						onPressEnter={throttledGetData}
-						onSearch={throttledGetData}
-						onClear={handleClear}
-						loading={loading}
-						enterButton="搜索"
-						disabled={loading}
-						status={error ? "error" : ""}
-					/>
-				}
-				extra={error && <span className="text-red ">{error}</span>}
-			/>
+		<div className="h-full relative flex flex-col">
+			<div className="flex  m-5 gap-5  items-center">
+				<Input.Search
+					className="!w-80"
+					allowClear
+					placeholder="请输入车牌号"
+					value={keyword}
+					onChange={handleInputChange}
+					onPressEnter={throttledGetData}
+					onSearch={throttledGetData}
+					onClear={handleClear}
+					loading={loading}
+					enterButton="搜索"
+					disabled={loading}
+					status={error ? "error" : ""}
+				/>
 
-			{/* 数据展示 */}
-			{loading && (
-				<div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-75 z-10">
-					<Spin size="large" />
+				<div className="">
+					{error && <span className="text-red ">{error}</span>}
 				</div>
-			)}
+			</div>
+
+			<div className="relative">
+				{loading && (
+					<Spin
+						size="large"
+						className="!absolute z-10 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+					/>
+				)}
+
+				<Descriptions
+					labelStyle={{
+						width: 160,
+					}}
+					bordered
+					items={items}
+				/>
+			</div>
 		</div>
 	);
 }
 
-export default Hok;
+export default LicensePlate;

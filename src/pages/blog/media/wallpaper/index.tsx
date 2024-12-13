@@ -16,7 +16,7 @@ function Wallpaper() {
 
 	const [category, setCategory] = useState("mn");
 
-	const [url, setUrl] = useState("");
+	const [keyword, setKeyword] = useState("");
 
 	/**
 	 *  分类选项
@@ -46,12 +46,12 @@ function Wallpaper() {
 			setLoading(true);
 
 			if (category === "tui") {
-				const res = await BlogApi.getTuiImage();
+				const response = await BlogApi.getTuiImage();
 
-				setUrl(res.text);
+				setKeyword(response.text);
 			} else {
-				const res = await BlogApi.getWallpaper(category);
-				setUrl(res.img_url);
+				const response = await BlogApi.getWallpaper(category);
+				setKeyword(response.img_url);
 			}
 		} catch (error: any) {
 			message.error(error.message || "获取数据失败，请稍后重试");
@@ -72,7 +72,7 @@ function Wallpaper() {
 	);
 	return (
 		<div className="h-full relative flex flex-col">
-			<div className="flex items-center mb-4 gap-5">
+			<div className="flex items-center m-5 gap-5">
 				<Select
 					className="w-40"
 					showSearch
@@ -93,34 +93,22 @@ function Wallpaper() {
 
 				<Tooltip placement="top" title="点击下载">
 					<Button
-						onClick={() => downloadImage(url)}
+						onClick={() => downloadImage(keyword)}
 						icon={<SvgIcon icon="download" />}
 					/>
 				</Tooltip>
 			</div>
 
 			{/* 壁纸展示区域 */}
-			<div className="flex-1 flex justify-center items-center bg-gray-200 relative">
+			<div className="flex-1 flex justify-center items-center bg-gray-200 h-[80vh] relative">
 				{loading && (
 					<Spin
 						size="large"
 						className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
 					/>
 				)}
-				{url && (
-					<Image
-						src={url}
-						alt="壁纸"
-						height="100%"
-						width="auto"
-						// style={{
-						// 	maxHeight: "100%", // 高度最大为父盒子高度
-						// 	maxWidth: "100%", // 宽度最大为父盒子宽度
-						// 	height: "auto", // 高度优先调整
-						// 	width: "auto", // 根据高度调整宽度，保持比例
-						// 	objectFit: "contain",
-						// }}
-					/>
+				{keyword && (
+					<Image src={keyword} alt="壁纸" height="100%" width="auto" />
 				)}
 			</div>
 		</div>

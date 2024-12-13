@@ -132,7 +132,7 @@ type DomainInfoType = {
 	};
 };
 
-function Hok() {
+function Domain() {
 	const [loading, setLoading] = useState(false);
 
 	const [error, setError] = useState("");
@@ -327,39 +327,37 @@ function Hok() {
 
 			setLoading(true);
 
-			// const responseWhoisInfo = await BlogApi.getDomainWhoisInfo(trimmedDomain);
-
-			const responseICPInfo = await BlogApi.getWebsiteDetails(trimmedDomain);
+			const response = await BlogApi.getWebsiteDetails(trimmedDomain);
 
 			setData({
 				icp: {
 					subject: {
-						name: responseICPInfo.icp.subject.name || "", // 单位名称
-						nature: responseICPInfo.icp.subject.nature || "", // 单位性质
-						license: responseICPInfo.icp.subject.license || "", // 备案许可证编号
-						updateTime: responseICPInfo.icp.subject.updateTime || "", // 信息更新时间
+						name: response.icp.subject.name || "", // 单位名称
+						nature: response.icp.subject.nature || "", // 单位性质
+						license: response.icp.subject.license || "", // 备案许可证编号
+						updateTime: response.icp.subject.updateTime || "", // 信息更新时间
 					},
 					website: {
-						domain: responseICPInfo.icp.website.domain || "", // 网站域名
-						license: responseICPInfo.icp.website.license || "", // 网站备案许可证编号
+						domain: response.icp.website.domain || "", // 网站域名
+						license: response.icp.website.license || "", // 网站备案许可证编号
 					},
 				},
 				whois: {
-					"Domain Status": responseICPInfo.whois["Domain Status"] || [], // 域名状态
-					"Name Server": responseICPInfo.whois["Name Server"] || [], // 域名 DNS 服务器列表
-					"Created Date": responseICPInfo.whois["Created Date"] || "", // 域名创建时间
-					"Updated Date": responseICPInfo.whois["Updated Date"] || "", // 域名更新时间
-					"Expiry Date": responseICPInfo.whois["Expiry Date"] || "", // 域名到期时间
-					Registrar: responseICPInfo.whois.Registrar || "", // 注册商名称
+					"Domain Status": response.whois["Domain Status"] || [], // 域名状态
+					"Name Server": response.whois["Name Server"] || [], // 域名 DNS 服务器列表
+					"Created Date": response.whois["Created Date"] || "", // 域名创建时间
+					"Updated Date": response.whois["Updated Date"] || "", // 域名更新时间
+					"Expiry Date": response.whois["Expiry Date"] || "", // 域名到期时间
+					Registrar: response.whois.Registrar || "", // 注册商名称
 				},
 				dns: {
-					A: responseICPInfo.dns.A || [], // A 记录
-					AAAA: responseICPInfo.dns.AAAA || [], // AAAA 记录
-					CNAME: responseICPInfo.dns.CNAME || [], // CNAME 记录
-					NS: responseICPInfo.dns.NS || [], // NS 记录
+					A: response.dns.A || [], // A 记录
+					AAAA: response.dns.AAAA || [], // AAAA 记录
+					CNAME: response.dns.CNAME || [], // CNAME 记录
+					NS: response.dns.NS || [], // NS 记录
 					GEO: {
-						isp: responseICPInfo.dns.GEO.isp || "", // 互联网服务提供商
-						area: responseICPInfo.dns.GEO.area || "", // 所在区域
+						isp: response.dns.GEO.isp || "", // 互联网服务提供商
+						area: response.dns.GEO.area || "", // 所在区域
 					},
 				},
 			});
@@ -439,41 +437,46 @@ function Hok() {
 	}, [getData]);
 
 	return (
-		<div className="p-4  flex flex-col relative">
-			{/* 数据展示 */}
-			<Descriptions
-				className="w-full h-full"
-				labelStyle={{
-					width: 190,
-				}}
-				bordered
-				items={items}
-				title={
-					<Input.Search
-						className="!w-80"
-						allowClear
-						placeholder="请输入域名"
-						value={domain}
-						onChange={handleInputChange}
-						onPressEnter={throttledGetData}
-						onSearch={throttledGetData}
-						onClear={handleClear}
-						loading={loading}
-						enterButton="搜索"
-						disabled={loading}
-						status={error ? "error" : ""}
-					/>
-				}
-				extra={error && <span className="text-red ">{error}</span>}
-			/>
+		<div className="h-full relative flex flex-col">
+			<div className="flex  m-5 gap-5  items-center">
+				<Input.Search
+					className="!w-80"
+					allowClear
+					placeholder="请输入域名"
+					value={domain}
+					onChange={handleInputChange}
+					onPressEnter={throttledGetData}
+					onSearch={throttledGetData}
+					onClear={handleClear}
+					loading={loading}
+					enterButton="搜索"
+					disabled={loading}
+					status={error ? "error" : ""}
+				/>
 
-			{loading && (
-				<div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-75 z-10">
-					<Spin size="large" />
+				<div className="">
+					{error && <span className="text-red ">{error}</span>}
 				</div>
-			)}
+			</div>
+
+			<div className="relative">
+				{loading && (
+					<Spin
+						size="large"
+						className="!absolute z-10 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+					/>
+				)}
+
+				<Descriptions
+					labelStyle={{
+						width: 160,
+					}}
+					bordered
+					items={items}
+				/>
+			</div>
 		</div>
 	);
 }
 
-export default Hok;
+export default Domain;

@@ -7,13 +7,11 @@ const columns = [
 		title: "香烟",
 		dataIndex: "name", // 数据字段名
 		key: "name",
-		// render: (text) => <span>{text}</span>, // 渲染函数
 	},
 	{
 		title: "单盒参考价",
 		dataIndex: "单盒参考价",
 		key: "singleBoxPrice",
-		// render: (text) => <span>{text}</span>, // 渲染为带单位的格式
 	},
 	{
 		title: "条盒参考价",
@@ -52,7 +50,7 @@ const columns = [
 	},
 ];
 
-function Movie() {
+function Cigarette() {
 	const [loading, setLoading] = useState(false);
 
 	const [data, setData] = useState([]);
@@ -72,9 +70,9 @@ function Movie() {
 		try {
 			setLoading(true);
 
-			const res = await BlogApi.getCigarettePrice(keyword);
+			const response = await BlogApi.getCigarettePrice(keyword);
 
-			setData(res as any);
+			setData(response as any);
 		} catch (error) {
 			message.error(error.message || "获取数据失败，请稍后重试");
 		} finally {
@@ -90,8 +88,8 @@ function Movie() {
 	}
 
 	return (
-		<div className="">
-			<div className="flex items-center justify-between mb-5">
+		<div className="h-full relative flex flex-col">
+			<div className="flex  m-5 gap-5  items-center">
 				<Input.Search
 					className="!w-80"
 					placeholder="请输入香烟名称"
@@ -113,11 +111,11 @@ function Movie() {
 				dataSource={data}
 				rowKey="name"
 				loading={loading}
-				pagination={{ pageSize: 50 }}
-				scroll={{ y: "calc(100vh - 300px)" }}
+				pagination={false}
+				scroll={{ y: "78vh" }}
 			/>
 		</div>
 	);
 }
 
-export default Movie;
+export default Cigarette;

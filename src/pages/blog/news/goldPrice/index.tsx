@@ -135,11 +135,6 @@ const marketGoldPriceColumns: TableProps<MarketGoldPriceItemType>["columns"] = [
 		key: "changepercent",
 		width: 100,
 		align: "right",
-		// render: (value) => (
-		// 	<span style={{ color: Number(value) >= 0 ? "green" : "red" }}>
-		// 		{value}%
-		// 	</span>
-		// ),
 		sorter: (a, b) => Number(a.changepercent) - Number(b.changepercent),
 	},
 	{
@@ -203,7 +198,7 @@ function GoldPrice() {
 				BlogApi.getBrandGoldPrice(),
 			]);
 
-			// 按 ID 排序
+			// 大盘黄金价格 按 ID 排序
 			marketGoldPrice.sort(
 				(a: MarketGoldPriceItemType, b: MarketGoldPriceItemType) =>
 					Number.parseInt(a.id) - Number.parseInt(b.id),
@@ -235,8 +230,8 @@ function GoldPrice() {
 			dataSource={data}
 			rowKey={rowKey}
 			loading={loading}
-			pagination={{ pageSize: 50 }}
-			scroll={{ y: "calc(100vh - 300px)" }}
+			pagination={false}
+			scroll={{ y: "78vh" }}
 		/>
 	);
 

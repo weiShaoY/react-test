@@ -79,9 +79,9 @@ export default function NavLogo({ collapsed, onToggle }: Props) {
 				type="button"
 			>
 				{collapsed ? (
-					<SvgIcon icon="arrow-left" size="20" />
-				) : (
 					<SvgIcon icon="arrow-right" size="20" />
+				) : (
+					<SvgIcon icon="arrow-left" size="20" />
 				)}{" "}
 			</button>
 		</div>
