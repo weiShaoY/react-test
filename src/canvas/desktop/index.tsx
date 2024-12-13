@@ -4,31 +4,71 @@ import { Suspense, useEffect, useState } from "react";
 
 import { CanvasLoading } from "@/components/loading";
 
+import * as THREE from "three";
+
 type ComputersProps = {
 	/**
 	 *  是否为移动端
 	 */
 	isMobile: boolean;
 };
-// 替换纹理的函数
-function replaceTexture(material) {
+/**
+ * 替换材质的纹理
+ * @param  material - 目标材质
+ * @param  textureType - 纹理类型（如 "map" 或 "emissiveMap"）
+ * @param  newTextureURL - 新纹理的 URL
+ */
+function replaceMaterialTexture(material, textureType, newTextureURL) {
 	const textureLoader = new THREE.TextureLoader();
-	const newTextureURL =
-		"https://img.xwteam.cn/img.php?pic=9ae1cbfe03756dea03cdfa8ecc4abc0def921c5fff7fd050635974804267df266ce271781f72397178f86fe13f3f8ef7"; // 替换为你的网络图片 URL
 
+	// 加载新纹理
 	textureLoader.load(
 		newTextureURL,
 		(newTexture) => {
-			// 加载完成后替换纹理
-			material.map = newTexture;
+			// 禁用纹理的垂直翻转
+			newTexture.flipY = false;
+
+			// 检查旧纹理是否存在，进行清理
+			if (material[textureType]) {
+				material[textureType].dispose();
+			}
+
+			// 替换目标纹理
+			material[textureType] = newTexture;
 			material.needsUpdate = true; // 通知材质更新
-			console.log("纹理已成功替换:", newTexture);
+
+			console.log(`成功替换 ${textureType}:`, newTexture);
 		},
 		undefined,
 		(error) => {
-			console.error("纹理加载失败:", error);
+			console.error(`加载纹理 ${textureType} 失败:`, error);
 		},
 	);
+}
+
+/**
+ * 遍历并替换纹理
+ * @param {THREE.Object3D} scene - 场景对象
+ */
+function replaceTexturesInScene(scene) {
+	scene.traverse((child) => {
+		if (child.isMesh) {
+			console.log("%c Line:57 🥚 child.isMesh", "color:#f5ce50", child.isMesh);
+			const material = child.material;
+
+			// const imgUrl = "https://p1.toutiaoimg.com/origin/1374c00019b8293a5d654";
+			const imgUrl = "https://api.lolimi.cn/API/dmtx/api.php";
+			// 替换普通纹理
+			if (material.map && material.map.name === "screenTex") {
+				replaceMaterialTexture(material, "map", imgUrl);
+			}
+
+			// 替换发光纹理
+			if (material.emissiveMap && material.emissiveMap.name === "screenTex") {
+				replaceMaterialTexture(material, "emissiveMap", imgUrl);
+			}
+		}
+	});
 }
 /**
  * 3D 电脑模型组件
@@ -42,35 +82,8 @@ const Computers = ({ isMobile }: ComputersProps): JSX.Element => {
 	 */
 	const computer = useGLTF("/models/desktop/index.gltf");
 
-	computer.scene.traverse((child) => {
-		if (child.isMesh) {
-			const material = child.material;
-
-			// 如果是数组材质
-			if (Array.isArray(material)) {
-				material.forEach((mat) => {
-					if (mat.map) {
-						console.log("纹理:", mat.map);
-					}
-				});
-			} else {
-				// 如果是单一材质
-				if (material.map) {
-					console.log("纹理11111111111:", material.map.name);
-
-					if (material.map.name === "screenTex") {
-						console.log(
-							"%c Line:43 🍌 material.map",
-							"color:#ea7e5c",
-							material.map,
-						);
-
-						replaceTexture(material);
-					}
-				}
-			}
-		}
-	});
+	// 遍历并替换 电脑模型的壁纸
+	replaceTexturesInScene(computer.scene);
 
 	return (
 		<primitive
@@ -125,13 +138,13 @@ function Desktop() {
 	return (
 		<Canvas
 			// 按需渲染帧，减少性能消耗
-			frameloop="demand"
+			frameloop="always"
 			// 启用阴影效果
 			shadows
 			// 设置相机位置和视场参数
 			camera={{ position: [20, 3, 5], fov: 45, near: 0.1, far: 1000 }}
 			// 保持绘图缓冲区内容
-			gl={{ preserveDrawingBuffer: true }}
+			gl={{ preserveDrawingBuffer: false }}
 			// 设置设备像素比，支持 Retina 显示
 			dpr={[1, 2]}
 		>
