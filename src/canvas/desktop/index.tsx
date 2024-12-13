@@ -18,7 +18,11 @@ type ComputersProps = {
  * @param  textureType - 纹理类型（如 "map" 或 "emissiveMap"）
  * @param  newTextureURL - 新纹理的 URL
  */
-function replaceMaterialTexture(material, textureType, newTextureURL) {
+function replaceMaterialTexture(
+	material: THREE.Material & { [key: string]: any },
+	textureType: string,
+	newTextureURL: string,
+) {
 	const textureLoader = new THREE.TextureLoader();
 
 	// 加载新纹理
@@ -50,8 +54,8 @@ function replaceMaterialTexture(material, textureType, newTextureURL) {
  * 遍历并替换纹理
  * @param {THREE.Object3D} scene - 场景对象
  */
-function replaceTexturesInScene(scene) {
-	scene.traverse((child) => {
+function replaceTexturesInScene(scene: THREE.Object3D) {
+	scene.traverse((child: any) => {
 		if (child.isMesh) {
 			console.log("%c Line:57 🥚 child.isMesh", "color:#f5ce50", child.isMesh);
 			const material = child.material;
