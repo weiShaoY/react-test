@@ -5,9 +5,7 @@ class BlogApi {
 	 *  测试接口
 	 */
 	test() {
-		return fetchHttp(
-			"https://zj.v.api.aa1.cn/api/qqmusic/demo.php?type=1&q=有何不可&p=1&n=5",
-		);
+		return fetchHttp("https://api.jkyai.top/API/sjngmt.php");
 	}
 
 	/**
@@ -79,6 +77,15 @@ class BlogApi {
 	 */
 	getTuiImage() {
 		return fetchHttp("https://api.lolimi.cn/API/meizi/api.php");
+	}
+
+	/**
+	 *  获取 随机男高美图
+	 *  @see https://api.aa1.cn/doc/sjngmt.html
+	 *  @url https://api.jkyai.top/API/sjngmt.php
+	 */
+	getRandomManImage() {
+		return fetchHttp("https://api.jkyai.top/API/sjngmt.php");
 	}
 
 	/**

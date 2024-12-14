@@ -2,14 +2,11 @@ import BlogApi from "@/api/modules/blog";
 import { SvgIcon } from "@/components/icon";
 import { useDebounceEffect } from "ahooks";
 import { message } from "antd";
-import { Button, Select, Spin, Switch, Tooltip } from "antd";
+import { Button, Select, Switch, Tooltip } from "antd";
 import { useRef, useState } from "react";
 import Player from "xgplayer";
-import MusicPreset from "xgplayer-music";
 
 import "xgplayer/dist/index.min.css";
-
-import "xgplayer-music/dist/index.min.css";
 
 function Voice() {
 	const [loading, setLoading] = useState(false);

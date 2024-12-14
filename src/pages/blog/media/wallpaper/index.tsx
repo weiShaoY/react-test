@@ -36,6 +36,7 @@ function Wallpaper() {
 		{ value: "qg", label: "情感" },
 		{ value: "wz", label: "文字" },
 		{ value: "tui", label: "腿" },
+		{ value: "sg", label: "帅哥" },
 	];
 
 	/**
@@ -49,6 +50,9 @@ function Wallpaper() {
 				const response = await BlogApi.getTuiImage();
 
 				setKeyword(response.text);
+			} else if (category === "sg") {
+				const response = await BlogApi.getRandomManImage();
+				setKeyword(response.img);
 			} else {
 				const response = await BlogApi.getWallpaper(category);
 				setKeyword(response.img_url);
