@@ -5,7 +5,9 @@ class BlogApi {
 	 *  测试接口
 	 */
 	test() {
-		return fetchHttp("https://api.lolimi.cn/API/boy/api.php");
+		return fetchHttp(
+			"https://zj.v.api.aa1.cn/api/qqmusic/demo.php?type=1&q=有何不可&p=1&n=5",
+		);
 	}
 
 	/**

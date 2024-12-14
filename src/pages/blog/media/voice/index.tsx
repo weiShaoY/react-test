@@ -3,12 +3,19 @@ import { SvgIcon } from "@/components/icon";
 import { useDebounceEffect } from "ahooks";
 import { message } from "antd";
 import { Button, Select, Spin, Switch, Tooltip } from "antd";
-import { useState } from "react";
-import ReactPlayer from "react-player/lazy";
+import { useRef, useState } from "react";
+import Player from "xgplayer";
+import MusicPreset from "xgplayer-music";
+
+import "xgplayer/dist/index.min.css";
+
+import "xgplayer-music/dist/index.min.css";
 
 function Voice() {
 	const [loading, setLoading] = useState(false);
 	const [category, setCategory] = useState(0);
+	const [isAutoPlay, setIsAutoPlay] = useState(false);
+
 	const [isAutoPlayNext, setIsAutoPlayNext] = useState(false);
 	const [keyword, setKeyword] = useState("");
 
@@ -50,13 +57,6 @@ function Voice() {
 		}
 	};
 
-	// 自动播放逻辑
-	function handleVideoEnd() {
-		if (isAutoPlayNext) {
-			getData();
-		}
-	}
-
 	// 使用防抖获取数据
 	useDebounceEffect(
 		() => {
@@ -65,6 +65,85 @@ function Voice() {
 		[category],
 		{ wait: 500 },
 	);
+
+	const voicePlayer = useRef<HTMLDivElement>(null);
+
+	if (voicePlayer.current && keyword) {
+		const player = new Player({
+			el: voicePlayer.current,
+			mediaType: "audio",
+			url: keyword,
+
+			/**
+			 *  播放器初始显示语言
+			 */
+			lang: "zh",
+
+			/**
+			 *  自动播放
+			 */
+			autoplay: isAutoPlay,
+
+			/**
+			 *  开启画面和控制栏分离模式
+			 */
+			marginControls: true,
+			/**
+			 *  video扩展属性
+			 */
+			videoAttributes: {
+				crossOrigin: "anonymous",
+			},
+
+			/**
+			 *  播放器区域是否允许右键功能菜单
+			 */
+			enableContextmenu: true,
+			/**
+			 *  下载
+			 */
+			download: true,
+			/**
+			 *  动态背景高斯模糊渲染插件
+			 */
+			dynamicBg: {
+				disable: false,
+			},
+			/**
+			 *  控制栏播放下一个视频按钮插件
+			 */
+			playnext: {
+				urlList: [keyword],
+			},
+			/**
+			 *  播放器旋转控件
+			 */
+			rotate: {
+				disable: false,
+			},
+		});
+
+		/**
+		 *  视频播放结束
+		 */
+		player.on(Player.Events.ENDED, () => {
+			if (isAutoPlayNext) {
+				if (!isAutoPlay) {
+					setIsAutoPlay(true);
+				}
+				getData();
+			}
+		});
+		/**
+		 *  点击按钮播放下一个视频源的时候触发
+		 */
+		player.on(Player.Events.PLAYNEXT, async () => {
+			if (!isAutoPlay) {
+				setIsAutoPlay(true);
+			}
+			getData();
+		});
+	}
 
 	return (
 		<div className="h-full relative flex flex-col">
@@ -98,22 +177,7 @@ function Voice() {
 			</div>
 
 			<div className="flex-1 flex justify-center items-center bg-gray-200 h-[80vh] relative">
-				{loading && (
-					<Spin
-						size="large"
-						className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-					/>
-				)}
-				{keyword && (
-					<ReactPlayer
-						controls
-						playing
-						url={keyword}
-						onEnded={handleVideoEnd}
-						height="100%"
-						width="100%"
-					/>
-				)}
+				{<div ref={voicePlayer} className="w-full h-full" />}
 			</div>
 		</div>
 	);

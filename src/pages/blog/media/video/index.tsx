@@ -153,7 +153,7 @@ function Video() {
 		/**
 		 *  视频播放结束
 		 */
-		player.on("ended", () => {
+		player.on(Player.Events.ENDED, () => {
 			if (isAutoPlayNext) {
 				if (!isAutoPlay) {
 					setIsAutoPlay(true);
@@ -164,7 +164,7 @@ function Video() {
 		/**
 		 *  视频截图结束
 		 */
-		player.on("screenShot", (url) => {
+		player.on(Player.Events.SCREEN_SHOT, (url) => {
 			copyImageToClipboard(url)
 				.then(() => {
 					notification.success({
@@ -178,6 +178,9 @@ function Video() {
 				});
 		});
 
+		/**
+		 *  点击按钮播放下一个视频源的时候触发
+		 */
 		player.on(Player.Events.PLAYNEXT, async () => {
 			if (!isAutoPlay) {
 				setIsAutoPlay(true);
