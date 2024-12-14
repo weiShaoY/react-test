@@ -128,7 +128,7 @@ function Oil() {
 			rowKey="province"
 			loading={loading}
 			pagination={false}
-			scroll={{ y: "80vh" }}
+			scroll={{ y: "calc(100vh - 180px)" }}
 		/>
 	);
 }

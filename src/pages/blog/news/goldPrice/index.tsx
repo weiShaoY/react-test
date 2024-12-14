@@ -231,7 +231,7 @@ function GoldPrice() {
 			rowKey={rowKey}
 			loading={loading}
 			pagination={false}
-			scroll={{ y: "78vh" }}
+			scroll={{ y: "calc(100vh - 260px)" }}
 		/>
 	);
 
