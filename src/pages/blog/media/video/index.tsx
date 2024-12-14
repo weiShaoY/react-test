@@ -2,7 +2,7 @@ import BlogApi from "@/api/modules/blog";
 import { SvgIcon } from "@/components/icon";
 import { useDebounceEffect } from "ahooks";
 import { message, notification } from "antd";
-import { Button, Select, Spin, Switch, Tooltip } from "antd";
+import { Button, Select, Switch, Tooltip } from "antd";
 import { useRef, useState } from "react";
 import Player from "xgplayer";
 import "xgplayer/dist/index.min.css";
@@ -52,14 +52,14 @@ function Video() {
 		}
 	};
 
-	// 自动播放逻辑
-	function handleVideoEnd() {
-		if (isAutoPlayNext) {
-			getData();
-			if (!isAutoPlay) {
-				setIsAutoPlay(true);
-			}
+	/**
+	 *  获取数据
+	 */
+	function handleRefresh() {
+		if (!isAutoPlay) {
+			setIsAutoPlay(true);
 		}
+		getData();
 	}
 
 	// 使用防抖获取数据
@@ -70,7 +70,11 @@ function Video() {
 		[category],
 		{ wait: 500 },
 	);
-	const videoRef = useRef<HTMLDivElement>(null); // 用来引用 video 容器
+
+	/**
+	 *  用来引用 video 容器
+	 */
+	const videoRef = useRef<HTMLDivElement>(null);
 
 	if (videoRef.current && keyword) {
 		const player = new Player({
@@ -150,7 +154,12 @@ function Video() {
 		 *  视频播放结束
 		 */
 		player.on("ended", () => {
-			handleVideoEnd();
+			if (isAutoPlayNext) {
+				if (!isAutoPlay) {
+					setIsAutoPlay(true);
+				}
+				getData();
+			}
 		});
 		/**
 		 *  视频截图结束
@@ -170,10 +179,10 @@ function Video() {
 		});
 
 		player.on(Player.Events.PLAYNEXT, async () => {
-			getData();
 			if (!isAutoPlay) {
 				setIsAutoPlay(true);
 			}
+			getData();
 		});
 	}
 
@@ -194,7 +203,7 @@ function Video() {
 				<Tooltip placement="top" title="点击刷新">
 					<Button
 						loading={loading}
-						onClick={getData}
+						onClick={handleRefresh}
 						icon={<SvgIcon icon="refresh" />}
 					/>
 				</Tooltip>
@@ -208,12 +217,6 @@ function Video() {
 			</div>
 
 			<div className="flex-1 flex justify-center items-center bg-gray-200 h-[80vh] relative">
-				{loading && (
-					<Spin
-						size="large"
-						className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-					/>
-				)}
 				{<div ref={videoRef} />}
 			</div>
 		</div>
