@@ -29,6 +29,7 @@ function replaceMaterialTexture(
 	textureLoader.load(
 		newTextureURL,
 		(newTexture) => {
+			console.log("%c Line:32 🥓 newTexture", "color:#ed9ec7", newTexture);
 			// 禁用纹理的垂直翻转
 			newTexture.flipY = false;
 

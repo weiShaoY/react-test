@@ -1,14 +1,18 @@
 import BlogApi from "@/api/modules/blog";
 import { SvgIcon } from "@/components/icon";
 import { useDebounceEffect } from "ahooks";
-import { message } from "antd";
+import { message, notification } from "antd";
 import { Button, Select, Spin, Switch, Tooltip } from "antd";
-import { useState } from "react";
-import ReactPlayer from "react-player/lazy";
+import { useRef, useState } from "react";
+import Player from "xgplayer";
+import "xgplayer/dist/index.min.css";
+
+import { copyImageToClipboard } from "@/utils";
 
 function Video() {
 	const [loading, setLoading] = useState(false);
 	const [category, setCategory] = useState(1);
+	const [isAutoPlay, setIsAutoPlay] = useState(false);
 	const [isAutoPlayNext, setIsAutoPlayNext] = useState(false);
 	const [keyword, setKeyword] = useState("");
 
@@ -52,6 +56,9 @@ function Video() {
 	function handleVideoEnd() {
 		if (isAutoPlayNext) {
 			getData();
+			if (!isAutoPlay) {
+				setIsAutoPlay(true);
+			}
 		}
 	}
 
@@ -63,6 +70,112 @@ function Video() {
 		[category],
 		{ wait: 500 },
 	);
+	const videoRef = useRef<HTMLDivElement>(null); // 用来引用 video 容器
+
+	if (videoRef.current && keyword) {
+		const player = new Player({
+			el: videoRef.current, // 使用 videoRef 作为元素
+
+			url: keyword,
+
+			height: "100%",
+
+			width: "100%",
+			/**
+			 *  播放器初始显示语言
+			 */
+			lang: "zh",
+
+			/**
+			 *  自动播放
+			 */
+			autoplay: isAutoPlay,
+
+			/**
+			 *  自动静音自动播放
+			 */
+			autoplayMuted: true,
+
+			/**
+			 *  开启画面和控制栏分离模式
+			 */
+			marginControls: true,
+			/**
+			 *  截图配置
+			 */
+			screenShot: {
+				saveImg: false, // 禁止截图后下载图片
+				quality: 0.92,
+			},
+			/**
+			 *  video扩展属性
+			 */
+			videoAttributes: {
+				crossOrigin: "anonymous",
+			},
+
+			/**
+			 *  播放器区域是否允许右键功能菜单
+			 */
+			enableContextmenu: true,
+
+			/**
+			 *  下载
+			 */
+			download: true,
+
+			/**
+			 *  动态背景高斯模糊渲染插件
+			 */
+			dynamicBg: {
+				disable: false,
+			},
+
+			/**
+			 *  控制栏播放下一个视频按钮插件
+			 */
+			playnext: {
+				urlList: [keyword],
+			},
+
+			/**
+			 *  播放器旋转控件
+			 */
+			rotate: {
+				disable: false,
+			},
+		});
+
+		/**
+		 *  视频播放结束
+		 */
+		player.on("ended", () => {
+			handleVideoEnd();
+		});
+		/**
+		 *  视频截图结束
+		 */
+		player.on("screenShot", (url) => {
+			copyImageToClipboard(url)
+				.then(() => {
+					notification.success({
+						message: "截图已复制到剪贴板",
+					});
+				})
+				.catch(() => {
+					notification.error({
+						message: "截图失败",
+					});
+				});
+		});
+
+		player.on(Player.Events.PLAYNEXT, async () => {
+			getData();
+			if (!isAutoPlay) {
+				setIsAutoPlay(true);
+			}
+		});
+	}
 
 	return (
 		<div className="h-full relative flex flex-col">
@@ -70,7 +183,6 @@ function Video() {
 				<Select
 					className="w-52"
 					showSearch
-					allowClear
 					placeholder="请选择视频类别"
 					value={category}
 					onChange={(value) => {
@@ -88,8 +200,8 @@ function Video() {
 				</Tooltip>
 
 				<Switch
-					checkedChildren="自动播放"
-					unCheckedChildren="手动播放"
+					checkedChildren="自动播放下一个"
+					unCheckedChildren="手动播放下一个"
 					checked={isAutoPlayNext}
 					onChange={setIsAutoPlayNext}
 				/>
@@ -102,16 +214,7 @@ function Video() {
 						className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
 					/>
 				)}
-				{
-					<ReactPlayer
-						controls
-						playing
-						url={keyword}
-						onEnded={handleVideoEnd}
-						height="100%"
-						width="100%"
-					/>
-				}
+				{<div ref={videoRef} />}
 			</div>
 		</div>
 	);
