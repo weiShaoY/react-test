@@ -11,6 +11,8 @@ const WallpaperPage = lazy(() => import("@/pages/blog/media/wallpaper"));
 
 const VoicePage = lazy(() => import("@/pages/blog/media/voice"));
 
+const MusicPage = lazy(() => import("@/pages/blog/media/music"));
+
 const Media: AppRouteObject = {
 	order: 5,
 	path: "media",
@@ -56,6 +58,15 @@ const Media: AppRouteObject = {
 				label: "语音",
 				key: "/media/voice",
 				icon: "blog-menu-voice",
+			},
+		},
+		{
+			path: "music",
+			element: <MusicPage />,
+			meta: {
+				label: "音乐",
+				key: "/media/music",
+				icon: "blog-menu-music",
 			},
 		},
 	],
