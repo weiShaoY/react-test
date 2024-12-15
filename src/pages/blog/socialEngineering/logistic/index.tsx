@@ -21,7 +21,7 @@ function Hok() {
 	/**
 	 * 检查并获取车牌数据
 	 */
-	const getData = async () => {
+	async function getData() {
 		try {
 			if (!keyword.trim()) throw new Error("请输入问题");
 
@@ -36,7 +36,7 @@ function Hok() {
 		} finally {
 			setLoading(false);
 		}
-	};
+	}
 
 	/**
 	 *  使用 ahooks 的节流

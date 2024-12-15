@@ -77,7 +77,7 @@ function LicensePlate() {
 	/**
 	 * 检查并获取车牌数据
 	 */
-	const getData = async () => {
+	async function getData() {
 		try {
 			if (!keyword.trim()) throw new Error("请输入车牌号");
 
@@ -95,7 +95,7 @@ function LicensePlate() {
 		} finally {
 			setLoading(false);
 		}
-	};
+	}
 
 	/**
 	 *  使用 ahooks 的节流

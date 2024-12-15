@@ -152,7 +152,7 @@ function Hok() {
 	/**
 	 * 获取数据
 	 */
-	const getData = async () => {
+	async function getData() {
 		try {
 			setLoading(true);
 			const { type, hero } = state;
@@ -163,7 +163,7 @@ function Hok() {
 		} finally {
 			setLoading(false);
 		}
-	};
+	}
 
 	/**
 	 * 使用 ahooks 的防抖处理输入变化

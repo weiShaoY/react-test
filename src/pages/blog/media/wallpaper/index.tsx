@@ -42,7 +42,7 @@ function Wallpaper() {
 	/**
 	 * 获取壁纸数据
 	 */
-	const getData = async () => {
+	async function getData() {
 		try {
 			setLoading(true);
 
@@ -62,7 +62,7 @@ function Wallpaper() {
 		} finally {
 			setLoading(false);
 		}
-	};
+	}
 
 	/**
 	 * 使用 ahooks 的防抖处理输入变化

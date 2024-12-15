@@ -34,7 +34,7 @@ function Voice() {
 		2: BlogApi.getRandomYujieVoice,
 	};
 
-	const getData = async () => {
+	async function getData() {
 		try {
 			setLoading(true);
 
@@ -52,7 +52,7 @@ function Voice() {
 		} finally {
 			setLoading(false);
 		}
-	};
+	}
 
 	// 使用防抖获取数据
 	useDebounceEffect(

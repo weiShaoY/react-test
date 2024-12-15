@@ -13,7 +13,7 @@ function Hok() {
 	/**
 	 * 获取数据
 	 */
-	const getData = async () => {
+	async function getData() {
 		setLoading(true);
 		try {
 			// const res = await BlogApi.getQiChaCha(name);
@@ -23,7 +23,7 @@ function Hok() {
 		} finally {
 			setLoading(false);
 		}
-	};
+	}
 
 	/**
 	 * 使用 ahooks 的防抖处理输入变化

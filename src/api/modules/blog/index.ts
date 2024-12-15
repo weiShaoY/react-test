@@ -5,7 +5,7 @@ class BlogApi {
 	 *  测试接口
 	 */
 	test() {
-		return fetchHttp("https://tools.mgtv100.com/external/v1/pear/goldPrice");
+		return fetchHttp("https://v2.api-m.com/api/weather?city=枣庄滕州");
 	}
 
 	/**

@@ -32,7 +32,7 @@ function Video() {
 		2: BlogApi.getRandomReturnOneGirlVideo,
 	};
 
-	const getData = async () => {
+	async function getData() {
 		try {
 			setLoading(true);
 
@@ -50,7 +50,7 @@ function Video() {
 		} finally {
 			setLoading(false);
 		}
-	};
+	}
 
 	/**
 	 *  获取数据
