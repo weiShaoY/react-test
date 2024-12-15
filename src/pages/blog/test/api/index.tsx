@@ -16,13 +16,14 @@ function LicensePlate() {
 		"https://api.pearktrue.cn/api/goldprice/",
 	);
 
-	const [data, setData] = useState<any>({
-		http: {
-			code: 0,
-			message: "",
-		},
+	const [data, setData] = useState<{
+		http: { code: number; message: string };
+		data: string;
+	}>({
+		http: { code: 0, message: "" },
 		data: "",
 	});
+
 	const items = [
 		{
 			label: "Http响应码",
@@ -130,19 +131,14 @@ function LicensePlate() {
 	}
 
 	/**
-	 * 清空输入框
-	 */
-	function handleClear() {
-		setKeyword("");
-
-		setError("");
-	}
-
-	/**
 	 *  搜索
 	 */
 	function handleInputSearch(info?: { source?: "input" | "clear" }) {
 		if (info && info.source === "clear") {
+			setKeyword("");
+
+			setError("");
+
 			setData({
 				http: {
 					code: 0,
@@ -150,7 +146,6 @@ function LicensePlate() {
 				},
 				data: "",
 			});
-			handleClear();
 			return;
 		}
 
@@ -168,7 +163,7 @@ function LicensePlate() {
 					onChange={handleInputChange}
 					onSearch={(_, __, info) => handleInputSearch(info)}
 					onPressEnter={throttledGetData}
-					placeholder="请输入车牌号"
+					placeholder="请输入接口地址"
 					allowClear
 					status={error ? "error" : ""}
 					enterButton="测试"

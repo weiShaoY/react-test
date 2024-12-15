@@ -1,5 +1,6 @@
 import { BlogApi } from "@/api";
 import { isValidQQ } from "@/utils";
+import { useThrottleFn } from "ahooks";
 import { Descriptions, Input, Select, Spin, message } from "antd";
 import { useState } from "react";
 
@@ -248,7 +249,7 @@ function Account() {
 	const [lol, setLol] = useState("");
 
 	//  6269902085
-	const [weiBoId, setWeiBoId] = useState("6269902085");
+	const [weiBoId, setWeiBoId] = useState("");
 
 	/**
 	 * 检查并获取车牌数据
@@ -322,7 +323,20 @@ function Account() {
 		}
 	}
 
-	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+	/**
+	 *  使用 ahooks 的节流
+	 */
+	const { run: throttledGetData } = useThrottleFn(
+		() => {
+			getData();
+		},
+		{
+			wait: 1000,
+			leading: false,
+		},
+	);
+
+	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
 		if (category === Category.QQ) {
 			setQq(e.target.value);
 		} else if (category === Category.PHONE) {
@@ -337,14 +351,82 @@ function Account() {
 		}
 	}
 
-	function handleClear() {}
+	/**
+	 *  搜索
+	 */
+	function handleInputSearch(info?: { source?: "input" | "clear" }) {
+		if (info && info.source === "clear") {
+			setQq("");
+
+			setPhone("");
+
+			setLol("");
+
+			setWeiBoId("");
+
+			setError("");
+
+			setData({
+				[Category.QQ]: {
+					phone: {
+						qq: "",
+
+						phone: "",
+
+						phonediqu: "",
+					},
+
+					lol: {
+						name: "",
+
+						daqu: "",
+					},
+
+					oldPassword: {
+						qqlm: "",
+					},
+				},
+				[Category.PHONE]: {
+					qq: {
+						qq: "",
+
+						phone: "",
+
+						phonediqu: "",
+					},
+					weiBo: {
+						id: "",
+					},
+				},
+
+				[Category.LOL]: {
+					qq: {
+						qq: "",
+
+						name: "",
+
+						daqu: "",
+					},
+				},
+
+				[Category.WEIBO]: {
+					phone: {
+						phone: "",
+						phonediqu: "",
+					},
+				},
+			});
+			return;
+		}
+
+		throttledGetData();
+	}
 	return (
 		<div className="h-full relative flex flex-col">
 			<div className="flex  m-5 gap-5 ">
 				<Select
 					className="w-48"
 					showSearch
-					allowClear
 					placeholder="请选择视频类别"
 					value={category}
 					onChange={(value) => {
@@ -358,64 +440,63 @@ function Account() {
 						{inputType === Category.QQ && (
 							<Input.Search
 								className="!w-60"
-								allowClear
+								loading={loading}
+								disabled={loading}
+								value={qq.trim()}
+								onChange={handleInputChange}
+								onSearch={(_, __, info) => handleInputSearch(info)}
+								onPressEnter={throttledGetData}
 								placeholder="请输入QQ号"
-								value={qq}
-								onChange={handleChange}
-								onClear={handleClear}
-								onPressEnter={getData}
-								onSearch={getData}
-								enterButton="搜索"
+								allowClear
 								status={error ? "error" : ""}
+								enterButton="搜索"
 							/>
 						)}
 
 						{inputType === Category.PHONE && (
 							<Input.Search
 								className="!w-60"
-								allowClear
-								placeholder="请输入手机号"
-								value={phone}
-								onChange={handleChange}
-								onClear={handleClear}
-								onPressEnter={getData}
-								onSearch={getData}
-								enterButton="搜索"
 								loading={loading}
 								disabled={loading}
+								value={phone.trim()}
+								onChange={handleInputChange}
+								onSearch={(_, __, info) => handleInputSearch(info)}
+								onPressEnter={throttledGetData}
+								placeholder="请输入手机号"
+								allowClear
 								status={error ? "error" : ""}
+								enterButton="搜索"
 							/>
 						)}
+
 						{inputType === Category.LOL && (
 							<Input.Search
 								className="!w-60"
-								allowClear
-								placeholder="请输入LOL名称"
-								value={lol}
-								onChange={handleChange}
-								onClear={handleClear}
-								onPressEnter={getData}
-								onSearch={getData}
-								enterButton="搜索"
 								loading={loading}
 								disabled={loading}
+								value={lol.trim()}
+								onChange={handleInputChange}
+								onSearch={(_, __, info) => handleInputSearch(info)}
+								onPressEnter={throttledGetData}
+								placeholder="请输入LOL名称"
+								allowClear
 								status={error ? "error" : ""}
+								enterButton="搜索"
 							/>
 						)}
 						{inputType === Category.WEIBO && (
 							<Input.Search
 								className="!w-60"
-								allowClear
-								placeholder="请输入微博ID"
-								value={weiBoId}
-								onChange={handleChange}
-								onClear={handleClear}
-								onPressEnter={getData}
-								onSearch={getData}
-								enterButton="搜索"
 								loading={loading}
 								disabled={loading}
+								value={weiBoId.trim()}
+								onChange={handleInputChange}
+								onSearch={(_, __, info) => handleInputSearch(info)}
+								onPressEnter={throttledGetData}
+								placeholder="请输入微博ID"
+								allowClear
 								status={error ? "error" : ""}
+								enterButton="搜索"
 							/>
 						)}
 					</>

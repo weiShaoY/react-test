@@ -1,9 +1,7 @@
 import { BlogApi } from "@/api";
 import { useThrottleFn } from "ahooks";
 import { Input, List, Spin, message } from "antd";
-import { useCallback, useEffect, useState } from "react";
-
-const INITIALIZATION = "吃饭了吗";
+import { useState } from "react";
 
 type DataType = {
 	title: string;
@@ -15,21 +13,25 @@ function Hok() {
 
 	const [error, setError] = useState("");
 
-	//  京A12345
-	const [licensePlateNumber, setLicensePlateNumber] = useState(INITIALIZATION);
+	const [keyword, setKeyword] = useState("在吗");
 
 	const [data, setData] = useState<DataType>([]);
 
 	/**
 	 * 检查并获取车牌数据
 	 */
-	const getData = useCallback(async (title: string) => {
+	async function getData() {
 		try {
-			if (!title.trim()) throw new Error("请输入问题");
+			if (!keyword.trim()) throw new Error("请输入问题");
 
 			setLoading(true);
 
-			const res = await BlogApi.getLoveSpeech(title, 1);
+			const res = await BlogApi.getLoveSpeech(keyword, 1);
+
+			// 给res数组的每一项都添加一个key
+			for (const item of res) {
+				item.key = Math.random();
+			}
 
 			setData(res);
 		} catch (error: any) {
@@ -38,14 +40,14 @@ function Hok() {
 		} finally {
 			setLoading(false);
 		}
-	}, []);
+	}
 
 	/**
 	 *  使用 ahooks 的节流
 	 */
 	const { run: throttledGetData } = useThrottleFn(
 		() => {
-			getData(licensePlateNumber.replace(/\s+/g, ""));
+			getData();
 		},
 		{
 			wait: 1000,
@@ -57,69 +59,76 @@ function Hok() {
 	 * 输入变化的处理
 	 */
 	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setLicensePlateNumber(e.target.value);
+		setKeyword(e.target.value);
 		setError("");
 	}
 
 	/**
-	 * 清空输入框
+	 *  搜索
 	 */
-	function handleClear() {
-		setLicensePlateNumber("");
+	function handleInputSearch(info?: { source?: "input" | "clear" }) {
+		if (info && info.source === "clear") {
+			setKeyword("");
 
-		setError("");
+			setError("");
 
-		setData([]);
+			setData([]);
+
+			return;
+		}
+
+		throttledGetData();
 	}
 
-	useEffect(() => {
-		getData(INITIALIZATION);
-	}, [getData]);
 	return (
-		<div className="p-4  flex flex-col relative">
-			<List
-				bordered
-				header={
-					<div className="w-full items-center justify-between flex">
-						<Input.Search
-							className="!w-80"
-							allowClear
-							placeholder="请输入问题"
-							value={licensePlateNumber}
-							onChange={handleInputChange}
-							onPressEnter={throttledGetData}
-							onSearch={throttledGetData}
-							onClear={handleClear}
-							loading={loading}
-							enterButton="搜索"
-							disabled={loading}
-							status={error ? "error" : ""}
-						/>
-						{error && <span className="text-red ">{error}</span>}
-					</div>
-				}
-				dataSource={data}
-				renderItem={(item) => (
-					<List.Item>
-						<List.Item.Meta
-							title={<span className="font-bold text-lg">{item.title}</span>}
-							description={item.content.split("\\r\\n").map((line) => (
-								<span key={line} className="text-lg">
-									{line}
-									<br />
-								</span>
-							))}
-						/>
-					</List.Item>
-				)}
-			/>
+		<div className="h-full relative flex flex-col">
+			<div className="flex  m-5 gap-5  items-center">
+				<Input.Search
+					className="!w-80"
+					loading={loading}
+					disabled={loading}
+					value={keyword.trim()}
+					onChange={handleInputChange}
+					onSearch={(_, __, info) => handleInputSearch(info)}
+					onPressEnter={throttledGetData}
+					placeholder="请输入问题"
+					allowClear
+					status={error ? "error" : ""}
+					enterButton="搜索"
+				/>
 
-			{/* 数据展示 */}
-			{loading && (
-				<div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-75 z-10">
-					<Spin size="large" />
+				<div className="">
+					{error && <span className="text-red ">{error}</span>}
 				</div>
-			)}
+			</div>
+
+			<div className="relative">
+				{/* 数据展示 */}
+				{loading && (
+					<div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-75 z-10">
+						<Spin size="large" />
+					</div>
+				)}
+
+				<List
+					bordered
+					dataSource={data}
+					renderItem={(item) => (
+						<List.Item>
+							<List.Item.Meta
+								title={<span className="font-bold text-lg">{item.title}</span>}
+								description={item.content.split("\\r\\n").map((line) => (
+									<span key={Math.random()} className="text-lg">
+										{line}
+										<br />
+									</span>
+								))}
+							/>
+						</List.Item>
+					)}
+					className="h-[calc(100vh-210px)] overflow-y-auto"
+				/>
+			</div>
 		</div>
 	);
 }

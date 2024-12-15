@@ -1,4 +1,5 @@
 import { BlogApi } from "@/api";
+import { useThrottleFn } from "ahooks";
 import { Input, Table, message } from "antd";
 import { useState } from "react";
 
@@ -79,6 +80,18 @@ function Cigarette() {
 			setLoading(false);
 		}
 	}
+	/**
+	 *  使用 ahooks 的节流
+	 */
+	const { run: throttledGetData } = useThrottleFn(
+		() => {
+			getData();
+		},
+		{
+			wait: 1000,
+			leading: false,
+		},
+	);
 
 	function handleInputChange(e: any) {
 		setKeyword(e.target.value);
@@ -87,20 +100,37 @@ function Cigarette() {
 		}
 	}
 
+	/**
+	 *  搜索
+	 */
+	function handleInputSearch(info?: { source?: "input" | "clear" }) {
+		if (info && info.source === "clear") {
+			setKeyword("");
+
+			setError("");
+
+			setData([]);
+
+			return;
+		}
+
+		throttledGetData();
+	}
 	return (
 		<div className="h-full relative flex flex-col">
 			<div className="flex  m-5 gap-5  items-center">
 				<Input.Search
 					className="!w-80"
-					placeholder="请输入香烟名称"
-					value={keyword}
-					onChange={handleInputChange}
-					onPressEnter={getData}
-					onSearch={getData}
 					loading={loading}
-					enterButton="搜索"
 					disabled={loading}
+					value={keyword.trim()}
+					onChange={handleInputChange}
+					onSearch={(_, __, info) => handleInputSearch(info)}
+					onPressEnter={throttledGetData}
+					placeholder="请输入香烟名称"
+					allowClear
 					status={error ? "error" : ""}
+					enterButton="搜索"
 				/>
 
 				{error && <span className="text-red ">{error}</span>}

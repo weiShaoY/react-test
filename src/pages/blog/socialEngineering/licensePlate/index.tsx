@@ -119,19 +119,24 @@ function LicensePlate() {
 	}
 
 	/**
-	 * 清空输入框
+	 *  搜索
 	 */
-	function handleClear() {
-		setKeyword("");
+	function handleInputSearch(info?: { source?: "input" | "clear" }) {
+		if (info && info.source === "clear") {
+			setKeyword("");
 
-		setError("");
+			setError("");
 
-		setData({
-			province_name: "",
-			city: "",
-			organization: "",
-			type: "",
-		});
+			setData({
+				province_name: "",
+				city: "",
+				organization: "",
+				type: "",
+			});
+			return;
+		}
+
+		throttledGetData();
 	}
 
 	return (
@@ -139,17 +144,16 @@ function LicensePlate() {
 			<div className="flex  m-5 gap-5  items-center">
 				<Input.Search
 					className="!w-80"
-					allowClear
-					placeholder="请输入车牌号"
-					value={keyword}
-					onChange={handleInputChange}
-					onPressEnter={throttledGetData}
-					onSearch={throttledGetData}
-					onClear={handleClear}
 					loading={loading}
-					enterButton="搜索"
 					disabled={loading}
+					value={keyword.trim()}
+					onChange={handleInputChange}
+					onSearch={(_, __, info) => handleInputSearch(info)}
+					onPressEnter={throttledGetData}
+					placeholder="请输入车牌号"
+					allowClear
 					status={error ? "error" : ""}
+					enterButton="搜索"
 				/>
 
 				<div className="">

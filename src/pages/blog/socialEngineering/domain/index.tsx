@@ -3,9 +3,7 @@ import { isValidDomain } from "@/utils";
 import { useThrottleFn } from "ahooks";
 import { Descriptions, Input, Spin, message } from "antd";
 import dayjs from "dayjs";
-import { useCallback, useEffect, useState } from "react";
-
-const INITIALIZATION = "baidu.com";
+import { useCallback, useState } from "react";
 
 /**
  * 表示完整的域名信息结构
@@ -138,7 +136,7 @@ function Domain() {
 	const [error, setError] = useState("");
 
 	//  baidu.com
-	const [domain, setDomain] = useState(INITIALIZATION);
+	const [keyword, setKeyword] = useState("baidu.com");
 
 	const [data, setData] = useState<DomainInfoType>({
 		icp: {
@@ -374,7 +372,7 @@ function Domain() {
 	 */
 	const { run: throttledGetData } = useThrottleFn(
 		() => {
-			getData(domain.replace(/\s+/g, ""));
+			getData(keyword.replace(/\s+/g, ""));
 		},
 		{
 			wait: 1000,
@@ -386,72 +384,75 @@ function Domain() {
 	 *  输入变化的处理
 	 */
 	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setDomain(e.target.value);
+		setKeyword(e.target.value);
 		setError("");
 	}
 
 	/**
-	 *  清空输入框
+	 *  搜索
 	 */
-	function handleClear() {
-		setDomain("");
+	function handleInputSearch(info?: { source?: "input" | "clear" }) {
+		if (info && info.source === "clear") {
+			setKeyword("");
 
-		setError("");
+			setError("");
 
-		setData({
-			icp: {
-				subject: {
-					name: "",
-					nature: "",
-					license: "",
-					updateTime: "",
+			setData({
+				icp: {
+					subject: {
+						name: "",
+						nature: "",
+						license: "",
+						updateTime: "",
+					},
+					website: {
+						domain: "",
+						license: "",
+					},
 				},
-				website: {
-					domain: "",
-					license: "",
+				whois: {
+					"Domain Status": [],
+					"Name Server": [],
+					"Created Date": "",
+					"Updated Date": "",
+					"Expiry Date": "",
+					Registrar: "",
 				},
-			},
-			whois: {
-				"Domain Status": [],
-				"Name Server": [],
-				"Created Date": "",
-				"Updated Date": "",
-				"Expiry Date": "",
-				Registrar: "",
-			},
-			dns: {
-				A: [],
-				AAAA: [],
-				CNAME: [],
-				NS: [],
-				GEO: {
-					isp: "",
-					area: "",
+				dns: {
+					A: [],
+					AAAA: [],
+					CNAME: [],
+					NS: [],
+					GEO: {
+						isp: "",
+						area: "",
+					},
 				},
-			},
-		});
+			});
+			return;
+		}
+
+		throttledGetData();
 	}
 
-	useEffect(() => {
-		getData(INITIALIZATION);
-	}, [getData]);
-
+	// useEffect(() => {
+	// 	getData(INITIALIZATION);
+	// }, [getData]);
 	return (
 		<div className="h-full relative flex flex-col">
 			<div className="flex  m-5 gap-5  items-center">
 				<Input.Search
 					className="!w-80"
-					allowClear
-					placeholder="请输入域名"
-					value={domain}
-					onChange={handleInputChange}
-					onPressEnter={throttledGetData}
-					onSearch={throttledGetData}
-					onClear={handleClear}
 					loading={loading}
-					enterButton="搜索"
 					disabled={loading}
+					value={keyword.trim()}
+					onChange={handleInputChange}
+					onSearch={(_, __, info) => handleInputSearch(info)}
+					onPressEnter={throttledGetData}
+					placeholder="请输入域名"
+					allowClear
 					status={error ? "error" : ""}
+					enterButton="搜索"
 				/>
 
 				<div className="">
