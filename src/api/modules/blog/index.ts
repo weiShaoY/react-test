@@ -5,7 +5,7 @@ class BlogApi {
 	 *  测试接口
 	 */
 	test() {
-		return fetchHttp("https://api.jkyai.top/API/sjngmt.php");
+		return fetchHttp("https://api.lolimi.cn/API/huangj/api.php");
 	}
 
 	/**
@@ -179,7 +179,8 @@ class BlogApi {
 	}
 	/**
 	 *  IP端口查询
-	 *  https://api.pearktrue.cn/info?id=244
+	 *  @param {string} ip - IP
+	 *  @see https://api.pearktrue.cn/info?id=244
 	 */
 	getIpPortFromCensys(ip: string) {
 		return fetchHttp(`https://api.pearktrue.cn/api/ipport/?ip=${ip}`);
