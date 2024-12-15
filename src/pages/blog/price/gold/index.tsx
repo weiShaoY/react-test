@@ -2,57 +2,30 @@ import { BlogApi } from "@/api";
 import { Table, Tabs, message } from "antd";
 import type { TableProps } from "antd";
 import { useCallback, useEffect, useState } from "react";
-
 /**
- *  品牌黄金价格每一项
+ *  分类
  */
-type BrandGoldPriceItemType = {
+enum Category {
 	/**
-	 *  品牌名称
+	 * 国内十大金店
 	 */
-	brand: string;
+	DomesticTopGoldStores = "国内十大金店",
 
 	/**
-	 *  黄金价格
+	 * 国内黄金
 	 */
-	goldPrice: string;
+	DomesticGold = "国内黄金",
 
 	/**
-	 *  铂金价格
+	 * 国际黄金
 	 */
-	ptPrice: string;
+	InternationalGold = "国际黄金",
 
 	/**
-	 *  控制显示标志
+	 * 大盘黄金
 	 */
-	showControl: number;
-};
-
-/**
- *  品牌黄金价格表格列
- */
-const brandGoldPriceColumns: TableProps<BrandGoldPriceItemType>["columns"] = [
-	{
-		title: "品牌",
-		dataIndex: "brand",
-		key: "brand",
-		align: "center",
-	},
-	{
-		title: "黄金价格",
-		dataIndex: "goldPrice",
-		key: "goldPrice",
-		align: "center",
-		sorter: (a, b) => Number(a.goldPrice) - Number(b.goldPrice),
-	},
-	{
-		title: "铂金价格",
-		dataIndex: "ptPrice",
-		key: "ptPrice",
-		align: "center",
-		sorter: (a, b) => Number(a.ptPrice) - Number(b.ptPrice),
-	},
-];
+	MarketGold = "大盘黄金",
+}
 
 /**
  *  大盘黄金价格每一项
@@ -108,82 +81,222 @@ type MarketGoldPriceItemType = {
 	date: string;
 };
 
-/**
- *  大盘黄金价格表格列
- */
-const marketGoldPriceColumns: TableProps<MarketGoldPriceItemType>["columns"] = [
-	{ title: "ID", dataIndex: "id", key: "id", width: 80, align: "center" },
-	{
-		title: "商品目录",
-		dataIndex: "dir",
-		key: "dir",
-		width: 120,
-		align: "center",
-	},
-	{ title: "商品名称", dataIndex: "title", key: "title", width: 150 },
-	{
-		title: "当前价格",
-		dataIndex: "price",
-		key: "price",
-		width: 100,
-		align: "right",
-		sorter: (a, b) => Number(a.price) - Number(b.price),
-	},
-	{
-		title: "涨跌幅",
-		dataIndex: "changepercent",
-		key: "changepercent",
-		width: 100,
-		align: "right",
-		sorter: (a, b) => Number(a.changepercent) - Number(b.changepercent),
-	},
-	{
-		title: "最高价",
-		dataIndex: "maxprice",
-		key: "maxprice",
-		width: 100,
-		align: "right",
-		sorter: (a, b) => Number(a.maxprice) - Number(b.maxprice),
-	},
-	{
-		title: "最低价",
-		dataIndex: "minprice",
-		key: "minprice",
-		width: 100,
-		align: "right",
-		sorter: (a, b) => Number(a.minprice) - Number(b.minprice),
-	},
-	{
-		title: "开盘价",
-		dataIndex: "openingprice",
-		key: "openingprice",
-		width: 100,
-		align: "right",
-		sorter: (a, b) => Number(a.openingprice) - Number(b.openingprice),
-	},
-	{
-		title: "收盘价",
-		dataIndex: "lastclosingprice",
-		key: "lastclosingprice",
-		width: 100,
-		align: "right",
-		sorter: (a, b) => Number(a.lastclosingprice) - Number(b.lastclosingprice),
-	},
-	{
-		title: "日期",
-		dataIndex: "date",
-		key: "date",
-		width: 150,
-		align: "center",
-	},
-];
+type ColumnsObjType = {
+	[Category.DomesticTopGoldStores]: TableProps<any>["columns"];
+
+	[Category.DomesticGold]: TableProps<any>["columns"];
+
+	[Category.InternationalGold]: TableProps<any>["columns"];
+
+	[Category.MarketGold]: TableProps<MarketGoldPriceItemType>["columns"];
+};
+
+const columnsObj: ColumnsObjType = {
+	[Category.DomesticTopGoldStores]: [
+		{
+			title: "品牌",
+			dataIndex: "品牌",
+			key: "品牌",
+			align: "center",
+		},
+		{
+			title: "黄金价格",
+			dataIndex: "黄金价格",
+			key: "黄金价格",
+			align: "center",
+		},
+		{
+			title: "铂金价格",
+			dataIndex: "铂金价格",
+			key: "铂金价格",
+			align: "center",
+		},
+		{
+			title: "金条价格",
+			dataIndex: "金条价格",
+			key: "金条价格",
+			align: "center",
+		},
+		{
+			title: "单位",
+			dataIndex: "单位",
+			key: "单位",
+			align: "center",
+		},
+		{
+			title: "报价时间",
+			dataIndex: "报价时间",
+			key: "报价时间",
+			align: "center",
+		},
+	],
+
+	[Category.DomesticGold]: [
+		{
+			title: "品种",
+			dataIndex: "品种",
+			key: "品种",
+			align: "center",
+		},
+		{
+			title: "最新价",
+			dataIndex: "最新价",
+			key: "最新价",
+			align: "center",
+		},
+		{
+			title: "最低价",
+			dataIndex: "最低价",
+			key: "最低价",
+			align: "center",
+		},
+		{
+			title: "最高价",
+			dataIndex: "最高价",
+			key: "最高价",
+			align: "center",
+		},
+		{
+			title: "涨跌",
+			dataIndex: "涨跌",
+			key: "涨跌",
+			align: "center",
+		},
+		{
+			title: "幅度",
+			dataIndex: "幅度",
+			key: "幅度",
+			align: "center",
+		},
+		{
+			title: "报价时间",
+			dataIndex: "报价时间",
+			key: "报价时间",
+			align: "center",
+		},
+	],
+
+	[Category.InternationalGold]: [
+		{
+			title: "品种",
+			dataIndex: "品种",
+			key: "品种",
+			align: "center",
+		},
+		{
+			title: "最新价",
+			dataIndex: "最新价",
+			key: "最新价",
+			align: "center",
+		},
+		{
+			title: "最低价",
+			dataIndex: "最低价",
+			key: "最低价",
+			align: "center",
+		},
+		{
+			title: "最高价",
+			dataIndex: "最高价",
+			key: "最高价",
+			align: "center",
+		},
+		{
+			title: "涨跌",
+			dataIndex: "涨跌",
+			key: "涨跌",
+			align: "center",
+		},
+		{
+			title: "幅度",
+			dataIndex: "幅度",
+			key: "幅度",
+			align: "center",
+		},
+		{
+			title: "报价时间",
+			dataIndex: "报价时间",
+			key: "报价时间",
+			align: "center",
+		},
+	],
+
+	[Category.MarketGold]: [
+		{ title: "ID", dataIndex: "id", key: "id", width: 80, align: "center" },
+		{
+			title: "商品目录",
+			dataIndex: "dir",
+			key: "dir",
+			width: 120,
+			align: "center",
+		},
+		{ title: "商品名称", dataIndex: "title", key: "title", width: 150 },
+		{
+			title: "当前价格",
+			dataIndex: "price",
+			key: "price",
+			width: 100,
+			align: "right",
+			sorter: (a, b) => Number(a.price) - Number(b.price),
+		},
+		{
+			title: "涨跌幅",
+			dataIndex: "changepercent",
+			key: "changepercent",
+			width: 100,
+			align: "right",
+			sorter: (a, b) => Number(a.changepercent) - Number(b.changepercent),
+		},
+		{
+			title: "最高价",
+			dataIndex: "maxprice",
+			key: "maxprice",
+			width: 100,
+			align: "right",
+			sorter: (a, b) => Number(a.maxprice) - Number(b.maxprice),
+		},
+		{
+			title: "最低价",
+			dataIndex: "minprice",
+			key: "minprice",
+			width: 100,
+			align: "right",
+			sorter: (a, b) => Number(a.minprice) - Number(b.minprice),
+		},
+		{
+			title: "开盘价",
+			dataIndex: "openingprice",
+			key: "openingprice",
+			width: 100,
+			align: "right",
+			sorter: (a, b) => Number(a.openingprice) - Number(b.openingprice),
+		},
+		{
+			title: "收盘价",
+			dataIndex: "lastclosingprice",
+			key: "lastclosingprice",
+			width: 100,
+			align: "right",
+			sorter: (a, b) => Number(a.lastclosingprice) - Number(b.lastclosingprice),
+		},
+		{
+			title: "日期",
+			dataIndex: "date",
+			key: "date",
+			width: 150,
+			align: "center",
+		},
+	],
+};
 
 function GoldPrice() {
 	const [loading, setLoading] = useState(false);
 
 	const [data, setData] = useState({
-		marketGoldPriceData: [] as MarketGoldPriceItemType[],
-		brandGoldPriceData: [] as BrandGoldPriceItemType[],
+		[Category.DomesticTopGoldStores]: [],
+		[Category.DomesticGold]: [],
+		[Category.InternationalGold]: [],
+		[Category.MarketGold]: [],
 	});
 
 	/**
@@ -193,20 +306,22 @@ function GoldPrice() {
 		try {
 			setLoading(true);
 
-			const [marketGoldPrice, brandGoldPrice] = await Promise.all([
+			const [realTimeGoldPrice, marketGoldPrice] = await Promise.all([
+				BlogApi.getRealTimeGoldPrice(),
+
 				BlogApi.getMarketGoldPrice(),
-				BlogApi.getBrandGoldPrice(),
 			]);
 
-			// 大盘黄金价格 按 ID 排序
-			marketGoldPrice.sort(
-				(a: MarketGoldPriceItemType, b: MarketGoldPriceItemType) =>
-					Number.parseInt(a.id) - Number.parseInt(b.id),
-			);
-
 			setData({
-				marketGoldPriceData: marketGoldPrice,
-				brandGoldPriceData: brandGoldPrice,
+				[Category.DomesticTopGoldStores]:
+					realTimeGoldPrice[Category.DomesticTopGoldStores],
+
+				[Category.DomesticGold]: realTimeGoldPrice[Category.DomesticGold],
+
+				[Category.InternationalGold]:
+					realTimeGoldPrice[Category.InternationalGold],
+
+				[Category.MarketGold]: marketGoldPrice,
 			});
 		} catch (error) {
 			message.error("获取数据失败，请稍后重试");
@@ -241,20 +356,38 @@ function GoldPrice() {
 			items={[
 				{
 					key: "1",
-					label: "品牌价格",
+					label: "国内十大金店",
 					children: renderTable(
-						brandGoldPriceColumns,
-						data.brandGoldPriceData,
-						"brand",
+						columnsObj[Category.DomesticTopGoldStores],
+						data[Category.DomesticTopGoldStores],
+						"品牌",
 					),
 				},
 				{
 					key: "2",
-					label: "大盘价格",
+					label: "国内黄金",
 					children: renderTable(
-						marketGoldPriceColumns,
-						data.marketGoldPriceData,
-						(record) => `${record.id}-${record.date}`,
+						columnsObj[Category.DomesticGold],
+						data[Category.DomesticGold],
+						"品种",
+					),
+				},
+				{
+					key: "3",
+					label: "国际黄金",
+					children: renderTable(
+						columnsObj[Category.InternationalGold],
+						data[Category.InternationalGold],
+						"品种",
+					),
+				},
+				{
+					key: "4",
+					label: "大盘黄金",
+					children: renderTable(
+						columnsObj[Category.MarketGold],
+						data[Category.MarketGold],
+						"品种",
 					),
 				},
 			]}

@@ -5,6 +5,13 @@ class BlogApi {
 	 *  测试接口
 	 */
 	test() {
+		return fetchHttp("https://tools.mgtv100.com/external/v1/pear/goldPrice");
+	}
+
+	/**
+	 *  获取 黄金价格实时查询
+	 */
+	getRealTimeGoldPrice() {
 		return fetchHttp("https://api.lolimi.cn/API/huangj/api.php");
 	}
 
@@ -14,13 +21,6 @@ class BlogApi {
 	 */
 	getMarketGoldPrice() {
 		return fetchHttp("https://api.pearktrue.cn/api/goldprice/");
-	}
-
-	/**
-	 *  获取 品牌黄金价格
-	 */
-	getBrandGoldPrice() {
-		return fetchHttp("https://free.xwteam.cn/api/gold/brand");
 	}
 
 	/**
