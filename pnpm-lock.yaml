@@ -161,9 +161,6 @@ importers:
       react-organizational-chart:
         specifier: ^2.2.1
         version: 2.2.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      react-player:
-        specifier: ^2.16.0
-        version: 2.16.0(react@18.2.0)
       react-router-dom:
         specifier: ^7.0.1
         version: 7.0.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -203,9 +200,6 @@ importers:
       xgplayer:
         specifier: ^3.0.20
         version: 3.0.20(core-js@3.39.0)
-      xgplayer-music:
-        specifier: ^3.0.20
-        version: 3.0.20(core-js@3.39.0)(xgplayer@3.0.20(core-js@3.39.0))
       zustand:
         specifier: ^5.0.1
         version: 5.0.1(@types/react@18.3.12)(react@18.2.0)(use-sync-external-store@1.2.2(react@18.2.0))
@@ -2201,14 +2195,6 @@ packages:
     resolution: {integrity: sha512-FqUYQ+8o158GyGTrMFJms9qh3CqTKvAqgqsTnkLI8sKu0028orqBhxNMFkFen0zGyg6epACD32pjVk58ngIErQ==}
     engines: {node: '>=0.10'}
 
-  deepmerge@2.2.1:
-    resolution: {integrity: sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==}
-    engines: {node: '>=0.10.0'}
-
-  deepmerge@4.3.1:
-    resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
-    engines: {node: '>=0.10.0'}
-
   define-data-property@1.1.4:
     resolution: {integrity: sha512-rBMvIzlpA8v6E+SJZoo++HAYqsLrkg7MSfIinMPFhmkorw7X+dOXVJQs+QT69zGkzMyfDnIMN2Wid1+NbL3T+A==}
     engines: {node: '>= 0.4'}
@@ -3082,9 +3068,6 @@ packages:
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
-  load-script@1.0.0:
-    resolution: {integrity: sha512-kPEjMFtZvwL9TaZo0uZ2ml+Ye9HUMmPwbYRJ324qF9tqMejwykJ5ggTyvzmrbBeapCAbk98BSbTeovHEEP1uCA==}
-
   loader-utils@1.4.2:
     resolution: {integrity: sha512-I5d00Pd/jwMD2QCduo657+YM/6L3KZu++pmX9VFncxaxvHcru9jx1lBaFft+r4Mt2jK0Yhp41XlRAihzPxHNCg==}
     engines: {node: '>=4.0.0'}
@@ -3900,11 +3883,6 @@ packages:
       react: '>= 16.12.0'
       react-dom: '>= 16.12.0'
 
-  react-player@2.16.0:
-    resolution: {integrity: sha512-mAIPHfioD7yxO0GNYVFD1303QFtI3lyyQZLY229UEAp/a10cSW+hPcakg0Keq8uWJxT2OiT/4Gt+Lc9bD6bJmQ==}
-    peerDependencies:
-      react: '>=16.6.0'
-
   react-reconciler@0.27.0:
     resolution: {integrity: sha512-HmMDKciQjYmBRGuuhIaKA1ba/7a+UsM5FzOZsMO2JYHt9Jh8reCb7j1eDC95NOyUlKM9KRyvdx0flBuDvYSBoA==}
     engines: {node: '>=0.10.0'}
@@ -4711,12 +4689,6 @@ packages:
   wrap-ansi@8.1.0:
     resolution: {integrity: sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ==}
     engines: {node: '>=12'}
-
-  xgplayer-music@3.0.20:
-    resolution: {integrity: sha512-Kv6F2BZHauoQPLN4czcVT8zqNfXRmxQFGeKKZi4DxDztk27JCQUOd3jVm/EhsPZBjxjJ8SJycrq73CGjwVJXMg==}
-    peerDependencies:
-      core-js: '>=3.12.1'
-      xgplayer: 3.0.20
 
   xgplayer-subtitles@3.0.20:
     resolution: {integrity: sha512-I1bjsIY+aKOrhYQspLdneOkYg+Vf4cJVGPnDSFnNebnxXl9Mhz5SEpWGzYizMYxL9UvsQ9pgjeEY0o4hkwM+kQ==}
@@ -6752,10 +6724,6 @@ snapshots:
 
   decode-uri-component@0.2.2: {}
 
-  deepmerge@2.2.1: {}
-
-  deepmerge@4.3.1: {}
-
   define-data-property@1.1.4:
     dependencies:
       es-define-property: 1.0.0
@@ -7663,8 +7631,6 @@ snapshots:
 
   lines-and-columns@1.2.4: {}
 
-  load-script@1.0.0: {}
-
   loader-utils@1.4.2:
     dependencies:
       big.js: 5.2.2
@@ -8567,15 +8533,6 @@ snapshots:
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
       - supports-color
-
-  react-player@2.16.0(react@18.2.0):
-    dependencies:
-      deepmerge: 4.3.1
-      load-script: 1.0.0
-      memoize-one: 5.2.1
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-fast-compare: 3.2.2
 
   react-reconciler@0.27.0(react@18.2.0):
     dependencies:
@@ -9517,13 +9474,6 @@ snapshots:
       ansi-styles: 6.2.1
       string-width: 5.1.2
       strip-ansi: 7.1.0
-
-  xgplayer-music@3.0.20(core-js@3.39.0)(xgplayer@3.0.20(core-js@3.39.0)):
-    dependencies:
-      core-js: 3.39.0
-      deepmerge: 2.2.1
-      eventemitter3: 4.0.7
-      xgplayer: 3.0.20(core-js@3.39.0)
 
   xgplayer-subtitles@3.0.20(core-js@3.39.0):
     dependencies:
