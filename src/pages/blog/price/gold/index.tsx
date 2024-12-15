@@ -1,7 +1,9 @@
 import { BlogApi } from "@/api";
+import Card from "@/components/card";
 import { Table, Tabs, message } from "antd";
 import type { TableProps } from "antd";
 import { useCallback, useEffect, useState } from "react";
+
 /**
  *  分类
  */
@@ -340,14 +342,16 @@ function GoldPrice() {
 		data: T[],
 		rowKey: string | ((record: T) => string),
 	) => (
-		<Table<T>
-			columns={columns}
-			dataSource={data}
-			rowKey={rowKey}
-			loading={loading}
-			pagination={false}
-			scroll={{ y: "calc(100vh - 260px)" }}
-		/>
+		<Card className="flex flex-col ">
+			<Table<T>
+				columns={columns}
+				dataSource={data}
+				rowKey={rowKey}
+				loading={loading}
+				pagination={false}
+				scroll={{ y: "calc(100vh - 280px)" }}
+			/>
+		</Card>
 	);
 
 	return (

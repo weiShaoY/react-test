@@ -1,4 +1,5 @@
 import { BlogApi } from "@/api";
+import Card from "@/components/card";
 import { useThrottleFn } from "ahooks";
 import { Input, Table, message } from "antd";
 import { useState } from "react";
@@ -117,8 +118,8 @@ function Cigarette() {
 		throttledGetData();
 	}
 	return (
-		<div className="h-full relative flex flex-col">
-			<div className="flex  m-5 gap-5  items-center">
+		<Card className="flex flex-col gap-5">
+			<div className="flex gap-5 flex-wrap w-full ">
 				<Input.Search
 					className="!w-80"
 					loading={loading}
@@ -142,9 +143,9 @@ function Cigarette() {
 				rowKey="name"
 				loading={loading}
 				pagination={false}
-				scroll={{ y: "calc(100vh - 260px)" }}
+				scroll={{ y: "calc(100vh - 300px)" }}
 			/>
-		</div>
+		</Card>
 	);
 }
 

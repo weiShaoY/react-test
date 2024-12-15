@@ -88,7 +88,7 @@ function Hok() {
 					status={error ? "error" : ""}
 				/>
 
-				<div className="">
+				<div className="flex items-center">
 					{error && <span className="text-red ">{error}</span>}
 				</div>
 			</div>

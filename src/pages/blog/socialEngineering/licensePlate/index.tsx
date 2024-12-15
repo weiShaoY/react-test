@@ -1,4 +1,5 @@
 import { BlogApi } from "@/api";
+import Card from "@/components/card";
 import { isValidPlateNumber } from "@/utils";
 import { useThrottleFn } from "ahooks";
 import { Descriptions, Input, Spin, message } from "antd";
@@ -140,8 +141,8 @@ function LicensePlate() {
 	}
 
 	return (
-		<div className="h-full relative flex flex-col">
-			<div className="flex  m-5 gap-5  items-center">
+		<Card className="flex flex-col gap-5">
+			<div className="flex gap-5 flex-wrap w-full ">
 				<Input.Search
 					className="!w-80"
 					loading={loading}
@@ -156,12 +157,12 @@ function LicensePlate() {
 					enterButton="搜索"
 				/>
 
-				<div className="">
+				<div className="flex items-center">
 					{error && <span className="text-red ">{error}</span>}
 				</div>
 			</div>
 
-			<div className="relative">
+			<div className="relative w-full">
 				{loading && (
 					<Spin
 						size="large"
@@ -177,7 +178,7 @@ function LicensePlate() {
 					items={items}
 				/>
 			</div>
-		</div>
+		</Card>
 	);
 }
 

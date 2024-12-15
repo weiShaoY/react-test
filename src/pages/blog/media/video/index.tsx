@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import Player from "xgplayer";
 import "xgplayer/dist/index.min.css";
 
+import Card from "@/components/card";
 import { copyImageToClipboard } from "@/utils";
 
 function Video() {
@@ -190,8 +191,8 @@ function Video() {
 	}
 
 	return (
-		<div className="h-full relative flex flex-col">
-			<div className="flex items-center m-5 gap-5">
+		<Card className="flex flex-col gap-5">
+			<div className="flex gap-5 flex-wrap w-full ">
 				<Select
 					className="w-52"
 					showSearch
@@ -219,10 +220,10 @@ function Video() {
 				/>
 			</div>
 
-			<div className="flex-1 flex justify-center items-center bg-gray-200 h-[80vh] relative">
-				{<div ref={videoRef} />}
+			<div className="flex justify-center items-center  h-[calc(100vh-240px)] relative w-full">
+				<div ref={videoRef} />
 			</div>
-		</div>
+		</Card>
 	);
 }
 

@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import { SvgIcon } from "@/components/icon";
 
+import Card from "@/components/card";
 import { downloadImage } from "@/utils/downloadImage";
 
 /**
@@ -75,8 +76,8 @@ function Wallpaper() {
 		{ wait: 500 }, // 防抖时间 500ms
 	);
 	return (
-		<div className="h-full relative flex flex-col">
-			<div className="flex items-center m-5 gap-5">
+		<Card className="flex flex-col gap-5">
+			<div className="flex gap-5 flex-wrap w-full ">
 				<Select
 					className="w-40"
 					showSearch
@@ -104,7 +105,7 @@ function Wallpaper() {
 			</div>
 
 			{/* 壁纸展示区域 */}
-			<div className="flex-1 flex justify-center items-center bg-gray-200 h-[80vh] relative">
+			<div className=" flex justify-center items-center bg-gray-200 h-[calc(100vh-240px)] relative">
 				{loading && (
 					<Spin
 						size="large"
@@ -115,7 +116,7 @@ function Wallpaper() {
 					<Image src={keyword} alt="壁纸" height="100%" width="auto" />
 				)}
 			</div>
-		</div>
+		</Card>
 	);
 }
 

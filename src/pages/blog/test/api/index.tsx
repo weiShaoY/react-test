@@ -2,6 +2,7 @@ import { useThrottleFn } from "ahooks";
 import { Descriptions, Input, Spin, message } from "antd";
 import { useState } from "react";
 const { TextArea } = Input;
+import Card from "@/components/card";
 
 function LicensePlate() {
 	const [loading, setLoading] = useState(false);
@@ -63,7 +64,7 @@ function LicensePlate() {
 		{
 			label: "接口数据",
 			children: (
-				<div className="h-[calc(100vh-340px)] ">
+				<div className="h-[calc(100vh-360px)] ">
 					<TextArea
 						value={data.data}
 						style={{ height: "100%", resize: "none" }}
@@ -153,8 +154,8 @@ function LicensePlate() {
 	}
 
 	return (
-		<div className="h-full relative flex flex-col">
-			<div className="flex items-center m-5 gap-5 flex-wrap">
+		<Card className="flex flex-col gap-5">
+			<div className="flex gap-5 flex-wrap w-full ">
 				<Input.Search
 					className="w-full"
 					loading={loading}
@@ -169,12 +170,12 @@ function LicensePlate() {
 					enterButton="测试"
 				/>
 
-				<div className="">
+				<div className="flex items-center">
 					{error && <span className="text-red ">{error}</span>}
 				</div>
 			</div>
 
-			<div className=" relative">
+			<div className="relative w-full">
 				{loading && (
 					<Spin
 						size="large"
@@ -189,7 +190,7 @@ function LicensePlate() {
 					items={items}
 				/>
 			</div>
-		</div>
+		</Card>
 	);
 }
 

@@ -5,8 +5,8 @@ import { message } from "antd";
 import { Button, Select, Switch, Tooltip } from "antd";
 import { useRef, useState } from "react";
 import Player from "xgplayer";
-
 import "xgplayer/dist/index.min.css";
+import Card from "@/components/card";
 
 function Voice() {
 	const [loading, setLoading] = useState(false);
@@ -71,6 +71,9 @@ function Voice() {
 			mediaType: "audio",
 			url: keyword,
 
+			height: "100%",
+
+			width: "100%",
 			/**
 			 *  播放器初始显示语言
 			 */
@@ -143,8 +146,8 @@ function Voice() {
 	}
 
 	return (
-		<div className="h-full relative flex flex-col">
-			<div className="flex items-center m-5 gap-5">
+		<Card className="flex flex-col gap-5">
+			<div className="flex gap-5 flex-wrap w-full ">
 				<Select
 					className="w-52"
 					showSearch
@@ -173,10 +176,10 @@ function Voice() {
 				/>
 			</div>
 
-			<div className="flex-1 flex justify-center items-center bg-gray-200 h-[80vh] relative">
-				{<div ref={voicePlayer} className="w-full h-full" />}
+			<div className=" flex justify-center items-center  h-[calc(100vh-240px)] relative w-full">
+				<div ref={voicePlayer} className="w-full h-full" />
 			</div>
-		</div>
+		</Card>
 	);
 }
 

@@ -1,4 +1,5 @@
 import { BlogApi } from "@/api";
+import Card from "@/components/card";
 import { useThrottleFn } from "ahooks";
 import { Input, List, Spin, message } from "antd";
 import { useState } from "react";
@@ -81,8 +82,8 @@ function Hok() {
 	}
 
 	return (
-		<div className="h-full relative flex flex-col">
-			<div className="flex  m-5 gap-5  items-center">
+		<Card className="flex flex-col gap-5">
+			<div className="flex gap-5 flex-wrap w-full ">
 				<Input.Search
 					className="!w-80"
 					loading={loading}
@@ -97,12 +98,12 @@ function Hok() {
 					enterButton="搜索"
 				/>
 
-				<div className="">
+				<div className="flex items-center">
 					{error && <span className="text-red ">{error}</span>}
 				</div>
 			</div>
 
-			<div className="relative">
+			<div className="relative w-full">
 				{/* 数据展示 */}
 				{loading && (
 					<div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-75 z-10">
@@ -126,10 +127,10 @@ function Hok() {
 							/>
 						</List.Item>
 					)}
-					className="h-[calc(100vh-210px)] overflow-y-auto"
+					className="h-[calc(100vh-240px)] overflow-y-auto"
 				/>
 			</div>
-		</div>
+		</Card>
 	);
 }
 

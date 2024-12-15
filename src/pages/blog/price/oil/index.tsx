@@ -1,4 +1,5 @@
 import { BlogApi } from "@/api";
+import Card from "@/components/card";
 import { Table, message } from "antd";
 import type { TableProps } from "antd";
 import { useCallback, useEffect, useState } from "react";
@@ -122,14 +123,16 @@ function Oil() {
 	}, [getData]);
 
 	return (
-		<Table
-			columns={columns}
-			dataSource={data}
-			rowKey="province"
-			loading={loading}
-			pagination={false}
-			scroll={{ y: "calc(100vh - 180px)" }}
-		/>
+		<Card className="flex flex-col gap-5">
+			<Table
+				columns={columns}
+				dataSource={data}
+				rowKey="province"
+				loading={loading}
+				pagination={false}
+				scroll={{ y: "calc(100vh - 240px)" }}
+			/>
+		</Card>
 	);
 }
 

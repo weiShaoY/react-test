@@ -1,4 +1,5 @@
 import { BlogApi } from "@/api";
+import Card from "@/components/card";
 import { isValidQQ } from "@/utils";
 import { useThrottleFn } from "ahooks";
 import { Descriptions, Input, Select, Spin, message } from "antd";
@@ -422,8 +423,8 @@ function Account() {
 		throttledGetData();
 	}
 	return (
-		<div className="h-full relative flex flex-col">
-			<div className="flex  m-5 gap-5 ">
+		<Card className="flex flex-col gap-5">
+			<div className="flex gap-5 flex-wrap w-full ">
 				<Select
 					className="w-48"
 					showSearch
@@ -507,7 +508,7 @@ function Account() {
 				</div>
 			</div>
 
-			<div className="relative">
+			<div className="relative w-full">
 				{loading && (
 					<Spin
 						size="large"
@@ -523,7 +524,7 @@ function Account() {
 					items={items[category]}
 				/>
 			</div>
-		</div>
+		</Card>
 	);
 }
 
