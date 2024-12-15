@@ -23,19 +23,12 @@ const LogisticPage = lazy(
 	() => import("@/pages/blog/socialEngineering/logistic"),
 );
 
-const CommodityPricePage = lazy(
-	() => import("@/pages/blog/socialEngineering/commodityPrice"),
-);
-
 const AccountPage = lazy(
 	() => import("@/pages/blog/socialEngineering/account"),
 );
 
-const CigarettePage = lazy(
-	() => import("@/pages/blog/socialEngineering/cigarette"),
-);
 const SocialEngineering: AppRouteObject = {
-	order: 6,
+	order: 7,
 	path: "socialEngineering",
 	element: (
 		<Suspense fallback={<CircleLoading />}>
@@ -97,15 +90,7 @@ const SocialEngineering: AppRouteObject = {
 				icon: "blog-menu-logistic",
 			},
 		},
-		{
-			path: "commodityPrice",
-			element: <CommodityPricePage />,
-			meta: {
-				label: "商品价格",
-				key: "/socialEngineering/commodityPrice",
-				icon: "blog-menu-commodityPrice",
-			},
-		},
+
 		{
 			path: "account",
 			element: <AccountPage />,
@@ -113,15 +98,6 @@ const SocialEngineering: AppRouteObject = {
 				label: "账号查询",
 				key: "/socialEngineering/account",
 				icon: "blog-menu-account",
-			},
-		},
-		{
-			path: "cigarette",
-			element: <CigarettePage />,
-			meta: {
-				label: "香烟价格",
-				key: "/socialEngineering/cigarette",
-				icon: "blog-menu-cigarette",
 			},
 		},
 	],

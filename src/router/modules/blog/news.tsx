@@ -7,13 +7,9 @@ import type { AppRouteObject } from "#/router";
 
 const Iframe = lazy(() => import("@/layouts/blog/iframe"));
 
-const GoldPricePage = lazy(() => import("@/pages/blog/news/goldPrice"));
-
 const MoviePage = lazy(() => import("@/pages/blog/news/movie"));
 
 const HokPage = lazy(() => import("@/pages/blog/news/hok"));
-
-const OilPage = lazy(() => import("@/pages/blog/news/oil"));
 
 function Wrapper({ children }: any) {
 	return <Suspense fallback={<CircleLoading />}>{children}</Suspense>;
@@ -49,15 +45,7 @@ const News: AppRouteObject = {
 				icon: "blog-menu-dailyHotTopics",
 			},
 		},
-		{
-			path: "goldPrice",
-			element: <GoldPricePage />,
-			meta: {
-				label: "金价",
-				key: "/news/goldPrice",
-				icon: "blog-menu-goldPrice",
-			},
-		},
+
 		{
 			path: "movie",
 			element: <MoviePage />,
@@ -74,15 +62,6 @@ const News: AppRouteObject = {
 				label: "王者荣耀",
 				key: "/news/hok",
 				icon: "blog-menu-hok",
-			},
-		},
-		{
-			path: "oil",
-			element: <OilPage />,
-			meta: {
-				label: "油价",
-				key: "/news/oil",
-				icon: "blog-menu-oil",
 			},
 		},
 	],
