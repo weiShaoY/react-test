@@ -1,4 +1,5 @@
 import { BlogApi } from "@/api";
+import Card from "@/components/card";
 import { Image, Spin, Table, Tabs, message } from "antd";
 import type { TableProps } from "antd";
 import { useCallback, useEffect, useState } from "react";
@@ -354,14 +355,16 @@ function Movie() {
 		data: T[],
 		rowKey: string,
 	) => (
-		<Table<T>
-			columns={columns}
-			dataSource={data}
-			rowKey={rowKey}
-			loading={loading}
-			pagination={false}
-			scroll={{ y: "calc(100vh - 260px)" }}
-		/>
+		<Card className="flex flex-col ">
+			<Table<T>
+				columns={columns}
+				dataSource={data}
+				rowKey={rowKey}
+				loading={loading}
+				pagination={false}
+				scroll={{ y: "calc(100vh - 295px)" }}
+			/>
+		</Card>
 	);
 
 	return (

@@ -349,7 +349,7 @@ function GoldPrice() {
 				rowKey={rowKey}
 				loading={loading}
 				pagination={false}
-				scroll={{ y: "calc(100vh - 280px)" }}
+				scroll={{ y: "calc(100vh - 295px)" }}
 			/>
 		</Card>
 	);
