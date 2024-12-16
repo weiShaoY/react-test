@@ -80,32 +80,39 @@ function LicensePlate() {
 	 */
 	async function getData() {
 		try {
-			if (!keyword) throw new Error("请输入接口地址");
+			if (!keyword) {
+				throw new Error("请输入接口地址");
+			}
 
 			setLoading(true);
 
 			const response = await fetch(keyword);
 
-			setData((prevData: any) => ({
-				...prevData,
-				http: {
-					code: response.status,
-					message: response.statusText,
-				},
-			}));
 			if (!response.ok) {
-				throw new Error("网络请求失败");
+				throw new Error(
+					`网络请求失败: ${response.status} ${response.statusText}`,
+				);
 			}
 
 			const responseText = await response.text();
 
-			setData((prevData: any) => ({
-				...prevData,
-				data: responseText,
-			}));
+			setData({
+				http: {
+					code: response.status,
+					message: response.statusText,
+				},
+				data: responseText || "无返回数据",
+			});
 		} catch (error: any) {
-			toast.error(error || "获取数据失败，请稍后重试");
-			setError(error.message);
+			toast.error(error.message || "获取数据失败，请稍后重试");
+			setError(error.message || "未知错误");
+			setData({
+				http: {
+					code: 0,
+					message: "",
+				},
+				data: "",
+			});
 		} finally {
 			setLoading(false);
 		}

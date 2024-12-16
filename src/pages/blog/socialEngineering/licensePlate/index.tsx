@@ -81,7 +81,9 @@ function LicensePlate() {
 	 */
 	async function getData() {
 		try {
-			if (!keyword) throw new Error("请输入车牌号");
+			if (!keyword) {
+				throw new Error("请输入车牌号");
+			}
 
 			if (!isValidPlateNumber(keyword)) throw new Error("请输入有效的车牌号");
 

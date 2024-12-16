@@ -24,7 +24,9 @@ function Hok() {
 	 */
 	async function getData() {
 		try {
-			if (!keyword.trim()) throw new Error("请输入问题");
+			if (!keyword) {
+				throw new Error("请输入问题");
+			}
 
 			setLoading(true);
 

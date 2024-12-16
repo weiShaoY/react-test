@@ -319,15 +319,19 @@ function Domain() {
 		},
 	];
 
-	const getData = useCallback(async (trimmedDomain: string) => {
+	const getData = useCallback(async (keyword: string) => {
 		try {
-			if (!trimmedDomain) throw new Error("请输入域名");
+			if (!keyword) {
+				throw new Error("请输入域名");
+			}
 
-			if (!isValidDomain(trimmedDomain)) throw new Error("请输入有效的域名");
+			if (!isValidDomain(keyword)) {
+				throw new Error("请输入有效的域名");
+			}
 
 			setLoading(true);
 
-			const response = await BlogApi.getWebsiteDetails(trimmedDomain);
+			const response = await BlogApi.getWebsiteDetails(keyword);
 
 			setData({
 				icp: {
