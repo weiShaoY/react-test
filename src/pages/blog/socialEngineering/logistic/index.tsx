@@ -80,7 +80,6 @@ function Hok() {
 					placeholder="请输入问题"
 					value={keyword}
 					onChange={handleInputChange}
-					onPressEnter={throttledGetData}
 					onSearch={throttledGetData}
 					onClear={handleClear}
 					loading={loading}

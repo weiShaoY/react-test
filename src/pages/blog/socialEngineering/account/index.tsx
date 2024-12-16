@@ -448,7 +448,6 @@ function Account() {
 								value={qq}
 								onChange={handleInputChange}
 								onSearch={(_, __, info) => handleInputSearch(info)}
-								onPressEnter={throttledGetData}
 								placeholder="请输入QQ号"
 								allowClear
 								status={error ? "error" : ""}
@@ -464,7 +463,6 @@ function Account() {
 								value={phone}
 								onChange={handleInputChange}
 								onSearch={(_, __, info) => handleInputSearch(info)}
-								onPressEnter={throttledGetData}
 								placeholder="请输入手机号"
 								allowClear
 								status={error ? "error" : ""}
@@ -480,7 +478,6 @@ function Account() {
 								value={lol}
 								onChange={handleInputChange}
 								onSearch={(_, __, info) => handleInputSearch(info)}
-								onPressEnter={throttledGetData}
 								placeholder="请输入LOL名称"
 								allowClear
 								status={error ? "error" : ""}
@@ -495,7 +492,6 @@ function Account() {
 								value={weiBoId}
 								onChange={handleInputChange}
 								onSearch={(_, __, info) => handleInputSearch(info)}
-								onPressEnter={throttledGetData}
 								placeholder="请输入微博ID"
 								allowClear
 								status={error ? "error" : ""}

@@ -129,7 +129,6 @@ function Cigarette() {
 					value={keyword}
 					onChange={handleInputChange}
 					onSearch={(_, __, info) => handleInputSearch(info)}
-					onPressEnter={throttledGetData}
 					placeholder="请输入香烟名称"
 					allowClear
 					status={error ? "error" : ""}

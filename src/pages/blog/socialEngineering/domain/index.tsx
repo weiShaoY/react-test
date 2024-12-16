@@ -448,7 +448,6 @@ function Domain() {
 					value={keyword}
 					onChange={handleInputChange}
 					onSearch={(_, __, info) => handleInputSearch(info)}
-					onPressEnter={throttledGetData}
 					placeholder="请输入域名"
 					allowClear
 					status={error ? "error" : ""}

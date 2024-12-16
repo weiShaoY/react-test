@@ -92,7 +92,6 @@ function Hok() {
 					value={keyword}
 					onChange={handleInputChange}
 					onSearch={(_, __, info) => handleInputSearch(info)}
-					onPressEnter={throttledGetData}
 					placeholder="请输入问题"
 					allowClear
 					status={error ? "error" : ""}

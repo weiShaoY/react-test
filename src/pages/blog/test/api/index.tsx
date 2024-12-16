@@ -164,7 +164,6 @@ function LicensePlate() {
 					value={keyword}
 					onChange={handleInputChange}
 					onSearch={(_, __, info) => handleInputSearch(info)}
-					onPressEnter={throttledGetData}
 					placeholder="请输入接口地址"
 					allowClear
 					status={error ? "error" : ""}
