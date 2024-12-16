@@ -1,4 +1,4 @@
-import { message } from "antd";
+import { toast } from "sonner";
 
 /**
  * 使用 `<a>` 标签下载文件，并动态设置文件名和扩展名
@@ -33,11 +33,11 @@ export function downloadImage(url: string, defaultName = "downloaded_file") {
 		document.body.removeChild(link);
 
 		// 成功提示
-		message.success(`文件下载成功: ${fileName}`);
+		toast.success(`文件下载成功: ${fileName}`);
 	} catch (err) {
 		console.error(err);
 
 		// 失败提示
-		message.error(`文件下载失败: ${url}`);
+		toast.error(`文件下载失败: ${url}`);
 	}
 }

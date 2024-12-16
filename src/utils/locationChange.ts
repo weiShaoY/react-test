@@ -2,7 +2,7 @@
 const X_PI = (Math.PI * 3000.0) / 180.0; // 百度坐标偏移量
 const PI = Math.PI; // 圆周率
 const EARTH_RADIUS = 6378245.0; // 地球半径，单位：米
-const ECCENTRICITY_SQUARED = 0.00669342162296594323; // 偏心率的平方
+const ECCENTRICITY_SQUARED = 0.006693421622965943; // 偏心率的平方
 
 /**
  * WGS84 坐标系 转 百度坐标系 (BD-09)

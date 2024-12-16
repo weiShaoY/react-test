@@ -1,4 +1,3 @@
-import { message as Message } from "antd";
 import axios, {
 	type AxiosRequestConfig,
 	type AxiosError,
@@ -8,6 +7,8 @@ import axios, {
 import type { Result } from "./type";
 
 import { ResultEnum } from "./type";
+
+import { toast } from "sonner";
 
 /**
  *  创建 axios 实例
@@ -64,8 +65,9 @@ axiosInstance.interceptors.response.use(
 	(error: AxiosError<Result>) => {
 		const { response, message } = error || {};
 		const errMsg = response?.data?.message || message || "操作失败,系统异常!";
-		Message.error(errMsg);
-
+		toast.error(errMsg, {
+			position: "top-center",
+		});
 		const status = response?.status;
 		if (status === 401) {
 			// userStore.getState().actions.clearUserInfoAndToken();

@@ -1,28 +1,37 @@
-/**
- * 将图片 URL 转换为 Blob 并复制到剪贴板
- * @param url 图片的 URL
- * @returns {Promise<void>} 复制成功时 resolve，失败时 reject
- */
-export function copyImageToClipboard(url: string): Promise<void> {
-	return new Promise((resolve, reject) => {
-		// 使用 fetch 获取图片的 Blob 对象
-		fetch(url)
-			.then((response) => response.blob()) // 获取 Blob 对象
-			.then((blob) => {
-				// 创建一个新的文件对象
-				const file = new File([blob], "screenshot.png", { type: "image/png" });
+import { toast } from "sonner";
 
-				// 使用 Clipboard API 复制到剪贴板
-				return navigator.clipboard.write([
-					new ClipboardItem({ "image/png": file }),
-				]);
-			})
-			.then(() => {
-				resolve(); // 复制成功，resolve
-			})
-			.catch((err) => {
-				console.error("复制截图到剪贴板失败:", err);
-				reject(err); // 复制失败，reject
-			});
-	});
+/**
+ * 将指定图片 URL 复制到剪贴板
+ * @param {string} url - 图片的 URL 地址
+ * @throws {Error} 如果图片获取或复制失败，将抛出错误
+ */
+export function copyImageToClipboard(url: string): void {
+	// 使用 fetch 获取图片 Blob 对象
+	fetch(url)
+		.then((response) => {
+			if (!response.ok) {
+				const errorMsg = `图片获取失败，状态码: ${response.status}`;
+				toast.error(errorMsg);
+				throw new Error(errorMsg);
+			}
+			return response.blob();
+		})
+		.then((blob) => {
+			const file = new File([blob], "screenshot.png", { type: "image/png" });
+
+			// 将图片写入剪贴板
+			return navigator.clipboard.write([
+				new ClipboardItem({ "image/png": file }),
+			]);
+		})
+		.then(() => {
+			// 提示用户操作成功
+			toast.success("图片已成功复制到剪贴板！");
+		})
+		.catch((err) => {
+			// 捕获错误并显示提示
+			const errorMsg = `复制图片到剪贴板失败: ${(err as Error).message}`;
+			toast.error(errorMsg);
+			throw new Error(errorMsg);
+		});
 }

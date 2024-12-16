@@ -1,5 +1,3 @@
-import { Layout } from "antd";
-import { useScroll } from "framer-motion";
 import {
 	Suspense,
 	useCallback,
@@ -9,15 +7,23 @@ import {
 	useState,
 	type CSSProperties,
 } from "react";
+
+import { Layout } from "antd";
+
+import { useScroll } from "framer-motion";
+
 import styled from "styled-components";
 
 import { CircleLoading } from "@/components/loading";
+
 import ProgressBar from "@/components/progress-bar";
+
 import { useSettings } from "@/store/settingStore";
-import { tailwindClassMerger } from "@/utils";
 
 import Header from "./header";
+
 import Main from "./main";
+
 import Nav from "./nav";
 
 import { ThemeLayout, ThemeMode } from "#/enum";
@@ -29,6 +35,8 @@ import AntdConfig from "@/theme/antd";
 import { useResponsive } from "@/theme/hooks";
 
 import { dashboardConfig } from "./config";
+
+import { tailwindClassMerger } from "@/utils";
 
 /**
  * Blog 模块 DashboardLayout 组件，用于构建包含导航栏、页头和主内容区域的布局

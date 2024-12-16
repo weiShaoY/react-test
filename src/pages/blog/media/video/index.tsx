@@ -166,13 +166,7 @@ function Video() {
 		 *  视频截图结束
 		 */
 		player.on(Player.Events.SCREEN_SHOT, (url) => {
-			copyImageToClipboard(url)
-				.then(() => {
-					toast.success("截图已复制到剪贴板");
-				})
-				.catch(() => {
-					toast.error("截图失败");
-				});
+			copyImageToClipboard(url);
 		});
 
 		/**
