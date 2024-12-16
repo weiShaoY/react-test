@@ -188,7 +188,7 @@ function Video() {
 
 	return (
 		<Card className="flex flex-col gap-5">
-			<div className="flex gap-5 flex-wrap w-full">
+			<div className="flex gap-5 flex-wrap w-full items-center">
 				<Select
 					className="w-52"
 					showSearch

@@ -142,7 +142,7 @@ function LicensePlate() {
 
 	return (
 		<Card className="flex flex-col gap-5">
-			<div className="flex gap-5 flex-wrap w-full ">
+			<div className="flex gap-5 flex-wrap w-full items-center">
 				<Input.Search
 					className="!w-80"
 					loading={loading}
