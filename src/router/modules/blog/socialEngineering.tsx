@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router";
 
 import { CircleLoading } from "@/components/loading";
 

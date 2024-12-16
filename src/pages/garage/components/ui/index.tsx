@@ -6,7 +6,7 @@ import {
 } from "react";
 
 import { useInteractStore } from "@/store/garage";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import Game from "./game";
 import Load from "./load";
 import { type PageActionType, initialState, reducer } from "./reducer";

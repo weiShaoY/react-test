@@ -1,6 +1,5 @@
 import { SvgIcon } from "@/components/icon";
-import { NavLink } from "react-router-dom";
-
+import { NavLink } from "react-router";
 /**
  * Logo 组件
  * @returns  渲染 Logo

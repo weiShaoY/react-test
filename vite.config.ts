@@ -59,7 +59,7 @@ export default defineConfig(({ mode }) => {
 
 		optimizeDeps: {
 			// 指定需要预构建的依赖模块，用于加快开发阶段的冷启动速度
-			include: ["react", "react-dom", "react-router-dom", "antd"],
+			include: ["react", "react-dom", "react-router", "antd"],
 		},
 		esbuild: {
 			// 配置代码压缩相关选项
@@ -83,7 +83,7 @@ export default defineConfig(({ mode }) => {
 					// 手动分包策略，将常用依赖分组，提升加载性能和缓存利用率
 					manualChunks: {
 						// React 相关的核心库单独打包
-						"vendor-react": ["react", "react-dom", "react-router-dom"],
+						"vendor-react": ["react", "react-dom", "react-router"],
 						// Ant Design 相关的 UI 库单独打包
 						"vendor-antd": ["antd", "@ant-design/icons", "@ant-design/cssinjs"],
 						// 图表相关的库单独打包

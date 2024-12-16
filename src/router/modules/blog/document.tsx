@@ -1,6 +1,6 @@
 import { CircleLoading } from "@/components/loading";
 import { Suspense, lazy } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router";
 import type { AppRouteObject } from "#/router";
 
 const Iframe = lazy(() => import("@/layouts/blog/iframe"));

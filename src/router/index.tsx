@@ -3,7 +3,7 @@ import {
 	type RouteObject,
 	RouterProvider,
 	createBrowserRouter,
-} from "react-router-dom";
+} from "react-router";
 
 import type { AppRouteObject } from "#/router";
 

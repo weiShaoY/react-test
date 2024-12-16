@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { Params, RouteObject } from "react-router-dom";
+import type { Params, RouteObject } from "react-router";
 
 /**
  * 路由元信息

@@ -1,8 +1,7 @@
 import { SvgIcon } from "@/components/icon";
 
-import { NavLink } from "react-router-dom";
-
 import { useSettings } from "@/store/settingStore";
+import { NavLink } from "react-router";
 
 import { tailwindClassMerger } from "@/utils";
 

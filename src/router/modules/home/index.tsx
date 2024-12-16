@@ -1,5 +1,5 @@
 import { CircleLoading } from "@/components/loading";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router";
 
 import type { AppRouteObject } from "#/router";
 

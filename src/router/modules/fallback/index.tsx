@@ -1,6 +1,6 @@
 import type { AppRouteObject } from "#/router";
 
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 
 /**
  * 未找到路由
