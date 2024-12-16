@@ -1,8 +1,9 @@
 import { BlogApi } from "@/api";
 import Card from "@/components/card";
-import { Table, Tabs, message } from "antd";
+import { Table, Tabs } from "antd";
 import type { TableProps } from "antd";
 import { useCallback, useEffect, useState } from "react";
+import { toast } from "sonner";
 
 /**
  *  分类
@@ -326,7 +327,7 @@ function GoldPrice() {
 				[Category.MarketGold]: marketGoldPrice,
 			});
 		} catch (error) {
-			message.error("获取数据失败，请稍后重试");
+			toast.error("获取数据失败，请稍后重试");
 		} finally {
 			setLoading(false);
 		}

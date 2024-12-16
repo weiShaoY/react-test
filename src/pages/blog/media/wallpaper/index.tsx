@@ -1,6 +1,5 @@
 import { BlogApi } from "@/api";
 import { useDebounceEffect } from "ahooks";
-import { message } from "antd";
 import { Button, Image, Select, Spin, Tooltip } from "antd";
 import { useState } from "react";
 
@@ -8,6 +7,7 @@ import { SvgIcon } from "@/components/icon";
 
 import Card from "@/components/card";
 import { downloadImage } from "@/utils/downloadImage";
+import { toast } from "sonner";
 
 /**
  * 壁纸组件
@@ -59,7 +59,7 @@ function Wallpaper() {
 				setKeyword(response.img_url);
 			}
 		} catch (error: any) {
-			message.error(error.message || "获取数据失败，请稍后重试");
+			toast.error(error.message || "获取数据失败，请稍后重试");
 		} finally {
 			setLoading(false);
 		}
@@ -81,7 +81,6 @@ function Wallpaper() {
 				<Select
 					className="w-40"
 					showSearch
-					allowClear
 					placeholder="请选择壁纸类别"
 					defaultValue={category}
 					onChange={(category) => setCategory(category)}

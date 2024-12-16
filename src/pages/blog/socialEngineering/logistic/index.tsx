@@ -1,7 +1,8 @@
 import { BlogApi } from "@/api";
 import { useThrottleFn } from "ahooks";
-import { Input, List, Spin, message } from "antd";
+import { Input, List, Spin } from "antd";
 import { useState } from "react";
+import { toast } from "sonner";
 
 type DataType = {
 	title: string;
@@ -31,7 +32,7 @@ function Hok() {
 
 			setData(res);
 		} catch (error: any) {
-			message.error(error.message || "获取数据失败，请稍后重试");
+			toast.error(error.message || "获取数据失败，请稍后重试");
 			setError(error.message);
 		} finally {
 			setLoading(false);
@@ -55,7 +56,7 @@ function Hok() {
 	 * 输入变化的处理
 	 */
 	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setKeyword(e.target.value);
+		setKeyword(e.target.value.trim());
 		setError("");
 	}
 

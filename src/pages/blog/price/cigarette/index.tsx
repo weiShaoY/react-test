@@ -1,8 +1,9 @@
 import { BlogApi } from "@/api";
 import Card from "@/components/card";
 import { useThrottleFn } from "ahooks";
-import { Input, Table, message } from "antd";
+import { Input, Table } from "antd";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const columns = [
 	{
@@ -65,18 +66,19 @@ function Cigarette() {
 	 *  获取数据逻辑
 	 */
 	async function getData() {
-		if (!keyword.trim()) {
-			setError("请输入香烟名称");
-			return;
-		}
 		try {
+			if (!keyword) {
+				throw new Error("请输入香烟名称");
+			}
+
 			setLoading(true);
 
 			const response = await BlogApi.getCigarettePrice(keyword);
 
 			setData(response as any);
 		} catch (error) {
-			message.error(error.message || "获取数据失败，请稍后重试");
+			toast.error(error.message || "获取数据失败，请稍后重试");
+			setError(error.message || "获取数据失败，请稍后重试");
 		} finally {
 			setLoading(false);
 		}
@@ -95,7 +97,7 @@ function Cigarette() {
 	);
 
 	function handleInputChange(e: any) {
-		setKeyword(e.target.value);
+		setKeyword(e.target.value.trim());
 		if (error) {
 			setError("");
 		}
@@ -124,7 +126,7 @@ function Cigarette() {
 					className="!w-80"
 					loading={loading}
 					disabled={loading}
-					value={keyword.trim()}
+					value={keyword}
 					onChange={handleInputChange}
 					onSearch={(_, __, info) => handleInputSearch(info)}
 					onPressEnter={throttledGetData}
@@ -134,7 +136,9 @@ function Cigarette() {
 					enterButton="搜索"
 				/>
 
-				{error && <span className="text-red ">{error}</span>}
+				<div className="flex items-center">
+					{error && <span className="text-red ">{error}</span>}
+				</div>
 			</div>
 
 			<Table

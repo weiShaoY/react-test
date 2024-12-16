@@ -2,9 +2,10 @@ import { BlogApi } from "@/api";
 import Card from "@/components/card";
 import { isValidDomain } from "@/utils";
 import { useThrottleFn } from "ahooks";
-import { Descriptions, Input, Spin, message } from "antd";
+import { Descriptions, Input, Spin } from "antd";
 import dayjs from "dayjs";
 import { useCallback, useState } from "react";
+import { toast } from "sonner";
 
 /**
  * 表示完整的域名信息结构
@@ -320,7 +321,7 @@ function Domain() {
 
 	const getData = useCallback(async (trimmedDomain: string) => {
 		try {
-			if (!trimmedDomain.trim()) throw new Error("请输入域名");
+			if (!trimmedDomain) throw new Error("请输入域名");
 
 			if (!isValidDomain(trimmedDomain)) throw new Error("请输入有效的域名");
 
@@ -361,7 +362,8 @@ function Domain() {
 				},
 			});
 		} catch (error) {
-			message.error(error.message || "获取数据失败，请稍后重试");
+			toast.error(error.message || "获取数据失败，请稍后重试");
+
 			setError(error.message);
 		} finally {
 			setLoading(false);
@@ -385,7 +387,7 @@ function Domain() {
 	 *  输入变化的处理
 	 */
 	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setKeyword(e.target.value);
+		setKeyword(e.target.value.trim());
 		setError("");
 	}
 
@@ -443,7 +445,7 @@ function Domain() {
 					className="!w-80"
 					loading={loading}
 					disabled={loading}
-					value={keyword.trim()}
+					value={keyword}
 					onChange={handleInputChange}
 					onSearch={(_, __, info) => handleInputSearch(info)}
 					onPressEnter={throttledGetData}
@@ -454,7 +456,7 @@ function Domain() {
 				/>
 
 				<div className="flex items-center">
-					{error && <span className="text-red ">{error}</span>}
+					{error && <span className="text-red">{error}</span>}
 				</div>
 			</div>
 

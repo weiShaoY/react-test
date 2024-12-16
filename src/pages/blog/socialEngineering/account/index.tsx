@@ -2,8 +2,9 @@ import { BlogApi } from "@/api";
 import Card from "@/components/card";
 import { isValidQQ } from "@/utils";
 import { useThrottleFn } from "ahooks";
-import { Descriptions, Input, Select, Spin, message } from "antd";
+import { Descriptions, Input, Select, Spin } from "antd";
 import { useState } from "react";
+import { toast } from "sonner";
 
 /**
  *  分类
@@ -262,6 +263,7 @@ function Account() {
 			}
 
 			setLoading(true);
+
 			// QQ号
 			if (category === Category.QQ) {
 				const res_phone = await BlogApi.getQqQueryPhone(qq);
@@ -317,7 +319,7 @@ function Account() {
 				});
 			}
 		} catch (error: any) {
-			message.error(error.message || "获取数据失败，请稍后重试");
+			toast.error(error.message || "获取数据失败，请稍后重试");
 			setError(error.message);
 		} finally {
 			setLoading(false);
@@ -339,13 +341,13 @@ function Account() {
 
 	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
 		if (category === Category.QQ) {
-			setQq(e.target.value);
+			setQq(e.target.value.trim());
 		} else if (category === Category.PHONE) {
-			setPhone(e.target.value);
+			setPhone(e.target.value.trim());
 		} else if (category === Category.LOL) {
-			setLol(e.target.value);
+			setLol(e.target.value.trim());
 		} else if (category === Category.WEIBO) {
-			setWeiBoId(e.target.value);
+			setWeiBoId(e.target.value.trim());
 		}
 		if (error) {
 			setError("");
@@ -443,7 +445,7 @@ function Account() {
 								className="!w-60"
 								loading={loading}
 								disabled={loading}
-								value={qq.trim()}
+								value={qq}
 								onChange={handleInputChange}
 								onSearch={(_, __, info) => handleInputSearch(info)}
 								onPressEnter={throttledGetData}
@@ -459,7 +461,7 @@ function Account() {
 								className="!w-60"
 								loading={loading}
 								disabled={loading}
-								value={phone.trim()}
+								value={phone}
 								onChange={handleInputChange}
 								onSearch={(_, __, info) => handleInputSearch(info)}
 								onPressEnter={throttledGetData}
@@ -475,7 +477,7 @@ function Account() {
 								className="!w-60"
 								loading={loading}
 								disabled={loading}
-								value={lol.trim()}
+								value={lol}
 								onChange={handleInputChange}
 								onSearch={(_, __, info) => handleInputSearch(info)}
 								onPressEnter={throttledGetData}
@@ -490,7 +492,7 @@ function Account() {
 								className="!w-60"
 								loading={loading}
 								disabled={loading}
-								value={weiBoId.trim()}
+								value={weiBoId}
 								onChange={handleInputChange}
 								onSearch={(_, __, info) => handleInputSearch(info)}
 								onPressEnter={throttledGetData}
@@ -502,7 +504,7 @@ function Account() {
 						)}
 					</>
 
-					<div className="">
+					<div className="flex items-center">
 						{error && <span className="text-red ">{error}</span>}
 					</div>
 				</div>

@@ -1,7 +1,8 @@
 import { BlogApi } from "@/api";
 import { useDebounceEffect } from "ahooks";
-import { Descriptions, Image, Select, Spin, message } from "antd";
+import { Descriptions, Image, Select, Spin } from "antd";
 import { useState } from "react";
+import { toast } from "sonner";
 
 function Hok() {
 	const [loading, setLoading] = useState(false);
@@ -159,7 +160,7 @@ function Hok() {
 			const response = await BlogApi.getHok(type, hero);
 			setState({ ...state, data: response });
 		} catch (error) {
-			message.error(error.message || "获取数据失败，请稍后重试");
+			toast.error(error.message || "获取数据失败，请稍后重试");
 		} finally {
 			setLoading(false);
 		}
@@ -238,7 +239,6 @@ function Hok() {
 				<Select
 					className="w-32"
 					showSearch
-					allowClear
 					placeholder="请选择区"
 					defaultValue={state.type}
 					onChange={(type) => setState({ ...state, type })}
@@ -247,7 +247,6 @@ function Hok() {
 				<Select
 					className="!w-44"
 					showSearch
-					allowClear
 					placeholder="请输入或选择英雄"
 					defaultValue={state.hero}
 					onChange={(hero) => setState({ ...state, hero })}

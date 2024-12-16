@@ -2,8 +2,9 @@ import { BlogApi } from "@/api";
 import Card from "@/components/card";
 import { isValidPlateNumber } from "@/utils";
 import { useThrottleFn } from "ahooks";
-import { Descriptions, Input, Spin, message } from "antd";
+import { Descriptions, Input, Spin } from "antd";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const typeMap: Record<string, string> = {
 	"10": "民用",
@@ -80,10 +81,9 @@ function LicensePlate() {
 	 */
 	async function getData() {
 		try {
-			if (!keyword.trim()) throw new Error("请输入车牌号");
+			if (!keyword) throw new Error("请输入车牌号");
 
-			if (!isValidPlateNumber(keyword.trim()))
-				throw new Error("请输入有效的车牌号");
+			if (!isValidPlateNumber(keyword)) throw new Error("请输入有效的车牌号");
 
 			setLoading(true);
 
@@ -91,7 +91,7 @@ function LicensePlate() {
 
 			setData(response);
 		} catch (error: any) {
-			message.error(error.message || "获取数据失败，请稍后重试");
+			toast.error(error.message || "获取数据失败，请稍后重试");
 			setError(error.message);
 		} finally {
 			setLoading(false);
@@ -115,7 +115,7 @@ function LicensePlate() {
 	 * 输入变化的处理
 	 */
 	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setKeyword(e.target.value);
+		setKeyword(e.target.value.trim());
 		setError("");
 	}
 
@@ -147,7 +147,7 @@ function LicensePlate() {
 					className="!w-80"
 					loading={loading}
 					disabled={loading}
-					value={keyword.trim()}
+					value={keyword}
 					onChange={handleInputChange}
 					onSearch={(_, __, info) => handleInputSearch(info)}
 					onPressEnter={throttledGetData}

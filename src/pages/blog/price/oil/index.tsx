@@ -1,8 +1,9 @@
 import { BlogApi } from "@/api";
 import Card from "@/components/card";
-import { Table, message } from "antd";
+import { Table } from "antd";
 import type { TableProps } from "antd";
 import { useCallback, useEffect, useState } from "react";
+import { toast } from "sonner";
 
 /**
  *  电影即将上映列表每一项
@@ -112,7 +113,7 @@ function Oil() {
 
 			setData(sortedData);
 		} catch (error) {
-			message.error(error.message || "获取数据失败，请稍后重试");
+			toast.error(error.message || "获取数据失败，请稍后重试");
 		} finally {
 			setLoading(false);
 		}

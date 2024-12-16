@@ -1,7 +1,6 @@
 import BlogApi from "@/api/modules/blog";
 import { SvgIcon } from "@/components/icon";
 import { useDebounceEffect } from "ahooks";
-import { message, notification } from "antd";
 import { Button, Select, Switch, Tooltip } from "antd";
 import { useRef, useState } from "react";
 import Player from "xgplayer";
@@ -9,6 +8,7 @@ import "xgplayer/dist/index.min.css";
 
 import Card from "@/components/card";
 import { copyImageToClipboard } from "@/utils";
+import { toast } from "sonner";
 
 function Video() {
 	const [loading, setLoading] = useState(false);
@@ -44,10 +44,10 @@ function Video() {
 			if (response) {
 				setKeyword(response);
 			} else {
-				message.error("未获取到视频资源");
+				throw new Error("未获取到视频资源");
 			}
 		} catch (error) {
-			message.error("获取数据失败，请稍后重试");
+			toast.error("获取数据失败，请稍后重试");
 		} finally {
 			setLoading(false);
 		}
@@ -168,14 +168,10 @@ function Video() {
 		player.on(Player.Events.SCREEN_SHOT, (url) => {
 			copyImageToClipboard(url)
 				.then(() => {
-					notification.success({
-						message: "截图已复制到剪贴板",
-					});
+					toast.success("截图已复制到剪贴板");
 				})
 				.catch(() => {
-					notification.error({
-						message: "截图失败",
-					});
+					toast.error("截图失败");
 				});
 		});
 
@@ -192,7 +188,7 @@ function Video() {
 
 	return (
 		<Card className="flex flex-col gap-5">
-			<div className="flex gap-5 flex-wrap w-full ">
+			<div className="flex gap-5 flex-wrap w-full">
 				<Select
 					className="w-52"
 					showSearch

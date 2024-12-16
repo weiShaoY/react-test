@@ -1,12 +1,12 @@
 import BlogApi from "@/api/modules/blog";
 import { SvgIcon } from "@/components/icon";
 import { useDebounceEffect } from "ahooks";
-import { message } from "antd";
 import { Button, Select, Switch, Tooltip } from "antd";
 import { useRef, useState } from "react";
 import Player from "xgplayer";
 import "xgplayer/dist/index.min.css";
 import Card from "@/components/card";
+import { toast } from "sonner";
 
 function Music() {
 	const [loading, setLoading] = useState(false);
@@ -45,10 +45,10 @@ function Music() {
 			if (response) {
 				setKeyword(response.audiopath);
 			} else {
-				message.error("未获取到视频资源");
+				throw new Error("未获取到视频资源");
 			}
 		} catch (error) {
-			message.error("获取数据失败，请稍后重试");
+			toast.error("获取数据失败，请稍后重试");
 		} finally {
 			setLoading(false);
 		}
@@ -151,7 +151,6 @@ function Music() {
 				<Select
 					className="w-52"
 					showSearch
-					allowClear
 					placeholder="请选择视频类别"
 					value={category}
 					onChange={(value) => {
