@@ -1,6 +1,6 @@
 import { IconButton, SvgIcon } from "@/components/icon";
 import { useSettings } from "@/store/settingStore";
-import { useResponsive, useThemeToken } from "@/theme/hooks";
+import { useThemeToken } from "@/theme/hooks";
 import { Drawer } from "antd";
 import Color from "color";
 import { type CSSProperties, useState } from "react";
@@ -10,10 +10,12 @@ import BreadCrumb from "./bread-crumb";
 import SearchBar from "./search-bar";
 import Setting from "./setting";
 
-import dashboardConfig from "../config";
-import NavVertical from "../nav/nav-vertical";
+import { tailwindClassMerger } from "@/utils";
 
 import { ThemeLayout } from "#/enum";
+
+import dashboardConfig from "../config";
+import NavVertical from "../nav/nav-vertical";
 
 import Github from "@/components/github";
 type Props = {
@@ -32,7 +34,7 @@ type Props = {
  * @param  props - 组件的属性
  * @returns  Header 组件
  */
-export default function Header({ className = "", offsetTop = false }: Props) {
+export default function Header({ offsetTop = false }: Props) {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
 	// 获取主题设置和布局配置
@@ -40,40 +42,30 @@ export default function Header({ className = "", offsetTop = false }: Props) {
 
 	const { colorBgElevated, colorBorder } = useThemeToken();
 
-	const { screenMap } = useResponsive();
-
 	/**
 	 * Header 样式
 	 * @type {CSSProperties}
 	 */
 	const headerStyle: CSSProperties = {
-		position: themeLayout === ThemeLayout.Horizontal ? "relative" : "fixed",
 		borderBottom:
 			themeLayout === ThemeLayout.Horizontal
 				? `1px dashed ${Color(colorBorder).alpha(0.6).toString()}`
 				: "",
 		backgroundColor: Color(colorBgElevated).alpha(1).toString(),
+		width: "100%",
 	};
-
-	// 设置不同布局下的宽度
-	if (themeLayout === ThemeLayout.Horizontal) {
-		headerStyle.width = "100vw";
-	} else if (screenMap.md) {
-		headerStyle.right = "0px";
-		headerStyle.left = "auto";
-		headerStyle.width = `calc(100% - ${
-			themeLayout === ThemeLayout.Vertical
-				? dashboardConfig.NAV_WIDTH
-				: dashboardConfig.NAV_COLLAPSED_WIDTH
-		}px)`;
-	} else {
-		headerStyle.width = "100vw";
-	}
 
 	return (
 		<>
 			{/* Header 主体 */}
-			<header className={`z-20 w-full ${className}`} style={headerStyle}>
+			<header
+				className={tailwindClassMerger(
+					themeLayout === ThemeLayout.Horizontal
+						? "relative"
+						: "sticky top-0 right-0 left-auto",
+				)}
+				style={headerStyle}
+			>
 				<div
 					className="flex flex-grow items-center justify-between px-4 text-gray backdrop-blur xl:px-6 2xl:px-10"
 					style={{

@@ -518,7 +518,9 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 		 * - 使用 `cubic-bezier(0.4, 0, 0.2, 1)` 的缓动函数
 		 * - 动画时长为 200ms，延迟为 0ms
 		 */
-		transition: "top 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+		transition: "all 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+
+		width: "100%",
 	};
 
 	// 判断主题布局为水平布局时
@@ -547,14 +549,6 @@ export default function MultiTabs({ offsetTop = false }: Props) {
 				? dashboardConfig.NAV_WIDTH
 				: dashboardConfig.NAV_COLLAPSED_WIDTH
 		}px`;
-	} else {
-		// 当前屏幕宽度为小于中等尺寸（md）时
-		/**
-		 * 对于屏幕宽度小于中等尺寸（md）的情况
-		 * - 将多标签栏的宽度设置为 `100vw`，即占满整个视口的宽度
-		 * - 这种设置适用于移动设备或小屏幕，以保证多标签栏的宽度自适应
-		 */
-		multiTabsStyle.width = "100vw";
 	}
 
 	/**

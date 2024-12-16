@@ -29,7 +29,7 @@ export function useResponsive() {
 	const screenEnum: ScreenSizeMap = {
 		xs: screenXS, // 超小屏幕 (extra small)
 		sm: screenSM, // 小屏幕 (small)
-		md: screenMD, // 中屏幕 (medium)
+		md: screenMD, // 中屏幕 (medium) //  768
 		lg: screenLG, // 大屏幕 (large)
 		xl: screenXL, // 超大屏幕 (extra large)
 		xxl: screenXXL, // 超超大屏幕 (extra extra large)

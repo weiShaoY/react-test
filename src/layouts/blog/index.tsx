@@ -7,6 +7,7 @@ import {
 	useMemo,
 	useRef,
 	useState,
+	type CSSProperties,
 } from "react";
 import styled from "styled-components";
 
@@ -25,12 +26,18 @@ import { App as AntdApp } from "antd";
 
 import AntdConfig from "@/theme/antd";
 
+import { useResponsive } from "@/theme/hooks";
+
+import { dashboardConfig } from "./config";
+
 /**
  * Blog 模块 DashboardLayout 组件，用于构建包含导航栏、页头和主内容区域的布局
  */
 export function BlogLayout() {
 	// 从全局设置中获取当前的布局方式和主题模式
 	const { themeLayout, themeMode } = useSettings();
+
+	const { screenMap } = useResponsive();
 
 	/**
 	 *  mainEl 引用，用于获取主内容区域的 DOM 元素
@@ -71,6 +78,19 @@ export function BlogLayout() {
 		);
 	}, [themeLayout]);
 
+	const secondLayoutStyle: CSSProperties = {
+		display: "flex",
+		flexDirection: "column",
+		transition: "all 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+		paddingLeft: screenMap.md
+			? themeLayout === ThemeLayout.Horizontal
+				? 0
+				: themeLayout === ThemeLayout.Mini
+					? dashboardConfig.NAV_COLLAPSED_WIDTH
+					: dashboardConfig.NAV_WIDTH
+			: 0,
+	};
+
 	// 渲染布局组件
 	return (
 		<AntdConfig>
@@ -81,12 +101,12 @@ export function BlogLayout() {
 
 					<Layout className={layoutClassName}>
 						<Suspense fallback={<CircleLoading />}>
-							<Layout>
+							<Layout style={secondLayoutStyle}>
 								{/* 页头组件，offsetTop 用于判断滚动时的样式变化 */}
 
 								<Header
 									offsetTop={
-										themeLayout === ThemeLayout.Vertical ? offsetTop : undefined
+										themeLayout !== ThemeLayout.Horizontal && offsetTop
 									}
 								/>
 
@@ -152,6 +172,7 @@ const scrollbarStyles = {
 const ScrollbarStyleWrapper = styled.div<{ $themeMode?: ThemeMode }>`
   ::-webkit-scrollbar {
     width: 8px; // 滚动条宽度
+		top: 32px;
   }
 
   ::-webkit-scrollbar-track {

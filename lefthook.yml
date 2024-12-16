@@ -1,14 +1,29 @@
-# Use this to lint and format
-pre-commit:
-  parallel: true
-  commands:
-    'biome check(lint + format)':
-      # Runs formatter, linter and import sorting to the requested files.
-      run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
-      stage_fixed: true
+# 使用“SKIP CI”关键字跳过 CI 检查的功能配置
+skip_output:
+  # 配置在跳过 CI 时忽略的输出类型
+  - meta # 跳过与元数据相关的输出
+  - success # 跳过成功消息的输出
+  - summary # 跳过概要报告的输出
 
-# Use this to validate commit messages
+# 定义 pre-commit 钩子的行为
+pre-commit:
+  parallel: true # 启用并行处理以提高效率
+  commands: # 定义 pre-commit 钩子中执行的命令
+    format: # 格式化代码的命令组
+      glob: '*.{js,jsx,ts,tsx,json,md}' # 指定要格式化的文件类型
+      run: npx @biomejs/biome format --write --no-errors-on-unmatched {staged_files} # 使用 Biome 格式化工具格式化文件
+      stage_fixed: true # 将已修复的文件重新加入暂存区
+    lint: # 代码检查命令组
+      glob: '*.{js,jsx,ts,tsx}' # 指定要检查的文件类型
+      run: npx @biomejs/biome lint --no-errors-on-unmatched {staged_files} # 运行 Biome 的 lint 检查
+    check-types: # 类型检查命令组
+      glob: '*.{ts,tsx}' # 指定仅检查 TypeScript 文件
+      run: npx tsc --noEmit # 使用 TypeScript 编译器检查类型，但不生成输出文件
+
+# 定义 commit-msg 钩子的行为
 commit-msg:
-  commands:
-    'commit-msg lint':
-      run: npx commitlint --edit {1}
+  commands: # 定义 commit-msg 钩子中执行的命令
+    commitlint: # 提交信息检查命令组
+      run: npx commitlint --edit {1} # 使用 Commitlint 检查提交信息
+      # 配置跳过特定类型的提交信息检查
+      skip: merge|rebase # 合并或变基提交时跳过检查

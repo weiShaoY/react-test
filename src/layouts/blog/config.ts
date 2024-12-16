@@ -10,7 +10,7 @@ export const dashboardConfig = {
 	/**
 	 * 导航栏折叠时的宽度（单位：像素）
 	 */
-	NAV_COLLAPSED_WIDTH: 90,
+	NAV_COLLAPSED_WIDTH: 80,
 
 	/**
 	 * 水平导航栏的高度（单位：像素）

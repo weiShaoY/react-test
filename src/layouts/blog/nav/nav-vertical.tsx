@@ -149,14 +149,6 @@ export default function NavVertical(props: Props) {
 		return darkSidebar ? "dark" : "light";
 	}, [themeMode, darkSidebar]);
 
-	// const theme = useThemeToken();
-
-	// 	const StyledMenu = styled(Menu)`
-	// 	.ant-menu-submenu-selected.ant-menu-submenu-vertical {
-	// 		background-color: ${theme.colorPrimaryBg} !important;
-	// 	}
-	// `;
-
 	return (
 		<Sider
 			trigger={null} // 不显示默认的触发器（折叠图标）
@@ -164,8 +156,8 @@ export default function NavVertical(props: Props) {
 			collapsed={collapsed} // 当前是否折叠状态
 			width={dashboardConfig.NAV_WIDTH} // 侧边栏的宽度配置
 			theme={sidebarTheme} // 侧边栏主题
+			className="!fixed left-0 top-0 h-screen z-50"
 			style={{
-				height: "100vh", // 设置侧边栏的高度为视口高度
 				borderRight: `1px dashed ${Color(colorBorder).alpha(0.6).toString()}`, // 使用 Color 库动态计算颜色的透明度
 			}}
 		>
