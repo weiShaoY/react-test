@@ -12,7 +12,7 @@ import dashboardConfig from "../config";
 
 import MultiTabs from "../multi-tabs";
 
-import { MultiTabsProvider } from "../multi-tabs/multi-tabs-provider";
+import { MultiTabsProvider } from "../multi-tabs/providers/multi-tabs-provider";
 
 import { useThemeToken } from "@/theme/hooks";
 
