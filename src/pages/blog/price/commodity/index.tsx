@@ -3,7 +3,7 @@ import { Select, Typography } from "antd";
 import { useState } from "react";
 
 import Card from "@/components/card";
-import Chart from "@/components/chart/chart";
+import Chart from "@/components/chart";
 import useChart from "@/components/chart/useChart";
 
 function ChartArea({ series }: { series: ApexAxisChartSeries }) {
