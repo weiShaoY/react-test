@@ -8,6 +8,8 @@ import Router from "@/router/index";
 
 import { MotionLazy } from "./components/animate/motion-lazy";
 
+import Toast from "./components/toast";
+
 function print() {
 	console.info(
 		"%cNiceToMeetYou,我是weiShaoY",
@@ -26,6 +28,8 @@ function App() {
 				<title>weiShaoY</title>
 				<link rel="icon" href={Logo} />
 			</Helmet>
+
+			<Toast />
 			<Router />
 		</MotionLazy>
 	);

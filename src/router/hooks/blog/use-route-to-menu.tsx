@@ -4,6 +4,9 @@ import { useCallback } from "react";
 import type { AppRouteObject } from "#/router";
 
 type MenuItem = GetProp<MenuProps, "items">[number];
+import { useSettings } from "@/store/settingStore";
+import { tailwindClassMerger } from "@/utils";
+import { ThemeLayout } from "#/enum";
 
 /**
  * 根据 icon 类型渲染对应的图标
@@ -23,25 +26,11 @@ const renderIcon = (icon: string | React.ReactNode): React.ReactNode => {
 };
 
 /**
- * 渲染菜单项的文本标签
- * @param  label - 菜单项的标签文本
- * @param  suffix - 菜单项的后缀节点
- * @returns  包含文本和后缀的菜单项标签
- */
-const renderLabel = (label: string, suffix: React.ReactNode) => {
-	return (
-		<div className="flex items-center">
-			<div>{label}</div>
-
-			{suffix}
-		</div>
-	);
-};
-
-/**
  * Hook: 将路由配置转换为菜单项配置
  */
 export function useRouteToMenuFn() {
+	const { themeLayout } = useSettings();
+
 	/**
 	 *  使用 useCallback 缓存转换函数，避免每次渲染都重新创建
 	 */
@@ -67,7 +56,21 @@ export function useRouteToMenuFn() {
 						 *  菜单项的显示文本
 						 */
 						// label: renderLabel(meta.label, meta.suffix),
-						label: meta.label,
+						// label: meta.label,
+						label: (
+							<div
+								className={tailwindClassMerger(
+									"inline-flex items-center overflow-hidden",
+									themeLayout === ThemeLayout.Horizontal
+										? "justify-start"
+										: "justify-between",
+								)}
+							>
+								<div className="">{meta.label}</div>
+								{meta.suffix}
+							</div>
+						),
+
 						// 如果有图标，则渲染图标
 						...(meta.icon && { icon: renderIcon(meta.icon) }),
 						// 如果有子路由，则递归处理子菜单项
@@ -77,7 +80,7 @@ export function useRouteToMenuFn() {
 					return menuItem as MenuItem;
 				});
 		},
-		[], // 依赖于翻译函数 t
+		[themeLayout], // 依赖于翻译函数 t
 	);
 	return routeToMenuFn;
 }

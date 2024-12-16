@@ -6,6 +6,7 @@ import { CircleLoading } from "@/components/loading";
 import type { AppRouteObject } from "#/router";
 
 const ApiPage = lazy(() => import("@/pages/blog/test/api"));
+const ToastPage = lazy(() => import("@/pages/blog/test/toast"));
 
 const Test: AppRouteObject = {
 	order: 10,
@@ -32,6 +33,15 @@ const Test: AppRouteObject = {
 				label: "接口",
 				key: "/test/api",
 				icon: "blog-menu-api",
+			},
+		},
+		{
+			path: "toast",
+			element: <ToastPage />,
+			meta: {
+				label: "通知",
+				key: "/test/toast",
+				icon: "blog-menu-toast",
 			},
 		},
 	],

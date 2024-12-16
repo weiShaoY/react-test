@@ -135,7 +135,7 @@ export default function NavVertical(props: Props) {
 	 * - 当菜单处于折叠状态时，不处理打开状态
 	 */
 	const handleOpenChange: MenuProps["onOpenChange"] = (keys) => {
-		if (collapsed) return;
+		// if (collapsed) return;
 		setOpenKeys(keys);
 	};
 
