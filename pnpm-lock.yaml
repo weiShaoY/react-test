@@ -206,6 +206,9 @@ importers:
       xgplayer:
         specifier: ^3.0.20
         version: 3.0.20(core-js@3.39.0)
+      xmorse:
+        specifier: ^1.0.0
+        version: 1.0.0
       zustand:
         specifier: ^5.0.1
         version: 5.0.1(@types/react@18.3.12)(react@18.2.0)(use-sync-external-store@1.2.2(react@18.2.0))
@@ -4695,6 +4698,9 @@ packages:
     resolution: {integrity: sha512-UNKZJRyODOZGdka83ao8fI18xdhzOV8qG4aNEOOkuOQbXFXfXsJMr/dazRHFP+uXmTqiCXr568euee3ch7CS7g==}
     peerDependencies:
       core-js: '>=3.12.1'
+
+  xmorse@1.0.0:
+    resolution: {integrity: sha512-J+H7u9jrWLtrslHYRyybYX8SgnXCYU5qUxA79aVBu4jM8xtMnLSPwURb36I8vbVvWLmTcZp6dV/yDt3MW6bmgA==}
 
   xtend@4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
@@ -9485,6 +9491,8 @@ snapshots:
       downloadjs: 1.4.7
       eventemitter3: 4.0.7
       xgplayer-subtitles: 3.0.20(core-js@3.39.0)
+
+  xmorse@1.0.0: {}
 
   xtend@4.0.2: {}
 

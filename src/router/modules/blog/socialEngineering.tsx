@@ -27,6 +27,8 @@ const AccountPage = lazy(
 	() => import("@/pages/blog/socialEngineering/account"),
 );
 
+const MorsePage = lazy(() => import("@/pages/blog/socialEngineering/morse"));
+
 const SocialEngineering: AppRouteObject = {
 	order: 7,
 	path: "socialEngineering",
@@ -98,6 +100,16 @@ const SocialEngineering: AppRouteObject = {
 				label: "账号查询",
 				key: "/socialEngineering/account",
 				icon: "blog-menu-account",
+			},
+		},
+
+		{
+			path: "morse",
+			element: <MorsePage />,
+			meta: {
+				label: "摩斯电码",
+				key: "/socialEngineering/morse",
+				icon: "blog-menu-morse",
 			},
 		},
 	],
