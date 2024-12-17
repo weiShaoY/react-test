@@ -1,13 +1,7 @@
-import { BlogApi } from "@/api";
-import { useDebounceEffect } from "ahooks";
-import { Button, Input, Select, Spin, Tooltip } from "antd";
-import { useState } from "react";
-
-import { SvgIcon } from "@/components/icon";
+import { Input, Select } from "antd";
+import { useState, useEffect } from "react";
 
 import Card from "@/components/card";
-import { downloadImage } from "@/utils/downloadImage";
-import { toast } from "sonner";
 import { decode, encode } from "xmorse";
 const { TextArea } = Input;
 
@@ -15,12 +9,6 @@ const { TextArea } = Input;
  * 壁纸组件
  */
 function Morse() {
-	const [loading, setLoading] = useState(false);
-
-	const [category, setCategory] = useState("mn");
-
-	const [keyword, setKeyword] = useState("");
-
 	/**
 	 *  分类选项
 	 */
@@ -29,41 +17,35 @@ function Morse() {
 		{ value: 1, label: "解码" },
 	];
 
-	/**
-	 * 获取壁纸数据
-	 */
-	async function getData() {
-		try {
-			setLoading(true);
+	const [category, setCategory] = useState(0);
 
-			if (category === "tui") {
-				const response = await BlogApi.getTuiImage();
+	const [error, setError] = useState("");
 
-				setKeyword(response.text);
-			} else if (category === "sg") {
-				const response = await BlogApi.getRandomManImage();
-				setKeyword(response.img);
-			} else {
-				const response = await BlogApi.getWallpaper(category);
-				setKeyword(response.img_url);
-			}
-		} catch (error: any) {
-			toast.error(error.message || "获取数据失败，请稍后重试");
-		} finally {
-			setLoading(false);
-		}
-	}
-
-	/**
-	 * 使用 ahooks 的防抖处理输入变化
-	 */
-	useDebounceEffect(
-		() => {
-			getData();
-		},
-		[category],
-		{ wait: 500 }, // 防抖时间 500ms
+	const [keywordOne, setKeywordOne] = useState("Hello Word! 代码改变世界！");
+	const [keywordTwo, setKeywordTwo] = useState("");
+	const [keywordThree, setKeywordThree] = useState(
+		"...././.-../.-../---/.--/---/.-./-../-.-.--/-..---.---...--/----..........-/--..-.-..---..-/-.-..----.--.../-..---....-.--./---.-.-.-..--../--------.......-",
 	);
+	const [keywordFour, setKeywordFour] = useState("");
+
+	// 新增的逻辑
+	useEffect(() => {
+		try {
+			setError(""); // 清空错误信息
+			if (category === 0) {
+				setKeywordTwo(encode(keywordOne));
+			} else {
+				const decodedText = decode(keywordThree);
+				if (keywordThree && !decodedText.trim()) {
+					setError("输入的摩尔斯代码无效，请检查后重试！");
+				}
+				setKeywordFour(decodedText);
+			}
+		} catch (err) {
+			setError("解码失败，请检查输入内容！");
+		}
+	}, [category, keywordOne, keywordThree]);
+
 	return (
 		<Card className="flex flex-col gap-5">
 			<div className="flex gap-5 flex-wrap w-full items-center">
@@ -76,40 +58,55 @@ function Morse() {
 					options={categoryOptions}
 				/>
 
-				<Tooltip placement="top" title="点击刷新">
-					<Button
-						loading={loading}
-						onClick={getData}
-						icon={<SvgIcon icon="refresh" />}
-					/>
-				</Tooltip>
-
-				<Tooltip placement="top" title="点击下载">
-					<Button
-						onClick={() => downloadImage(keyword)}
-						icon={<SvgIcon icon="download" />}
-					/>
-				</Tooltip>
+				<div className="flex items-center">
+					{error && <span className="text-red ">{error}</span>}
+				</div>
 			</div>
-			{/* {loading && (
-					<Spin
-						size="large"
-						className="!absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-					/>
+
+			<div className="flex flex-col gap-5 h-[calc(100vh-240px)] relative w-full">
+				{category === 0 ? (
+					<>
+						<div className="flex-1">
+							<TextArea
+								style={{ resize: "none", height: "100%" }}
+								placeholder="请输入需要编码的文字"
+								allowClear
+								value={keywordOne}
+								onChange={(e) => setKeywordOne(e.target.value)}
+							/>
+						</div>
+
+						<div className="flex-1">
+							<TextArea
+								style={{ resize: "none", height: "100%" }}
+								placeholder="编码结果"
+								readOnly
+								value={keywordTwo}
+							/>
+						</div>
+					</>
+				) : (
+					<>
+						<div className="flex-1">
+							<TextArea
+								style={{ resize: "none", height: "100%" }}
+								placeholder="请输入需要解码的摩尔斯电码"
+								allowClear
+								value={keywordThree}
+								onChange={(e) => setKeywordThree(e.target.value)}
+							/>
+						</div>
+
+						<div className="flex-1">
+							<TextArea
+								style={{ resize: "none", height: "100%" }}
+								placeholder="解码结果"
+								readOnly
+								value={keywordFour}
+							/>
+						</div>
+					</>
 				)}
-				{keyword && (
-					<Image src={keyword} alt="壁纸" height="100%" width="auto" />
-				)} */}
-
-			{/* 壁纸展示区域 */}
-			<div className=" flex flex-col  gap-5 bg-gray-200 h-[calc(100vh-240px)] relative w-full">
-				<div className="flex-1">
-					<TextArea placeholder="请输入文本" />
-				</div>
-
-				<div className=" bg-amber flex-1">
-					<TextArea placeholder="编码结果" />
-				</div>
 			</div>
 		</Card>
 	);

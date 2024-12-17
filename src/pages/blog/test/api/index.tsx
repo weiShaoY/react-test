@@ -68,7 +68,7 @@ function LicensePlate() {
 				<div className="h-[calc(100vh-360px)] ">
 					<TextArea
 						value={data.data}
-						style={{ height: "100%", resize: "none" }}
+						style={{ resize: "none", height: "100%" }}
 					/>
 				</div>
 			),
