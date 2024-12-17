@@ -69,7 +69,7 @@ function Morse() {
 						<div className="flex-1">
 							<TextArea
 								style={{ resize: "none", height: "100%" }}
-								placeholder="请输入需要编码的文字"
+								placeholder="请输入需要编码的文本"
 								allowClear
 								value={keywordOne}
 								onChange={(e) => setKeywordOne(e.target.value)}

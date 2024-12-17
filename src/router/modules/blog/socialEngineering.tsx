@@ -29,6 +29,8 @@ const AccountPage = lazy(
 
 const MorsePage = lazy(() => import("@/pages/blog/socialEngineering/morse"));
 
+const Base64Page = lazy(() => import("@/pages/blog/socialEngineering/base64"));
+
 const SocialEngineering: AppRouteObject = {
 	order: 7,
 	path: "socialEngineering",
@@ -110,6 +112,15 @@ const SocialEngineering: AppRouteObject = {
 				label: "摩斯电码",
 				key: "/socialEngineering/morse",
 				icon: "blog-menu-morse",
+			},
+		},
+		{
+			path: "base64",
+			element: <Base64Page />,
+			meta: {
+				label: "Base64",
+				key: "/socialEngineering/base64",
+				icon: "blog-menu-base64",
 			},
 		},
 	],
