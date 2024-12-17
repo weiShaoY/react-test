@@ -9,7 +9,7 @@ import dashboardConfig from "../config";
 
 import { ThemeLayout } from "#/enum";
 
-// import { useThemeToken } from "@/theme/hooks";
+import { useThemeToken } from "@/theme/hooks";
 
 type Props = {
 	/**
@@ -28,11 +28,10 @@ type Props = {
  */
 export default function NavLogo({ collapsed, onToggle }: Props) {
 	// 获取当前的布局模式
-	const { themeLayout, darkSidebar } = useSettings();
+	const { themeLayout } = useSettings();
 
 	// 获取主题相关的颜色;
-	// const { colorBgContainer, colorBorderSecondary } = useThemeToken();
-
+	const { colorPrimary } = useThemeToken();
 	return (
 		<div
 			style={{
@@ -44,31 +43,9 @@ export default function NavLogo({ collapsed, onToggle }: Props) {
 			<NavLink to="/" className="flex items-center bg-red">
 				<SvgIcon icon="common-logo" size={60} />
 				{themeLayout !== ThemeLayout.Mini && (
-					<SvgIcon
-						icon="common-weiShaoY"
-						size="120"
-						color={darkSidebar ? "#ffffff" : "#191919"}
-					/>
+					<SvgIcon icon="common-weiShaoY" size="120" color={colorPrimary} />
 				)}
 			</NavLink>
-
-			{/* 折叠/展开按钮 */}
-			{/* <div
-				onClick={onToggle}
-				className={tailwindClassMerger(
-					"absolute right-0 top-14 z-50 hidden h-8 w-8 translate-x-1/2 cursor-pointer select-none items-center justify-center rounded-full text-center md:flex",
-				)}
-				style={{
-					border: `1px solid ${colorBorderSecondary}`,
-					backgroundColor: colorBgContainer,
-				}}
-			>
-				{collapsed ? (
-					<SvgIcon icon="arrow-left" size="20" />
-				) : (
-					<SvgIcon icon="arrow-right" size="20" />
-				)}
-			</div> */}
 
 			<button
 				onClick={onToggle}
