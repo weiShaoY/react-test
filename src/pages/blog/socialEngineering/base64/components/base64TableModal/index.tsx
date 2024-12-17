@@ -233,7 +233,7 @@ const columns: TableProps<any>["columns"] = [
 	},
 ];
 
-function Base64Table({
+function Base64TableModal({
 	isOpen,
 	onClose,
 }: {
@@ -254,10 +254,9 @@ function Base64Table({
 				bordered
 				pagination={false}
 				scroll={{ y: "60vh" }}
-				size="large"
 			/>
 		</Modal>
 	);
 }
 
-export default Base64Table;
+export default Base64TableModal;
