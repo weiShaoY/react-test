@@ -47,16 +47,6 @@ const News: AppRouteObject = {
 				icon: "blog-menu-dailyHotTopics",
 			},
 		},
-
-		{
-			path: "movie",
-			element: <MoviePage />,
-			meta: {
-				label: "电影",
-				key: "/news/movie",
-				icon: "blog-menu-movie",
-			},
-		},
 		{
 			path: "hok",
 			element: <HokPage />,
@@ -64,6 +54,15 @@ const News: AppRouteObject = {
 				label: "王者荣耀",
 				key: "/news/hok",
 				icon: "blog-menu-hok",
+			},
+		},
+		{
+			path: "movie",
+			element: <MoviePage />,
+			meta: {
+				label: "电影",
+				key: "/news/movie",
+				icon: "blog-menu-movie",
 			},
 		},
 		{
