@@ -27,13 +27,15 @@ function Morse() {
 	// 新增的逻辑
 	useEffect(() => {
 		try {
-
-			setKeywordTwo(md5(keywordOne));
-
+			if (keywordOne) {
+				setKeywordTwo(md5(keywordOne));
+			} else {
+				setKeywordTwo("");
+			}
 			setError(""); // 清空错误信息
 		} catch (err) {
 			// 捕获异常，设置错误信息
-			setError("解码失败，请检查输入内容！");
+			setError("加密失败，请检查输入内容！");
 		}
 	}, [keywordOne]);
 
@@ -58,7 +60,7 @@ function Morse() {
 				<div className="flex-1">
 					<TextArea
 						style={{ resize: "none", height: "100%" }}
-						placeholder="请输入需要编码的文本"
+						placeholder="请输入需要Md5加密的文本"
 						allowClear
 						value={keywordOne}
 						onChange={(e) => setKeywordOne(e.target.value)}

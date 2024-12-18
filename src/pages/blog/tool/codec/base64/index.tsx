@@ -88,7 +88,7 @@ function Morse() {
 					<Select
 						className="w-40"
 						showSearch
-						placeholder="请选择操作类型"
+						placeholder="请选择壁纸类别"
 						defaultValue={category}
 						onChange={(category) => setCategory(category)}
 						options={categoryOptions}
@@ -109,7 +109,7 @@ function Morse() {
 							<div className="flex-1">
 								<TextArea
 									style={{ resize: "none", height: "100%" }}
-									placeholder="请输入需要加密的文本"
+									placeholder="请输入需要编码的文本"
 									allowClear
 									value={keywordOne}
 									onChange={(e) => setKeywordOne(e.target.value)}
