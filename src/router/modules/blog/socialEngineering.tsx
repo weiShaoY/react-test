@@ -31,6 +31,8 @@ const MorsePage = lazy(() => import("@/pages/blog/socialEngineering/morse"));
 
 const Base64Page = lazy(() => import("@/pages/blog/socialEngineering/base64"));
 
+const Md5Page = lazy(() => import("@/pages/blog/socialEngineering/md5"));
+
 const SocialEngineering: AppRouteObject = {
 	order: 7,
 	path: "socialEngineering",
@@ -121,6 +123,15 @@ const SocialEngineering: AppRouteObject = {
 				label: "Base64",
 				key: "/socialEngineering/base64",
 				icon: "blog-menu-base64",
+			},
+		},
+		{
+			path: "md5",
+			element: <Md5Page />,
+			meta: {
+				label: "Md5",
+				key: "/socialEngineering/md5",
+				icon: "blog-menu-md5",
 			},
 		},
 	],

@@ -16,8 +16,8 @@ function Morse() {
 	 *  分类选项
 	 */
 	const categoryOptions = [
-		{ value: 0, label: "编码" },
-		{ value: 1, label: "解码" },
+		{ value: 0, label: "Base64-编码" },
+		{ value: 1, label: "Base64-解码" },
 	];
 
 	const [category, setCategory] = useState(0);
@@ -88,7 +88,7 @@ function Morse() {
 					<Select
 						className="w-40"
 						showSearch
-						placeholder="请选择壁纸类别"
+						placeholder="请选择操作类型"
 						defaultValue={category}
 						onChange={(category) => setCategory(category)}
 						options={categoryOptions}
@@ -109,7 +109,7 @@ function Morse() {
 							<div className="flex-1">
 								<TextArea
 									style={{ resize: "none", height: "100%" }}
-									placeholder="请输入需要编码的文本"
+									placeholder="请输入需要加密的文本"
 									allowClear
 									value={keywordOne}
 									onChange={(e) => setKeywordOne(e.target.value)}
