@@ -240,15 +240,15 @@ function Hok() {
 					className="w-32"
 					showSearch
 					placeholder="请选择区"
-					defaultValue={state.type}
+					value={state.type}
 					onChange={(type) => setState({ ...state, type })}
 					options={typeSelectOptions}
 				/>
 				<Select
 					className="!w-44"
 					showSearch
-					placeholder="请输入或选择英雄"
-					defaultValue={state.hero}
+					placeholder="请选择英雄"
+					value={state.hero}
 					onChange={(hero) => setState({ ...state, hero })}
 					options={heroSelectOptions}
 				/>
