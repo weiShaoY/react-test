@@ -9,7 +9,7 @@ const ApiPage = lazy(() => import("@/pages/blog/test/api"));
 const ToastPage = lazy(() => import("@/pages/blog/test/toast"));
 
 const Test: AppRouteObject = {
-	order: 10,
+	order: 100,
 	path: "test",
 	element: (
 		<Suspense fallback={<CircleLoading />}>

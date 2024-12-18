@@ -16,8 +16,6 @@ const Iframe = lazy(() => import("@/layouts/blog/iframe"));
 
 const External = lazy(() => import("@/layouts/blog/external"));
 
-// const FormatPage = lazy(() => import("@/pages/blog/dev/tool/format"));
-
 const Dev: AppRouteObject = {
 	order: 2,
 	path: "dev",
@@ -37,58 +35,43 @@ const Dev: AppRouteObject = {
 			element: <Navigate to="tool" replace />,
 		},
 		{
-			path: "tool",
+			path: "format",
+			element: (
+				<Wrapper>
+					<Iframe src="https://highlightjs.org/demo" />
+				</Wrapper>
+			),
 			meta: {
-				label: "工具",
-				key: "/dev/tool",
-				icon: "blog-menu-tool",
+				label: "代码格式化",
+				key: "/dev/format",
+				icon: "blog-menu-format",
 			},
-
-			children: [
-				{
-					index: true,
-					element: <Navigate to="profile" replace />,
-				},
-				{
-					path: "format",
-					element: (
-						<Wrapper>
-							<Iframe src="https://highlightjs.org/demo" />
-						</Wrapper>
-					),
-					meta: {
-						label: "代码格式化",
-						key: "/dev/tool/format",
-						icon: "blog-menu-format",
-					},
-				},
-				{
-					path: "image",
-					element: (
-						<Wrapper>
-							<External src="https://carbon.now.sh/" />
-						</Wrapper>
-					),
-					meta: {
-						label: "代码转图片",
-						key: "/dev/tool/image",
-						icon: "blog-menu-image",
-					},
-				},
-				{
-					path: "npm",
-					element: (
-						<Wrapper>
-							<Iframe src="https://pkg-graph.info/" />
-						</Wrapper>
-					),
-					meta: {
-						label: "Npm可视化",
-						key: "/dev/tool/npm",
-						icon: "blog-menu-npm",
-					},
-				},
-			],
+		},
+		{
+			path: "image",
+			element: (
+				<Wrapper>
+					<External src="https://carbon.now.sh/" />
+				</Wrapper>
+			),
+			meta: {
+				label: "代码转图片",
+				key: "/dev/image",
+				icon: "blog-menu-image",
+			},
+		},
+		{
+			path: "npm",
+			element: (
+				<Wrapper>
+					<Iframe src="https://pkg-graph.info/" />
+				</Wrapper>
+			),
+			meta: {
+				label: "Npm可视化",
+				key: "/dev/npm",
+				icon: "blog-menu-npm",
+			},
 		},
 	],
 };

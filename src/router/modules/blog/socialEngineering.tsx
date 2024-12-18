@@ -5,10 +5,6 @@ import { CircleLoading } from "@/components/loading";
 
 import type { AppRouteObject } from "#/router";
 
-const QichachaPage = lazy(
-	() => import("@/pages/blog/socialEngineering/qichacha"),
-);
-
 const LicensePlatePage = lazy(
 	() => import("@/pages/blog/socialEngineering/licensePlate"),
 );
@@ -27,12 +23,6 @@ const AccountPage = lazy(
 	() => import("@/pages/blog/socialEngineering/account"),
 );
 
-const MorsePage = lazy(() => import("@/pages/blog/socialEngineering/morse"));
-
-const Base64Page = lazy(() => import("@/pages/blog/socialEngineering/base64"));
-
-const Md5Page = lazy(() => import("@/pages/blog/socialEngineering/md5"));
-
 const SocialEngineering: AppRouteObject = {
 	order: 7,
 	path: "socialEngineering",
@@ -50,15 +40,6 @@ const SocialEngineering: AppRouteObject = {
 		{
 			index: true,
 			element: <Navigate to="qichacha" replace />,
-		},
-		{
-			path: "qichacha",
-			element: <QichachaPage />,
-			meta: {
-				label: "企查查",
-				key: "/socialEngineering/qichacha",
-				icon: "blog-menu-qichacha",
-			},
 		},
 		{
 			path: "licensePlate",
@@ -104,34 +85,6 @@ const SocialEngineering: AppRouteObject = {
 				label: "账号查询",
 				key: "/socialEngineering/account",
 				icon: "blog-menu-account",
-			},
-		},
-
-		{
-			path: "morse",
-			element: <MorsePage />,
-			meta: {
-				label: "摩斯电码",
-				key: "/socialEngineering/morse",
-				icon: "blog-menu-morse",
-			},
-		},
-		{
-			path: "base64",
-			element: <Base64Page />,
-			meta: {
-				label: "Base64",
-				key: "/socialEngineering/base64",
-				icon: "blog-menu-base64",
-			},
-		},
-		{
-			path: "md5",
-			element: <Md5Page />,
-			meta: {
-				label: "Md5",
-				key: "/socialEngineering/md5",
-				icon: "blog-menu-md5",
 			},
 		},
 	],
