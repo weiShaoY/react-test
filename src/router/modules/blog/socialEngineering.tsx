@@ -23,6 +23,10 @@ const AccountPage = lazy(
 	() => import("@/pages/blog/socialEngineering/account"),
 );
 
+const ComplainPage = lazy(
+	() => import("@/pages/blog/socialEngineering/complain"),
+);
+
 const SocialEngineering: AppRouteObject = {
 	order: 7,
 	path: "socialEngineering",
@@ -85,6 +89,15 @@ const SocialEngineering: AppRouteObject = {
 				label: "账号查询",
 				key: "/socialEngineering/account",
 				icon: "blog-menu-account",
+			},
+		},
+		{
+			path: "complain",
+			element: <ComplainPage />,
+			meta: {
+				label: "投诉举报",
+				key: "/socialEngineering/complain",
+				icon: "blog-menu-complain",
 			},
 		},
 	],

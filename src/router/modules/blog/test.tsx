@@ -7,6 +7,7 @@ import type { AppRouteObject } from "#/router";
 
 const ApiPage = lazy(() => import("@/pages/blog/test/api"));
 const ToastPage = lazy(() => import("@/pages/blog/test/toast"));
+const ComponentPage = lazy(() => import("@/pages/blog/test/component"));
 
 const Test: AppRouteObject = {
 	order: 100,
@@ -42,6 +43,15 @@ const Test: AppRouteObject = {
 				label: "通知",
 				key: "/test/toast",
 				icon: "blog-menu-toast",
+			},
+		},
+		{
+			path: "component",
+			element: <ComponentPage />,
+			meta: {
+				label: "组件",
+				key: "/test/component",
+				icon: "blog-menu-component",
 			},
 		},
 	],
