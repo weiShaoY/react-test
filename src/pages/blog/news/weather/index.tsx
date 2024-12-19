@@ -5,7 +5,9 @@ import { BlogApi } from "@/api";
 import { toast } from "sonner";
 import Card from "@/components/card";
 import Climate from "./components/climate";
+import PassedChart from "./components/passedChart";
 import type { WeatherType } from "./type";
+import { Tabs } from "antd";
 
 /**
  *  省份选择框的选项
@@ -114,7 +116,13 @@ function Weather() {
 				},
 			],
 		},
-		air: "Good",
+		air: {
+			forecasttime: "2024-12-19 15:00",
+			aqi: 91,
+			aq: 2,
+			text: "良",
+			aqiCode: "99031;99032;99033;99035;99037;99038;99039;99040",
+		},
 		tempchart: [
 			{
 				time: "2024-01-01T12:00:00Z",
@@ -233,6 +241,23 @@ function Weather() {
 					disabled={!state.province} // 禁用逻辑
 				/>
 			</div>
+
+			<Tabs
+				className="w-full"
+				defaultActiveKey="2"
+				items={[
+					{
+						key: "1",
+						label: "预报数据",
+						children: <div className="">1</div>,
+					},
+					{
+						key: "2",
+						label: "24小时实时天气",
+						children: <PassedChart passedchart={data.passedchart} />,
+					},
+				]}
+			/>
 
 			{/* <div className="relative">
 				当前选择：

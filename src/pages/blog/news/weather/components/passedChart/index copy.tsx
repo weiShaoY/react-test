@@ -2,29 +2,33 @@ import Chart from "@/components/chart";
 import type { EChartsOption } from "echarts";
 import type { WeatherType } from "../../type";
 
-function Climate({ climate }: { climate: WeatherType["climate"] }) {
+function PassedChart({
+	passedchart,
+}: { passedchart: WeatherType["passedchart"] }) {
 	/**
-	 *  提取最高温度数据
+	 *  温度数据
 	 */
-	const maxTempData = climate.month.map((item) => item.maxTemp);
+	const temperatureData = passedchart.map((item) => item.temperature);
 
 	/**
 	 *  提取最低温度数据
 	 */
-	const minTempData = climate.month.map((item) => item.minTemp);
+	// const minTempData = passedchart.month.map((item) => item.minTemp);
 
 	/**
 	 *  提取降水量数据
 	 */
-	const precipitationData = climate.month.map((item) => item.precipitation);
+	// const precipitationData = passedchart.month.map((item) => item.precipitation);
+
+	const colors = ["#EE6666", "#5470C6", "#91CC75"];
 
 	const option: EChartsOption = {
-		title: {
-			text: `${climate.time} 月平均气温和降水`,
-		},
+		// title: {
+		// 	text: `${passedchart.time} 月平均气温和降水`,
+		// },
 
 		// 图表的配色方案
-		// color: ["#EE6666", "#5470C6", "#91CC75"],
+		color: colors,
 
 		// 提示框配置
 		tooltip: {
@@ -33,15 +37,15 @@ function Climate({ climate }: { climate: WeatherType["climate"] }) {
 				type: "cross", // 坐标轴指示器的类型，'cross' 交叉线
 			},
 
-			formatter: (params: any) => {
-				let relVal = params[0].name;
-				for (let i = 0, l = params.length; i < l; i++) {
-					// 后缀
-					const suffix = params[i].seriesName === "降水量" ? "mm" : "°C";
-					relVal += `<br/>${params[i].marker}${params[i].seriesName}     ${params[i].value}${suffix}`;
-				}
-				return relVal;
-			},
+			// formatter: (params: any) => {
+			// 	let relVal = params[0].name;
+			// 	for (let i = 0, l = params.length; i < l; i++) {
+			// 		// 后缀
+			// 		const suffix = params[i].seriesName === "降水量" ? "mm" : "°C";
+			// 		relVal += `<br/>${params[i].marker}${params[i].seriesName}     ${params[i].value}${suffix}`;
+			// 	}
+			// 	return relVal;
+			// },
 		},
 
 		// 网格配置
@@ -92,7 +96,6 @@ function Climate({ climate }: { climate: WeatherType["climate"] }) {
 		// y 轴配置
 		yAxis: [
 			{
-				id: "temperature",
 				type: "value", // 第三个 y 轴类型为值轴
 				name: "温度", // y 轴名称
 				position: "left", // y 轴的位置（左侧）
@@ -100,7 +103,7 @@ function Climate({ climate }: { climate: WeatherType["climate"] }) {
 				axisLine: {
 					show: true, // 显示 y 轴的轴线
 					lineStyle: {
-						color: "#EE6666",
+						color: colors[1], // 轴线的颜色
 					},
 				},
 				axisLabel: {
@@ -109,7 +112,6 @@ function Climate({ climate }: { climate: WeatherType["climate"] }) {
 			},
 
 			{
-				id: "precipitation",
 				type: "value", // 第二个 y 轴类型为值轴
 				name: "降水量", // y 轴名称
 				position: "right", // y 轴位置（右侧）
@@ -118,7 +120,7 @@ function Climate({ climate }: { climate: WeatherType["climate"] }) {
 				axisLine: {
 					show: true, // 显示 y 轴的轴线
 					lineStyle: {
-						color: "#91CC75",
+						color: colors[2], // 轴线的颜色
 					},
 				},
 				axisLabel: {
@@ -130,25 +132,16 @@ function Climate({ climate }: { climate: WeatherType["climate"] }) {
 		// 数据系列配置
 		series: [
 			{
-				yAxisId: "temperature", // 使用第1个 y 轴
-				name: "最高温度", // 系列名称
+				name: "温度", // 系列名称
 				type: "line", // 系列图表类型为折线图
-				color: "#EE6666", // 折线图的颜色
-				data: maxTempData,
+				yAxisIndex: 0, // 使用第1个 y 轴
+				data: temperatureData,
 			},
 			{
-				yAxisId: "temperature", // 使用第1个 y 轴
-				name: "最低温度", // 系列名称
-				type: "line", // 系列图表类型为折线图
-				color: "#5470C6", // 折线图的颜色
-				data: minTempData,
-			},
-			{
-				yAxisId: "precipitation", // 使用第2个 y 轴
 				name: "降水量", // 系列名称
 				type: "bar", // 系列图表类型为条形图
-				color: "#91CC75", // 条形图的颜色
-				data: precipitationData,
+				yAxisIndex: 1, // 使用第2个 y 轴
+				// data: precipitationData,
 			},
 		],
 	};
@@ -159,4 +152,4 @@ function Climate({ climate }: { climate: WeatherType["climate"] }) {
 	);
 }
 
-export default Climate;
+export default PassedChart;
