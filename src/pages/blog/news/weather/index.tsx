@@ -245,12 +245,12 @@ function Weather() {
 
 			<Tabs
 				className="w-full"
-				defaultActiveKey="2"
+				defaultActiveKey="1"
 				items={[
 					{
 						key: "1",
 						label: "预报数据",
-						// children: <Predict data={data} />,
+						children: <Predict data={data} />,
 					},
 					{
 						key: "2",

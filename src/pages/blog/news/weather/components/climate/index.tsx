@@ -135,6 +135,7 @@ function Climate({ data }: { data: WeatherType }) {
 				yAxisId: "temperature", // 使用第1个 y 轴
 				name: "最高温度", // 系列名称
 				type: "line", // 系列图表类型为折线图
+				smooth: true,
 				color: "#EE6666", // 折线图的颜色
 				data: maxTempData,
 			},
@@ -142,6 +143,7 @@ function Climate({ data }: { data: WeatherType }) {
 				yAxisId: "temperature", // 使用第1个 y 轴
 				name: "最低温度", // 系列名称
 				type: "line", // 系列图表类型为折线图
+				smooth: true,
 				color: "#5470C6", // 折线图的颜色
 				data: minTempData,
 			},

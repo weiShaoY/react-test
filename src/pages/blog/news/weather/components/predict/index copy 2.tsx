@@ -27,16 +27,6 @@ function PassedChart({ data }: { data: WeatherType }) {
 	 */
 	const minTempData = tempchart.map((item) => item.min_temp);
 
-	// 获取当前日期并格式化为 'YYYY/MM/DD' 格式
-	const today = new Date();
-
-	const formattedToday = `${today.getFullYear()}/${(today.getMonth() + 1).toString().padStart(2, "0")}/${today.getDate().toString().padStart(2, "0")}`; // '2024/12/20' 格式
-
-	// 计算今天的索引
-	const todayIndex = timeAxis.indexOf(formattedToday);
-	console.log("%c Line:41 🍆 todayIndex", "color:#4fff4B", todayIndex);
-
-	// 获取xAxis的数据
 	const option: EChartsOption = {
 		// 提示框配置
 		tooltip: {
@@ -132,7 +122,19 @@ function PassedChart({ data }: { data: WeatherType }) {
 				interval: 0, // 强制显示所有标签
 			},
 		},
-
+		visualMap: {
+			type: "piecewise",
+			show: false,
+			dimension: 0,
+			seriesIndex: 0,
+			pieces: [
+				{
+					gt: 11,
+					lt: 7,
+					color: "rgba(0, 0, 180, 0.4)",
+				},
+			],
+		},
 		// y 轴配置
 		yAxis: [
 			{
@@ -166,22 +168,6 @@ function PassedChart({ data }: { data: WeatherType }) {
 					position: "top", // 标签显示在点的上方
 					formatter: "{c}°C", // 格式化标签内容，{c} 表示当前点的数值
 					color: "#EE6666",
-				},
-				markArea: {
-					itemStyle: {
-						color: "rgba(255, 173, 177, 0.4)", // 高亮区域的背景色
-					},
-					data: [
-						// 高亮区域：根据 X 轴的索引位置设置
-						[
-							{
-								xAxis: todayIndex, // 对应 '2024/12/18'
-							},
-							{
-								xAxis: maxTempData.length - 1,
-							},
-						],
-					],
 				},
 			},
 			{

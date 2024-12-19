@@ -13,7 +13,7 @@ function PassedChart({ data }: { data: WeatherType }) {
 	/**
 	 *  时间数据
 	 */
-	const timeData = passedchart.map((item) => {
+	const timeAxis = passedchart.map((item) => {
 		const time = item.time;
 		if (time) {
 			return time.split(" ")[1]?.split(":")[0]; // 安全访问，避免 undefined 或 null 引发错误
@@ -21,7 +21,7 @@ function PassedChart({ data }: { data: WeatherType }) {
 		return ""; // 如果 time 是 undefined 或 null，返回空字符串
 	});
 
-	console.log("%c Line:25 🍰 timeData", "color:#7f2b82", timeData);
+	console.log("%c Line:25 🍰 timeData", "color:#7f2b82", timeAxis);
 
 	/**
 	 *  温度数据
@@ -98,7 +98,7 @@ function PassedChart({ data }: { data: WeatherType }) {
 			axisTick: {
 				alignWithLabel: true,
 			},
-			data: timeData,
+			data: timeAxis,
 
 			axisLabel: {
 				formatter: "{value}时",
@@ -183,46 +183,38 @@ function PassedChart({ data }: { data: WeatherType }) {
 			{
 				yAxisId: "temperature",
 				name: "温度",
-				type: "line",
+				type: "line", // 系列图表类型为折线图
+				smooth: true, // 平滑曲线
 				color: "#EE6666",
 				data: temperatureData,
-				// markPoint: {
-				// 	data: [
-				// 		{ type: "max", name: "Max" },
-				// 		{ type: "min", name: "Min" },
-				// 	],
-				// },
-				// markLine: {
-				// 	data: [{ type: "average", name: "Avg" }],
-				// },
+				markPoint: {
+					data: [
+						{ type: "max", name: "Max" },
+						{ type: "min", name: "Min" },
+					],
+				},
 			},
 			{
 				yAxisId: "precipitation",
 				name: "降水量",
-				type: "line",
+				type: "line", // 系列图表类型为折线图
+				smooth: true, // 平滑曲线
 				color: "#91CC75",
 				data: precipitationData,
-				// markPoint: {
-				// 	data: [
-				// 		{ type: "max", name: "Max" },
-				// 		{ type: "min", name: "Min" },
-				// 	],
-				// },
-				// markLine: {
-				// 	data: [{ type: "average", name: "Avg" }],
-				// },
 			},
 			{
 				yAxisId: "humidity",
 				name: "相对湿度",
-				type: "line",
+				type: "line", // 系列图表类型为折线图
+				smooth: true, // 平滑曲线
 				color: "#9E4C47",
 				data: humidityData,
 			},
 			{
 				yAxisId: "pressure",
 				name: "气压",
-				type: "line",
+				type: "line", // 系列图表类型为折线图
+				smooth: true, // 平滑曲线
 				color: "#595EA5",
 				data: pressureData,
 			},
