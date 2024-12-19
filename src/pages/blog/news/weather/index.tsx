@@ -3,6 +3,9 @@ import { useState, useEffect, useCallback } from "react";
 import { optionData } from "./data";
 import { BlogApi } from "@/api";
 import { toast } from "sonner";
+import Card from "@/components/card";
+import Climate from "./components/climate";
+import type { WeatherType } from "./type";
 
 /**
  *  省份选择框的选项
@@ -29,6 +32,139 @@ const citySelectOptions = optionData.reduce(
 function Weather() {
 	const [loading, setLoading] = useState(false);
 
+	const [data, setData] = useState<WeatherType>({
+		real: {
+			station: {
+				code: "defaultCode",
+				province: "defaultProvince",
+				city: "defaultCity",
+				url: "http://default.url",
+			},
+			publish_time: "2024-01-01T00:00:00Z",
+			weather: {
+				temperature: 0,
+				temperatureDiff: 0,
+				airpressure: 1013,
+				humidity: 50,
+				rain: 0,
+				rcomfort: 0,
+				icomfort: 0,
+				info: "Clear",
+				img: "01",
+				feelst: 20,
+			},
+			wind: {
+				direct: "North",
+				degree: 0,
+				power: "1级",
+				speed: 0,
+			},
+			warn: {
+				alert: "No warnings",
+				pic: "",
+				province: "",
+				city: "",
+				url: "",
+				issuecontent: "",
+				fmeans: "",
+				signaltype: "",
+				signallevel: "",
+				pic2: "",
+			},
+			sunriseSunset: {
+				sunrise: "06:00",
+				sunset: "18:00",
+			},
+		},
+		predict: {
+			station: {
+				code: "defaultCode",
+				province: "defaultProvince",
+				city: "defaultCity",
+				url: "http://default.url",
+			},
+			publish_time: "2024-01-01T00:00:00Z",
+			detail: [
+				{
+					date: "2024-01-01",
+					pt: "12:00",
+					day: {
+						weather: {
+							info: "Clear",
+							img: "01",
+							temperature: "20",
+						},
+						wind: {
+							direct: "North",
+							power: "1级",
+						},
+					},
+					night: {
+						weather: {
+							info: "Clear",
+							img: "01",
+							temperature: "15",
+						},
+						wind: {
+							direct: "North",
+							power: "1级",
+						},
+					},
+					precipitation: 0,
+				},
+			],
+		},
+		air: "Good",
+		tempchart: [
+			{
+				time: "2024-01-01T12:00:00Z",
+				max_temp: 25,
+				min_temp: 18,
+				day_img: "01",
+				day_text: "Clear",
+				night_img: "01",
+				night_text: "Clear",
+			},
+		],
+		passedchart: [
+			{
+				rain1h: 0,
+				rain6h: 0,
+				rain12h: 0,
+				rain24h: 0,
+				temperature: 20,
+				tempDiff: "",
+				humidity: 50,
+				pressure: 1013,
+				windDirection: 0,
+				windSpeed: 0,
+				time: "2024-01-01T00:00:00Z",
+			},
+		],
+		climate: {
+			time: "1981～2010",
+			month: [
+				{
+					month: 1,
+					maxTemp: 25,
+					minTemp: 18,
+					precipitation: 0,
+				},
+				{
+					month: 2,
+					maxTemp: 25,
+					minTemp: 18,
+					precipitation: 0,
+				},
+			],
+		},
+		radar: {
+			title: "实时雷达数据",
+			image: "",
+			url: "",
+		},
+	});
+
 	const [state, setState] = useState({
 		province: "AHN",
 		city: "zOenJ",
@@ -54,7 +190,8 @@ function Weather() {
 			setLoading(true);
 
 			const response = await BlogApi.getWeather(state.city);
-			console.log("%c Line:63 🥑 response", "color:#7f2b82", response);
+
+			setData(response);
 		} catch (error) {
 			toast.error(error.message || "获取数据失败，请稍后重试");
 		} finally {
@@ -67,8 +204,8 @@ function Weather() {
 	}, [getData]);
 
 	return (
-		<div className="h-full relative flex flex-col">
-			<div className="flex items-center m-5 gap-5">
+		<Card className="flex flex-col gap-5 h-full">
+			<div className="flex gap-5 flex-wrap w-full items-center">
 				{/* 省份选择框 */}
 				<Select
 					className="!w-44"
@@ -97,12 +234,14 @@ function Weather() {
 				/>
 			</div>
 
-			<div className="relative">
+			{/* <div className="relative">
 				当前选择：
 				{state.province && <span>省份：{state.province}</span>}
 				{state.city && <span>，城市：{state.city}</span>}
-			</div>
-		</div>
+			</div> */}
+
+			<Climate climate={data.climate} />
+		</Card>
 	);
 }
 

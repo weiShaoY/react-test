@@ -186,7 +186,7 @@ type RealWeatherData = {
 /**
  *  天气数据
  */
-type weatherType = {
+export type WeatherType = {
 	/**
 	 *  实时天气数据
 	 */
@@ -626,7 +626,7 @@ type weatherType = {
 			minTemp: number;
 
 			/**
-			 *  降雨量
+			 *  降水量
 			 */
 			precipitation: number;
 		}[];
