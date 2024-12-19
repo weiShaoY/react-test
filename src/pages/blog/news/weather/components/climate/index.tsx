@@ -2,7 +2,9 @@ import Chart from "@/components/chart";
 import type { EChartsOption } from "echarts";
 import type { WeatherType } from "../../type";
 
-function Climate({ climate }: { climate: WeatherType["climate"] }) {
+function Climate({ data }: { data: WeatherType }) {
+	const climate = data.climate;
+
 	/**
 	 *  提取最高温度数据
 	 */

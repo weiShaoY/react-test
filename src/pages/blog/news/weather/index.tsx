@@ -254,18 +254,12 @@ function Weather() {
 					{
 						key: "2",
 						label: "24小时实时天气",
-						children: <PassedChart passedchart={data.passedchart} />,
+						children: <PassedChart   data={data}  />,
 					},
 				]}
 			/>
 
-			{/* <div className="relative">
-				当前选择：
-				{state.province && <span>省份：{state.province}</span>}
-				{state.city && <span>，城市：{state.city}</span>}
-			</div> */}
-
-			<Climate climate={data.climate} />
+			<Climate data={data} />
 		</Card>
 	);
 }

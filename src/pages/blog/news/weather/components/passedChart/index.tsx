@@ -2,9 +2,8 @@ import Chart from "@/components/chart";
 import type { EChartsOption } from "echarts";
 import type { WeatherType } from "../../type";
 
-function PassedChart({
-	passedchart,
-}: { passedchart: WeatherType["passedchart"] }) {
+function PassedChart({ data }: { data: WeatherType }) {
+	const passedchart = data.passedchart;
 	/**
 	 *  最新数据
 	 */
