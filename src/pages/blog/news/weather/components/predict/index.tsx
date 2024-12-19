@@ -3,8 +3,7 @@ import type { EChartsOption } from "echarts";
 import type { WeatherType } from "../../type";
 
 function PassedChart({ data }: { data: WeatherType }) {
-	const passedchart = [...data.passedchart].reverse();
-
+	const passedchart = data.passedchart;
 	/**
 	 *  最新数据
 	 */
@@ -20,8 +19,6 @@ function PassedChart({ data }: { data: WeatherType }) {
 		}
 		return ""; // 如果 time 是 undefined 或 null，返回空字符串
 	});
-
-	console.log("%c Line:25 🍰 timeData", "color:#7f2b82", timeData);
 
 	/**
 	 *  温度数据
@@ -44,7 +41,7 @@ function PassedChart({ data }: { data: WeatherType }) {
 
 	const option: EChartsOption = {
 		title: {
-			text: `最新整点实况 (${latestData.time}) :  气温:${latestData.temperature}°C  降水量:${latestData.rain1h}mm  相对湿度:${latestData.humidity}%  气压:${latestData.pressure}hPa`,
+			text: `最新整点实况 (${latestData.time}) :  气温:${latestData.temperature}°C  降水量:${latestData.temperature}mm  相对湿度:${latestData.humidity}%  气压:${latestData.pressure}hPa`,
 		},
 		// 提示框配置
 		tooltip: {
@@ -94,16 +91,11 @@ function PassedChart({ data }: { data: WeatherType }) {
 		// x 轴配置
 
 		xAxis: {
-			type: "category",
+			type: "category", // 类目轴，适用于离散的数据（如月份、星期等）
 			axisTick: {
-				alignWithLabel: true,
+				alignWithLabel: true, // 刻度线是否与标签对齐
 			},
-			data: timeData,
-
-			axisLabel: {
-				formatter: "{value}时",
-				interval: 0, // 强制显示所有标签
-			},
+			data: timeData, // x 轴的数据，表示一周的星期几
 		},
 
 		// y 轴配置
@@ -152,9 +144,6 @@ function PassedChart({ data }: { data: WeatherType }) {
 						color: "#9E4C47", // 轴线的颜色
 					},
 				},
-
-				max: 100, // 设置最大刻度值为 100
-				min: 0, // 可选：设置最小刻度值为 0
 				axisLabel: {
 					formatter: "{value} %", // y 轴标签的格式化（显示百分比）
 				},
@@ -186,15 +175,15 @@ function PassedChart({ data }: { data: WeatherType }) {
 				type: "line",
 				color: "#EE6666",
 				data: temperatureData,
-				// markPoint: {
-				// 	data: [
-				// 		{ type: "max", name: "Max" },
-				// 		{ type: "min", name: "Min" },
-				// 	],
-				// },
-				// markLine: {
-				// 	data: [{ type: "average", name: "Avg" }],
-				// },
+				markPoint: {
+					data: [
+						{ type: "max", name: "Max" },
+						{ type: "min", name: "Min" },
+					],
+				},
+				markLine: {
+					data: [{ type: "average", name: "Avg" }],
+				},
 			},
 			{
 				yAxisId: "precipitation",
@@ -202,15 +191,15 @@ function PassedChart({ data }: { data: WeatherType }) {
 				type: "line",
 				color: "#91CC75",
 				data: precipitationData,
-				// markPoint: {
-				// 	data: [
-				// 		{ type: "max", name: "Max" },
-				// 		{ type: "min", name: "Min" },
-				// 	],
-				// },
-				// markLine: {
-				// 	data: [{ type: "average", name: "Avg" }],
-				// },
+				markPoint: {
+					data: [
+						{ type: "max", name: "Max" },
+						{ type: "min", name: "Min" },
+					],
+				},
+				markLine: {
+					data: [{ type: "average", name: "Avg" }],
+				},
 			},
 			{
 				yAxisId: "humidity",

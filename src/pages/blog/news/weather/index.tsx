@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import Card from "@/components/card";
 import Climate from "./components/climate";
 import PassedChart from "./components/passedChart";
+import Predict from "./components/predict";
 import type { WeatherType } from "./type";
 import { Tabs } from "antd";
 
@@ -88,8 +89,8 @@ function Weather() {
 			publish_time: "2024-01-01T00:00:00Z",
 			detail: [
 				{
-					date: "2024-01-01",
-					pt: "12:00",
+					date: "",
+					pt: "",
 					day: {
 						weather: {
 							info: "Clear",
@@ -150,7 +151,7 @@ function Weather() {
 			},
 		],
 		climate: {
-			time: "1981～2010",
+			time: "",
 			month: [
 				{
 					month: 1,
@@ -175,7 +176,7 @@ function Weather() {
 
 	const [state, setState] = useState({
 		province: "AHN",
-		city: "zOenJ",
+		city: "pwvLl",
 	});
 
 	const [citiesForSelectedProvince, setCitiesForSelectedProvince] = useState<
@@ -249,12 +250,12 @@ function Weather() {
 					{
 						key: "1",
 						label: "预报数据",
-						children: <div className="">1</div>,
+						// children: <Predict data={data} />,
 					},
 					{
 						key: "2",
 						label: "24小时实时天气",
-						children: <PassedChart   data={data}  />,
+						children: <PassedChart data={data} />,
 					},
 				]}
 			/>
