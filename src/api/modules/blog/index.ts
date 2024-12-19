@@ -358,6 +358,19 @@ class BlogApi {
 	getWeiBoIdQueryPhone(weiBoId: string) {
 		return fetchHttp(`https://api.xywlapi.cc/wbapi?id=${weiBoId}`);
 	}
+
+	/**
+	 *  获取 中央气象台天气预报
+	 *  @see https://linux.do/t/topic/170114
+	 *  @url http://www.nmc.cn/rest/weather?stationid={stationid}
+	 *  @param {string} city - 城市ID
+	 */
+	getWeather(city: string) {
+		// return fetchHttp(`http://www.nmc.cn/rest/real/${city}`);
+		return fetchHttp(`http://www.nmc.cn/rest/weather?stationid=${city}`);
+	}
 }
 
 export default new BlogApi();
+
+

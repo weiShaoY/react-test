@@ -6,7 +6,9 @@ import { toast } from "sonner";
  * @returns {boolean} 是否为有效响应码
  */
 function isValidResponseCode(result: any): boolean {
-	const validCodes = [200, "200", 1]; // 可扩展的有效响应码
+	console.log("%c Line:9 🍢 result", "color:#f5ce50", result.code);
+	const validCodes = [200, "200", 1, 0]; // 可扩展的有效响应码
+
 	const errorCodes = [500]; // 特殊允许的错误响应码
 	return (
 		validCodes.includes(result?.code) ||

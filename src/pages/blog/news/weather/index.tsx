@@ -1,6 +1,8 @@
 import { Select } from "antd";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { optionData } from "./data";
+import { BlogApi } from "@/api";
+import { toast } from "sonner";
 
 /**
  *  省份选择框的选项
@@ -25,6 +27,8 @@ const citySelectOptions = optionData.reduce(
 );
 
 function Weather() {
+	const [loading, setLoading] = useState(false);
+
 	const [state, setState] = useState({
 		province: "AHN",
 		city: "zOenJ",
@@ -36,19 +40,31 @@ function Weather() {
 			label: string;
 		}[]
 	>(citySelectOptions[state.province] || []);
-	console.log("%c Line:39 🌮 citySelectOptions", "color:#4fff4B", citySelectOptions);
-	console.log("%c Line:39 🍇 state", "color:#2eafb0", state);
-
-	console.log(
-		"%c Line:41 🍬 citiesForSelectedProvince",
-		"color:#2eafb0",
-		citiesForSelectedProvince,
-	);
 
 	// 初始化默认省份和城市
 	useEffect(() => {
 		setCitiesForSelectedProvince(citySelectOptions[state.province]);
 	}, [state.province]);
+
+	/**
+	 *  获取数据逻辑
+	 */
+	const getData = useCallback(async () => {
+		try {
+			setLoading(true);
+
+			const response = await BlogApi.getWeather(state.city);
+			console.log("%c Line:63 🥑 response", "color:#7f2b82", response);
+		} catch (error) {
+			toast.error(error.message || "获取数据失败，请稍后重试");
+		} finally {
+			setLoading(false);
+		}
+	}, [state.city]);
+
+	useEffect(() => {
+		getData();
+	}, [getData]);
 
 	return (
 		<div className="h-full relative flex flex-col">
