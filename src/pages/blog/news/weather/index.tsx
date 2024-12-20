@@ -7,6 +7,7 @@ import Card from "@/components/card";
 import Climate from "./components/climate";
 import PassedChart from "./components/passedChart";
 import Tempchart from "./components/tempchart";
+import Meter from "./components/meter";
 import type { WeatherType } from "./type";
 import { Tabs } from "antd";
 
@@ -213,7 +214,7 @@ function Weather() {
 	}, [getData]);
 
 	return (
-		<Card className="flex flex-col gap-5 h-full">
+		<Card className="flex flex-col gap-5 h-auto">
 			<div className="flex gap-5 flex-wrap w-full items-center">
 				{/* 省份选择框 */}
 				<Select
@@ -246,9 +247,10 @@ function Weather() {
 					<div className="">{data.real.publish_time.slice(-5)} 更新</div>
 				)}
 			</div>
+			<Meter data={data} />
 
 			<Tabs
-				className="w-full"
+				className="w-full !h-[550px]"
 				defaultActiveKey="1"
 				items={[
 					{
@@ -263,7 +265,6 @@ function Weather() {
 					},
 				]}
 			/>
-
 			{data.climate && <Climate data={data} />}
 		</Card>
 	);
