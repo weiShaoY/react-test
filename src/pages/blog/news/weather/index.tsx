@@ -242,7 +242,9 @@ function Weather() {
 					disabled={!state.province} // 禁用逻辑
 				/>
 
-				<div className="">{data.real.publish_time.slice(-5)} 更新</div>
+				{data.real.publish_time && (
+					<div className="">{data.real.publish_time.slice(-5)} 更新</div>
+				)}
 			</div>
 
 			<Tabs
@@ -262,7 +264,7 @@ function Weather() {
 				]}
 			/>
 
-			<Climate data={data} />
+			{data.climate && <Climate data={data} />}
 		</Card>
 	);
 }

@@ -4,9 +4,21 @@ import type { WeatherType } from "../../type";
 import day_0 from "@/assets/icons/blog/weather/day_0.svg";
 import day_1 from "@/assets/icons/blog/weather/day_1.svg";
 import day_2 from "@/assets/icons/blog/weather/day_2.svg";
+import day_3 from "@/assets/icons/blog/weather/day_3.svg";
+
 import day_7 from "@/assets/icons/blog/weather/day_7.svg";
+import day_8 from "@/assets/icons/blog/weather/day_8.svg";
 import day_13 from "@/assets/icons/blog/weather/day_13.svg";
 import day_14 from "@/assets/icons/blog/weather/day_14.svg";
+
+import night_0 from "@/assets/icons/blog/weather/night_0.svg";
+import night_1 from "@/assets/icons/blog/weather/night_1.svg";
+import night_2 from "@/assets/icons/blog/weather/night_2.svg";
+import night_3 from "@/assets/icons/blog/weather/night_3.svg";
+import night_7 from "@/assets/icons/blog/weather/night_7.svg";
+import night_8 from "@/assets/icons/blog/weather/night_8.svg";
+import night_13 from "@/assets/icons/blog/weather/night_13.svg";
+import night_14 from "@/assets/icons/blog/weather/night_14.svg";
 
 function Tempchart({ data }: { data: WeatherType }) {
 	const tempchart = data.tempchart;
@@ -21,34 +33,20 @@ function Tempchart({ data }: { data: WeatherType }) {
 		return time;
 	});
 
-	/**
-	 *  白天图片轴
-	 */
-	const dayImgAxis = tempchart.map((item) => {
-		const dayImg = item.day_img || ""; // 如果 day_img 是 undefined 或 null，设置为空字符串
-		if (!dayImg) return ""; // 处理无效图片的情况
-		return dayImg;
-	});
+	const maxTempData = tempchart.map((item) => item.max_temp);
 
 	/**
-	 *  白天天气
+	 *  最高温度
 	 */
-	const dayTextAxis = tempchart.map((item) => {
-		const day_text = item.day_text || ""; // 如果 time 是 undefined 或 null，设置为空字符串
-		if (day_text) return ""; // 处理无效时间的情况
-		return day_text;
-	});
-	console.log("%c Line:26 🥛 dayImgAxis", "color:#3f7cff", dayImgAxis);
+	const maxTemp = Math.ceil((Math.max(...maxTempData) + 10) / 10) * 10;
 
-	// 获取当前日期并格式化为 'YYYY/MM/DD' 格式
-	const today = new Date();
+	const minTempData = tempchart.map((item) => item.min_temp);
 
-	const formattedToday = `${today.getFullYear()}/${(today.getMonth() + 1).toString().padStart(2, "0")}/${today.getDate().toString().padStart(2, "0")}`; // '2024/12/20' 格式
+	/**
+	 *  最低温度
+	 */
+	const minTemp = Math.floor((Math.min(...minTempData) - 10) / 10) * 10;
 
-	// 计算今天的索引
-	const todayIndex = timeAxis.indexOf(formattedToday);
-
-	// 获取xAxis的数据
 	const option: EChartsOption = {
 		// 提示框配置
 		tooltip: {
@@ -58,8 +56,6 @@ function Tempchart({ data }: { data: WeatherType }) {
 			},
 
 			formatter: (params: any) => {
-				console.log("%c Line:70 🥚 params", "color:#465975", params);
-
 				// 初始的时间名称
 				let relVal = params[0].name;
 
@@ -81,29 +77,36 @@ function Tempchart({ data }: { data: WeatherType }) {
 				return relVal;
 			},
 		},
-		// 图例配置
-		// legend: {}, // 图例配置，空对象表示使用默认图例样式
 		// 网格配置
 		grid: {
 			// right: "20%", // 网格右边的空白区域
 		},
 
-		// 工具箱配置，提供了一些常用功能
 		toolbox: {
 			feature: {
 				saveAsImage: {
 					show: true,
 					title: "保存为图片",
-				}, // 保存为图片功能，显示并能保存图表为图片
+				},
 			},
 		},
-
-		// x 轴配置
 
 		xAxis: [
 			{
 				type: "category",
 				data: timeAxis,
+				axisLine: {
+					show: false, // 显示轴线
+				},
+				axisTick: {
+					show: false, // 显示刻度线
+				},
+
+				axisPointer: {
+					label: {
+						show: false, // 不显示提示框标签
+					},
+				},
 
 				axisLabel: {
 					formatter: (value) => {
@@ -159,17 +162,20 @@ function Tempchart({ data }: { data: WeatherType }) {
 			{
 				type: "category",
 				position: "top",
-				data: tempchart.map((item) => ({
-					value: item.day_img, // 只传递值
-				})),
+				offset: -50,
 				axisTick: {
 					show: false, // 不显示刻度
 				},
 				axisLine: {
 					show: false, // 不显示轴线
 				},
-				axisPointer: {},
-				offset: -60,
+				axisPointer: {
+					show: false, // 禁用 x 轴指示器
+				},
+				data: tempchart.map((item) => ({
+					value: item.day_img, // 只传递值
+				})),
+
 				axisLabel: {
 					formatter: (value) => {
 						if (value === "9999") {
@@ -185,8 +191,14 @@ function Tempchart({ data }: { data: WeatherType }) {
 						if (value === "2") {
 							return "{day_2|}";
 						}
+						if (value === "3") {
+							return "{day_3|}";
+						}
 						if (value === "7") {
 							return "{day_7|}";
+						}
+						if (value === "8") {
+							return "{day_8|}";
 						}
 						if (value === "13") {
 							return "{day_13|}";
@@ -216,9 +228,21 @@ function Tempchart({ data }: { data: WeatherType }) {
 							},
 							fontSize: 40,
 						},
+						day_3: {
+							backgroundColor: {
+								image: day_3,
+							},
+							fontSize: 40,
+						},
 						day_7: {
 							backgroundColor: {
 								image: day_7,
+							},
+							fontSize: 40,
+						},
+						day_8: {
+							backgroundColor: {
+								image: day_8,
 							},
 							fontSize: 40,
 						},
@@ -237,9 +261,111 @@ function Tempchart({ data }: { data: WeatherType }) {
 					},
 				},
 			},
+
+			{
+				type: "category",
+				position: "bottom",
+				offset: -50,
+				axisTick: {
+					show: false, // 不显示刻度
+				},
+				axisLine: {
+					show: false, // 不显示轴线
+				},
+				axisPointer: {
+					show: false, // 禁用 x 轴指示器
+				},
+
+				data: tempchart.map((item) => ({
+					value: item.night_img, // 只传递值
+				})),
+
+				axisLabel: {
+					formatter: (value) => {
+						if (value === "9999") {
+							return "";
+						}
+
+						if (value === "0") {
+							return "{night_0|}";
+						}
+						if (value === "1") {
+							return "{night_1|}";
+						}
+						if (value === "2") {
+							return "{night_2|}";
+						}
+						if (value === "3") {
+							return "{night_3|}";
+						}
+						if (value === "7") {
+							return "{night_7|}";
+						}
+						if (value === "8") {
+							return "{night_8|}";
+						}
+						if (value === "13") {
+							return "{night_13|}";
+						}
+						if (value === "14") {
+							return "{night_14|}";
+						}
+						return value;
+					},
+					rich: {
+						night_0: {
+							backgroundColor: {
+								image: night_0,
+							},
+							fontSize: 40,
+						},
+						night_1: {
+							backgroundColor: {
+								image: night_1,
+							},
+							fontSize: 40,
+						},
+						night_2: {
+							backgroundColor: {
+								image: night_2,
+							},
+							fontSize: 40,
+						},
+						night_3: {
+							backgroundColor: {
+								image: night_3,
+							},
+							fontSize: 40,
+						},
+						night_7: {
+							backgroundColor: {
+								image: night_7,
+							},
+							fontSize: 40,
+						},
+						night_8: {
+							backgroundColor: {
+								image: night_8,
+							},
+							fontSize: 40,
+						},
+						night_13: {
+							backgroundColor: {
+								image: night_13,
+							},
+							fontSize: 40,
+						},
+						night_14: {
+							backgroundColor: {
+								image: night_14,
+							},
+							fontSize: 40,
+						},
+					},
+				},
+			},
 		],
 
-		// y 轴配置
 		yAxis: [
 			{
 				id: "temperature",
@@ -255,11 +381,12 @@ function Tempchart({ data }: { data: WeatherType }) {
 				axisLabel: {
 					formatter: "{value} °C", // 格式化 y 轴的标签，显示摄氏度符号
 				},
-				max: 60, // 设置最大刻度值为 100
+				min: minTemp,
+
+				max: maxTemp,
 			},
 		],
 
-		// 数据系列配置
 		series: [
 			{
 				yAxisId: "temperature", // 使用第1个 y 轴
@@ -267,30 +394,12 @@ function Tempchart({ data }: { data: WeatherType }) {
 				type: "line", // 系列图表类型为折线图
 				smooth: true, // 平滑曲线
 				color: "#EE6666", // 折线图的颜色
-				data: tempchart.map((item) => ({
-					value: item.max_temp, // 只传递值
-				})),
+				data: maxTempData,
 				label: {
 					show: true, // 显示每个点的标签
 					position: "top", // 标签显示在点的上方
 					formatter: "{c}°C", // 格式化标签内容，{c} 表示当前点的数值
 					color: "#EE6666",
-				},
-				markArea: {
-					// itemStyle: {
-					// 	color: "rgba(255, 173, 177, 0.4)", // 高亮区域的背景色
-					// },
-					// data: [
-					// 	// 高亮区域：根据 X 轴的索引位置设置
-					// 	[
-					// 		{
-					// 			xAxis: todayIndex, // 对应 '2024/12/18'
-					// 		},
-					// 		{
-					// 			xAxis: maxTempData.length - 1,
-					// 		},
-					// 	],
-					// ],
 				},
 			},
 			{
@@ -299,9 +408,7 @@ function Tempchart({ data }: { data: WeatherType }) {
 				type: "line", // 系列图表类型为折线图
 				smooth: true, // 平滑曲线
 				color: "#5470C6", // 折线图的颜色
-				data: tempchart.map((item) => ({
-					value: item.min_temp, // 只传递值
-				})),
+				data: minTempData,
 				label: {
 					show: true, // 显示每个点的标签
 					position: "top", // 标签显示在点的上方
