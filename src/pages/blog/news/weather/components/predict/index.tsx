@@ -11,9 +11,6 @@ function PassedChart({ data }: { data: WeatherType }) {
 	const timeAxis = tempchart.map((item) => {
 		const time = item.time || ""; // 如果 time 是 undefined 或 null，设置为空字符串
 		if (!time) return ""; // 处理无效时间的情况
-		// const [, month, day] = time.split("/"); // 使用解构获取月和日
-		// return `${month}/${day}`; // 返回格式化后的日期
-
 		return time;
 	});
 
@@ -34,7 +31,6 @@ function PassedChart({ data }: { data: WeatherType }) {
 
 	// 计算今天的索引
 	const todayIndex = timeAxis.indexOf(formattedToday);
-	console.log("%c Line:41 🍆 todayIndex", "color:#4fff4B", todayIndex);
 
 	// 获取xAxis的数据
 	const option: EChartsOption = {
@@ -64,14 +60,14 @@ function PassedChart({ data }: { data: WeatherType }) {
 		},
 
 		// 工具箱配置，提供了一些常用功能
-		// toolbox: {
-		// 	feature: {
-		// 		saveAsImage: {
-		// 			show: true,
-		// 			title: "保存为图片",
-		// 		}, // 保存为图片功能，显示并能保存图表为图片
-		// 	},
-		// },
+		toolbox: {
+			feature: {
+				saveAsImage: {
+					show: true,
+					title: "保存为图片",
+				}, // 保存为图片功能，显示并能保存图表为图片
+			},
+		},
 
 		// x 轴配置
 

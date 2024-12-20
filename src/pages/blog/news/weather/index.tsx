@@ -241,6 +241,8 @@ function Weather() {
 					options={citiesForSelectedProvince}
 					disabled={!state.province} // 禁用逻辑
 				/>
+
+				<div className="">{data.real.publish_time.slice(-5)} 更新</div>
 			</div>
 
 			<Tabs
