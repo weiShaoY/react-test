@@ -39,6 +39,15 @@ function Tempchart({ data }: { data: WeatherType }) {
 		return day_text;
 	});
 	console.log("%c Line:26 🥛 dayImgAxis", "color:#3f7cff", dayImgAxis);
+	/**
+	 *  提取最高温度数据
+	 */
+	const maxTempData = tempchart.map((item) => item.max_temp);
+
+	/**
+	 *  提取最低温度数据
+	 */
+	const minTempData = tempchart.map((item) => item.min_temp);
 
 	// 获取当前日期并格式化为 'YYYY/MM/DD' 格式
 	const today = new Date();
@@ -58,26 +67,32 @@ function Tempchart({ data }: { data: WeatherType }) {
 			},
 
 			formatter: (params: any) => {
-				console.log("%c Line:70 🥚 params", "color:#465975", params);
-
-				// 初始的时间名称
 				let relVal = params[0].name;
-
-				// 遍历所有的参数
 				for (let i = 0, l = params.length; i < l; i++) {
-					const param = params[i];
-					const isTemperature =
-						param.seriesName === "最高温度" || param.seriesName === "最低温度";
-					const isValidValue = param.value !== "9999";
+					// 后缀
+					const suffix = "°C";
 
-					// 根据不同类型的系列，设置温度单位或其他后缀
-					const suffix = isTemperature ? "°C" : "";
-					// 如果是有效的温度值，或是有效的其他数据
-					if (isTemperature || isValidValue) {
-						relVal += `<br/>${param.marker}${param.seriesName}     ${param.value}${suffix}`;
+					/**
+					 *  白天天气
+					 */
+					const dayText = params[i].data.day_text;
+
+					relVal += `<br/>${params[i].marker}${params[i].seriesName}     ${params[i].value}${suffix}`;
+
+					if (dayText && dayText !== "9999") {
+						// 如果有白天天气，则显示对应的图标
+						relVal += `<br/>白天天气: ${dayText}`;
+					}
+
+					/**
+					 *  晚上天气
+					 */
+					const nightText = params[i].data.night_text;
+					if (nightText && nightText !== "9999") {
+						// 如果有晚上天气，则显示对应的图标
+						relVal += `<br/>晚上天气: ${nightText}`;
 					}
 				}
-
 				return relVal;
 			},
 		},
@@ -159,9 +174,7 @@ function Tempchart({ data }: { data: WeatherType }) {
 			{
 				type: "category",
 				position: "top",
-				data: tempchart.map((item) => ({
-					value: item.day_img, // 只传递值
-				})),
+				data: dayImgAxis,
 				axisTick: {
 					show: false, // 不显示刻度
 				},
@@ -267,9 +280,7 @@ function Tempchart({ data }: { data: WeatherType }) {
 				type: "line", // 系列图表类型为折线图
 				smooth: true, // 平滑曲线
 				color: "#EE6666", // 折线图的颜色
-				data: tempchart.map((item) => ({
-					value: item.max_temp, // 只传递值
-				})),
+				data: maxTempData,
 				label: {
 					show: true, // 显示每个点的标签
 					position: "top", // 标签显示在点的上方
@@ -293,14 +304,32 @@ function Tempchart({ data }: { data: WeatherType }) {
 					// ],
 				},
 			},
+			// {
+			// 	yAxisId: "temperature", // 使用第1个 y 轴
+			// 	name: "最低温度", // 系列名称
+			// 	type: "line", // 系列图表类型为折线图
+			// 	smooth: true, // 平滑曲线
+			// 	color: "#5470C6", // 折线图的颜色
+			// 	data: minTempData,
+			// 	label: {
+			// 		show: true, // 显示每个点的标签
+			// 		position: "top", // 标签显示在点的上方
+			// 		formatter: "{c}°C", // 格式化标签内容，{c} 表示当前点的数值
+			// 		color: "#5470C6",
+			// 	},
+			// },
+
 			{
 				yAxisId: "temperature", // 使用第1个 y 轴
-				name: "最低温度", // 系列名称
+				name: "最低温度1", // 系列名称
 				type: "line", // 系列图表类型为折线图
 				smooth: true, // 平滑曲线
 				color: "#5470C6", // 折线图的颜色
 				data: tempchart.map((item) => ({
 					value: item.min_temp, // 只传递值
+					time: item.time,
+					day_text: item.day_text,
+					night_text: item.night_text,
 				})),
 				label: {
 					show: true, // 显示每个点的标签
@@ -308,24 +337,6 @@ function Tempchart({ data }: { data: WeatherType }) {
 					formatter: "{c}°C", // 格式化标签内容，{c} 表示当前点的数值
 					color: "#5470C6",
 				},
-			},
-			{
-				name: "白天天气", // 系列名称
-				type: "line", // 系列图表类型为折线图
-				smooth: true, // 平滑曲线
-				color: "#FFA500", // 折线图的颜色
-				data: tempchart.map((item) => ({
-					value: item.day_text, // 只传递值
-				})),
-			},
-			{
-				name: "夜晚天气",
-				type: "line", // 系列图表类型为折线图
-				smooth: true, // 平滑曲线
-				color: "#8A2BE2", // 折线图的颜色
-				data: tempchart.map((item) => ({
-					value: item.night_text, // 只传递值
-				})),
 			},
 		],
 	};
