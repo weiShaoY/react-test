@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import Card from "@/components/card";
 import Climate from "./components/climate";
 import PassedChart from "./components/passedChart";
-import Predict from "./components/predict";
+import Tempchart from "./components/tempchart";
 import type { WeatherType } from "./type";
 import { Tabs } from "antd";
 
@@ -252,7 +252,7 @@ function Weather() {
 					{
 						key: "1",
 						label: "预报数据",
-						children: <Predict data={data} />,
+						children: <Tempchart data={data} />,
 					},
 					{
 						key: "2",
