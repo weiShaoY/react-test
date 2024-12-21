@@ -67,38 +67,38 @@ export default defineConfig(({ mode }) => {
 			drop: isProduction ? ["console", "debugger"] : [],
 		},
 		build: {
-			// 指定构建目标为 esnext，支持最新的 ECMAScript 特性
-			target: "esnext",
-			// 使用 esbuild 进行代码压缩，速度更快且性能优异
-			minify: "esbuild",
-			// 是否生成 source map 文件，设置为 false 以减少包大小
-			sourcemap: false,
-			// 启用 CSS 代码拆分，将 CSS 提取到独立的文件
-			cssCodeSplit: true,
-			// 设置单个 chunk 的大小警告阈值为 1000 KB，避免不必要的警告信息
-			chunkSizeWarningLimit: 1000,
+			// // 指定构建目标为 esnext，支持最新的 ECMAScript 特性
+			// target: "esnext",
+			// // 使用 esbuild 进行代码压缩，速度更快且性能优异
+			// minify: "esbuild",
+			// // 是否生成 source map 文件，设置为 false 以减少包大小
+			// sourcemap: false,
+			// // 启用 CSS 代码拆分，将 CSS 提取到独立的文件
+			// cssCodeSplit: true,
+			// // 设置单个 chunk 的大小警告阈值为 1000 KB，避免不必要的警告信息
+			// chunkSizeWarningLimit: 1000,
 
-			rollupOptions: {
-				output: {
-					// 手动分包策略，将常用依赖分组，提升加载性能和缓存利用率
-					manualChunks: {
-						// React 相关的核心库单独打包
-						"vendor-react": ["react", "react-dom", "react-router"],
-						// Ant Design 相关的 UI 库单独打包
-						"vendor-antd": ["antd", "@ant-design/icons", "@ant-design/cssinjs"],
-						// 图表相关的库单独打包
-						"vendor-charts": ["apexcharts", "react-apexcharts"],
-						// 工具函数库单独打包
-						"vendor-utils": ["axios", "dayjs", "zustand"],
-						// UI 动画和样式相关的库单独打包
-						"vendor-ui": [
-							"framer-motion",
-							"styled-components",
-							"@iconify/react",
-						],
-					},
-				},
-			},
+			// rollupOptions: {
+			// 	output: {
+			// 		// 手动分包策略，将常用依赖分组，提升加载性能和缓存利用率
+			// 		manualChunks: {
+			// 			// React 相关的核心库单独打包
+			// 			"vendor-react": ["react", "react-dom", "react-router"],
+			// 			// Ant Design 相关的 UI 库单独打包
+			// 			"vendor-antd": ["antd", "@ant-design/icons", "@ant-design/cssinjs"],
+			// 			// 图表相关的库单独打包
+			// 			"vendor-charts": ["apexcharts", "react-apexcharts"],
+			// 			// 工具函数库单独打包
+			// 			"vendor-utils": ["axios", "dayjs", "zustand"],
+			// 			// UI 动画和样式相关的库单独打包
+			// 			"vendor-ui": [
+			// 				"framer-motion",
+			// 				"styled-components",
+			// 				"@iconify/react",
+			// 			],
+			// 		},
+			// 	},
+			// },
 		},
 	};
 });
