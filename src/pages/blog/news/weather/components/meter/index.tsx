@@ -114,11 +114,6 @@ function Meter({ data }: { data: WeatherType }) {
 					<div className="">空气质量</div>
 					<div className="">{data.air.text}</div>
 				</div>
-				<div className="flex-1 flex  flex-col items-center gap-1">
-					<SvgIcon icon="blog-weather-air" size={50} />
-					<div className="">空气质量</div>
-					<div className="">{data.air.text}</div>
-				</div>{" "}
 			</div>
 		</div>
 	);
