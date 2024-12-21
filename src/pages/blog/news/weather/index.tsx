@@ -1,4 +1,4 @@
-import { Select } from "antd";
+import { Select, Spin } from "antd";
 import { useState, useEffect, useCallback } from "react";
 import { optionData } from "./data";
 import { BlogApi } from "@/api";
@@ -247,25 +247,35 @@ function Weather() {
 					<div className="">{data.real.publish_time.slice(-5)} 更新</div>
 				)}
 			</div>
-			<Meter data={data} />
 
-			<Tabs
-				className="w-full !h-[550px]"
-				defaultActiveKey="1"
-				items={[
-					{
-						key: "1",
-						label: "预报数据",
-						children: <Tempchart data={data} />,
-					},
-					{
-						key: "2",
-						label: "24小时实时天气",
-						children: <PassedChart data={data} />,
-					},
-				]}
-			/>
-			{data.climate && <Climate data={data} />}
+			<div className="relative w-full">
+				{loading && (
+					<Spin
+						size="large"
+						className="!absolute z-10 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+					/>
+				)}
+
+				<Meter data={data} />
+
+				<Tabs
+					className="w-full !h-[550px]"
+					defaultActiveKey="1"
+					items={[
+						{
+							key: "1",
+							label: "预报数据",
+							children: <Tempchart data={data} />,
+						},
+						{
+							key: "2",
+							label: "24小时实时天气",
+							children: <PassedChart data={data} />,
+						},
+					]}
+				/>
+				{data.climate && <Climate data={data} />}
+			</div>
 		</Card>
 	);
 }

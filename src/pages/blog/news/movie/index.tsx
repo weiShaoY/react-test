@@ -149,7 +149,12 @@ const comingSoonMovieColumns: TableProps<ComingSoonMovieItemType>["columns"] = [
 		title: "主演",
 		dataIndex: "star",
 		key: "star",
-		render: (text) => text.split(",").join(" / "), // 将逗号分隔的主演转换为斜杠分隔
+		render: (text: string | undefined | null) => {
+			// 如果 `text` 不存在，返回空字符串
+			if (!text) return "";
+			// 如果 `text` 存在，则进行分隔符替换
+			return text.split(",").join(" / ");
+		},
 	},
 	{
 		title: "期待值",
@@ -286,7 +291,12 @@ const hotTheaterMovieColumns: TableProps<HotTheaterMovieItemType>["columns"] = [
 		title: "主演",
 		dataIndex: "star",
 		key: "star",
-		render: (text) => text.split(",").join(" / "), // 将逗号分隔的主演转换为斜杠分隔
+		render: (text: string | undefined | null) => {
+			// 如果 `text` 不存在，返回空字符串
+			if (!text) return "";
+			// 如果 `text` 存在，则进行分隔符替换
+			return text.split(",").join(" / ");
+		},
 	},
 	{
 		title: "评分",
